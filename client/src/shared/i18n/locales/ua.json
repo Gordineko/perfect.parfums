@@ -178,35 +178,25 @@
     "secondary": "Отримати дзвінок"
   },
   "footer": {
-    "description": "Maloé — це гармонія органічних тканин та ручної роботи. Ми втілюємо складність ательєрних технік у ніжність, що дарує свободу вашим найціннішим",
-    "catalogColumn": "Каталог",
-    "companyColumn": "Компанія",
-    "contactColumn": "Звʼязок",
-    "navNew": "Новинки",
-    "navSale": "Акції",
-    "navGirls": "Дівчаткам",
-    "navBoys": "Хлопчикам",
-    "company": "КОМПАНІЯ",
-    "structure": "КАТАЛОГ",
-    "contact": "ЗВʼЯЗОК",
-    "structures": {
-      "skin": "Skin Structure",
-      "hair": "Hair Structure",
-      "balance": "Balance Structure",
-      "stress": "Stress Structure",
-      "gut": "Gut Structure",
-      "womenMen": "Women / Men / 40+"
-    },
     "contacts": {
-      "email": "maloehelp@gmail.com",
-      "phone": "+38 (067) 967 01 63",
-      "callback": "Замовити дзвінок →"
+      "title": "КОНТАКТИ",
+      "showroomLabel": "Шоурум за адресою:",
+      "showroomAddress": "м. Дніпро, вул Європейська, 92",
+      "phoneLabel": "Телефон:",
+      "phone": "099-000-00-00",
+      "scheduleLabel": "Графік роботи:",
+      "scheduleValue": "Пн-нд - 9:00 - 20:00"
     },
-    "bottom": {
-      "copyright": "© 2026 Maloe Atelier. ВСІ ПРАВА ЗАХИЩЕНІ",
-      "offer": "Публічна оферта",
+    "information": {
+      "title": "ІНФОРМАЦІЯ",
+      "paymentDelivery": "Оплата та доставка",
+      "publicOffer": "Публічна оферта",
       "privacy": "Політика конфіденційності",
-      "madeBy": "Розробка та підтримка сайту: KEYKEY"
+      "deliveryReturns": "Доставка та повернення"
+    },
+    "brand": {
+      "perfect": "Perfect",
+      "parfums": "Parfums"
     }
   },
   "breadcrumbs": {

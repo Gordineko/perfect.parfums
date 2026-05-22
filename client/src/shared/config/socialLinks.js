@@ -12,13 +12,6 @@ export const socialLinks = [
     Icon: Instagram,
   },
   {
-    id: "facebook",
-    href: "https://facebook.com/world.of.heels",
-    label: "Facebook",
-    handle: "@maloe_atelier",
-    Icon: Facebook,
-  },
-  {
     id: "telegram",
     href: "https://t.me/woh_support",
     label: "Telegram",
@@ -26,12 +19,18 @@ export const socialLinks = [
     Icon: Telegram,
   },
   {
-
     id: "tiktok",
     href: "https://www.tiktok.com/@world.of_heels?_r=1&_t=ZS-95mPRroZ0Dw",
     label: "TikTok",
     handle: "@maloe_atelier",
     Icon: TikTok,
+  },
+  {
+    id: "facebook",
+    href: "https://facebook.com/world.of.heels",
+    label: "Facebook",
+    handle: "@maloe_atelier",
+    Icon: Facebook,
   },
 ];
 

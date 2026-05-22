@@ -377,22 +377,29 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      padding: 10px;
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--color-nude);
+      text-decoration: none;
+
+      svg {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    & .social-links__item:first-child .social-links__link {
+      padding: 8px;
       border-radius: 999px;
       background: var(--color-white);
       border: 1px solid color-mix(in srgb, var(--color-black) 8%, transparent);
-      color: var(--color-black);
-      text-decoration: none;
-      transition: opacity 0.15s ease;
+      color: var(--color-burgundy);
 
       svg {
-        width: 20px;
-        height: 20px;
-      }
-
-      &:hover,
-      &:focus-visible {
-        opacity: 0.5;
+        width: 24px;
+        height: 24px;
       }
     }
   }

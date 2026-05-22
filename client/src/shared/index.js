@@ -147,6 +147,6 @@ export {
   toggleWishlistAsync,
 } from "./redux/Wishlist/lib/WishlistSlice";
 export { default } from "./ui/MainNav";
-export { cormorant, lato } from "./ui/styles/font";
+export { cormorant, italiana, lato } from "./ui/styles/font";
 export { default as SwiperPagination } from "./ui/SwiperPagination";
 export { default as Title } from "./ui/Title";

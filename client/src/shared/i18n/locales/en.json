@@ -180,35 +180,25 @@
     "secondary": "Request a call"
   },
   "footer": {
-    "description": "Maloé is the harmony of organic fabrics and handcraft. We turn the complexity of atelier techniques into tenderness that gives freedom to what you cherish most.",
-    "catalogColumn": "Catalog",
-    "companyColumn": "Company",
-    "contactColumn": "Contact",
-    "navNew": "New arrivals",
-    "navSale": "Sale",
-    "navGirls": "Girls",
-    "navBoys": "Boys",
-    "company": "COMPANY",
-    "structure": "CATALOG",
-    "contact": "CONTACT",
-    "structures": {
-      "skin": "Skin Structure",
-      "hair": "Hair Structure",
-      "balance": "Balance Structure",
-      "stress": "Stress Structure",
-      "gut": "Gut Structure",
-      "womenMen": "Women / Men / 40+"
-    },
     "contacts": {
-      "email": "maloehelp@gmail.com",
-      "phone": "+38 (067) 967 01 63",
-      "callback": "Request a call →"
+      "title": "CONTACTS",
+      "showroomLabel": "Showroom address:",
+      "showroomAddress": "Dnipro, 92 Yevropeiska St.",
+      "phoneLabel": "Phone:",
+      "phone": "099-000-00-00",
+      "scheduleLabel": "Opening hours:",
+      "scheduleValue": "Mon–Sun 9:00 – 20:00"
     },
-    "bottom": {
-      "copyright": "© 2026 Maloe Atelier. ALL RIGHTS RESERVED",
-      "offer": "Public offer",
+    "information": {
+      "title": "INFORMATION",
+      "paymentDelivery": "Payment & delivery",
+      "publicOffer": "Public offer",
       "privacy": "Privacy policy",
-      "madeBy": "Developed & supported by: KEYKEY"
+      "deliveryReturns": "Delivery & returns"
+    },
+    "brand": {
+      "perfect": "Perfect",
+      "parfums": "Parfums"
     }
   },
   "breadcrumbs": {
