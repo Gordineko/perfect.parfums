@@ -1,0 +1,2033 @@
+# =========================
+# PART 1/4
+# =========================
+openapi: 3.0.3
+info:
+  title: Универсальный API каталога интернет-магазина
+  version: 2.4.0
+  description: |
+    Канонический API для универсального шаблона интернет-магазина (modular monolith friendly).
+
+    Концепции (DSL e-commerce):
+      - Category: дерево категорий неограниченной глубины (parentId/path/ancestors)
+      - ProductGroup: одна SEO-страница товара (карточка товара)
+      - Offer: SKU/вариация товара, описана optionValues[] строго в порядке ProductGroup.variationAxes[]
+      - Characteristics: динамические характеристики товара (ProductGroup.characteristics[])
+      - Characteristics Meta: словарь характеристик для построения фильтров на фронте (type/unit/valuesPreset/filterable/searchable)
+      - Catalog Cards: быстрый DTO для листинга (агрегация цен, наличия, preview по вариациям)
+      - Soft-deletes/visibility: status=active/hidden/draft (без удаления из БД)
+      - Multi-category: ProductGroup может принадлежать нескольким категориям (categoryIds[])
+
+servers:
+  - url: /v1
+
+tags:
+  - name: Категории
+    description: Дерево категорий (меню, навигация, хлебные крошки, sitemap)
+  - name: Каталог
+    description: Карточки каталога, фильтрация, фасеты, страница товара (PDP)
+  - name: Характеристики
+    description: Словарь характеристик для UI фильтров
+  - name: Офферы
+    description: Разрешение выбранной вариации в конкретный SKU (Offer)
+  - name: Service
+    description: Служебные эндпоинты (ping/health)
+
+components:
+  securitySchemes:
+    PublicApiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: |
+        Опционально. Используется если нужно ограничить публичный доступ или сделать rate-limit по ключам.
+        Если у проекта публичный каталог — схему можно не включать на уровне операций.
+
+  schemas:
+    # =========================================================
+    # Общие
+    # =========================================================
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Некорректный параметр запроса"
+        code:
+          type: string
+          nullable: true
+          example: "BAD_REQUEST"
+        details:
+          type: object
+          nullable: true
+          additionalProperties: true
+      required: [message]
+
+    LocalizedText:
+      type: object
+      description: Локализованный текст (UA/RU)
+      properties:
+        ua: { type: string, example: "Шампунь Keratin Pro" }
+        en: { type: string, example: "Шампунь Keratin Pro" }
+
+    LocalizedSlug:
+      type: object
+      description: |
+        Опционально: если нужно хранить разные SEO-slug по языкам.
+        Если у вас slug общий — можно не использовать (оставить просто slug: string).
+      properties:
+        ua: { type: string, example: "shampun-keratin-pro" }
+        en: { type: string, example: "shampun-keratin-pro" }
+
+    Money:
+      type: object
+      description: Денежное значение
+      properties:
+        value: { type: number, example: 390 }
+        currency: { type: string, example: "UAH" }
+      required: [value, currency]
+
+    SeoMeta:
+      type: object
+      description: SEO-мета для страницы категории/товара
+      properties:
+        title: { $ref: "#/components/schemas/LocalizedText" }
+        description: { $ref: "#/components/schemas/LocalizedText" }
+        h1: { $ref: "#/components/schemas/LocalizedText" }
+        canonical: { type: string, nullable: true, example: "https://site.com/ua/shampoo-keratin-pro" }
+        noindex: { type: boolean, example: false }
+        ogImage: { type: string, nullable: true, example: "https://cdn.site/og/shampoo.webp" }
+
+    Image:
+      type: object
+      description: |
+        Унифицированное описание изображения.
+        cover можно дублировать в imageURL для быстрого доступа.
+      properties:
+        url: { type: string, example: "https://cdn.site/demo/shampoo/cover.webp" }
+        alt: { $ref: "#/components/schemas/LocalizedText" }
+        sort: { type: integer, example: 10 }
+      required: [url]
+
+    PaginationMeta:
+      type: object
+      properties:
+        page: { type: integer, example: 1 }
+        limit: { type: integer, example: 24 }
+        total: { type: integer, example: 132 }
+        pages: { type: integer, example: 6 }
+      required: [page, limit, total, pages]
+
+    # =========================================================
+    # Категории
+    # =========================================================
+    Category:
+      type: object
+      properties:
+        _id: { type: string, example: "C3" }
+        parentId: { type: string, nullable: true, example: "C2" }
+        slug: { type: string, example: "shampoo" }
+        # Если нужен локализованный slug — используйте slugI18n
+        slugI18n: { $ref: "#/components/schemas/LocalizedSlug" }
+        title: { $ref: "#/components/schemas/LocalizedText" }
+        description:
+          $ref: "#/components/schemas/LocalizedText"
+        seo:
+          $ref: "#/components/schemas/SeoMeta"
+        icon:
+          type: string
+          nullable: true
+          example: "https://cdn.site/icons/hair.svg"
+        image:
+          type: string
+          nullable: true
+          example: "https://cdn.site/categories/hair.webp"
+        path:
+          type: array
+          items: { type: string }
+          example: ["cosmetics", "hair", "shampoo"]
+        ancestors:
+          type: array
+          items: { type: string }
+          example: ["C1", "C2"]
+        status: { type: string, example: "active" }
+        sort: { type: integer, example: 10 }
+        createdAt: { type: string, format: date-time, example: "2026-02-20T10:11:12.000Z" }
+        updatedAt: { type: string, format: date-time, example: "2026-02-25T09:00:00.000Z" }
+
+    CategoryNode:
+      allOf:
+        - $ref: "#/components/schemas/Category"
+        - type: object
+          properties:
+            children:
+              type: array
+              items: { $ref: "#/components/schemas/CategoryNode" }
+
+    # =========================================================
+    # Вариации (оси и preview)
+    # =========================================================
+    VariationAxis:
+      type: object
+      description: |
+        Ось вариации товара (ProductGroup.variationAxes[]).
+
+        ВАЖНО:
+          - Порядок осей КРИТИЧЕН.
+          - Offer.optionValues[] хранит значения строго в этом порядке.
+          - axisId используется для фильтра (opt) и для построения UI (кнопки/селекты).
+
+        Пример:
+          variationAxes = [
+            { axisId:"A1", title:"Объём", type:"number", unit:"ml" },
+            { axisId:"A2", title:"Аромат", type:"select" },
+            { axisId:"A3", title:"Формат", type:"select" }
+          ]
+
+          Тогда Offer.optionValues = [250, "rose", "bottle"]
+
+        UI подсказка:
+          - type=number + unit => UI может рендерить "250 мл"
+          - type=select => UI рендерит чипы/селект
+      properties:
+        axisId: { type: string, example: "A1" }
+        title: { $ref: "#/components/schemas/LocalizedText" }
+        type:
+          type: string
+          enum: [number, select, string]
+          example: "number"
+        unit: { type: string, nullable: true, example: "ml" }
+        valuesPreset:
+          type: array
+          items: {}
+          example: [250, 500]
+        sort:
+          type: integer
+          nullable: true
+          example: 10
+      required: [axisId, title, type]
+
+    VariantPreviewAxis:
+      type: object
+      description: |
+        Preview значений вариаций для каталога.
+        Возвращается в /catalog/cards -> variantPreview.axes.
+
+        Зачем:
+          - В каталоге нельзя грузить все offers (дорого).
+          - Но UI должен показать доступные варианты (пример: объёмы 250/500).
+
+        axisIndex - индекс оси в variationAxes[].
+        values - уникальные значения, ограниченные maxValuesPerAxis.
+      properties:
+        axisIndex: { type: integer, example: 0 }
+        axisId: { type: string, nullable: true, example: "A1" }
+        title: { $ref: "#/components/schemas/LocalizedText" }
+        type: { type: string, example: "number" }
+        unit: { type: string, nullable: true, example: "ml" }
+        values:
+          type: array
+          items: {}
+          example: [250, 500]
+
+    # =========================================================
+    # Offer (SKU)
+    # =========================================================
+    Offer:
+      type: object
+      description: |
+        Offer = SKU/вариация товара.
+
+        optionValues:
+          - массив значений по осям variationAxes, строго по индексу.
+          - может быть пустым [], если вариаций нет.
+
+        optionKey:
+          - стабильный ключ, который можно использовать для быстрых lookup/кеша.
+          - РЕКОМЕНДУЕМО: делать без JSON кавычек:
+              optionKey = optionValues.map(String).join('|')
+            Пример: 250|rose|bottle
+
+          - Если у тебя сейчас пишется `"orange"|30` (с кавычками) — это значит,
+            что optionKey где-то собирается через JSON.stringify для строк.
+            Это можно поправить в генераторе optionKey.
+
+        Доп поля, которые часто нужны:
+          - barcode/gtin (если есть)
+          - stockQty (если хотите показывать остатки)
+      properties:
+        _id: { type: string, example: "O1001" }
+        groupId: { type: string, example: "G100" }
+        sku: { type: string, example: "KPRO-250-ROSE-BTL" }
+        barcode: { type: string, nullable: true, example: "4820000000001" }
+        price: { type: number, example: 390 }
+        opt_price: { type: number, nullable: true, example: null }
+        available: { type: boolean, example: true }
+        stockQty:
+          type: integer
+          nullable: true
+          example: 15
+        img: { type: string, example: "https://cdn.site/demo/shampoo/250-rose-bottle.webp" }
+        optionValues:
+          type: array
+          items: {}
+          example: [250, "rose", "bottle"]
+        optionKey:
+          type: string
+          example: "250|rose|bottle"
+        status:
+          type: string
+          nullable: true
+          example: "active"
+        createdAt: { type: string, format: date-time, example: "2026-02-22T12:00:00.000Z" }
+        updatedAt: { type: string, format: date-time, example: "2026-02-25T10:00:00.000Z" }
+
+    Pricing:
+      type: object
+      properties:
+        min: { type: number, nullable: true, example: 360 }
+        max: { type: number, nullable: true, example: 610 }
+        currency: { type: string, example: "UAH" }
+
+    Availability:
+      type: object
+      properties:
+        hasAvailable: { type: boolean, example: true }
+        variantsCount: { type: integer, example: 12 }
+
+    # =========================================================
+    # Характеристики (ProductGroup.characteristics)
+    # =========================================================
+    CharacteristicValue:
+      type: object
+      description: |
+        Динамическая характеристика товара.
+
+        В ProductGroup хранится массив characteristics[].
+        Для разных type используется либо value, либо values:
+
+          type=string|number|boolean|select -> value
+          type=multiselect                  -> values (массив)
+
+        Примеры:
+          { key:"brand", type:"select", value:"KeratinPro" }
+          { key:"sulfate_free", type:"boolean", value:true }
+          { key:"hair_type", type:"multiselect", values:["dry","damaged"] }
+      properties:
+        key: { type: string, example: "brand" }
+        type:
+          type: string
+          enum: [string, number, boolean, select, multiselect]
+          example: "select"
+        unit: { type: string, nullable: true, example: null }
+        value:
+          description: Для string/number/boolean/select
+          nullable: true
+          example: "KeratinPro"
+        values:
+          description: Для multiselect
+          type: array
+          items: {}
+          example: ["dry", "damaged"]
+      required: [key, type]
+
+    CharacteristicMeta:
+      type: object
+      description: |
+        Словарь характеристик для UI.
+
+        Фронт использует meta чтобы:
+          - построить фильтры (filterable=true)
+          - построить поиск по характеристике (searchable=true)
+          - понять тип, unit, пресеты значений
+          - сортировать отображение (sort)
+
+        Важно по типам:
+          - type=number + filterable=true => UI обычно рендерит range (min/max)
+          - type=select => single select
+          - type=multiselect => multi select (чекбоксы)
+          - type=boolean => switch/checkbox
+      properties:
+        key: { type: string, example: "brand" }
+        title: { $ref: "#/components/schemas/LocalizedText" }
+        type:
+          type: string
+          enum: [string, number, boolean, select, multiselect]
+          example: "select"
+        unit: { type: string, nullable: true, example: null }
+        valuesPreset:
+          type: array
+          items: {}
+          example: ["KeratinPro", "Davines", "Lador"]
+        filterable: { type: boolean, example: true }
+        searchable: { type: boolean, example: true }
+        sort: { type: integer, example: 10 }
+        status: { type: string, example: "active" }
+
+    # =========================================================
+    # CatalogCard / Responses
+    # =========================================================
+    CatalogCard:
+      type: object
+      description: |
+        Карточка каталога (DTO) — оптимизированный объект для листинга.
+
+        Почему не отдаём ProductGroup целиком:
+          - листинг должен быть быстрым
+          - offers может быть много (10..500)
+          - preview по вариациям позволяет рисовать UI без загрузки всех SKU
+
+        includeOffers:
+          - none    -> offers=[]
+          - preview -> offers=[bestOffer] (1 элемент)
+          - all     -> offers=[...] до maxOffersPerGroup
+
+        Важно:
+          - groupId используется как стабильный идентификатор группы (ProductGroup._id)
+          - slug для PDP
+          - pricing/availability — агрегаты по offers с учетом фильтров onlyAvailable
+      properties:
+        groupId: { type: string, example: "G100" }
+        slug: { type: string, example: "shampoo-keratin-pro" }
+        title: { $ref: "#/components/schemas/LocalizedText" }
+
+        imageURL:
+          type: string
+          nullable: true
+          example: "https://cdn.site/demo/shampoo/cover.webp"
+        images:
+          type: array
+          items: { $ref: "#/components/schemas/Image" }
+
+        categoryIds:
+          type: array
+          items: { type: string }
+          example: ["C3"]
+
+        status:
+          type: string
+          example: "active"
+
+        pricing: { $ref: "#/components/schemas/Pricing" }
+        availability: { $ref: "#/components/schemas/Availability" }
+
+        # preview значений вариаций
+        variantPreview:
+          type: object
+          properties:
+            depth: { type: integer, example: 2 }
+            axes:
+              type: array
+              items: { $ref: "#/components/schemas/VariantPreviewAxis" }
+
+        # offers по режиму includeOffers
+        offers:
+          type: array
+          items: { $ref: "#/components/schemas/Offer" }
+
+        # UI подсказки (что надо отрисовать)
+        ui:
+          type: object
+          properties:
+            variationAxes:
+              type: array
+              items: { $ref: "#/components/schemas/VariationAxis" }
+            badges:
+              type: array
+              items: { type: string }
+              example: ["hit", "new"]
+
+        characteristics:
+          type: array
+          items: { $ref: "#/components/schemas/CharacteristicValue" }
+          description: |
+            Опционально: includeCharacteristics=true добавит ProductGroup.characteristics в карточку.
+
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2026-02-25T10:00:00.000Z"
+
+    CatalogCardsResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items: { $ref: "#/components/schemas/CatalogCard" }
+        meta: { $ref: "#/components/schemas/PaginationMeta" }
+      required: [items, meta]
+
+    # =========================================================
+    # Facets
+    # =========================================================
+    FacetBucket:
+      type: object
+      properties:
+        value:
+          description: Значение “корзины” (bucket)
+          nullable: true
+          example: "rose"
+        count:
+          type: integer
+          example: 12
+
+    FacetRange:
+      type: object
+      description: |
+        Range-фасет (обычно для type=number).
+        Может использоваться для характеристик и для price.
+      properties:
+        min: { type: number, nullable: true, example: 120 }
+        max: { type: number, nullable: true, example: 1990 }
+
+    FacetsResponse:
+      type: object
+      description: |
+        Фасеты для UI фильтров (счётчики).
+
+        Возвращает:
+          - pricing min/max внутри текущих фильтров
+          - variationAxes: axisId -> buckets
+          - characteristics:
+              - buckets для select/multiselect/boolean
+              - range для number (если реализовано)
+      properties:
+        pricing:
+          type: object
+          properties:
+            min: { type: number, nullable: true, example: 120 }
+            max: { type: number, nullable: true, example: 1990 }
+            currency: { type: string, example: "UAH" }
+        variationAxes:
+          description: Счётчики по осям вариаций. axisId -> buckets
+          type: object
+          additionalProperties:
+            type: array
+            items: { $ref: "#/components/schemas/FacetBucket" }
+          example:
+            A1:
+              - { value: 250, count: 18 }
+              - { value: 500, count: 9 }
+            A2:
+              - { value: "rose", count: 10 }
+              - { value: "mint", count: 7 }
+            A3:
+              - { value: "bottle", count: 12 }
+              - { value: "refill", count: 8 }
+        characteristics:
+          description: |
+            Счётчики по характеристикам.
+            key -> либо buckets[] (select/multiselect/boolean), либо range (number).
+          type: object
+          additionalProperties: true
+          example:
+            brand:
+              buckets:
+                - { value: "KeratinPro", count: 14 }
+                - { value: "Davines", count: 6 }
+            sulfate_free:
+              buckets:
+                - { value: true, count: 20 }
+                - { value: false, count: 5 }
+            weight_g:
+              range: { min: 50, max: 1000 }
+
+    # =========================================================
+    # PDP (детали ProductGroup)
+    # =========================================================
+    ProductGroupDetails:
+      type: object
+      description: |
+        Детальная страница товара (PDP).
+
+        Возвращает:
+          - сам ProductGroup (основные поля)
+          - variationAxes (оси вариаций)
+          - characteristics (характеристики)
+          - все offers (SKU)
+          - агрегированную цену/наличие
+
+        Важно:
+          - offers всегда в одном массиве
+          - фронт строит UI из variationAxes
+          - затем резолвит offer через /catalog/offers/resolve (или выбирает напрямую по optionKey)
+      properties:
+        _id: { type: string, example: "G100" }
+        slug: { type: string, example: "shampoo-keratin-pro" }
+
+        title: { $ref: "#/components/schemas/LocalizedText" }
+        description:
+          $ref: "#/components/schemas/LocalizedText"
+
+        seo:
+          $ref: "#/components/schemas/SeoMeta"
+
+        imageURL: { type: string, example: "https://cdn.site/demo/shampoo/cover.webp" }
+        images:
+          type: array
+          items: { $ref: "#/components/schemas/Image" }
+
+        categoryIds:
+          type: array
+          items: { type: string }
+          example: ["C3"]
+
+        status: { type: string, example: "active" }
+
+        # UX-маркеры
+        flags:
+          type: object
+          properties:
+            isNew: { type: boolean, example: true }
+            isHit: { type: boolean, example: false }
+            isSale: { type: boolean, example: false }
+
+        variationAxes:
+          type: array
+          items: { $ref: "#/components/schemas/VariationAxis" }
+
+        characteristics:
+          type: array
+          items: { $ref: "#/components/schemas/CharacteristicValue" }
+
+        pricing: { $ref: "#/components/schemas/Pricing" }
+        availability: { $ref: "#/components/schemas/Availability" }
+
+        offers:
+          type: array
+          items: { $ref: "#/components/schemas/Offer" }
+
+        updatedAt:
+          type: string
+          format: date-time
+          example: "2026-02-25T10:00:00.000Z"
+
+    # =========================================================
+    # Offer Resolve
+    # =========================================================
+    OfferResolveRequest:
+      type: object
+      properties:
+        groupId: { type: string, example: "G100" }
+        optionValues:
+          type: array
+          items: {}
+          example: [250, "rose", "bottle"]
+        optionKey:
+          type: string
+          nullable: true
+          example: "250|rose|bottle"
+      required: [groupId]
+      description: |
+        Нужно передать groupId и ЛИБО optionValues, ЛИБО optionKey.
+
+        optionValues:
+          - строго совпадает с порядком variationAxes в ProductGroup
+
+        optionKey:
+          - заранее собранный ключ
+          - удобно кешировать на фронте
+
+        Ошибки:
+          - если передан optionValues неверной длины (не совпадает с variationAxes.length) — BAD_REQUEST
+          - если комбинация не найдена — NOT_FOUND
+
+    OfferResolveResponse:
+      type: object
+      properties:
+        offer:
+          $ref: "#/components/schemas/Offer"
+      required: [offer]
+
+  parameters:
+    StatusParam:
+      name: status
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: [active, hidden, draft]
+        default: active
+      description: Фильтр по статусу (где применимо).
+
+    PageParam:
+      name: page
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        default: 1
+      description: Номер страницы (начиная с 1).
+
+    LimitParam:
+      name: limit
+      in: query
+      required: false
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 200
+        default: 24
+      description: Кол-во элементов на странице.
+
+    LanguageParam:
+      name: lang
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: [ua, en]
+        default: ua
+      description: |
+        Опционально: язык ответа для некоторых полей (если захотите отдавать "flattened" заголовки).
+        В текущей модели вы храните i18n целиком (ua/en), поэтому параметр можно игнорировать.
+
+paths:
+# =========================
+# PART 3/4
+# (продолжение — вставляй сразу после PART 2)
+# =========================
+  # =========================================================
+  # Категории
+  # =========================================================
+  /catalog/categories/tree:
+    get:
+      tags: [Категории]
+      summary: Получить дерево категорий целиком
+      description: |
+        Возвращает дерево категорий (неограниченная глубина).
+        Используется для меню, сайдбара, sitemap.
+
+        Параметр status:
+          - active -> только активные
+          - hidden -> скрытые (для админки)
+          - draft  -> если у вас появится черновик (опционально)
+      parameters:
+        - $ref: "#/components/parameters/StatusParam"
+      responses:
+        "200":
+          description: Дерево категорий
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items: { $ref: "#/components/schemas/CategoryNode" }
+              examples:
+                ПримерДерева_3Уровня:
+                  value:
+                    items:
+                      - _id: "C1"
+                        parentId: null
+                        slug: "cosmetics"
+                        title: { ua: "Косметика", en: "Косметика" }
+                        path: ["cosmetics"]
+                        ancestors: []
+                        status: "active"
+                        sort: 10
+                        children:
+                          - _id: "C2"
+                            parentId: "C1"
+                            slug: "hair"
+                            title: { ua: "Волосся", en: "Волосы" }
+                            path: ["cosmetics", "hair"]
+                            ancestors: ["C1"]
+                            status: "active"
+                            sort: 10
+                            children:
+                              - _id: "C3"
+                                parentId: "C2"
+                                slug: "shampoo"
+                                title: { ua: "Шампуні", en: "Шампуни" }
+                                path: ["cosmetics", "hair", "shampoo"]
+                                ancestors: ["C1", "C2"]
+                                status: "active"
+                                sort: 10
+                                children: []
+                ПримерДерева_СНесколькимиКорнями:
+                  value:
+                    items:
+                      - _id: "C10"
+                        parentId: null
+                        slug: "skin-structure"
+                        title: { ua: "Skin Structure", en: "Skin Structure" }
+                        path: ["skin-structure"]
+                        ancestors: []
+                        status: "active"
+                        sort: 10
+                        children:
+                          - _id: "C11"
+                            parentId: "C10"
+                            slug: "cleansing"
+                            title: { ua: "Очищення", en: "Очищение" }
+                            path: ["skin-structure", "cleansing"]
+                            ancestors: ["C10"]
+                            status: "active"
+                            sort: 10
+                            children:
+                              - _id: "C12"
+                                parentId: "C11"
+                                slug: "foam"
+                                title: { ua: "Пінка", en: "Пенка" }
+                                path: ["skin-structure", "cleansing", "foam"]
+                                ancestors: ["C10", "C11"]
+                                status: "active"
+                                sort: 10
+                                children: []
+                      - _id: "C20"
+                        parentId: null
+                        slug: "hair-structure"
+                        title: { ua: "Hair Structure", en: "Hair Structure" }
+                        path: ["hair-structure"]
+                        ancestors: []
+                        status: "active"
+                        sort: 20
+                        children: []
+        "400":
+          description: Ошибка в параметрах запроса
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorResponse" }
+
+  /catalog/categories/children:
+    get:
+      tags: [Категории]
+      summary: Получить дочерние категории по parentId (lazy load)
+      description: |
+        Возвращает детей для parentId.
+        Если parentId не задан или null — вернёт корневые категории.
+
+        Использование:
+          - мобильное меню подгружает детей по клику
+          - админка подгружает узлы дерева без выдачи всего дерева
+      parameters:
+        - name: parentId
+          in: query
+          required: false
+          schema: { type: string, nullable: true }
+          description: ID родительской категории (null/empty -> корни).
+        - $ref: "#/components/parameters/StatusParam"
+      responses:
+        "200":
+          description: Список категорий
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items: { $ref: "#/components/schemas/Category" }
+              examples:
+                ПримерКорней:
+                  value:
+                    items:
+                      - _id: "C10"
+                        parentId: null
+                        slug: "skin-structure"
+                        title: { ua: "Skin Structure", en: "Skin Structure" }
+                        path: ["skin-structure"]
+                        ancestors: []
+                        status: "active"
+                        sort: 10
+                      - _id: "C20"
+                        parentId: null
+                        slug: "hair-structure"
+                        title: { ua: "Hair Structure", en: "Hair Structure" }
+                        path: ["hair-structure"]
+                        ancestors: []
+                        status: "active"
+                        sort: 20
+                ПримерДетей:
+                  value:
+                    items:
+                      - _id: "C11"
+                        parentId: "C10"
+                        slug: "cleansing"
+                        title: { ua: "Очищення", en: "Очищение" }
+                        path: ["skin-structure", "cleansing"]
+                        ancestors: ["C10"]
+                        status: "active"
+                        sort: 10
+                      - _id: "C13"
+                        parentId: "C10"
+                        slug: "hydration"
+                        title: { ua: "Зволоження", en: "Увлажнение" }
+                        path: ["skin-structure", "hydration"]
+                        ancestors: ["C10"]
+                        status: "active"
+                        sort: 20
+        "400":
+          description: Ошибка в параметрах запроса
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorResponse" }
+
+  /catalog/categories/breadcrumbs:
+    get:
+      tags: [Категории]
+      summary: Получить хлебные крошки для категории
+      description: |
+        Возвращает массив категорий от корня до выбранной категории.
+        Используется в UI: Главная / Косметика / Волосы / Шампуни
+
+        Реализация:
+          - category.ancestors[] хранит ObjectId всех предков
+          - breadcrumbs = ancestors + self
+      parameters:
+        - name: categoryId
+          in: query
+          required: true
+          schema: { type: string }
+          description: ID категории.
+      responses:
+        "200":
+          description: Массив breadcrumbs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items: { $ref: "#/components/schemas/Category" }
+              examples:
+                Пример:
+                  value:
+                    items:
+                      - _id: "C10"
+                        parentId: null
+                        slug: "skin-structure"
+                        title: { ua: "Skin Structure", en: "Skin Structure" }
+                        path: ["skin-structure"]
+                        ancestors: []
+                        status: "active"
+                        sort: 10
+                      - _id: "C11"
+                        parentId: "C10"
+                        slug: "cleansing"
+                        title: { ua: "Очищення", en: "Очищение" }
+                        path: ["skin-structure", "cleansing"]
+                        ancestors: ["C10"]
+                        status: "active"
+                        sort: 10
+                      - _id: "C12"
+                        parentId: "C11"
+                        slug: "foam"
+                        title: { ua: "Пінка", en: "Пенка" }
+                        path: ["skin-structure", "cleansing", "foam"]
+                        ancestors: ["C10", "C11"]
+                        status: "active"
+                        sort: 10
+        "400":
+          description: categoryId обязателен
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorResponse" }
+              examples:
+                Missing:
+                  value:
+                    message: "categoryId is required"
+                    code: "BAD_REQUEST"
+
+  # =========================================================
+  # Характеристики Meta
+  # =========================================================
+  /catalog/characteristics/meta:
+    get:
+      tags: [Характеристики]
+      summary: Получить словарь характеристик (meta)
+      description: |
+        Фронт использует этот endpoint чтобы построить фильтры “на лету”:
+          - тип фильтра (select/multiselect/range/boolean)
+          - единицы измерения (unit)
+          - пресеты значений (valuesPreset)
+          - видимость в фильтре (filterable)
+          - поиск по характеристике (searchable)
+
+        Важно:
+          - meta.key — это тот же ключ, что используется в ProductGroup.characteristics[].key
+          - meta.type определяет формат фильтра
+          - valuesPreset — подсказки для UI (не обязаны быть полными)
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema: { type: string, enum: [active, hidden], default: active }
+          description: Фильтр по статусу meta (active/hidden).
+      responses:
+        "200":
+          description: Список meta характеристик
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items: { $ref: "#/components/schemas/CharacteristicMeta" }
+              examples:
+                ПримерMeta_Базовый:
+                  value:
+                    items:
+                      - key: "brand"
+                        title: { ua: "Бренд", en: "Бренд" }
+                        type: "select"
+                        unit: null
+                        valuesPreset: ["KeratinPro", "Davines", "Lador"]
+                        filterable: true
+                        searchable: true
+                        sort: 10
+                        status: "active"
+                      - key: "sulfate_free"
+                        title: { ua: "Без сульфатів", en: "Без сульфатов" }
+                        type: "boolean"
+                        unit: null
+                        valuesPreset: []
+                        filterable: true
+                        searchable: false
+                        sort: 20
+                        status: "active"
+                      - key: "hair_type"
+                        title: { ua: "Тип волосся", en: "Тип волос" }
+                        type: "multiselect"
+                        unit: null
+                        valuesPreset: ["dry", "oily", "damaged"]
+                        filterable: true
+                        searchable: false
+                        sort: 30
+                        status: "active"
+                ПримерMeta_ЧисловойРейндж:
+                  value:
+                    items:
+                      - key: "weight_g"
+                        title: { ua: "Вага", en: "Вес" }
+                        type: "number"
+                        unit: "g"
+                        valuesPreset: [50, 100, 250, 500, 1000]
+                        filterable: true
+                        searchable: false
+                        sort: 40
+                        status: "active"
+
+  # =========================================================
+  # Каталог: cards
+  # =========================================================
+  /catalog/cards:
+    get:
+      tags: [Каталог]
+      summary: Получить карточки каталога (DTO)
+      description: |
+        ОСНОВНОЙ endpoint каталога. Возвращает карточки ProductGroup с агрегацией Offer.
+
+        ---------------------------------------------------------
+        ✅ ПАГИНАЦИЯ
+        ---------------------------------------------------------
+        Ответ содержит meta:
+          - total: всего товаров (ProductGroup) по фильтрам
+          - pages: количество страниц
+
+        ---------------------------------------------------------
+        ✅ includeOffers
+        ---------------------------------------------------------
+        includeOffers=none
+          - offers: []
+          - минимальный ответ для быстрой сетки
+
+        includeOffers=preview
+          - offers: [bestOffer] (1 элемент)
+          - удобно для UI “цена от ...”
+
+        includeOffers=all
+          - offers: все офферы (до maxOffersPerGroup)
+          - обычно НЕ нужно для каталога (дорого)
+
+        ---------------------------------------------------------
+        ✅ preview по вариациям
+        ---------------------------------------------------------
+        variantPreview показывает доступные значения первых N осей (depth),
+        чтобы в каталоге можно было рисовать “кнопки объёма/цвета” без загрузки всех SKU.
+
+        Параметры:
+          - preview=true/false
+          - depth=2 (сколько осей показывать)
+          - maxValuesPerAxis=6 (сколько значений на ось)
+
+        ---------------------------------------------------------
+        ✅ ФИЛЬТРАЦИЯ
+        ---------------------------------------------------------
+
+        1) По категории:
+          - categoryId + categoryInclude=branch -> включает всю ветку категории (по ancestors)
+          - categoryInclude=self -> только прямое совпадение categoryIds
+
+        2) Поиск:
+          - q -> по title.ua/title.en (или через текстовый индекс)
+
+        3) По цене:
+          - priceMin/priceMax -> фильтр по offers.price
+
+        4) По наличию:
+          - onlyAvailable=true -> учитывать только offers.available=true
+
+        5) По вариациям:
+          - opt (JSON) по axisId
+            пример: opt={"A1":250,"A2":"rose"}
+
+          ⚠️ ВАЖНО ПРО ТИПЫ:
+            - если axis.type=number -> значение должно быть number (без кавычек)
+            - если axis.type=select/string -> значение строка
+
+        6) По характеристикам:
+          - char (JSON) по ProductGroup.characteristics
+            примеры:
+              char={"brand":"KeratinPro"}
+              char={"sulfate_free":true}
+              char={"hair_type":["dry","damaged"]}
+
+        ---------------------------------------------------------
+        ✅ СОРТИРОВКА
+        ---------------------------------------------------------
+        Параметр:
+          - sort=<mode>
+
+        Поддерживаемые значения:
+          - updated_desc (по умолчанию)
+          - title_asc
+          - price_asc
+          - price_desc
+
+        Примечания:
+          - sort применяется на уровне БД.
+          - price_* сортирует по агрегированной цене группы (pricing.min / pricing.max),
+            а не по "первому попавшемуся offer".
+          - sort корректно комбинируется с category/q/char/opt/offerChar/priceMin/priceMax/onlyAvailable.
+
+        ---------------------------------------------------------
+        ✅ ПРИМЕРЫ ЗАПРОСОВ (готовые)
+        ---------------------------------------------------------
+
+        A) Каталог без офферов (быстро):
+          GET /catalog/cards?page=1&limit=24
+
+        B) Каталог с лучшим оффером (показывать цену):
+          GET /catalog/cards?includeOffers=preview
+
+        C) Фильтр по ветке категории:
+          GET /catalog/cards?categoryId=C2&categoryInclude=branch
+
+        D) Поиск:
+          GET /catalog/cards?q=keratin
+
+        E) Цена + наличие:
+          GET /catalog/cards?onlyAvailable=true&priceMin=300&priceMax=600
+
+        F) Фильтр по вариациям (ось A1=250):
+          GET /catalog/cards?opt={"A1":250}
+
+        G) Фильтр по вариациям (A1=250 и A2=rose):
+          GET /catalog/cards?opt={"A1":250,"A2":"rose"}
+
+        H) Фильтр по характеристикам:
+          GET /catalog/cards?char={"brand":"KeratinPro","sulfate_free":true}
+
+        I) Multiselect характеристика:
+          GET /catalog/cards?char={"hair_type":["dry","damaged"]}
+
+        J) ТЕСТ “странных цветов” (как у тебя в facets color):
+          GET /catalog/cards?char={"color":"orange"}
+          GET /catalog/cards?char={"color":"berry"}
+          GET /catalog/cards?char={"color":30}
+          GET /catalog/cards?char={"color":null}
+
+          (если color — это ХАРАКТЕРИСТИКА)
+          Если же color — это ОСЬ вариации, тогда:
+            GET /catalog/cards?opt={"A_COLOR":"orange"}
+
+        ---------------------------------------------------------
+        ✅ ПРИМЕРЫ ЗАПРОСОВ С СОРТИРОВКОЙ
+        ---------------------------------------------------------
+
+        K) Сортировка по умолчанию:
+          GET /catalog/cards?sort=updated_desc
+
+        L) Сортировка по названию (А→Я):
+          GET /catalog/cards?sort=title_asc
+
+        M) Сортировка по цене (дешевле сверху):
+          GET /catalog/cards?sort=price_asc
+
+        N) Сортировка по цене (дороже сверху):
+          GET /catalog/cards?sort=price_desc
+
+        O) Категория + сортировка по цене:
+          GET /catalog/cards?categoryId=C2&categoryInclude=branch&sort=price_asc
+
+        P) Поиск + сортировка по цене:
+          GET /catalog/cards?q=keratin&sort=price_desc
+
+        Q) Наличие + диапазон цены + сортировка:
+          GET /catalog/cards?onlyAvailable=true&priceMin=300&priceMax=600&sort=price_asc
+
+        R) Фильтр по вариациям + сортировка:
+          GET /catalog/cards?opt={"A1":250,"A2":"rose"}&sort=price_asc
+
+        S) Фильтр по характеристикам + сортировка:
+          GET /catalog/cards?char={"brand":"KeratinPro"}&sort=updated_desc
+      parameters:
+        - $ref: "#/components/parameters/PageParam"
+        - $ref: "#/components/parameters/LimitParam"
+        - $ref: "#/components/parameters/StatusParam"
+        - $ref: "#/components/parameters/LanguageParam"
+
+        - name: categoryId
+          in: query
+          required: false
+          schema: { type: string }
+          description: ID категории для фильтра.
+
+        - name: categoryInclude
+          in: query
+          required: false
+          schema: { type: string, enum: [branch, self], default: branch }
+          description: branch=ветка (по ancestors), self=только категория.
+
+        - name: q
+          in: query
+          required: false
+          schema: { type: string }
+          description: Поиск по названию товара.
+
+        - name: sort
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [updated_desc, price_asc, price_desc, title_asc]
+            default: updated_desc
+          description: Сортировка.
+
+        - name: onlyAvailable
+          in: query
+          required: false
+          schema: { type: boolean, default: false }
+          description: Учитывать только offers.available=true.
+
+        - name: priceMin
+          in: query
+          required: false
+          schema: { type: number, nullable: true }
+          description: Минимальная цена offer.
+        - name: priceMax
+          in: query
+          required: false
+          schema: { type: number, nullable: true }
+          description: Максимальная цена offer.
+
+        - name: includeOffers
+          in: query
+          required: false
+          schema: { type: string, enum: [none, preview, all], default: none }
+          description: none/preview/all.
+
+        - name: maxOffersPerGroup
+          in: query
+          required: false
+          schema: { type: integer, minimum: 1, maximum: 500, default: 80 }
+          description: Лимит offers при includeOffers=all.
+
+        - name: preview
+          in: query
+          required: false
+          schema: { type: boolean, default: true }
+          description: Включить variantPreview.
+
+        - name: depth
+          in: query
+          required: false
+          schema: { type: integer, minimum: 0, maximum: 20, default: 2 }
+          description: Кол-во осей в preview.
+
+        - name: maxValuesPerAxis
+          in: query
+          required: false
+          schema: { type: integer, minimum: 1, maximum: 50, default: 6 }
+          description: Лимит значений preview на ось.
+
+        - name: includeCharacteristics
+          in: query
+          required: false
+          schema: { type: boolean, default: false }
+          description: Добавить характеристики в карточки.
+
+        - name: char
+          in: query
+          required: false
+          schema: { type: string }
+          description: |
+            JSON-фильтр характеристик ProductGroup.
+
+            Примеры:
+              char={"brand":"KeratinPro"}
+              char={"sulfate_free":true}
+              char={"hair_type":["dry","damaged"]}
+
+        - name: opt
+          in: query
+          required: false
+          schema: { type: string }
+          description: |
+            JSON-фильтр вариаций по axisId.
+
+            Примеры:
+              opt={"A1":250}
+              opt={"A1":250,"A2":"rose"}
+      responses:
+        "200":
+          description: Карточки каталога + meta пагинации
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/CatalogCardsResponse" }
+              examples:
+                ПримерКарточекБезОфферов:
+                  value:
+                    items:
+                      - groupId: "G100"
+                        slug: "shampoo-keratin-pro"
+                        title: { ua: "Шампунь Keratin Pro", en: "Шампунь Keratin Pro" }
+                        imageURL: "https://cdn.site/demo/shampoo/cover.webp"
+                        images:
+                          - url: "https://cdn.site/demo/shampoo/cover.webp"
+                            alt: { ua: "Обкладинка", en: "Обложка" }
+                            sort: 10
+                        categoryIds: ["C3"]
+                        status: "active"
+                        pricing: { min: 360, max: 610, currency: "UAH" }
+                        availability: { hasAvailable: true, variantsCount: 12 }
+                        variantPreview:
+                          depth: 2
+                          axes:
+                            - axisIndex: 0
+                              axisId: "A1"
+                              title: { ua: "Обʼєм", en: "Объём" }
+                              type: "number"
+                              unit: "ml"
+                              values: [250, 500]
+                            - axisIndex: 1
+                              axisId: "A2"
+                              title: { ua: "Аромат", en: "Аромат" }
+                              type: "select"
+                              unit: null
+                              values: ["rose", "mint", "citrus"]
+                        offers: []
+                        ui:
+                          variationAxes:
+                            - axisId: "A1"
+                              title: { ua: "Обʼєм", en: "Объём" }
+                              type: "number"
+                              unit: "ml"
+                              valuesPreset: [250, 500]
+                            - axisId: "A2"
+                              title: { ua: "Аромат", en: "Аромат" }
+                              type: "select"
+                              unit: null
+                              valuesPreset: ["rose", "mint", "citrus"]
+                            - axisId: "A3"
+                              title: { ua: "Формат", en: "Формат" }
+                              type: "select"
+                              unit: null
+                              valuesPreset: ["bottle", "refill"]
+                    meta:
+                      page: 1
+                      limit: 24
+                      total: 132
+                      pages: 6
+
+                ПримерСЛучшимОффером:
+                  value:
+                    items:
+                      - groupId: "G100"
+                        slug: "shampoo-keratin-pro"
+                        title: { ua: "Шампунь Keratin Pro", en: "Шампунь Keratin Pro" }
+                        imageURL: "https://cdn.site/demo/shampoo/cover.webp"
+                        categoryIds: ["C3"]
+                        status: "active"
+                        pricing: { min: 360, max: 610, currency: "UAH" }
+                        availability: { hasAvailable: true, variantsCount: 12 }
+                        variantPreview:
+                          depth: 1
+                          axes:
+                            - axisIndex: 0
+                              axisId: "A1"
+                              title: { ua: "Обʼєм", en: "Объём" }
+                              type: "number"
+                              unit: "ml"
+                              values: [250, 500]
+                        offers:
+                          - _id: "O1002"
+                            groupId: "G100"
+                            sku: "KPRO-250-ROSE-RFL"
+                            price: 360
+                            opt_price: null
+                            available: true
+                            img: "https://cdn.site/demo/shampoo/250-rose-refill.webp"
+                            optionValues: [250, "rose", "refill"]
+                            optionKey: "250|rose|refill"
+                        ui:
+                          variationAxes:
+                            - axisId: "A1"
+                              title: { ua: "Обʼєм", en: "Объём" }
+                              type: "number"
+                              unit: "ml"
+                              valuesPreset: [250, 500]
+                            - axisId: "A2"
+                              title: { ua: "Аромат", en: "Аромат" }
+                              type: "select"
+                              unit: null
+                              valuesPreset: ["rose", "mint", "citrus"]
+                            - axisId: "A3"
+                              title: { ua: "Формат", en: "Формат" }
+                              type: "select"
+                              unit: null
+                              valuesPreset: ["bottle", "refill"]
+                    meta:
+                      page: 1
+                      limit: 24
+                      total: 132
+                      pages: 6
+
+        "400":
+          description: Ошибка в параметрах запроса
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorResponse" }
+              examples:
+                BadJson:
+                  value:
+                    message: "Некорректный JSON в параметре opt/char"
+                    code: "BAD_REQUEST"
+        "500":
+          description: Внутренняя ошибка
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorResponse" }
+  # =========================================================
+  # Каталог: facets
+  # =========================================================
+  /catalog/facets:
+    get:
+      tags: [Каталог]
+      summary: Получить фасеты (счётчики) для фильтров
+      description: |
+        Возвращает фасеты для сайдбара фильтров:
+          - pricing min/max внутри текущих фильтров
+          - variationAxes: axisId -> buckets
+          - characteristics: key -> buckets (только filterable характеристики)
+
+        Важно:
+          Используй те же фильтры, что и для /catalog/cards, чтобы UI совпадал.
+
+        Типичный flow для фронта:
+          1) GET /catalog/cards (получить товары)
+          2) GET /catalog/facets (получить счётчики для фильтров)
+      parameters:
+        - $ref: "#/components/parameters/StatusParam"
+        - name: categoryId
+          in: query
+          required: false
+          schema: { type: string }
+        - name: categoryInclude
+          in: query
+          required: false
+          schema: { type: string, enum: [branch, self], default: branch }
+        - name: q
+          in: query
+          required: false
+          schema: { type: string }
+        - name: onlyAvailable
+          in: query
+          required: false
+          schema: { type: boolean, default: false }
+        - name: priceMin
+          in: query
+          required: false
+          schema: { type: number, nullable: true }
+        - name: priceMax
+          in: query
+          required: false
+          schema: { type: number, nullable: true }
+        - name: char
+          in: query
+          required: false
+          schema: { type: string }
+        - name: opt
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        "200":
+          description: Фасеты для UI фильтров
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  facets: { $ref: "#/components/schemas/FacetsResponse" }
+              examples:
+                ПримерФасетов_СColorСтраннымиЗначениями:
+                  value:
+                    facets:
+                      pricing: { min: 120, max: 1990, currency: "UAH" }
+                      variationAxes: {}
+                      characteristics:
+                        color:
+                          buckets:
+                            - { value: null, count: 66 }
+                            - { value: "berry", count: 42 }
+                            - { value: "orange", count: 42 }
+                            - { value: 30, count: 21 }
+                            - { value: "beige", count: 19 }
+                            - { value: "black", count: 19 }
+                            - { value: "white", count: 19 }
+        "400":
+          description: Ошибка в параметрах запроса
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorResponse" }
+
+  # =========================================================
+  # Каталог: PDP (details)
+  # =========================================================
+  /catalog/groups/{slug}:
+    get:
+      tags: [Каталог]
+      summary: Получить страницу товара (ProductGroup) по slug
+      description: |
+        Возвращает детальную страницу товара (PDP):
+          - поля ProductGroup
+          - variationAxes (оси вариаций)
+          - characteristics (характеристики)
+          - offers (все SKU)
+          - агрегированную цену/наличие
+
+        Использование на фронте:
+          1) Открыли PDP по slug
+          2) Отрисовали UI осей variationAxes
+          3) Пользователь выбирает опции
+          4) На add-to-cart делаем /offers/resolve для получения offer
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+          example: "shampoo-keratin-pro"
+      responses:
+        "200":
+          description: Детали ProductGroup
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  item: { $ref: "#/components/schemas/ProductGroupDetails" }
+              examples:
+                ПримерPDP:
+                  value:
+                    item:
+                      _id: "G100"
+                      slug: "shampoo-keratin-pro"
+                      title: { ua: "Шампунь Keratin Pro", en: "Шампунь Keratin Pro" }
+                      description:
+                        ua: "Професійний шампунь для відновлення волосся."
+                        en: "Профессиональный шампунь для восстановления волос."
+                      seo:
+                        title: { ua: "Keratin Pro — шампунь", en: "Keratin Pro — шампунь" }
+                        description:
+                          ua: "Купити Keratin Pro з доставкою по Україні."
+                          en: "Купить Keratin Pro с доставкой по Украине."
+                        keywords: ["keratin", "shampoo"]
+                      imageURL: "https://cdn.site/demo/shampoo/cover.webp"
+                      images:
+                        - url: "https://cdn.site/demo/shampoo/cover.webp"
+                          alt: { ua: "Обкладинка", en: "Обложка" }
+                          sort: 10
+                        - url: "https://cdn.site/demo/shampoo/250-rose-bottle.webp"
+                          alt: { ua: "250 мл пляшка", en: "250 мл бутылка" }
+                          sort: 20
+                      categoryIds: ["C3"]
+                      status: "active"
+                      flags: { isNew: true, isHit: false, isSale: false }
+                      variationAxes:
+                        - axisId: "A1"
+                          title: { ua: "Обʼєм", en: "Объём" }
+                          type: "number"
+                          unit: "ml"
+                          valuesPreset: [250, 500]
+                        - axisId: "A2"
+                          title: { ua: "Аромат", en: "Аромат" }
+                          type: "select"
+                          unit: null
+                          valuesPreset: ["rose", "mint", "citrus"]
+                        - axisId: "A3"
+                          title: { ua: "Формат", en: "Формат" }
+                          type: "select"
+                          unit: null
+                          valuesPreset: ["bottle", "refill"]
+                      characteristics:
+                        - key: "brand"
+                          type: "select"
+                          unit: null
+                          value: "KeratinPro"
+                          values: []
+                        - key: "sulfate_free"
+                          type: "boolean"
+                          unit: null
+                          value: true
+                          values: []
+                        - key: "hair_type"
+                          type: "multiselect"
+                          unit: null
+                          value: null
+                          values: ["dry", "damaged"]
+                        - key: "color"
+                          type: "select"
+                          unit: null
+                          value: "orange"
+                          values: []
+                      pricing: { min: 360, max: 610, currency: "UAH" }
+                      availability: { hasAvailable: true, variantsCount: 12 }
+                      offers:
+                        - _id: "O1001"
+                          groupId: "G100"
+                          sku: "KPRO-250-ROSE-BTL"
+                          price: 390
+                          opt_price: null
+                          available: true
+                          img: "https://cdn.site/demo/shampoo/250-rose-bottle.webp"
+                          optionValues: [250, "rose", "bottle"]
+                          optionKey: "250|rose|bottle"
+                        - _id: "O1002"
+                          groupId: "G100"
+                          sku: "KPRO-250-ROSE-RFL"
+                          price: 360
+                          opt_price: null
+                          available: true
+                          img: "https://cdn.site/demo/shampoo/250-rose-refill.webp"
+                          optionValues: [250, "rose", "refill"]
+                          optionKey: "250|rose|refill"
+        "404":
+          description: Не найдено
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorResponse" }
+              examples:
+                NotFound:
+                  value:
+                    message: "ProductGroup не найден"
+                    code: "NOT_FOUND"
+
+  # =========================================================
+  # Offers: resolve
+  # =========================================================
+  /catalog/offers/resolve:
+    post:
+      tags: [Офферы]
+      summary: Определить Offer (SKU) по выбранным опциям
+      description: |
+        Используется на фронте при выборе вариаций на PDP и при добавлении в корзину.
+
+        Передай groupId и ЛИБО:
+          - optionValues: массив значений по осям variationAxes (по индексу)
+          - optionKey: заранее собранный ключ
+
+        ---------------------------------------------------------
+        ✅ Как фронту собирать optionValues правильно
+        ---------------------------------------------------------
+
+        Пример variationAxes:
+          0: A1 = Объём (number)
+          1: A2 = Аромат (select)
+          2: A3 = Формат (select)
+
+        Тогда если пользователь выбрал:
+          A1=250
+          A2="rose"
+          A3="bottle"
+
+        optionValues будет:
+          [250, "rose", "bottle"]
+
+        ---------------------------------------------------------
+        ✅ Рекомендация по optionKey
+        ---------------------------------------------------------
+        Собирай на сервере (в момент создания оффера) так:
+          optionKey = optionValues.map(v => String(v)).join("|")
+
+        Чтобы не было кавычек:
+          "orange"|30  ❌
+          orange|30    ✅
+
+        ---------------------------------------------------------
+        ✅ Доп. проверки
+        ---------------------------------------------------------
+        - если optionValues.length != variationAxes.length -> 400
+        - если есть undefined в массиве -> 400
+        - если типы не совпали (number vs string) -> 400 (по желанию)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OfferResolveRequest" }
+            examples:
+              ПоValues:
+                value:
+                  groupId: "G100"
+                  optionValues: [250, "rose", "bottle"]
+              ПоKey:
+                value:
+                  groupId: "G100"
+                  optionKey: "250|rose|bottle"
+              ПоValues_ТестЦветаOrange:
+                value:
+                  groupId: "G100"
+                  optionValues: [250, "orange", "bottle"]
+              ПоValues_ТестЦвета30:
+                value:
+                  groupId: "G100"
+                  optionValues: [250, 30, "bottle"]
+      responses:
+        "200":
+          description: Найденный Offer
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OfferResolveResponse" }
+              examples:
+                Found:
+                  value:
+                    offer:
+                      _id: "O1001"
+                      groupId: "G100"
+                      sku: "KPRO-250-ROSE-BTL"
+                      price: 390
+                      opt_price: null
+                      available: true
+                      img: "https://cdn.site/demo/shampoo/250-rose-bottle.webp"
+                      optionValues: [250, "rose", "bottle"]
+                      optionKey: "250|rose|bottle"
+        "400":
+          description: Ошибка запроса (не хватает optionValues/optionKey или неверный формат)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorResponse" }
+              examples:
+                Missing:
+                  value:
+                    message: "Нужно передать optionValues или optionKey"
+                    code: "BAD_REQUEST"
+                WrongLength:
+                  value:
+                    message: "optionValues length must match variationAxes length"
+                    code: "BAD_REQUEST"
+                BadTypes:
+                  value:
+                    message: "optionValues types do not match variationAxes"
+                    code: "BAD_REQUEST"
+        "404":
+          description: Offer не найден
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorResponse" }
+              examples:
+                NotFound:
+                  value:
+                    message: "Offer не найден"
+                    code: "NOT_FOUND"
+# =========================
+# PART 4/4 (FINAL)
+# (продолжение — вставляй сразу после PART 3)
+# =========================
+
+    # =========================================================
+    # ДОП: UI/SEO/img (используются в примерах и расширении)
+    # =========================================================
+    ImageItem:
+      type: object
+      description: Изображение с alt и сортировкой.
+      properties:
+        url: { type: string, example: "https://cdn.site/demo/shampoo/cover.webp" }
+        alt: { $ref: "#/components/schemas/LocalizedText" }
+        sort: { type: integer, example: 10 }
+      required: [url]
+
+    SeoMeta:
+      type: object
+      description: SEO мета для страниц (PDP/категория и т.д.).
+      properties:
+        title: { $ref: "#/components/schemas/LocalizedText" }
+        description: { $ref: "#/components/schemas/LocalizedText" }
+        keywords:
+          type: array
+          items: { type: string }
+          example: ["keratin", "shampoo"]
+      required: [title]
+
+    ProductFlags:
+      type: object
+      description: UI-флаги для карточек/страниц (New/Hit/Sale).
+      properties:
+        isNew: { type: boolean, example: false }
+        isHit: { type: boolean, example: false }
+        isSale: { type: boolean, example: false }
+
+    # =========================================================
+    # РАСШИРЕНИЕ существующих схем (backward compatible)
+    # =========================================================
+    # ВАЖНО:
+    # OpenAPI не умеет "дополнять" существующую схему напрямую в YAML без allOf.
+    # Поэтому ниже — расширенные версии, которые ты можешь:
+    #   A) либо реально заменить в исходнике (в схемах CatalogCard и ProductGroupDetails),
+    #   B) либо оставить как отдельные *v2* DTO.
+    #
+    # Я оставляю как отдельные, чтобы не ломать текущие ссылки.
+    # Если хочешь — я скажу точечно, что заменить.
+    CatalogCardV2:
+      allOf:
+        - $ref: "#/components/schemas/CatalogCard"
+        - type: object
+          properties:
+            status: { type: string, example: "active" }
+            images:
+              type: array
+              items: { $ref: "#/components/schemas/ImageItem" }
+              description: Галерея для карточки (если нужно).
+            flags: { $ref: "#/components/schemas/ProductFlags" }
+          description: |
+            Расширенная карточка каталога.
+            Добавляет:
+              - status
+              - images[]
+              - flags (new/hit/sale)
+
+    ProductGroupDetailsV2:
+      allOf:
+        - $ref: "#/components/schemas/ProductGroupDetails"
+        - type: object
+          properties:
+            description: { $ref: "#/components/schemas/LocalizedText" }
+            seo: { $ref: "#/components/schemas/SeoMeta" }
+            images:
+              type: array
+              items: { $ref: "#/components/schemas/ImageItem" }
+            flags: { $ref: "#/components/schemas/ProductFlags" }
+          description: |
+            Расширенная PDP-модель.
+            Добавляет:
+              - description (ua/en)
+              - seo
+              - images[]
+              - flags
+
+    # =========================================================
+    # ДОП: стандартизация фасетов (исправление примера с characteristics.color)
+    # =========================================================
+    FacetsResponseV2:
+      type: object
+      description: |
+        Нормализованный формат фасетов.
+
+        В твоей базовой схеме FacetsResponse.characteristics = map(key -> FacetBucket[]).
+        Это удобно и просто.
+
+        В PART 3 я показал пример "color: { buckets: [...] }" — так делать НЕ надо,
+        потому что не совпадает со схемой. Здесь — корректный вариант.
+      properties:
+        pricing:
+          type: object
+          properties:
+            min: { type: number, nullable: true, example: 120 }
+            max: { type: number, nullable: true, example: 1990 }
+            currency: { type: string, example: "UAH" }
+        variationAxes:
+          type: object
+          additionalProperties:
+            type: array
+            items: { $ref: "#/components/schemas/FacetBucket" }
+        characteristics:
+          type: object
+          additionalProperties:
+            type: array
+            items: { $ref: "#/components/schemas/FacetBucket" }
+
+    # =========================================================
+    # ДОП: Service/Debug (полезно для фронта и QA)
+    # =========================================================
+    HealthResponse:
+      type: object
+      properties:
+        status: { type: string, example: "ok" }
+        version: { type: string, example: "2.3.1" }
+        time: { type: string, example: "2026-02-26T10:00:00Z" }
+      required: [status]
+
+    # =========================================================
+    # ДОП: стандартизация ошибок валидации
+    # =========================================================
+    ValidationErrorDetails:
+      type: object
+      description: |
+        Детализация ошибок валидации (какой параметр и что не так).
+      properties:
+        field: { type: string, example: "opt" }
+        reason: { type: string, example: "Invalid JSON" }
+        expected: { type: string, nullable: true, example: "object" }
+        got: { type: string, nullable: true, example: "string" }
+
+    ErrorResponseV2:
+      allOf:
+        - $ref: "#/components/schemas/ErrorResponse"
+        - type: object
+          properties:
+            details:
+              type: object
+              nullable: true
+              properties:
+                validation:
+                  type: array
+                  items: { $ref: "#/components/schemas/ValidationErrorDetails" }
+
+  parameters:
+    # =========================================================
+    # ДОП: язык ответа (чтобы фронт мог просить ua/en при желании)
+    # =========================================================
+    LanguageParam:
+      name: lang
+      in: query
+      required: false
+      schema:
+        type: string
+        enum: [ua, en]
+        default: ua
+      description: |
+        Язык UI-ответа (если вы на бэке делаете "подбор локали").
+        Важно: LocalizedText всё равно может возвращаться целиком.
+        Этот параметр нужен, если захотите отдавать *только одну* локаль
+        (например, для экономии трафика) — опционально.
+
+
+  # =========================================================
+  # Service: health
+  # =========================================================
+  /health:
+    get:
+      tags: [Service]
+      servers:
+        - url: /
+      summary: Healthcheck API
+      description: |
+        Простой health endpoint для мониторинга и QA.
+        Может возвращать текущую версию API и время.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthResponse" }
+
+  # =========================================================
+  # (Опционально) Быстрые фасеты v2 (если хочешь строго валидный формат + расширения)
+  # =========================================================
+  /catalog/facets/v2:
+    get:
+      tags: [Каталог]
+      summary: Получить фасеты (v2, нормализованный формат)
+      description: |
+        То же, что /catalog/facets, но схема ответа — FacetsResponseV2.
+
+        Зачем:
+          - если хочется зафиксировать контракт
+          - если в будущем появятся доп. поля (например, "selected", "sortHint", "unit")
+      parameters:
+        - $ref: "#/components/parameters/StatusParam"
+        - name: categoryId
+          in: query
+          required: false
+          schema: { type: string }
+        - name: categoryInclude
+          in: query
+          required: false
+          schema: { type: string, enum: [branch, self], default: branch }
+        - name: q
+          in: query
+          required: false
+          schema: { type: string }
+        - name: onlyAvailable
+          in: query
+          required: false
+          schema: { type: boolean, default: false }
+        - name: priceMin
+          in: query
+          required: false
+          schema: { type: number, nullable: true }
+        - name: priceMax
+          in: query
+          required: false
+          schema: { type: number, nullable: true }
+        - name: char
+          in: query
+          required: false
+          schema: { type: string }
+        - name: opt
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        "200":
+          description: Facets v2
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  facets: { $ref: "#/components/schemas/FacetsResponseV2" }
+              examples:
+                Example:
+                  value:
+                    facets:
+                      pricing: { min: 120, max: 1990, currency: "UAH" }
+                      variationAxes:
+                        A1:
+                          - { value: 250, count: 18 }
+                          - { value: 500, count: 9 }
+                      characteristics:
+                        color:
+                          - { value: null, count: 66 }
+                          - { value: "berry", count: 42 }
+                          - { value: "orange", count: 42 }
+                          - { value: 30, count: 21 }
+                          - { value: "beige", count: 19 }
+                          - { value: "black", count: 19 }
+                          - { value: "white", count: 19 }
+        "400":
+          description: Ошибка в параметрах запроса
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorResponseV2" }
+              examples:
+                BadJson:
+                  value:
+                    message: "Некорректный JSON в параметре opt/char"
+                    code: "BAD_REQUEST"
+                    details:
+                      validation:
+                        - field: "opt"
+                          reason: "Invalid JSON"
+                          expected: "object"
+                          got: "string"
+
+# =========================
+# END OF SPEC
+# =========================
+                

@@ -1,0 +1,83 @@
+.wishlist-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 80px;
+
+  .product-item:nth-child(4n + 1) {
+    border: 1px solid $accent;
+  }
+
+  .product-item:nth-child(4n + 2) {
+    border: 1px solid $accent-green;
+  }
+
+  .product-item:nth-child(4n + 3) {
+    border: 1px solid $accent-violet;
+  }
+
+  @include down($bp-desktop) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+
+    .product-item:nth-child(4n + 1),
+    .product-item:nth-child(4n + 2),
+    .product-item:nth-child(4n + 3),
+    .product-item:nth-child(4n + 4) {
+      background: unset;
+    }
+
+    .product-item:nth-child(3n + 1) {
+      border: 1px solid $accent;
+    }
+
+    .product-item:nth-child(3n + 2) {
+      border: 1px solid $accent-green;
+    }
+
+    .product-item:nth-child(3n + 3) {
+      border: 1px solid $accent-violet;
+    }
+  }
+
+  @include down($bp-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+
+    .product-item {
+      padding: 8px 8px 12px;
+
+      .product-item:nth-child(2n + 1) {
+        border: 1px solid $accent;
+      }
+
+      .product-item:nth-child(2n + 2) {
+        border: 1px solid $accent-green;
+      }
+      .product-item:nth-child(2n + 2) {
+        border: 1px solid $accent-violet;
+      }
+    }
+  }
+}
+
+.wishlist-grid__item {
+  /* если нужно — можно добавить стили под li, но ширину не задаём */
+}
+
+.wishlist-empty {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  padding: 60px 0;
+  color: #0d1717;
+}
+
+@include down($bp-tablet) {
+  .wishlist-empty {
+    font-size: 22px;
+    padding: 40px 0;
+  }
+}

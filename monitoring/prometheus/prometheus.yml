@@ -1,0 +1,22 @@
+global:
+  scrape_interval: 10s
+  evaluation_interval: 10s
+
+scrape_configs:
+  - job_name: maloe-api
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - 127.0.0.1:5007
+        labels:
+          service: maloe-api
+          component: api
+          runtime: pm2
+
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - 127.0.0.1:9090
+        labels:
+          service: prometheus
+          component: monitoring

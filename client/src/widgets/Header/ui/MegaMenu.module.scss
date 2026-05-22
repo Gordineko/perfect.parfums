@@ -1,0 +1,179 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+$mega-dark: #1a1a1a;
+$font-geologica: var(--font-geologica), Geologica, sans-serif;
+$font-geologica-italic: var(--font-geologica), Georgia, serif;
+$image-placeholder: color-mix(in srgb, var(--color-text) 4%, transparent);
+
+.panel {
+  background: $white;
+  box-shadow: 0 4px 4px 1px rgba(0, 0, 0, 0.1);
+}
+
+.panelInner {
+  padding: 40px;
+}
+
+.collectionsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include down($bp-desktop) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.collectionCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: inherit;
+  text-decoration: none;
+
+  &:hover .collectionMedia::after,
+  &:focus-visible .collectionMedia::after {
+    opacity: 1;
+  }
+
+  &:hover .collectionTitle,
+  &:focus-visible .collectionTitle {
+    text-decoration-line: underline;
+  }
+}
+
+.collectionMedia {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: $image-placeholder;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #fafafa4d;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+}
+
+.collectionImg {
+  object-fit: cover;
+  object-position: top center;
+}
+
+.collectionTitle {
+  margin: 0;
+  text-align: center;
+  color: $mega-dark;
+  font-family: Georgia, var(--font-title), "Times New Roman", Times, serif;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: $fw-regular;
+  letter-spacing: 1px;
+}
+
+.catalogPanel {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+
+  @include down($bp-desktop) {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+.catalogMain {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 64px;
+
+  > div {
+    min-width: 0;
+  }
+}
+
+.columnTitle {
+  margin: 0 0 20px;
+  color: var(--Gray, #{$gray});
+  font-family: $font-geologica;
+  font-size: 12px;
+  font-weight: $fw-regular;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menuLink {
+  display: inline-block;
+  color: $mega-dark;
+  font-family: $font-geologica-italic;
+  font-size: 16px;
+  font-variation-settings: "slnt" -12, "CRSV" 1, "wght" 100;
+  letter-spacing: 0.8px;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    transform: translateX(8px);
+  }
+}
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 12px;
+  width: min(320px, 100%);
+  margin-left: auto;
+  color: inherit;
+  text-decoration: none;
+
+  @include down($bp-desktop) {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  &:hover .bannerCaption,
+  &:focus-visible .bannerCaption {
+    text-decoration-line: underline;
+  }
+}
+
+.bannerMedia {
+  position: relative;
+  height: 172px;
+  overflow: hidden;
+  background: $image-placeholder;
+}
+
+.bannerImg {
+  object-fit: cover;
+  object-position: top center;
+}
+
+.bannerCaption {
+  margin: 0;
+  color: $mega-dark;
+  font-family: $font-geologica;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}

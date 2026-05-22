@@ -1,0 +1,167 @@
+@import "../../../shared/ui/styles/variables.scss";
+
+@keyframes catalog-page-skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@mixin catalog-page-skeleton-block {
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    $gray-200 0%,
+    rgba($gray-999, 0.12) 50%,
+    $gray-200 100%
+  );
+  background-size: 200% 100%;
+  animation: catalog-page-skeleton-pulse 1.2s ease-in-out infinite;
+}
+
+.catalog-page-skeleton {
+  pointer-events: none;
+  padding-bottom: $space-xl;
+
+  &__layout {
+    margin-top: $space-md;
+  }
+
+  &__breadcrumbs {
+    height: 14px;
+    width: min(280px, 55%);
+    margin-top: $catalog-breadcrumbs-gap-top;
+    margin-bottom: $catalog-breadcrumbs-gap-bottom;
+    @include catalog-page-skeleton-block;
+  }
+
+  &__title {
+    height: clamp(28px, 6vw, $catalog-h1-size);
+    width: min(420px, 85%);
+    margin-bottom: $space-xs;
+    @include catalog-page-skeleton-block;
+  }
+
+  &__chip {
+    height: 34px;
+    width: 120px;
+    @include catalog-page-skeleton-block;
+
+    &--wide {
+      width: min(259px, 70%);
+    }
+  }
+
+  &__sidebar {
+    .catalog-page-skeleton__sidebar-card {
+      padding: $filter-card-padding-y $filter-card-padding-x;
+      border-radius: $filter-card-radius;
+      box-shadow: $filter-card-shadow;
+      background: $white;
+    }
+
+    .catalog-page-skeleton__sidebar-title {
+      height: 18px;
+      width: 70%;
+      margin-bottom: $filter-card-gap;
+      @include catalog-page-skeleton-block;
+    }
+
+    .catalog-page-skeleton__sidebar-row {
+      height: 14px;
+      width: 100%;
+      margin-bottom: $filter-section-gap;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      @include catalog-page-skeleton-block;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    gap: $space-md;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    @include up($bp-tablet) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @include up($bp-desktop) {
+      gap: $space-lg;
+    }
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: $space-sm;
+    min-width: 0;
+  }
+
+  &__media {
+    aspect-ratio: 176 / 221;
+    width: 100%;
+    @include catalog-page-skeleton-block;
+  }
+
+  &__line {
+    height: 12px;
+    width: 100%;
+    @include catalog-page-skeleton-block;
+
+    &--short {
+      width: 65%;
+    }
+
+    &--price {
+      width: 40%;
+      height: 14px;
+      margin-top: $space-xxs;
+    }
+  }
+}
+
+.catalog-page-skeleton-error {
+  margin-bottom: $space-md;
+}
+
+.category-page--error {
+  padding-bottom: $section-pad-y-md;
+
+  .catalog-page-error__lead {
+    margin: 0 0 $space-lg;
+    max-width: 520px;
+    color: $text-gray-dark;
+    font-family: $font-secondary;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .catalog-page-error__retry {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 $space-lg;
+    border: $catalog-sort-border;
+    border-radius: 0;
+    background: $dark;
+    color: $white;
+    font-family: var(--font-main), "Golos Text", sans-serif;
+    font-size: 14px;
+    font-weight: $fw-semibold;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.88;
+    }
+  }
+}

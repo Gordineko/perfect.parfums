@@ -1,0 +1,139 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            set -e
+
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+            nvm use 20 || nvm install 20
+
+            echo "Versions"
+            which node
+            which npm
+            which pm2
+            node -v
+            npm -v
+            pm2 -v
+
+            cd /var/www/maloe
+
+            echo "Fix project permissions"
+            sudo chown -R $USER:$USER /var/www/maloe || true
+
+            echo "Pull latest code"
+            git fetch origin develop
+            git reset --hard origin/develop
+
+            # =========================
+            # SERVER
+            # =========================
+
+            echo "Install server dependencies"
+            cd server
+
+            unset NODE_ENV
+
+            rm -rf node_modules/.cache || true
+
+            npm ci --include=dev --no-audit --no-fund || \
+            npm install --include=dev --no-audit --no-fund
+
+            # =========================
+            # CLIENT
+            # =========================
+
+            echo "Install client dependencies"
+            cd ../client
+
+            unset NODE_ENV
+
+            rm -rf .next/cache || true
+            rm -rf node_modules/.cache || true
+
+            npm ci --include=dev --no-audit --no-fund --legacy-peer-deps || \
+            npm install --include=dev --no-audit --no-fund --legacy-peer-deps
+
+            echo "Check client env"
+            ls -la .env* || true
+
+            echo "Check next-sitemap"
+            ls -la node_modules/.bin/next-sitemap || true
+
+            echo "Build client"
+
+            export NODE_ENV=production
+            export CI=false
+
+            npm run build
+
+            echo "Check Next build"
+            test -d .next || exit 1
+
+            # =========================
+            # ADMIN PANEL
+            # =========================
+
+            echo "Install admin-panel dependencies"
+            cd ../admin-panel
+
+            unset NODE_ENV
+
+            rm -rf node_modules/.cache || true
+            rm -rf build || true
+
+            npm ci --include=dev --no-audit --no-fund --legacy-peer-deps || \
+            npm install --include=dev --no-audit --no-fund --legacy-peer-deps
+
+            echo "Build admin-panel"
+
+            export NODE_ENV=production
+            export DISABLE_ESLINT_PLUGIN=true
+            export ESLINT_NO_DEV_ERRORS=true
+            export CI=false
+
+            rm -rf node_modules/.cache || true
+
+            npm run build
+
+            echo "Check admin build"
+            test -d build || exit 1
+
+            # =========================
+            # PM2
+            # =========================
+
+            echo "Cleaning PM2 logs"
+            pm2 flush || true
+            rm -rf ~/.pm2/logs/* || true
+
+            echo "Restart all PM2 processes"
+            pm2 restart all --update-env
+
+            pm2 save
+
+            echo "Deploy completed"

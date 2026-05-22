@@ -1,0 +1,38 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+.shell {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto clamp(80px, 12vw, 300px);
+  padding-inline: var(--container-pad-desktop);
+
+  @include down($bp-desktop-narrow) {
+    flex-direction: column;
+  }
+
+  @include tablet-only {
+    gap: 32px;
+    padding-inline: var(--container-pad-tablet);
+  }
+
+  @include down($bp-tablet) {
+    gap: 24px;
+    margin-bottom: 48px;
+    padding-inline: var(--container-pad-mobile);
+  }
+}
+
+.content {
+  width: 75%;
+  min-width: 0;
+
+  @include down($bp-desktop-narrow) {
+    width: 100%;
+  }
+}

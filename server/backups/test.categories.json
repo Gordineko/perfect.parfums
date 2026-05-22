@@ -1,0 +1,144 @@
+[{
+  "_id": {
+    "$oid": "696f9c4ab7919bf78623d901"
+  },
+  "slug": "skin-structure",
+  "__v": 0,
+  "ancestors": [],
+  "createdAt": {
+    "$date": "2026-01-28T13:15:20.788Z"
+  },
+  "parentId": null,
+  "path": [
+    "skin-structure"
+  ],
+  "sort": 10,
+  "status": "active",
+  "title": {
+    "ua": "Skin Structure",
+    "en": "Skin Structure"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:20.788Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f9c4ab7919bf78623d902"
+  },
+  "slug": "hair-structure",
+  "__v": 0,
+  "ancestors": [],
+  "createdAt": {
+    "$date": "2026-01-28T13:15:20.957Z"
+  },
+  "parentId": null,
+  "path": [
+    "hair-structure"
+  ],
+  "sort": 20,
+  "status": "active",
+  "title": {
+    "ua": "Hair Structure",
+    "en": "Hair Structure"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:20.957Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f9c4ab7919bf78623d903"
+  },
+  "slug": "balance-structure",
+  "__v": 0,
+  "ancestors": [],
+  "createdAt": {
+    "$date": "2026-01-28T13:15:21.133Z"
+  },
+  "parentId": null,
+  "path": [
+    "balance-structure"
+  ],
+  "sort": 30,
+  "status": "active",
+  "title": {
+    "ua": "Balance Structure",
+    "en": "Balance Structure"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:21.133Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f9c4ab7919bf78623d904"
+  },
+  "slug": "stress-structure",
+  "__v": 0,
+  "ancestors": [],
+  "createdAt": {
+    "$date": "2026-01-28T13:15:21.672Z"
+  },
+  "parentId": null,
+  "path": [
+    "stress-structure"
+  ],
+  "sort": 40,
+  "status": "active",
+  "title": {
+    "ua": "Stress Structure",
+    "en": "Stress Structure"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:21.672Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f9c4ab7919bf78623d905"
+  },
+  "slug": "gut-structure",
+  "__v": 0,
+  "ancestors": [],
+  "createdAt": {
+    "$date": "2026-01-28T13:15:21.734Z"
+  },
+  "parentId": null,
+  "path": [
+    "gut-structure"
+  ],
+  "sort": 50,
+  "status": "active",
+  "title": {
+    "ua": "Gut Structure",
+    "en": "Gut Structure"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:21.734Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f9c4ab7919bf78623d906"
+  },
+  "slug": "women-men-40",
+  "__v": 0,
+  "ancestors": [],
+  "createdAt": {
+    "$date": "2026-01-28T13:15:21.802Z"
+  },
+  "parentId": null,
+  "path": [
+    "women-men-40"
+  ],
+  "sort": 60,
+  "status": "active",
+  "title": {
+    "ua": "Women / Men / 40+",
+    "en": "Women / Men / 40+"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:21.802Z"
+  }
+}]

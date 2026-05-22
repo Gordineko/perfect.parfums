@@ -1,0 +1,34 @@
+.skeleton {
+  border-radius: 4px;
+  background: rgba(153, 153, 153, 0.5);
+  animation: profile-loading-skeleton 1.1s ease-in-out infinite;
+}
+
+.kicker {
+  width: min(280px, 80%);
+  height: 16px;
+  margin: 0;
+}
+
+.titleSkeleton {
+  width: min(320px, 90%);
+  height: 32px;
+  margin: 0;
+}
+
+.card {
+  width: 100%;
+  min-height: 320px;
+  border-radius: 0;
+}
+
+@keyframes profile-loading-skeleton {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,156 @@
+.cooperation-why {
+  margin-top: 120px;
+
+  @include down($bp-desktop) {
+    margin-top: 56px;
+  }
+
+  @include down($bp-tablet) {
+    margin-top: 48px;
+  }
+
+  &__heading {
+    margin: 0 0 40px;
+    color: $dark;
+    font-family: $font-montserrat;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: $fw-bold;
+    line-height: normal;
+    letter-spacing: 0.32px;
+    text-transform: uppercase;
+
+    @include down($bp-desktop) {
+      margin: 0 0 24px;
+      font-size: 24px;
+      letter-spacing: 0.24px;
+    }
+
+    @include down($bp-tablet) {
+      font-size: 20px;
+    }
+  }
+
+  &__swiper {
+    overflow: hidden;
+    cursor: grab;
+
+    .swiper-slide {
+      height: auto;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+
+  &__card {
+    padding-top: 32px;
+    border-top: 1px solid $dark;
+    transition:
+      border-color 0.25s ease,
+      color 0.25s ease;
+
+    @include down($bp-desktop) {
+      padding-top: 24px;
+    }
+
+    &.is-active {
+      border-top-color: $accent;
+
+      .cooperation-why__title {
+        color: $accent;
+      }
+    }
+  }
+
+  &__index {
+    margin: 0 0 8px;
+    color: $accent;
+    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: $fw-bold;
+    line-height: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    @include down($bp-desktop) {
+      font-size: 10px;
+    }
+  }
+
+  &__title {
+    margin: 0 0 12px;
+    color: $dark;
+    font-family: $font-montserrat;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: $fw-bold;
+    line-height: normal;
+    letter-spacing: 0.72px;
+    text-transform: uppercase;
+    transition: color 0.25s ease;
+
+    @include down($bp-desktop) {
+      margin: 0 0 16px;
+      font-size: 20px;
+      letter-spacing: 0.6px;
+    }
+
+    @include down($bp-tablet) {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+  }
+
+  &__desc {
+    margin: 0;
+    color: $gray;
+    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: $fw-regular;
+    line-height: normal;
+    letter-spacing: 0.32px;
+    text-transform: uppercase;
+
+    @include down($bp-desktop) {
+      font-size: 14px;
+      letter-spacing: 0.28px;
+    }
+
+    @include down($bp-tablet) {
+      font-size: 12px;
+    }
+  }
+
+  &__pagination {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  &__bullet {
+    width: 40px;
+    height: 2px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background-color: $gray-999-50;
+    cursor: pointer;
+    transition:
+      width 0.25s ease,
+      background-color 0.25s ease;
+
+    &.is-active {
+      width: 80px;
+      background-color: $accent;
+    }
+  }
+}

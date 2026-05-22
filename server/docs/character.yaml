@@ -1,0 +1,474 @@
+paths:
+  /character/admin/characters:
+    get:
+      tags:
+        - Characters Admin
+      summary: Получить список образов
+      description: |
+        Возвращает пагинированный список образов для админки.
+
+        Поддерживает:
+        - пагинацию
+        - поиск по slug/title
+        - фильтр по status
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: Номер страницы
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          required: false
+          description: Лимит на страницу
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+            default: 20
+        - name: q
+          in: query
+          required: false
+          description: Поиск по slug, title.ua, title.en
+          schema:
+            type: string
+        - name: status
+          in: query
+          required: false
+          description: Фильтр по статусу
+          schema:
+            $ref: '#/components/schemas/CharacterStatus'
+      responses:
+        '200':
+          description: Список образов
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterListResponse'
+
+    post:
+      tags:
+        - Characters Admin
+      summary: Создать образ
+      description: |
+        Создает новый образ.
+
+        Frontend передает:
+        - slug
+        - title
+        - imageURL
+        - status
+        - position
+        - products
+
+        В products передаются связи с ProductGroup и порядок отображения.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateCharacterRequest'
+            examples:
+              basic:
+                value:
+                  slug: scarlet-look-1
+                  title:
+                    ua: Scarlet Look 1
+                    en: Scarlet Look 1
+                  imageURL: https://example.com/look-main.jpg
+                  status: active
+                  position: 1
+                  products:
+                    - productGroupId: 69de35d0b9cc050661cb6f70
+                      position: 1
+                    - productGroupId: 69de35d0b9cc050661cb6f71
+                      position: 2
+                    - productGroupId: 69de35d0b9cc050661cb6f72
+                      position: 3
+      responses:
+        '201':
+          description: Образ создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterMutationResponse'
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Конфликт данных
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /character/admin/characters/{id}:
+    get:
+      tags:
+        - Characters Admin
+      summary: Получить образ по id
+      description: |
+        Возвращает один образ для экрана редактирования.
+
+        products.productGroupId возвращается уже с populate
+        (если это реализовано в repo/service).
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Mongo ObjectId образа
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+      responses:
+        '200':
+          description: Образ найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterItemResponse'
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Образ не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    put:
+      tags:
+        - Characters Admin
+      summary: Обновить образ
+      description: |
+        Полностью обновляет образ.
+
+        Можно менять:
+        - slug
+        - title
+        - imageURL
+        - status
+        - position
+        - products
+
+        products пересохраняются целиком.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Mongo ObjectId образа
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateCharacterRequest'
+            examples:
+              update:
+                value:
+                  slug: scarlet-look-1
+                  title:
+                    ua: Scarlet Look Updated
+                    en: Scarlet Look Updated
+                  imageURL: https://example.com/look-main-updated.jpg
+                  status: active
+                  position: 2
+                  products:
+                    - productGroupId: 69de35d0b9cc050661cb6f70
+                      position: 1
+                    - productGroupId: 69de35d0b9cc050661cb6f71
+                      position: 2
+      responses:
+        '200':
+          description: Образ обновлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterMutationResponse'
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Образ не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Конфликт данных
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    delete:
+      tags:
+        - Characters Admin
+      summary: Удалить образ
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Mongo ObjectId образа
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+      responses:
+        '200':
+          description: Образ удален
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkResponse'
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Образ не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /character/characters:
+    get:
+      tags:
+        - Characters Public
+      summary: Получить активные образы
+      description: |
+        Возвращает список активных образов для витрины / storefront.
+
+        Обычно используется для блока:
+        - Shop the Look
+        - Complete the Look
+      responses:
+        '200':
+          description: Активные образы
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacterPublicListResponse'
+
+components:
+  schemas:
+    CharacterStatus:
+      type: string
+      enum:
+        - active
+        - draft
+        - hidden
+      example: active
+
+    CharacterLocalizedText:
+      type: object
+      additionalProperties: false
+      required:
+        - ua
+        - en
+      properties:
+        ua:
+          type: string
+        en:
+          type: string
+      example:
+        ua: Створи свій вайб
+        en: Create Your Vibe
+
+    CharacterProductLinkInput:
+      type: object
+      additionalProperties: false
+      required:
+        - productGroupId
+      properties:
+        productGroupId:
+          $ref: '#/components/schemas/ObjectIdString'
+        position:
+          type: number
+          default: 0
+
+    CharacterProductLink:
+      type: object
+      required:
+        - productGroupId
+        - position
+      properties:
+        productGroupId:
+          oneOf:
+            - $ref: '#/components/schemas/ObjectIdString'
+            - $ref: '#/components/schemas/CharacterProductGroupShort'
+        position:
+          type: number
+
+    CharacterProductGroupShort:
+      type: object
+      required:
+        - _id
+        - slug
+      properties:
+        _id:
+          $ref: '#/components/schemas/ObjectIdString'
+        slug:
+          type: string
+        title:
+          $ref: '#/components/schemas/CharacterLocalizedText'
+        imageURL:
+          type: string
+        status:
+          type: string
+
+    CharacterItem:
+      type: object
+      required:
+        - _id
+        - slug
+        - title
+        - imageURL
+        - status
+        - position
+        - products
+        - createdAt
+        - updatedAt
+      properties:
+        _id:
+          $ref: '#/components/schemas/ObjectIdString'
+        slug:
+          type: string
+        title:
+          $ref: '#/components/schemas/CharacterLocalizedText'
+        imageURL:
+          type: string
+        status:
+          $ref: '#/components/schemas/CharacterStatus'
+        position:
+          type: number
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterProductLink'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CreateCharacterRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - slug
+        - title
+        - imageURL
+        - products
+      properties:
+        slug:
+          type: string
+          example: scarlet-look-1
+        title:
+          $ref: '#/components/schemas/CharacterLocalizedText'
+        imageURL:
+          type: string
+          example: https://example.com/look-main.jpg
+        status:
+          $ref: '#/components/schemas/CharacterStatus'
+        position:
+          type: number
+          default: 0
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterProductLinkInput'
+
+    UpdateCharacterRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        slug:
+          type: string
+        title:
+          $ref: '#/components/schemas/CharacterLocalizedText'
+        imageURL:
+          type: string
+        status:
+          $ref: '#/components/schemas/CharacterStatus'
+        position:
+          type: number
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterProductLinkInput'
+
+    CharacterItemResponse:
+      type: object
+      required:
+        - item
+      properties:
+        item:
+          $ref: '#/components/schemas/CharacterItem'
+
+    CharacterMutationResponse:
+      type: object
+      required:
+        - ok
+        - item
+      properties:
+        ok:
+          type: boolean
+        item:
+          $ref: '#/components/schemas/CharacterItem'
+
+    CharacterListMeta:
+      type: object
+      required:
+        - page
+        - limit
+        - total
+        - pages
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        pages:
+          type: integer
+
+    CharacterListResponse:
+      type: object
+      required:
+        - items
+        - meta
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterItem'
+        meta:
+          $ref: '#/components/schemas/CharacterListMeta'
+
+    CharacterPublicListResponse:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacterItem'

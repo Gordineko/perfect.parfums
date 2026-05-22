@@ -1,0 +1,425 @@
+paths:
+  /banner/admin/home-banners:
+    get:
+      tags:
+        - Home Banners Admin
+      summary: Получить список баннеров главной страницы
+      description: |
+        Возвращает пагинированный список баннеров для админки.
+
+        Поддерживает:
+        - пагинацию
+        - поиск по slug/title
+        - фильтр по status
+      parameters:
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 200
+            default: 20
+        - name: q
+          in: query
+          required: false
+          description: Поиск по slug, title.ua, title.en, subtitle.ua, subtitle.en
+          schema:
+            type: string
+        - name: status
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/HomeBannerStatus'
+      responses:
+        '200':
+          description: Список баннеров
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeBannerListResponse'
+
+    post:
+      tags:
+        - Home Banners Admin
+      summary: Создать баннер главной страницы
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateHomeBannerRequest'
+      responses:
+        '201':
+          description: Баннер создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeBannerMutationResponse'
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Конфликт данных
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /banner/admin/home-banners/{id}:
+    get:
+      tags:
+        - Home Banners Admin
+      summary: Получить баннер по id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+      responses:
+        '200':
+          description: Баннер найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeBannerItemResponse'
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Баннер не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    put:
+      tags:
+        - Home Banners Admin
+      summary: Обновить баннер
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateHomeBannerRequest'
+      responses:
+        '200':
+          description: Баннер обновлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeBannerMutationResponse'
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Баннер не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Конфликт данных
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    delete:
+      tags:
+        - Home Banners Admin
+      summary: Удалить баннер
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+      responses:
+        '200':
+          description: Баннер удален
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkResponse'
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Баннер не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /banner/home-banners:
+    get:
+      tags:
+        - Home Banners Public
+      summary: Получить активные баннеры главной страницы
+      description: |
+        Возвращает активные баннеры главной страницы для витрины.
+      responses:
+        '200':
+          description: Активные баннеры
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HomeBannerPublicListResponse'
+
+components:
+  schemas:
+    HomeBannerStatus:
+      type: string
+      enum:
+        - active
+        - draft
+        - hidden
+      example: active
+
+    HomeBannerLocalizedText:
+      type: object
+      additionalProperties: false
+      required:
+        - ua
+        - en
+      properties:
+        ua:
+          type: string
+        en:
+          type: string
+
+    HomeBannerCategoryShort:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/ObjectIdString'
+        slug:
+          type: string
+        fullSlug:
+          type: string
+        title:
+          $ref: '#/components/schemas/HomeBannerLocalizedText'
+        status:
+          type: string
+
+    HomeBannerItem:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/ObjectIdString'
+        slug:
+          type: string
+        title:
+          $ref: '#/components/schemas/HomeBannerLocalizedText'
+        subtitle:
+          $ref: '#/components/schemas/HomeBannerLocalizedText'
+        description:
+          $ref: '#/components/schemas/HomeBannerLocalizedText'
+        imageURL:
+          type: string
+        mobileImageURL:
+          type: string
+        buttonText:
+          $ref: '#/components/schemas/HomeBannerLocalizedText'
+        link:
+          type: string
+        categoryId:
+          oneOf:
+            - $ref: '#/components/schemas/ObjectIdString'
+            - $ref: '#/components/schemas/HomeBannerCategoryShort'
+            - type: 'null'
+        backgroundColor:
+          type: string
+        textColor:
+          type: string
+        status:
+          $ref: '#/components/schemas/HomeBannerStatus'
+        position:
+          type: number
+        startsAt:
+          type: string
+          format: date-time
+          nullable: true
+        endsAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CreateHomeBannerRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - slug
+        - title
+        - imageURL
+      properties:
+        slug:
+          type: string
+        title:
+          $ref: '#/components/schemas/HomeBannerLocalizedText'
+        subtitle:
+          $ref: '#/components/schemas/HomeBannerLocalizedText'
+        description:
+          $ref: '#/components/schemas/HomeBannerLocalizedText'
+        imageURL:
+          type: string
+        mobileImageURL:
+          type: string
+        buttonText:
+          $ref: '#/components/schemas/HomeBannerLocalizedText'
+        link:
+          type: string
+        categoryId:
+          oneOf:
+            - $ref: '#/components/schemas/ObjectIdString'
+            - type: 'null'
+        backgroundColor:
+          type: string
+        textColor:
+          type: string
+        status:
+          $ref: '#/components/schemas/HomeBannerStatus'
+        position:
+          type: number
+        startsAt:
+          type: string
+          format: date-time
+          nullable: true
+        endsAt:
+          type: string
+          format: date-time
+          nullable: true
+
+    UpdateHomeBannerRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        slug:
+          type: string
+        title:
+          $ref: '#/components/schemas/HomeBannerLocalizedText'
+        subtitle:
+          $ref: '#/components/schemas/HomeBannerLocalizedText'
+        description:
+          $ref: '#/components/schemas/HomeBannerLocalizedText'
+        imageURL:
+          type: string
+        mobileImageURL:
+          type: string
+        buttonText:
+          $ref: '#/components/schemas/HomeBannerLocalizedText'
+        link:
+          type: string
+        categoryId:
+          oneOf:
+            - $ref: '#/components/schemas/ObjectIdString'
+            - type: 'null'
+        backgroundColor:
+          type: string
+        textColor:
+          type: string
+        status:
+          $ref: '#/components/schemas/HomeBannerStatus'
+        position:
+          type: number
+        startsAt:
+          type: string
+          format: date-time
+          nullable: true
+        endsAt:
+          type: string
+          format: date-time
+          nullable: true
+
+    HomeBannerItemResponse:
+      type: object
+      required:
+        - item
+      properties:
+        item:
+          $ref: '#/components/schemas/HomeBannerItem'
+
+    HomeBannerMutationResponse:
+      type: object
+      required:
+        - ok
+        - item
+      properties:
+        ok:
+          type: boolean
+        item:
+          $ref: '#/components/schemas/HomeBannerItem'
+
+    HomeBannerListMeta:
+      type: object
+      required:
+        - page
+        - limit
+        - total
+        - pages
+      properties:
+        page:
+          type: integer
+        limit:
+          type: integer
+        total:
+          type: integer
+        pages:
+          type: integer
+
+    HomeBannerListResponse:
+      type: object
+      required:
+        - items
+        - meta
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/HomeBannerItem'
+        meta:
+          $ref: '#/components/schemas/HomeBannerListMeta'
+
+    HomeBannerPublicListResponse:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/HomeBannerItem'

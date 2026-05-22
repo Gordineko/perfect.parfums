@@ -1,0 +1,354 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+$font-inter-stack: var(--font-inter), Inter, sans-serif;
+$review-heading-color: #1a1a1a;
+$submit-bg-hover: rgba(13, 13, 13, 0.8);
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.45);
+}
+
+.modal {
+  position: relative;
+  width: 480px;
+  padding: 32px;
+  border-radius: 0;
+  background: $white;
+
+  @include down($bp-tablet) {
+    margin: 0 8px;
+  }
+
+  @include mobile-only {
+    padding: 24px;
+  }
+
+  &.modalSent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    text-align: center;
+
+    > .close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      margin-left: 0;
+    }
+  }
+
+  .close {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    cursor: pointer;
+    color: $review-heading-color;
+
+    svg {
+      display: block;
+      width: 16px;
+      height: 16px;
+    }
+
+    path {
+      fill: currentColor;
+    }
+
+    &:hover,
+    &:focus-visible {
+      color: rgba(26, 26, 26, 0.8);
+    }
+  }
+
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 24px;
+
+    @include down($bp-tablet) {
+      gap: 12px;
+    }
+  }
+
+  .heading {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .title {
+    margin: 0 0 8px;
+    color: $review-heading-color;
+    font-family: $font-inter-stack;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: normal;
+    letter-spacing: 0.64px;
+    word-break: break-word;
+
+    @include down($bp-tablet) {
+      font-size: 24px;
+      letter-spacing: 0.48px;
+    }
+
+    @include mobile-only {
+      font-size: 28px;
+    }
+  }
+
+  .subtitle {
+    margin: 0;
+    color: var(--Gray, #{$gray});
+    font-family: $font-inter-stack;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: $fw-regular;
+    line-height: normal;
+  }
+
+  .header .close {
+    margin-left: auto;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+    :global(.error-text) {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      color: red;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: normal;
+    }
+
+    :global(.star-counter) {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+
+      :global(.star-counter__btn) {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: 0;
+        background: transparent;
+        cursor: pointer;
+        line-height: 0;
+
+        &:focus-visible {
+          outline: 2px solid rgba($accent, 0.55);
+          outline-offset: 2px;
+          border-radius: 2px;
+        }
+      }
+    }
+  }
+
+  .field {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .label,
+  .labelAccent,
+  .labelText {
+    color: $review-heading-color;
+    font-family: $font-inter-stack;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: $fw-medium;
+    line-height: normal;
+    letter-spacing: 0.14px;
+    text-transform: uppercase;
+  }
+
+  .input,
+  .textarea {
+    width: 100%;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    outline: none;
+    color: $review-heading-color;
+    font-family: $font-inter-stack;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: $fw-regular;
+  }
+
+  .input {
+    padding: 0 0 8px;
+    border-bottom: 1px solid $review-heading-color;
+
+    &::placeholder {
+      color: $gray-999-50;
+      font-family: $font-inter-stack;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: $fw-regular;
+      line-height: normal;
+    }
+
+    &:focus-visible {
+      border-bottom-color: $review-heading-color;
+    }
+
+    &:global(.error) {
+      border-bottom-color: red;
+    }
+  }
+
+  .textarea {
+    min-height: 32px;
+    height: auto;
+    padding: 2px 0;
+    line-height: 1.25;
+    resize: none;
+    overflow-y: auto;
+    border-bottom: 1px solid #d9d9d9;
+
+    &::placeholder {
+      color: $gray-999-50;
+      font-family: $font-inter-stack;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: $fw-regular;
+      line-height: normal;
+    }
+
+    &:focus-visible {
+      border-bottom-color: $dark;
+    }
+
+    &:global(.error) {
+      border-bottom-color: red;
+    }
+  }
+
+  .rating {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .ratingTitle,
+  .ratingTitleAccent {
+    margin: 0;
+    align-self: flex-start;
+    text-align: left;
+    color: $review-heading-color;
+    font-family: $font-inter-stack;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: $fw-medium;
+    line-height: normal;
+    letter-spacing: 0.14px;
+    text-transform: uppercase;
+  }
+
+  .stars {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0;
+  padding: 16px;
+  border: 0;
+  border-radius: 0;
+  background: var(--Dark, #{$dark});
+  color: var(--White, #fff);
+  font-family: $font-inter-stack;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: $fw-regular;
+  line-height: normal;
+  letter-spacing: 1.12px;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover:not(:disabled) {
+    background: $submit-bg-hover;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba($accent, 0.55);
+    outline-offset: 2px;
+  }
+
+  p {
+    margin: 0;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+  }
+}
+
+.success {
+  display: flex;
+  max-width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.successTitle {
+  margin: 0;
+  color: $review-heading-color;
+  font-family: $font-inter-stack;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: $fw-medium;
+  line-height: normal;
+  text-align: center;
+}
+
+.successText {
+  margin: 0;
+  color: $review-heading-color;
+  text-align: center;
+  font-family: $font-inter-stack;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: $fw-regular;
+  line-height: normal;
+}

@@ -1,0 +1,80 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+.pageShell {
+  :global(.products-layout-wrapper::before) {
+    display: none;
+  }
+}
+
+.shell {
+  padding: 0 0 80px;
+
+  @include tablet-only {
+    padding-bottom: 0;
+  }
+
+  @include mobile-only {
+    padding-bottom: 48px;
+  }
+}
+
+.card {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #fff;
+  padding: 40px;
+
+  @include tablet-only {
+    padding: 24px;
+  }
+
+  @include mobile-only {
+    padding: 16px;
+  }
+}
+
+.lead {
+  margin: 0;
+  color: var(--Dark, #{$dark});
+  font-family: var(--font-body);
+  font-size: 24px;
+  font-weight: 500;
+  line-height: normal;
+
+  @include tablet-only {
+    font-size: 20px;
+  }
+
+  @include mobile-only {
+    font-size: 16px;
+  }
+}
+
+.content {
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: var(--Dark, #{$dark});
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: normal;
+
+  @include tablet-only {
+    font-size: 18px;
+  }
+
+  @include mobile-only {
+    margin-top: 12px;
+    gap: 12px;
+    font-size: 14px;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+.emphasis {
+  font-weight: 500;
+}

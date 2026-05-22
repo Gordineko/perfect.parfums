@@ -1,0 +1,360 @@
+{
+  "annotations": {
+    "list": []
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": null,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "options": {
+                "0": {
+                  "color": "red",
+                  "text": "DOWN"
+                },
+                "1": {
+                  "color": "green",
+                  "text": "UP"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              }
+            ]
+          },
+          "unit": "short",
+          "noValue": "Нет данных"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 4,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "colorMode": "background",
+        "graphMode": "none",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "targets": [
+        {
+          "expr": "max(up{job=\"maloe-api\"})",
+          "legendFormat": "PM2 API /metrics",
+          "refId": "A"
+        }
+      ],
+      "title": "Статус API",
+      "type": "stat",
+      "description": "Показывает, достучался ли Prometheus до PM2 API по /metrics. UP означает, что scrape работает. DOWN означает, что PM2 сейчас не отдаёт /metrics или возвращает ошибку."
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "noValue": "Нет данных"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 4,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      },
+      "targets": [
+        {
+          "expr": "(sum(rate(maloe_http_requests_total[5m]))) or vector(0)",
+          "legendFormat": "RPS",
+          "refId": "A"
+        }
+      ],
+      "title": "Запросов в секунду",
+      "type": "stat",
+      "description": "Текущая входящая нагрузка на API. Считается по всем HTTP-запросам за последние 5 минут."
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "noValue": "Нет данных"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 9,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      },
+      "targets": [
+        {
+          "expr": "(max(maloe_http_unique_clients{job=\"maloe-api\", window=\"5m\"})) or vector(0)",
+          "legendFormat": "unique clients",
+          "refId": "A"
+        }
+      ],
+      "title": "Уникальные клиенты за 5 минут",
+      "type": "stat",
+      "description": "Приблизительное число уникальных клиентов за последние 5 минут. IP и User-Agent не публикуются в метрики."
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "noValue": "Нет данных"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 14,
+        "y": 0
+      },
+      "id": 4,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      },
+      "targets": [
+        {
+          "expr": "(histogram_quantile(0.95, sum(rate(maloe_http_request_duration_seconds_bucket[5m])) by (le))) or vector(0)",
+          "legendFormat": "p95",
+          "refId": "A"
+        }
+      ],
+      "title": "Задержка p95",
+      "type": "stat",
+      "description": "95% запросов отвечают быстрее этого значения. Если p95 растёт, пользователи начинают чаще ждать медленные ответы."
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percentunit",
+          "noValue": "Нет данных"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 4,
+        "w": 5,
+        "x": 19,
+        "y": 0
+      },
+      "id": 5,
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        }
+      },
+      "targets": [
+        {
+          "expr": "(sum(rate(maloe_http_requests_total{status_class=\"5xx\"}[5m])) / clamp_min(sum(rate(maloe_http_requests_total[5m])), 0.001)) or vector(0)",
+          "legendFormat": "5xx",
+          "refId": "A"
+        }
+      ],
+      "title": "Доля ошибок 5xx",
+      "type": "stat",
+      "description": "Доля серверных ошибок среди всех запросов. Любой стабильный рост требует проверки логов ошибок."
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "noValue": "Нет данных"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 4
+      },
+      "id": 6,
+      "targets": [
+        {
+          "expr": "(sum(rate(maloe_http_requests_total[5m])) by (module, area)) or vector(0)",
+          "legendFormat": "{{module}} / {{area}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Нагрузка по модулям",
+      "type": "timeseries",
+      "description": "Показывает RPS по архитектурным модулям API: catalog, iam, reviews, inventory, staff и другим."
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s",
+          "noValue": "Нет данных"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 4
+      },
+      "id": 7,
+      "targets": [
+        {
+          "expr": "(histogram_quantile(0.95, sum(rate(maloe_http_request_duration_seconds_bucket[5m])) by (le, route))) or vector(0)",
+          "legendFormat": "{{route}}",
+          "refId": "A"
+        }
+      ],
+      "title": "Задержка p95 по маршрутам",
+      "type": "timeseries",
+      "description": "Сравнение задержки p95 по конкретным route. Помогает быстро найти медленные endpoint-ы."
+    },
+    {
+      "datasource": {
+        "type": "loki",
+        "uid": "loki"
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 12
+      },
+      "id": 8,
+      "options": {
+        "dedupStrategy": "none",
+        "enableLogDetails": true,
+        "showCommonLabels": false,
+        "showLabels": true,
+        "showTime": true,
+        "sortOrder": "Descending",
+        "wrapLogMessage": true
+      },
+      "targets": [
+        {
+          "expr": "{service=\"maloe-api\"}",
+          "refId": "A"
+        }
+      ],
+      "title": "Логи приложения",
+      "type": "logs",
+      "description": "Живой поток JSON-логов PM2 API, которые Promtail читает из server/logs/app.log и отправляет в Loki.",
+      "fieldConfig": {
+        "defaults": {
+          "noValue": "Нет данных"
+        }
+      }
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 39,
+  "tags": [
+    "maloe",
+    "api",
+    "monitoring",
+    "русский",
+    "нагрузка",
+    "pm2"
+  ],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "browser",
+  "title": "Maloe API: обзор",
+  "uid": "maloe-api-overview",
+  "version": 7,
+  "weekStart": "",
+  "style": "dark"
+}

@@ -1,0 +1,17 @@
+name: Telegram Push Notification
+
+on:
+  push:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Send Telegram message
+        run: |
+          TEXT="Новый push%0Aрепозиторий: ${{ github.repository }}%0AВетка: ${{ github.ref_name }}%0AАвтор: ${{ github.actor }}%0AКоммит: ${{ github.event.head_commit.message }}%0AСсылка: https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
+
+          curl -s "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d "chat_id=${{ secrets.TELEGRAM_CHAT_ID }}" \
+            -d "text=${TEXT}"

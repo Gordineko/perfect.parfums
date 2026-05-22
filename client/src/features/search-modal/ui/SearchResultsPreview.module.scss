@@ -1,0 +1,201 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+@keyframes skeleton {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: -200% 0%;
+  }
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 738px;
+  margin: 0 auto;
+
+  @include down($bp-desktop) {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  @include down($bp-tablet) {
+    gap: 16px;
+  }
+
+  .title {
+    margin-top: 8px;
+    color: var(--Dark, #1a1a1a);
+    font-family: var(--font-inter), Inter, sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  .label,
+  .empty {
+    font-family: $font-secondary;
+    font-size: 16px;
+    font-weight: $fw-semibold;
+    color: rgba($text-light, 0.7);
+  }
+
+  .error {
+    font-family: $font-secondary;
+    font-size: 16px;
+    font-weight: $fw-semibold;
+    color: rgba($dark, 0.75);
+  }
+
+  .list {
+    display: grid;
+    grid-template-columns: repeat(2, 357px);
+    gap: 16px 24px;
+    justify-content: center;
+    justify-items: stretch;
+
+    @include down($bp-desktop) {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      justify-content: stretch;
+      align-items: stretch;
+    }
+
+    @include down($bp-tablet) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .skeleton {
+    width: 357px;
+    height: 100px;
+    border-radius: 12px;
+    background: linear-gradient(
+      90deg,
+      rgba(15, 23, 42, 0.06) 0%,
+      rgba(15, 23, 42, 0.12) 50%,
+      rgba(15, 23, 42, 0.06) 100%
+    );
+    background-size: 200% 100%;
+    animation: skeleton 1.2s ease-in-out infinite;
+  }
+
+  .button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 12px 40px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    color: var(--White, #fefefe);
+    font-family: var(--font-inter), Inter, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: normal;
+    background: var(--Dark, #1a1a1a);
+    box-shadow: 0 10px 20px -10px rgba(26, 26, 26, 0.5);
+
+    &:hover {
+      filter: brightness(1.03);
+    }
+
+    &:active {
+      transform: scale(0.99);
+    }
+
+    p {
+      margin: 0;
+      color: inherit;
+      font: inherit;
+      text-align: inherit;
+    }
+  }
+
+  :global(.product-item) {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    column-gap: 16px;
+    row-gap: 12px;
+    align-items: center;
+    min-height: 100px;
+    height: 100%;
+    padding: 24px;
+    text-align: left;
+    border: 1px solid var(--Dark, #1a1a1a);
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: none;
+    transition:
+      border-color 0.2s ease,
+      opacity 0.2s ease;
+
+    &:hover {
+      border-color: var(--Dark, #1a1a1a);
+      opacity: 0.96;
+    }
+
+    @include down($bp-tablet) {
+      min-height: 100px;
+    }
+
+    :global(.product-item__image-wrap) {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+      align-self: center;
+      width: 52px;
+      height: 52px;
+      position: relative;
+      margin: 0;
+      flex: 0 0 52px;
+      border: 1px solid rgba(153, 153, 153, 0.5);
+    }
+
+    :global(.product-item__image) {
+      object-fit: cover;
+    }
+
+    :global(.product-item__title) {
+      grid-column: 2;
+      margin-bottom: 0;
+      height: fit-content;
+      overflow: visible;
+      text-overflow: unset;
+      white-space: normal;
+      word-break: break-word;
+      color: var(--Dark, #0d0d0d);
+      font-family: $font-secondary, "Golos Text", sans-serif;
+      font-size: 16px;
+      font-weight: $fw-regular;
+      line-height: normal;
+    }
+
+    :global(.product-item__wrapper) {
+      grid-column: 2;
+      margin: 0;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    :global(.product-item__price),
+    :global(.product-item__price-line),
+    :global(.product-item__price-line--sale) {
+      color: var(--Dark, #1a1a1a);
+      font-family: var(--font-inter), Inter, sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+}

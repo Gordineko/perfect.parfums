@@ -1,0 +1,923 @@
+@mixin profile-input-value-text {
+    color: var(--Dark, #0d0d0d);
+    font-family: Inter, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-width: 0;
+    max-width: 100%;
+    .form-group {
+        margin-bottom: 0;
+    }
+
+    // Typography for entered/selected values in form controls
+    input,
+    select,
+    textarea {
+        color: var(--Dark, #0D0D0D);
+        font-family: "Golos Text";
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        border-radius: 0;
+        @include down($bp-tablet) {
+            font-size: 14px;
+        }
+    }
+    input::placeholder,
+    textarea::placeholder {
+        @include down($bp-tablet) {
+            font-size: 14px;
+        }
+    }
+    label {
+        color: #9CA3AF;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        text-transform: uppercase;
+        @include down($bp-tablet) {
+            font-size: 12px;
+        }
+    }
+    &__head {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 24px;
+        min-width: 0;
+        @include down($bp-tablet) {
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+        .num {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            border-radius: 1000px;
+            background: var(--Accent-color-1, #ff99d6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--White, #FEFEFE);
+            font-size: 30px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            @include down($bp-tablet) {
+                display: none;
+            }
+            @include tablet-only {
+                display: none;
+            }
+        }
+        span {
+            flex: 1 1 0%;
+            min-width: 0;
+            max-width: 100%;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            color: var(--Dark, #0D0D0D);
+            font-family: Montserrat;
+            font-size: 32px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            @include tablet-only {
+                font-size: 32px;
+            }
+            @include down($bp-tablet) {
+                font-size: 24px;
+            }
+        }
+    }
+    &__group {
+        margin-bottom: 24px;
+        min-width: 0;
+        max-width: 100%;
+        border-radius: 0;
+        border: 1px solid rgba(15, 23, 42, 0.08);
+        background: #fff;
+        backdrop-filter: blur(5px);
+        padding: 40px;
+        @include tablet-only {
+            margin-bottom: 16px;
+            padding: 24px 32px;
+        }
+        @include down($bp-tablet) {
+            margin-bottom: 16px;
+            padding: 24px;
+        }
+    }
+
+    &--profile,
+    &--order {
+        .user-details__profile-title {
+            display: none;
+        }
+
+        .user-details__groups {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            border: 0;
+            background: transparent;
+            backdrop-filter: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .user-details__group {
+            margin-bottom: 0;
+            padding: 40px;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            background: #fbfbf9;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+            min-width: 0;
+        }
+
+        .user-details__head {
+            margin-bottom: 24px;
+            min-width: 0;
+
+            @include down($bp-tablet) {
+                justify-content: center;
+                margin-bottom: 16px;
+                text-align: center;
+            }
+        }
+
+        .user-details__form-group {
+            @include tablet-only {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 16px;
+
+                > .form-group:only-child,
+                > .form-group--span-tablet {
+                    grid-column: 1 / -1;
+                }
+
+                > .error-text {
+                    grid-column: 1 / -1;
+                }
+            }
+        }
+
+        .user-details__head .num {
+            background: var(--color-text);
+            color: var(--color-white);
+        }
+
+        .user-details__head span {
+            flex: 1 1 auto;
+            width: 100%;
+            color: var(--color-dark);
+            font-family: var(--font-title);
+            font-size: 33px;
+            font-style: italic;
+            font-weight: var(--fw-regular);
+            line-height: normal;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+
+            @include tablet-only {
+                font-size: 28px;
+            }
+
+            @include down($bp-tablet) {
+                flex: 0 1 auto;
+                width: auto;
+                font-size: 24px;
+                text-align: center;
+            }
+        }
+
+        label,
+        .custom-select-label {
+            color: $gray;
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-style: normal;
+            font-weight: var(--fw-light);
+            line-height: normal;
+            text-transform: uppercase;
+        }
+
+        .custom-select-wrapper {
+            position: relative;
+            min-width: 0;
+            width: 100%;
+
+            :global(.react-select) {
+                width: 100%;
+            }
+        }
+
+        input,
+        select,
+        textarea {
+            @include profile-input-value-text;
+            box-sizing: border-box;
+            height: 53px;
+            min-height: 53px;
+            padding: 0 16px;
+            border: 1px solid rgba(153, 153, 153, 0.5);
+            background: var(--White, #fff);
+            outline: none;
+            box-shadow: none;
+            transition: border-color 0.2s ease;
+
+            &:focus {
+                border-color: var(--Dark, #1a1a1a);
+                background: var(--White, #fff);
+            }
+        }
+
+        :global(.react-tel-input .form-control) {
+            @include profile-input-value-text;
+            box-sizing: border-box !important;
+            height: 53px !important;
+            min-height: 53px !important;
+            padding: 0 16px !important;
+            color: var(--Dark, #0d0d0d) !important;
+            font-family: Inter, sans-serif !important;
+            font-size: 16px !important;
+            font-style: normal !important;
+            font-weight: 400 !important;
+            line-height: 20px !important;
+            border: 1px solid rgba(153, 153, 153, 0.5) !important;
+            background: var(--White, #fff) !important;
+            outline: none !important;
+            box-shadow: none !important;
+            transition: border-color 0.2s ease !important;
+
+            &:focus {
+                border-color: var(--Dark, #1a1a1a) !important;
+                background: var(--White, #fff) !important;
+            }
+        }
+
+        .custom-select-wrapper :global(.react-select__control) {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            align-items: center !important;
+            border: 1px solid rgba(153, 153, 153, 0.5) !important;
+            background: var(--White, #fff) !important;
+            box-shadow: none !important;
+            height: 53px !important;
+            min-height: 53px !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            transition: border-color 0.2s ease !important;
+        }
+
+        .custom-select-wrapper :global(.react-select__value-container) {
+            position: relative !important;
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            align-items: center !important;
+            align-content: center !important;
+            align-self: stretch !important;
+            flex: 1 1 0% !important;
+            width: 0 !important;
+            min-width: 0 !important;
+            height: 100% !important;
+            min-height: 0 !important;
+            padding: 0 8px 0 16px !important;
+            overflow: hidden !important;
+            grid-template-columns: none !important;
+            grid-template-rows: none !important;
+        }
+
+        .custom-select-wrapper :global(.react-select__value-container > *) {
+            grid-area: unset !important;
+        }
+
+        .custom-select-wrapper :global(.react-select__input-container) {
+            display: flex !important;
+            align-items: center !important;
+            align-self: stretch !important;
+            flex: 0 1 auto !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            min-height: 0 !important;
+        }
+
+        .custom-select-wrapper
+            :global(.react-select--has-value:not(.react-select--is-focused)) {
+            :global(.react-select__input-container),
+            :global(.react-select__input) {
+                position: absolute !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 1px !important;
+                min-width: 0 !important;
+                height: 1px !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+                clip: rect(0, 0, 0, 0) !important;
+                white-space: nowrap !important;
+                opacity: 0 !important;
+                pointer-events: none !important;
+            }
+        }
+
+        .custom-select-wrapper :global(.react-select__control--is-focused),
+        .custom-select-wrapper :global(.react-select__control--is-focused:hover) {
+            border-color: var(--Dark, #1a1a1a) !important;
+            background: var(--White, #fff) !important;
+            box-shadow: none !important;
+        }
+
+        .custom-select-wrapper :global(.react-select__single-value),
+        .custom-select-wrapper :global(.react-select__placeholder) {
+            position: relative !important;
+            top: 0 !important;
+            transform: none !important;
+            margin: 0 !important;
+            max-width: 100% !important;
+            overflow: hidden !important;
+            text-overflow: ellipsis !important;
+            white-space: nowrap !important;
+            color: var(--Dark, #0d0d0d) !important;
+            font-family: Inter, sans-serif !important;
+            font-size: 16px !important;
+            font-style: normal !important;
+            font-weight: 400 !important;
+            line-height: 20px !important;
+        }
+
+        .custom-select-wrapper
+            :global(.react-select--is-focused .react-select__input-container input) {
+            position: relative !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            color: var(--Dark, #0d0d0d) !important;
+            font-family: Inter, sans-serif !important;
+            font-size: 16px !important;
+            font-weight: 400 !important;
+            line-height: 20px !important;
+        }
+
+        .custom-select-wrapper :global(.react-select__placeholder) {
+            color: $gray !important;
+        }
+
+        .custom-select-wrapper :global(.react-select__indicators) {
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            flex-shrink: 0 !important;
+            align-items: center !important;
+            align-self: center !important;
+            height: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .custom-select-wrapper :global(.react-select__indicator) {
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            align-self: center !important;
+            flex-shrink: 0 !important;
+            padding: 0 10px 0 0 !important;
+        }
+
+        .custom-select-wrapper :global(.react-select__dropdown-indicator) {
+            padding: 0 !important;
+        }
+
+        :global(.react-select__option) {
+            color: var(--Dark, #0d0d0d) !important;
+            font-family: Inter, sans-serif !important;
+            font-size: 16px !important;
+            font-style: normal !important;
+            font-weight: 400 !important;
+            line-height: 20px !important;
+        }
+
+        .user-details__profile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            background: transparent;
+        }
+
+        .user-details__profile-actions-row {
+            position: relative;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            min-height: 52px;
+        }
+
+        .user-details__profile-status-slot {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            pointer-events: none;
+        }
+
+        .user-details__profile-status {
+            margin: 0;
+            width: auto;
+            max-width: min(48%, 320px);
+            color: #10b981;
+            font-family: var(--font-body);
+            font-size: var(--fs-body);
+            font-weight: $fw-semibold;
+            line-height: normal;
+            text-align: right;
+            pointer-events: auto;
+        }
+
+        .user-details__profile-submit {
+            position: relative;
+            z-index: 1;
+            margin: 0 0 0 40px;
+            align-self: flex-start;
+            width: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 16px 64px;
+            border: 0;
+            border-radius: 0;
+            background: var(--color-text);
+            box-shadow: 0 10px 20px -10px rgba(26, 26, 26, 0.5);
+            color: var(--color-white);
+            text-align: center;
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-style: normal;
+            font-weight: var(--fw-medium);
+            line-height: normal;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition:
+                background 0.2s ease,
+                box-shadow 0.2s ease;
+
+            &:hover:not(:disabled) {
+                background: rgba(26, 26, 26, 0.8);
+                box-shadow: 0 10px 20px -10px rgba(26, 26, 26, 0.5);
+            }
+
+            &:disabled {
+                cursor: not-allowed;
+                opacity: 0.7;
+            }
+        }
+
+        @include down($bp-desktop-narrow) {
+            .user-details__groups {
+                gap: 16px;
+            }
+
+            .user-details__group {
+                padding: 24px;
+            }
+        }
+
+        @include tablet-only {
+            .user-details__profile-actions-row {
+                justify-content: flex-start;
+            }
+
+            .user-details__profile-submit {
+                align-self: flex-start;
+                width: auto;
+            }
+        }
+
+        @include down($bp-tablet) {
+            .user-details__groups {
+                gap: 12px;
+            }
+
+            .user-details__group {
+                padding: 16px;
+            }
+
+            .user-details__profile-actions {
+                gap: 12px;
+            }
+
+            .user-details__profile-actions-row {
+                flex-direction: column;
+                justify-content: flex-start;
+                min-height: 0;
+                gap: 0;
+            }
+
+            .user-details__profile-status-slot {
+                position: static;
+                order: -1;
+                justify-content: center;
+                width: 100%;
+                min-height: 0;
+                margin: 0;
+
+                &:not(:empty) {
+                    min-height: 22px;
+                    margin-bottom: 8px;
+                }
+            }
+
+            .user-details__profile-status {
+                max-width: 100%;
+                text-align: center;
+            }
+
+            label,
+            .custom-select-label {
+                font-size: 12px;
+            }
+
+            input,
+            select,
+            textarea {
+                height: 48px;
+                min-height: 48px;
+                padding: 0 12px;
+                font-size: 14px;
+                line-height: 20px;
+            }
+
+            :global(.react-tel-input .form-control) {
+                height: 48px !important;
+                min-height: 48px !important;
+                padding: 0 12px !important;
+                font-size: 14px !important;
+                line-height: 20px !important;
+            }
+
+            .custom-select-wrapper :global(.react-select__control) {
+                flex-direction: row !important;
+                flex-wrap: nowrap !important;
+                height: 48px !important;
+                min-height: 48px !important;
+            }
+
+            .custom-select-wrapper :global(.react-select__value-container) {
+                height: 100% !important;
+                min-height: 0 !important;
+                padding: 0 4px 0 12px !important;
+                overflow: hidden !important;
+            }
+
+            .custom-select-wrapper :global(.react-select__single-value),
+            .custom-select-wrapper :global(.react-select__placeholder),
+            .custom-select-wrapper :global(.react-select__input-container input) {
+                font-size: 14px !important;
+                line-height: 20px !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: clip !important;
+                max-width: 100% !important;
+            }
+
+            :global(.react-select__option) {
+                font-size: 14px !important;
+                line-height: 20px !important;
+            }
+
+            .custom-select-wrapper :global(.react-select__indicator) {
+                padding: 0 8px 0 0 !important;
+            }
+
+            .user-details__profile-submit {
+                margin: 0;
+                align-self: stretch;
+                width: 100%;
+                padding: 14px 20px;
+                font-size: 14px;
+            }
+        }
+    }
+
+    &--profile {
+        gap: 0;
+    }
+
+    &--order {
+        gap: 0;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            min-width: 0;
+            width: 100%;
+        }
+
+        @include down($bp-desktop-narrow) {
+            form {
+                gap: 16px;
+            }
+        }
+
+        @include down($bp-tablet) {
+            form {
+                gap: 12px;
+            }
+        }
+
+        .pay {
+            &__option {
+                border: 1px solid rgba(153, 153, 153, 0.5);
+                background: var(--color-white);
+                padding: 24px 32px;
+                transition: border-color 0.2s ease, background 0.2s ease;
+
+                &:hover {
+                    transform: none;
+                    box-shadow: none;
+                    border-color: var(--color-text);
+                }
+
+                &.active {
+                    border-color: var(--color-text);
+                    background: #fbfbf9;
+                }
+
+                @include down($bp-tablet) {
+                    padding: 16px;
+                }
+            }
+
+            &__title {
+                color: var(--color-dark);
+                font-family: var(--font-title);
+                font-size: 20px;
+                font-style: italic;
+                font-weight: var(--fw-regular);
+                line-height: normal;
+
+                @include down($bp-tablet) {
+                    font-family: var(--font-body);
+                    font-size: 18px;
+                    font-style: normal;
+                    font-weight: var(--fw-medium);
+                }
+            }
+
+            &__desc {
+                color: $gray;
+                font-family: var(--font-body);
+                font-size: 14px;
+                font-weight: var(--fw-light);
+                line-height: normal;
+            }
+        }
+    }
+
+    &__form-group {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 16px;
+        &.width {
+            grid-template-columns: repeat(1, 1fr);
+        }
+        @include tablet-only {
+            gap: 16px;
+        }
+        @include down($bp-tablet) {
+            gap: 16px;
+            grid-template-columns: repeat(1, 1fr);
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px
+        }
+    }
+    .submit-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 16px 24px;
+        border-radius: 0;
+        background: var(--Main, #FF99D6);
+        box-shadow: 0 10px 20px -10px rgba(255, 153, 214, 0.50);
+        color: var(--White, #FFF);
+        text-align: center;
+        font-family: "Golos Text";
+        font-size: 16px;
+        font-weight: 700;
+    }
+}
+.custom-select-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    .error{
+        position: absolute;
+        top: 100%;
+        right: 0;    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: red;
+    }
+}
+
+.user-details:not(.user-details--profile):not(.user-details--order) .custom-select-wrapper {
+    @include down($bp-tablet) {
+        .react-select__single-value,
+        .react-select__placeholder {
+            font-size: 14px !important;
+        }
+        .react-select__input-container input {
+            font-size: 14px !important;
+        }
+        .react-select__option {
+            font-size: 14px !important;
+        }
+    }
+}
+.special-label {
+    display: none;
+}
+.react-tel-input .form-control {
+    padding: 16px !important;
+    width: 100% !important;
+    height: 53px !important;
+    border-radius: 0 !important;
+    color: var(--Dark, #0d0d0d) !important;
+    font-family: "Golos Text" !important;
+    font-size: 16px !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    line-height: normal !important;
+}
+
+.user-details.user-details--profile .react-tel-input .form-control,
+.user-details.user-details--order .react-tel-input .form-control {
+    height: 53px !important;
+    padding: 0 16px !important;
+    color: var(--Dark, #0d0d0d) !important;
+    font-family: Inter, sans-serif !important;
+    font-size: 16px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: 20px !important;
+
+    @include down($bp-tablet) {
+        font-size: 14px !important;
+        line-height: 20px !important;
+    }
+}
+
+@include down($bp-tablet) {
+    .user-details.user-details--profile,
+    .user-details.user-details--order {
+        input,
+        select,
+        textarea,
+        .react-tel-input .form-control,
+        .custom-select-wrapper .react-select__single-value,
+        .custom-select-wrapper .react-select__placeholder {
+            font-size: 14px !important;
+            line-height: 20px !important;
+        }
+    }
+}
+.flag-dropdown {
+    display: none !important;
+}
+.marg {
+    margin-left: 40px;
+}
+
+@include tablet-only {
+    .user-details {
+        .submit-button {
+            padding: 16px 64px;
+            margin-top: 24px;
+        }
+    }
+    .marg {
+        margin-left: 0;
+    }
+}
+
+@include down($bp-tablet) {
+    .user-details {
+        .submit-button {
+            padding: 16px 64px;
+            margin-top: 16px;
+            width: 100%;
+            font-size: 14px;
+        }
+    }
+    .marg {
+        margin-left: 0;
+    }
+}
+.pay {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 0;
+    max-width: 100%;
+    &__option {
+        cursor: pointer;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        border-radius: 0;
+        border: 1px solid var(--Main, #FF99D6);
+        background: rgba(255, 153, 214, 0.10);
+        padding: 24px 32px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        transition: 0.3s;
+        &:hover {
+            transition: 0.3s;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
+        }
+        &.active {
+            background: rgba(255, 153, 214, 0.10);
+        }
+        @include down($bp-tablet) {
+            padding: 16px;
+            gap: 8px;
+        }
+    }
+    .delivery__header {
+        min-width: 0;
+        max-width: 100%;
+    }
+    &__title {
+        display: block;
+        max-width: 100%;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        color: var(--Text-color-1, #0F172A);
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        @include down($bp-tablet) {
+            color: var(--Dark, #0D0D0D);
+            font-family: "Golos Text";
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+        }
+    }
+    &__desc {
+        max-width: 100%;
+        margin: 0;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+        color: var(--Gray, #9CA3AF);
+        font-family: "Golos Text";
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+    .error-text {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        font-family: $font-secondary;
+        color: red;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+}

@@ -1,0 +1,53 @@
+@use "../../../../shared/ui/styles/variables.scss" as *;
+
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.empty {
+  composes: root;
+  align-items: flex-start;
+  gap: 24px;
+  text-align: left;
+
+  p {
+    margin: 0;
+    width: 100%;
+    color: var(--color-dark);
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+  }
+}
+
+.emptyAction {
+  display: inline-flex;
+  align-self: flex-start;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 16px 64px;
+  border: 0;
+  border-radius: 0;
+  background: var(--Dark, #1a1a1a);
+  box-shadow: 0 10px 20px -10px rgba(26, 26, 26, 0.5);
+  color: var(--White, #fff);
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background: rgba(26, 26, 26, 0.8);
+  }
+
+  @include down($bp-tablet) {
+    width: 100%;
+    padding-inline: 24px;
+  }
+}

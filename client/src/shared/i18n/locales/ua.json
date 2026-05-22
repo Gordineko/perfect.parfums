@@ -1,0 +1,690 @@
+{
+  "title": "Привіт",
+  "navigation": {
+    "header": {
+      "catalog": "Каталог",
+      "about": "Про нас",
+      "content": "Контент",
+      "principles": "Принципи",
+      "contacts": "Контакти",
+      "new": "Новинки",
+      "girls": "Дівчатка",
+      "boys": "Хлопчики",
+      "collections": "Колекції",
+      "megaCategories": "Категорії",
+      "megaByAge": "За віком"
+    },
+    "footer": {
+      "catalog": "Каталог товарів",
+      "aboutUs": "Про нас",
+      "laboratory": "Лабораторія",
+      "library": "Бібліотека",
+      "paymentDelivery": "Оплата і доставка",
+      "warrantyReturns": "Гарантії і повернення",
+      "cooperation": "Співпраця"
+    },
+    "burger": {
+      "cooperation": "Співпраця",
+      "chooseLanguage": "Обрати мову",
+      "accountLogin": "Вхід в особистий кабінет",
+      "favorites": "Обрані товари",
+      "phone": "Телефон",
+      "questions": "По всім питанням та пропозиціям",
+      "social": "Соціальні мережі"
+    }
+  },
+  "common": {
+    "back": "Назад",
+    "next": "Далі"
+  },
+  "language": {
+    "english": "Англійська",
+    "ukrainian": "Українська"
+  },
+  "Auth": {
+    "errors": {
+      "invalidCredentials": "Невірна пошта або пароль"
+    }
+  },
+  "auth": {
+    "logoutError": "Не вдалося вийти з акаунта. Спробуйте ще раз."
+  },
+  "hero": {
+    "slides": {
+      "main": {
+        "title": "own the",
+        "lines": [
+          "floor"
+        ]
+      },
+      "second": {
+        "title": "Ще один слайд",
+        "lines": [
+          "Текст 1.",
+          "Текст 2.",
+          "Текст 3."
+        ]
+      }
+    }
+  },
+  "catalogSection": {
+    "title": "Каталог товарів",
+    "allCatalog": "Весь каталог"
+  },
+  "aboutPage": {
+    "bannerEyebrow": "Est. 2024",
+    "bannerTitle": "Спадщина майбутнього",
+    "bannerSubtitle": "Одяг, що дихає природою та любов'ю",
+    "storyEyebrow": "Наша історія",
+    "storyTitle": "Від першого дотику до бездоганного шва",
+    "storyText": "Maloé народився з бажання подарувати дітям свободу. Ми віримо, що преміальність — це не блиск, а якість натурального льону, м'якість мусліну та зручність крою, який не обмежує пізнання світу.",
+    "storyImageAlt": "Maloé Atelier",
+    "manifestoQuote": "«Ми створюємо не просто одяг, ми створюємо відчуття захищеності та легкості»",
+    "valuesNaturalnessTitle": "Натуральність",
+    "valuesNaturalnessText": "Тільки 100% органічні тканини. Льон, бавовна та муслін, що сертифіковані за світовими стандартами.",
+    "valuesCraftTitle": "Майстерність",
+    "valuesCraftText": "Кожна деталь — це ручна робота наших майстрів. Ми контролюємо кожен шов у власному ательє.",
+    "valuesAestheticTitle": "Естетика",
+    "valuesAestheticText": "Дизайн поза часом. Ми створюємо одяг, який залишається актуальним та передається наступним поколінням.",
+    "ctaTitle": "Справжність у кожній деталі",
+    "ctaButton": "Перейти до каталогу"
+  },
+  "contentHub": {
+    "sectionTitle": "Контент-хаб",
+    "mainCard": {
+      "mainImage": "/img/content-hub-main.jpg",
+      "title": "Доказова база вашої краси",
+      "text": "Центр розробки Structure.Lab об’єднує молекулярну біологію та нутриціологію. Кожен протокол — це результат тисяч годин досліджень та клінічно підтверджених стандартів чистоти.",
+      "button": "Стандарти лабораторії"
+    },
+    "cards": {
+      "molecules": {
+        "id": "molecules",
+        "date": "25.12.2025",
+        "title": "Молекулярний ліфтинг: роль пептидних зв'язків",
+        "text": "Дослідження того, як специфічні амінокислоти відновлюють каркас дерми на рівні ДНК.",
+        "link": "Читати статтю",
+        "tone": "green"
+      },
+      "neuro": {
+        "id": "neuro",
+        "date": "25.12.2025",
+        "title": "Нейробаланс та шкіра: прямий зв'язок",
+        "text": "Як управління стресом та кортизолом стає головним етапом у догляді за зовнішністю.",
+        "link": "Читати статтю",
+        "tone": "violet"
+      }
+    }
+  },
+  "principles": {
+    "sectionTitle": "Наші принципи",
+    "cards": {
+      "quality": {
+        "title": "Якість — це не маркетинг. Це контроль.",
+        "items": [
+          "Вхідний контроль сировини (HPLC / LC-MS)",
+          "Контроль на етапі виробництва (GMP)",
+          "Вихідний лабораторний аналіз кожної партії"
+        ],
+        "button": "Як ми контролюємо якість"
+      },
+      "system": {
+        "title": "Система, що виходить за межі баночки.",
+        "items": [
+          "Персоналізовані протоколи прийому",
+          "Інтеграція з харчуванням та способом життя",
+          "Підтримка експертів-нутриціологів"
+        ],
+        "button": "Дивитись каталог"
+      },
+      "care": {
+        "title": "Зовнішній догляд як посилення системи",
+        "button": "Догляд за волоссям"
+      },
+      "balance": {
+        "title": "Баланс починається зі стійкості",
+        "button": "Бібліотека Structure Lab"
+      }
+    }
+  },
+  "infoBlock": {
+    "title": "Structure Lab — коли форма слідує за балансом",
+    "text": "Відкрийте каталог або залиште ваші дані для звʼязку. Комбінації — пояснювані. Якість — перевіряється.",
+    "primary": "Відкрити каталог",
+    "secondary": "Отримати дзвінок"
+  },
+  "footer": {
+    "description": "Maloé — це гармонія органічних тканин та ручної роботи. Ми втілюємо складність ательєрних технік у ніжність, що дарує свободу вашим найціннішим",
+    "catalogColumn": "Каталог",
+    "companyColumn": "Компанія",
+    "contactColumn": "Звʼязок",
+    "navNew": "Новинки",
+    "navSale": "Акції",
+    "navGirls": "Дівчаткам",
+    "navBoys": "Хлопчикам",
+    "company": "КОМПАНІЯ",
+    "structure": "КАТАЛОГ",
+    "contact": "ЗВʼЯЗОК",
+    "structures": {
+      "skin": "Skin Structure",
+      "hair": "Hair Structure",
+      "balance": "Balance Structure",
+      "stress": "Stress Structure",
+      "gut": "Gut Structure",
+      "womenMen": "Women / Men / 40+"
+    },
+    "contacts": {
+      "email": "maloehelp@gmail.com",
+      "phone": "+38 (067) 967 01 63",
+      "callback": "Замовити дзвінок →"
+    },
+    "bottom": {
+      "copyright": "© 2026 Maloe Atelier. ВСІ ПРАВА ЗАХИЩЕНІ",
+      "offer": "Публічна оферта",
+      "privacy": "Політика конфіденційності",
+      "madeBy": "Розробка та підтримка сайту: KEYKEY"
+    }
+  },
+  "breadcrumbs": {
+    "home": "Головна",
+    "catalog": "Каталог",
+    "page": "Сторінка",
+    "prof": "Особистий кабінет",
+    "order": "Оформлення замовлення",
+    "cooperation": "Співпраця",
+    "product": "Товар"
+  },
+  "delivery": {
+    "novaPoshtaAreasErrorMessage": "Не вдалося завантажити області Нової Пошти. Спробуйте ще раз пізніше.",
+    "novaPoshtaCitiesErrorMessage": "Не вдалося завантажити міста Нової Пошти. Спробуйте ще раз пізніше.",
+    "novaPoshtaWarehousesErrorMessage": "Не вдалося завантажити відділення Нової Пошти. Спробуйте ще раз пізніше.",
+    "meestCountriesErrorMessage": "Не вдалося завантажити країни Meest. Спробуйте ще раз пізніше.",
+    "meestAreasErrorMessage": "Не вдалося завантажити області Meest. Спробуйте ще раз пізніше.",
+    "meestCitiesErrorMessage": "Не вдалося завантажити міста Meest. Спробуйте ще раз пізніше.",
+    "meestWarehousesErrorMessage": "Не вдалося завантажити відділення Meest. Спробуйте ще раз пізніше."
+  },
+  "cooperationPage": {
+    "heroEyebrow": "World of Heels Ecosystem",
+    "heroTitle": "Ростемо разом",
+    "heroLead": "Ми створюємо не просто взуття, а професійний інструмент для самовираження. Приєднуйтесь до нашої мережі партнерів.",
+    "cardWholesaleTitle": "Оптовим партнерам",
+    "cardWholesaleText": "Для рітейлерів та дропшипперів, які цінують якість та актуальний дизайн. Гнучкі умови закупівлі та повна маркетингова підтримка.",
+    "cardWholesaleItem1": "Спеціальний прайс-лист",
+    "cardWholesaleItem2": "Пріоритетне відвантаження",
+    "cardWholesaleItem3": "Контент для просування",
+    "cardInstructorsTitle": "Для викладачів",
+    "cardInstructorsText": "Ви формуєте культуру танцю — ми забезпечуємо вас та ваших учнів найкращим екіпіруванням. Особливі умови для лідерів думок.",
+    "cardInstructorsItem1": "Реферальна програма",
+    "cardInstructorsItem2": "Тестування нових моделей",
+    "cardInstructorsItem3": "Колаборації в соцмережах",
+    "cardsSectionLabel": "Напрямки співпраці",
+    "whyTitle": "Чому обирають нас",
+    "why1Index": "01",
+    "why1Title": "Швидка логістика",
+    "why1Desc": "Оперативна доставка по Україні та міжнародні відправлення з повним відстеженням замовлення.",
+    "why2Index": "02",
+    "why2Title": "Якість без компромісів",
+    "why2Desc": "Оригінальні колекції, контроль кожної пари та гарантія відповідності заявленим стандартам.",
+    "why3Index": "03",
+    "why3Title": "Партнерська екосистема",
+    "why3Desc": "Персональний супровід, маркетингові матеріали та гнучкі умови для вашого бізнесу.",
+    "why4Index": "04",
+    "why4Title": "Відправка по всьому світу",
+    "why4Desc": "Ми вже відправляли замовлення в США, Канаду, Німеччину, Францію, Італію, Іспанію, Польщу. І цей список постійно зростає.",
+    "why5Index": "05",
+    "why5Title": "Найдоступніші ціни",
+    "why5Desc": "Пропонуємо одні з найкращих цін без зайвих націнок. Економія в середньому 500–1500 грн на парі.",
+    "whyPaginationAria": "Навігація по перевагах",
+    "requirementsTitle": "Вимоги до партнерів",
+    "requirements1Index": "/01",
+    "requirements1Title": "Наявність торгового майданчика",
+    "requirements1Desc": "Ми шукаємо партнерів з активною аудиторією в соцмережах або фізичними магазинами/студіями.",
+    "requirements2Index": "/02",
+    "requirements2Title": "Обсяги замовлень",
+    "requirements2Desc": "Мінімальне оптове замовлення — від 10 пар в асортименті для отримання спецціни.",
+    "ctaTitle": "Готові до старту?",
+    "ctaLead": "Зв'яжіться з нашим менеджером у Telegram для отримання презентації та оптового прайсу.",
+    "ctaButton": "Обговорити деталі"
+  },
+  "wishlist": {
+    "title": "Список бажань",
+    "loadMore": "Показати ще обрані товари",
+    "addToWishlist": "Додати в обране",
+    "removeFromWishlist": "Видалити з обраного",
+    "emptyText": "Список бажань порожній",
+    "addSuccessMessage": "Товар додано до списку обраного",
+    "addSuccessCta": "ПЕРЕГЛЯНУТИ ОБРАНІ ТОВАРИ"
+  },
+  "commerce": {
+    "productItem": {
+      "inCart": "Додано в кошик",
+      "outOfStock": "Немає в наявності",
+      "addToCart": "В кошик"
+    },
+    "cartButton": {
+      "chooseVariant": "ОБЕРІТЬ ВАРІАНТ",
+      "priceOnRequest": "ЦІНА ЗА ЗАПИТОМ",
+      "outOfStock": "НЕМАЄ В НАЯВНОСТІ",
+      "addToCart": "ДОДАТИ В КОШИК",
+      "inCart": "Вже в кошику",
+      "restock": "Очікуємо",
+      "addToCartShort": "В кошик",
+      "missingProductId": "У товара відсутній унікальний ID"
+    },
+    "loadError": "Не вдалося завантажити дані. Спробуйте пізніше.",
+    "saleBlockDefaultTitle": "Акційні пропозиції",
+    "genericProduct": "Товар",
+    "responseCode": "Код відповіді: {code}"
+  },
+  "home": {
+    "heroCta": "Дивитися колекцію",
+    "heroFallbackTitle": "Естетика ательє\nв кожній деталі",
+    "seasonEyebrow": "Lookbook Stories",
+    "seasonTitle": "Колекції сезону",
+    "viewLookbook": "Дивитися лукбук",
+    "categorySectionAria": "Категорії каталогу",
+    "goToCatalog": "Перейти до каталогу",
+    "saleOffersTitle": "Акційні пропозиції",
+    "allCatalogCta": "Весь каталог"
+  },
+  "pdp": {
+    "pickVariantHint": "Оберіть параметри",
+    "sizeChartTitle": "Розмірна сітка",
+    "accessoriesAria": "Аксесуари",
+    "seriesCategoryAria": "Серія і категорія",
+    "recommendedStripTitle": "Вам також сподобається",
+    "viewedProductsTitle": "Переглянуті товари",
+    "viewedProductsSectionAria": "Переглянуті товари",
+    "benefits": {
+      "deliveryTitle": "Доставка",
+      "deliveryText": "Доставка по Україні — популярними транспортними службами (Нова Пошта)",
+      "warrantyTitle": "Гарантія",
+      "warrantyText": "100% оригінальний сертифікований продукт. Лабораторний контроль кожної партії.",
+      "paymentTitle": "Спосіб оплати",
+      "paymentText": "Онлайн-оплата банківською карткою (Visa/MasterCard) через захищений сервіс LiqPay"
+    },
+    "gallery": {
+      "openPhoto": "Відкрити фото",
+      "navAria": "Навігація по фото товару",
+      "thumbsAria": "Мініатюри",
+      "thumbShow": "Показати фото {n}"
+    },
+    "block": {
+      "galleryAria": "Галерея товару",
+      "infoAria": "Інформація та вибір параметрів"
+    },
+    "skeletonAria": "Завантаження товару"
+  },
+  "aria": {
+    "closeMenu": "Закрити меню",
+    "homeLogo": "На головну",
+    "catalogLoading": "Завантаження каталогу",
+    "closeReview": "Закрити",
+    "sizeTable": "Таблиця розмірів",
+    "reviewRating": "Рейтинг",
+    "carouselPrev": "Попередній слайд",
+    "carouselNext": "Наступний слайд",
+    "popularList": "Список популярних товарів",
+    "categoryDefault": "Категорія",
+    "dialogClose": "Закрити",
+    "heroLoading": "Завантаження банера"
+  },
+  "filters": {
+    "modalTitle": "ФІЛЬТРАЦІЯ",
+    "closeModal": "Закрити фільтри",
+    "selectedHeading": "ОБРАНО:",
+    "clearFiltersModal": "ОЧИСТИТИ",
+    "showResultsModal": "ПОКАЗАТИ",
+    "categories": "КАТЕГОРІЇ",
+    "subcategories": "ПІДКАТЕГОРІЇ",
+    "targetSystems": "Цільові системи",
+    "price": "Ціна, грн",
+    "priceMinAria": "Мінімальна ціна",
+    "priceMaxAria": "Максимальна ціна",
+    "currency": "грн",
+    "removeFilterAria": "Прибрати фільтр",
+    "onlyInStockSection": "Наявність",
+    "onlyInStock": "Лише в наявності"
+  },
+  "reviews": {
+    "sectionTitle": "Відгуки",
+    "leaveReview": "Залишити відгук",
+    "sectionAria": "Відгуки",
+    "paginationAria": "Навігація по відгуках",
+    "listEmpty": "Наразі відгуків немає. Будьте першим!",
+    "listLoadError": "Не вдалося завантажити відгуки",
+    "submitError": "Не вдалося надіслати відгук. Спробуйте пізніше.",
+    "submitErrorMissingProduct": "Товар не знайдено — спробуйте оновити сторінку.",
+    "datePlaceholder": "—",
+    "nameFallback": "Покупець",
+    "textFallback": "Текст відгуку відсутній",
+    "sentTitle": "Відгук відправлено",
+    "sentText": "Згодом ваш відгук з’явиться на сайті",
+    "modalSubtitle": "Поділіться досвідом про товар",
+    "nameLabel": "Ваше ім'я",
+    "namePlaceholder": "Введіть ім'я",
+    "textLabel": "Ваш відгук",
+    "textPlaceholder": "Напишіть ваш відгук",
+    "ratingTitle": "Ваша оцінка",
+    "submitBtn": "Надіслати відгук",
+    "submitError": "Не вдалося надіслати відгук. Спробуйте ще раз.",
+    "submitErrorMissingProduct": "Не вдалося визначити товар для відгуку.",
+    "validation": {
+      "required": "Обов'язкове поле",
+      "minText": "Мінімум 10 символів",
+      "ratingRequired": "Оберіть оцінку"
+    }
+  },
+  "catalog": {
+    "allProducts": "Всі товари",
+    "products": "товарів",
+    "filters": "Фільтри",
+    "sort": "Сортування",
+    "sortDefault": "За замовчуванням",
+    "sortPriceDesc": "За спаданням ціни",
+    "sortPriceAsc": "За зростанням ціни",
+    "sortTitleAsc": "За назвою (А-Я)",
+    "activeFiltersHeading": "Фільтри:",
+    "clearActiveFilters": "Очистити",
+    "catalogTitleAll": "Каталог взуття",
+    "paginationPrev": "Попередня",
+    "paginationNext": "Наступна",
+    "recommendedEyebrow": "Shop the look",
+    "recommendedTitle": "Вам також сподобається",
+    "loadErrorTitle": "Не вдалося завантажити каталог",
+    "loadErrorDescription": "Сталася помилка сервера під час завантаження товарів. Спробуйте ще раз або зайдіть пізніше.",
+    "loadErrorRetry": "Спробувати знову",
+    "searchResults": "Результати пошуку: \"{query}\"",
+    "bestsellersEyebrow": "Bestsellers",
+    "bestsellersTitle": "Популярні моделі",
+    "bestsellersAddToCart": "+ Додати в кошик",
+    "bestsellersGoToProduct": "Перейти до товару",
+    "archiveSelectionEyebrow": "SEASONAL OFFER",
+    "archiveSelectionTitle": "Archive Selection",
+    "archiveSelectionSummary": "Останні одиниці з минулих колекцій тепер доступні за особливими цінами. Свідомий підхід до моди.",
+    "archiveSelectionCta": "Дивитися акційні товари",
+    "brandValuesQuote": "«Одяг, створений для моментів, що залишаються в пам'яті назавжди»",
+    "brandValuesStatement": "МИ ВИКОРИСТОВУЄМО ЛИШЕ СЕРТИФІКОВАНІ ОРГАНІЧНІ ТКАНИНИ ТА РУЧНУ РОБОТУ НАШИХ МАЙСТРІВ В УКРАЇНІ.",
+    "brandValuesCareTitle": "Care",
+    "brandValuesCareLabel": "ДБАЙЛИВИЙ ПОШИВ",
+    "brandValuesLinenTitle": "Linen",
+    "brandValuesLinenLabel": "НАТУРАЛЬНИЙ ЛЬОН",
+    "brandValuesEcoTitle": "Eco",
+    "brandValuesEcoLabel": "ЕКОЛОГІЧНА УПАКОВКА",
+    "carouselCta": "Перейти в категорію →",
+    "carouselDemoClothing": "Одяг",
+    "carouselDemoHeels": "Танцювальні підбори",
+    "carouselDemoAccessories": "Аксесуари",
+    "showMoreWithCount": "Показати ще {count} товарів"
+  },
+  "basket": {
+    "basketCount": "Товарів у кошику",
+    "clearConfirm": "Ви впевнені, що хочете очистити кошик?",
+    "closeAria": "Закрити кошик",
+    "clearAria": "Очистити кошик",
+    "title": "Кошик товарів",
+    "clearButton": "Очистити",
+    "emptyText": "Ваш кошик порожній",
+    "startShopping": "Розпочати покупки",
+    "total": "Всього:",
+    "checkout": "Оформити замовлення",
+    "continueShopping": "Продовжити покупки",
+    "pricePerUnit": "Ціна за шт."
+  },
+  "currency": {
+    "uah": "₴"
+  },
+  "search": {
+    "placeholder": "Що ви шукаєте?",
+    "close": "Закрити пошук",
+    "popular": "Популярне:",
+    "popularItem1": "Лляний сет \"Sable\"",
+    "popularItem2": "Плаття \"Fleur d'été\""
+  },
+  "authorization": {
+    "loginTitle": "Вхід в акаунт",
+    "regTitle": "Реєстрація акаунту",
+    "resetTitle": "Відновлення паролю",
+    "emailLabel": "Пошта",
+    "emailPlaceholder": "example@mail.com",
+    "passwordLabel": "Пароль",
+    "passwordPlaceholder": "Введіть пароль",
+    "nameLabel": "Ім'я та прізвище",
+    "namePlaceholder": "Ваше ім'я",
+    "regNamePlaceholder": "Введіть ім'я та прізвище",
+    "regEmailPlaceholder": "Введіть свою пошту",
+    "regPasswordPlaceholder": "Введіть свій пароль",
+    "rememberMe": "Запам'ятати мене",
+    "newsletter": "Бажаю отримувати новини та спеціальні пропозиції магазину",
+    "termsPrefix": "Підтверджуючи реєстрацію, я приймаю умови",
+    "termsLink": "користувацької угоди",
+    "terms": "Підтверджуючи реєстрацію, я приймаю умови користувацької угоди*",
+    "forgotPassword": "Забули пароль?",
+    "loginBtn": "Увійти",
+    "regBtn": "Зареєструватися",
+    "phoneLabel": "Телефон",
+    "phonePlaceholder": "+380 (__) ___ __ __",
+    "smsCodeLabel": "Код з смс",
+    "smsCodePlaceholder": "Введіть код з смс",
+    "sendCodeBtn": "Надіслати лист",
+    "resetEmailError": "Не вдалося надіслати лист. Спробуйте ще раз.",
+    "restoreBtn": "Відновити пароль",
+    "resetBtn": "Скинути пароль",
+    "newPasswordLabel": "Новий пароль",
+    "newPasswordPlaceholder": "Введіть новий пароль",
+    "confirmPasswordLabel": "Повторіть пароль",
+    "confirmPasswordPlaceholder": "Повторіть новий пароль",
+    "savePasswordBtn": "Зберегти пароль",
+    "phoneNotFound": "Номер не знайдено. Перевірте телефон або зареєструйтесь.",
+    "resetTokenMissing": "Не вдалося отримати токен для скидання паролю. Спробуйте ще раз.",
+    "resetPasswordError": "Не вдалося змінити пароль. Спробуйте ще раз.",
+    "recoveryTokenExpired": "Термін дії посилання вичерпано або токен недійсний. Спробуйте ще раз.",
+    "invalidCode": "Невірний код.",
+    "invalidCodeAttempts": "Невірний код. Залишилось спроб: {{count}}",
+    "invalidSmsCode": "Невірний код. Залишилось спроб: {{count}}",
+    "alreadyHaveAccount": "Вже маєте акаунт?",
+    "loginLink": "Увійти в акаунт",
+    "backToLogin": "Повернутись до входу",
+    "noAccount": "Не маєте акаунту?",
+    "regLink": "Зареєструватися",
+    "validation": {
+      "required": "Обов'язкове поле",
+      "invalidEmail": "Невірний формат email",
+      "minPassword": "Пароль має містити мінімум 6 символів",
+      "acceptTerms": "Необхідно погодитися з умовами",
+      "passwordsMustMatch": "Паролі мають співпадати"
+    }
+  },
+  "checkout": {
+    "contactData": "Контактні дані",
+    "firstName": "Імʼя",
+    "lastName": "Прізвище",
+    "email": "Email",
+    "phone": "Телефон",
+    "delivery": "Доставка",
+    "payment": "Оплата",
+    "updateProfile": "Зберегти зміни",
+    "npBranch": "Відділення Нової пошти",
+    "meestBranch": "Відділення Meest",
+    "deliveryMethod": "Спосіб доставки",
+    "chooseDeliveryMethod": "Оберіть спосіб доставки",
+    "country": "Країна",
+    "chooseCountry": "Оберіть країну",
+    "chooseCountryFirst": "Спочатку оберіть країну",
+    "region": "Область",
+    "loading": "Завантаження…",
+    "chooseRegion": "Оберіть область",
+    "city": "Місто",
+    "chooseRegionFirst": "Спочатку оберіть область",
+    "chooseCity": "Оберіть місто",
+    "chooseCityFirst": "Спочатку оберіть місто",
+    "branch": "Відділення",
+    "chooseBranch": "Оберіть відділення",
+    "paymentOnlineTitle": "Оплата онлайн",
+    "paymentOnlineDesc": "Картка через платіжну систему",
+    "paymentPostpaidTitle": "Оплата при отриманні",
+    "paymentPostpaidDesc": "Готівка або карта при отриманні в відділенні",
+    "orderCreateError": "Не вдалося створити замовлення. Спробуйте ще раз."
+  },
+  "choose": "Оберіть",
+  "txt-modal": {
+    "reg": {
+      "title": "Дякуємо за реєстрацію!",
+      "desc": "З цього моменту ви можете використовувати особистий кабінет",
+      "btn": "Перейти в особистий кабінет"
+    },
+    "login": {
+      "title": "Ви авторизовані !",
+      "desc": "Можете перейти до свого особистого кабінету",
+      "btn": "Перейти в особистий кабінет"
+    },
+    "reset": {
+      "title": "Пароль змінено",
+      "desc": "Тепер ви можете увійти з новим паролем.",
+      "btn": "Ок"
+      
+    },
+    "forgotEmailSent": {
+      "title": "Перевірте пошту",
+      "desc": "Якщо акаунт з такою адресою існує, ми надіслали лист із посиланням для відновлення паролю.",
+      "btn": "Зрозуміло"
+    },
+    "logout": {
+      "title": "Вихід із профілю",
+      "desc": "Ви впевнені, що хочете вийти? Вам доведеться знову вводити дані для входу.",
+      "btn": "Залишитись",
+      "btn2": "Вийти"
+    },
+    "orderSuccess": {
+      "title": "Замовлення оформлено!",
+      "desc": "Ваше замовлення оформлено і найближчим часом буде у вас. Дякуємо за довіру!"
+    }
+  },
+  "failedOrderPage": {
+    "titlePrefix": "Оплата не",
+    "titleAccent": "завершена",
+    "subtitle": "На жаль, ми не змогли отримати підтвердження транзакції. Будь ласка, перевірте баланс або спробуйте інший метод оплати.",
+    "orderLabel": "Замовлення №{number}",
+    "placedAt": "Оформлено {date}",
+    "itemQty": "{qty} шт.",
+    "delivery": "Доставка:",
+    "total": "Разом:",
+    "retryButton": "Спробувати оплату ще раз",
+    "supportLabel": "Виникли питання?",
+    "supportEmail": "maloe_support@gmail.com",
+    "homeLink": "Повернутись на головну",
+    "catalogLink": "До каталогу",
+    "actionsAria": "Навігація після невдалої оплати"
+  },
+  "successOrderPage": {
+    "titlePrefix": "Оплата",
+    "titleAccent": "успішна",
+    "subtitle": "Дякуємо! Ваше замовлення вже готується до відправки.",
+    "orderLabel": "Замовлення №{number}",
+    "placedAt": "Оформлено {date}",
+    "itemQty": "{qty} шт.",
+    "delivery": "Доставка:",
+    "total": "Разом:",
+    "supportLabel": "Виникли питання?",
+    "supportEmail": "maloe_support@gmail.com",
+    "homeLink": "Повернутись на головну",
+    "catalogLink": "До каталогу",
+    "actionsAria": "Навігація після оплати"
+  },
+  "order-status": {
+    "title": "Ваше замовлення",
+    "sum": "Сума",
+    "delivery": "Доставка",
+    "delivery-ststus": "за тарифами перевізника",
+    "all-cost": "Разом",
+    "btn": "Оформити замовлення",
+    "promoPlaceholder": "Введіть промокод",
+    "promoApply": "Застосувати"
+  },
+  "profile": {
+    "title-prof": "Ваш профіль",
+    "title-header": "Особистий кабінет",
+    "title-history": "Архів замовлень",
+    "subtitle-prof": "ВІТАЄМО, {name}",
+    "subtitle-history": "ваша історія замовлень",
+    "guestName": "Гість",
+    "noOrders": "У вас ще немає замовлень",
+    "orderNumber": "Order #{number}",
+    "orderDetails": "Деталі замовлення",
+    "viewAllItems": "Дивитись всі товари",
+    "collapseItems": "Згорнути",
+    "updateProfile": "Оновити профіль",
+    "updateSuccess": "Дані успішно оновлено",
+    "updateError": "Помилка при оновленні даних",
+    "orderNotFound": "Замовлення не знайдено",
+    "backToOrders": "Назад до списку замовлень",
+    "link1": "особиста інформація",
+    "link2": "історія замовлень",
+    "link3": "вийти",
+    "order-title": "Замовлення",
+    "order-br": "Архів / Замовлення",
+    "order-detail-subtitle": "архів",
+    "order-data": "Отримувач",
+    "order-stats1": "Статус",
+    "order-stats2": "Ім'я та прізвище",
+    "order-stats3": "E-mail",
+    "order-stats4": "Телефон",
+    "order-stats5": "Метод доставки",
+    "order-stats6": "Місто",
+    "order-stats7": "Адреса",
+    "order-t": "Склад замовлення",
+    "order-all": "Разом до сплати",
+    "repeatOrder": "Повторити замовлення"
+  },
+
+  "warrantyReturnsPage": {
+    "lead": "Гарантія від Maloe Atelier",
+    "intro": "Ми прагнемо забезпечити наших клієнтів якісними та надійними товарами,тому гарантуємо:",
+    "originality": "Оригінальність продукції – ми працюємо лише з офіційними постачальниками та перевіреними виробниками.",
+    "warranty": "Гарантійне обслуговування – на всі товари діє офіційна гарантія від виробника.",
+    "term": "Термін гарантії залежить від конкретного продукту та зазначений в описі товару.",
+    "returns": "Обмін та повернення – якщо товар має заводський брак або не відповідає замовленню, ви можете повернути або обміняти його відповідно до чинного законодавства України.",
+    "quality": "Контроль якості – перед відправленням кожен товар проходить перевірку на відповідність заявленим характеристикам."
+},
+  "paymentDelivery": {
+    "lead": "Замовлення на сайті приймаються 24/7, відправка пн-пт з 9:00 до 17.00",
+    "delivery": "Доставка по Україні - здійснюється популярними транспортними службами – на відділення Нової Пошти, поштомат або кур’єром.",
+    "freeDelivery": "Безкоштовна доставка по Україні при замовленні від 3000 грн.",
+    "minDelivery": "Мінімальна вартість доставки згідно з тарифами Нової пошти – від 60 грн.",
+    "payment": "Спосіб оплати: Онлайн-оплата – банківською картою (Visa/MasterCard) через захищений сервіс LiqPay.",
+    "returns": "Обмін та повернення – якщо товар має заводський брак або не відповідає замовленню, ви можете повернути або обміняти його відповідно до чинного законодавства України.",
+    "defectContact": "В разі браку товару звертатись:",
+    "phoneLabel": "Телефон:",
+    "phone": "+38 (067) 967 01 63",
+    "emailLabel": "Пошта:",
+    "email": "maloe.help@gmail.com"
+
+  },
+  "contactsPage": {
+    "formTitle": "Напишіть нам",
+    "nameLabel": "Ваше ім'я",
+    "phoneLabel": "Ваш номер телефону",
+    "sourceLabel": "Звідки ви про нас дізналися?",
+    "sourcePlaceholder": "Оберіть варіант",
+    "sourceAria": "Джерело",
+    "messageLabel": "Ваше повідомлення",
+    "messagePlaceholder": "Ваш текст...",
+    "submit": "Відправити запит",
+    "sourceAds": "Реклама",
+    "sourceCoach": "Рекомендація тренера",
+    "sourceFriend": "Рекомендація подруги",
+    "sourceSelf": "Знайшли самостійно",
+    "emailHint": "Відповідаємо протягом 1 години",
+    "phoneHint": "Пн-Пт, з 9:00 до 19:00",
+    "chipEmail": "Email",
+    "chipPhone": "Телефон"
+  },
+  "notFound": {
+    "back": "Повернутися",
+    "eyebrow": "Шляхи розійшлися",
+    "title": "Здається, нитка обірвалася...",
+    "description": "Ця траєкторія веде у незвідане. Навіть найкращим майстрам потрібен новий клубок ниток. Давайте повернемося туди, де панує порядок та затишок нашого ательє.",
+    "ctaHome": "На головну",
+    "ctaCatalog": "Дивитись каталог"
+  }
+}

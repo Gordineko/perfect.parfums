@@ -1,0 +1,47 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: maloe-api-file
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: maloe-api
+          service: maloe-api
+          __path__: /var/log/maloe/*.log
+    pipeline_stages:
+      - json:
+          expressions:
+            timestamp: timestamp
+            level: level
+            service: service
+            environment: environment
+            message: message
+            method: method
+            route: route
+            module: module
+            area: area
+            status_code: status_code
+            status_class: status_class
+            auth_state: auth_state
+      - timestamp:
+          source: timestamp
+          format: RFC3339Nano
+      - labels:
+          level:
+          service:
+          environment:
+          method:
+          module:
+          area:
+          route:
+          status_class:
+          auth_state:

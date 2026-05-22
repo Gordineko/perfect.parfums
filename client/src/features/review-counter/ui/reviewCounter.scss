@@ -1,0 +1,35 @@
+.review-counter {
+  width: 39px;
+  height: 39px;
+  border-radius: 50%;
+  background: #4d8dff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  @include down($bp-desktop) {
+    width: 33px;
+    height: 33px;
+  }
+
+  @include down($bp-tablet) {
+    width: 30px;
+    height: 30px;
+  }
+
+  &__value {
+    font-size: 20px;
+    font-weight: $fw-semibold;
+    line-height: 1;
+    color: $white;
+
+    @include down($bp-desktop) {
+      font-size: 16px;
+    }
+
+    @include down($bp-tablet) {
+      font-size: 14px;
+    }
+  }
+}

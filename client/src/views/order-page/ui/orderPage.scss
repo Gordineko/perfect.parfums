@@ -1,0 +1,9 @@
+@import "../../../shared/ui/styles/variables.scss";
+
+.order-page {
+  padding: 0 0 clamp(48px, 8vw, 80px);
+
+  @include down($bp-tablet) {
+    padding-bottom: 48px;
+  }
+}

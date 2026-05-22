@@ -1,0 +1,82 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+%crumb-text {
+  font-family: Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+
+  @include tablet-only {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+
+  @include down($bp-tablet) {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+}
+
+.root {
+  margin: 24px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  @include down($bp-tablet) {
+    margin: 16px 0;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.rootEmbedded {
+  margin: 0;
+  border-bottom: none;
+}
+
+.inner {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+
+  @include down($bp-tablet) {
+    .link,
+    .split,
+    .linkCurrent {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+    }
+  }
+}
+
+.split {
+  @extend %crumb-text;
+  flex-shrink: 0;
+  margin-inline: 8px;
+  color: var(--Gray, #9ca3af);
+}
+
+.link {
+  @extend %crumb-text;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: inherit;
+  cursor: pointer;
+  color: var(--Gray, #9ca3af);
+}
+
+.linkCurrent {
+  color: var(--Dark, #0d0d0d);
+  cursor: default;
+  pointer-events: none;
+}

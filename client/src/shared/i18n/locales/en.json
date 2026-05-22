@@ -1,0 +1,691 @@
+{
+  "title": "Hello",
+  "navigation": {
+    "header": {
+      "catalog": "Catalog",
+      "about": "About us",
+      "content": "Content",
+      "principles": "Principles",
+      "contacts": "Contacts",
+      "new": "New arrivals",
+      "girls": "Girls",
+      "boys": "Boys",
+      "collections": "Collections",
+      "megaCategories": "Categories",
+      "megaByAge": "By age"
+    },
+    "footer": {
+      "catalog": "Product catalog",
+      "aboutUs": "About us",
+      "laboratory": "Laboratory",
+      "library": "Library",
+      "paymentDelivery": "Payment and delivery",
+      "warrantyReturns": "Warranty and returns",
+      "cooperation": "Cooperation"
+    },
+    "burger": {
+      "cooperation": "Partnership",
+      "chooseLanguage": "Choose language",
+      "accountLogin": "Log in to account",
+      "favorites": "Wishlist",
+      "phone": "Phone",
+      "questions": "Any questions?",
+      "social": "Social media"
+    }
+  },
+  "common": {
+    "back": "Back",
+    "next": "Next"
+  },
+  "language": {
+    "english": "English",
+    "ukrainian": "Ukrainian"
+  },
+  "Auth": {
+    "errors": {
+      "invalidCredentials": "Invalid email or password"
+    }
+  },
+  "auth": {
+    "logoutError": "Failed to log out. Please try again."
+  },
+  "hero": {
+    "slides": {
+      "main": {
+        "title": "Structure.Lab",
+        "lines": [
+          "Science.",
+          "Energy.",
+          "Balance."
+        ]
+      },
+      "second": {
+        "title": "Second slide",
+        "lines": [
+          "Line 1.",
+          "Line 2.",
+          "Line 3."
+        ]
+      }
+    }
+  },
+  "catalogSection": {
+    "title": "Product catalog",
+    "allCatalog": "All products"
+  },
+  "aboutPage": {
+    "bannerEyebrow": "Est. 2024",
+    "bannerTitle": "A legacy of the future",
+    "bannerSubtitle": "Clothing that breathes nature and love",
+    "storyEyebrow": "Our story",
+    "storyTitle": "From the first touch to a flawless seam",
+    "storyText": "Maloé was born from a wish to give children freedom. We believe premium is not shine, but the quality of natural linen, the softness of muslin, and the ease of a cut that never limits discovering the world.",
+    "storyImageAlt": "Maloé Atelier",
+    "manifestoQuote": "“We create more than clothing — we create a feeling of safety and lightness”",
+    "valuesNaturalnessTitle": "Naturalness",
+    "valuesNaturalnessText": "Only 100% organic fabrics. Linen, cotton and muslin certified to global standards.",
+    "valuesCraftTitle": "Craftsmanship",
+    "valuesCraftText": "Every detail is handmade by our artisans. We oversee every stitch in our own atelier.",
+    "valuesAestheticTitle": "Aesthetics",
+    "valuesAestheticText": "Timeless design. We create clothing that stays relevant and is passed to the next generation.",
+    "ctaTitle": "Authenticity in every detail",
+    "ctaButton": "Go to catalog"
+  },
+  "contentHub": {
+    "sectionTitle": "Content-hub",
+    "mainCard": {
+      "mainImage": "/img/content-hub-main.jpg",
+      "title": "Evidence base of your beauty",
+      "text": "Structure.Lab R&D center combines molecular biology and nutrition science. Each protocol is the result of thousands of research hours and clinically validated purity standards.",
+      "button": "Laboratory standards"
+    },
+    "cards": {
+      "molecules": {
+        "id": "molecules",
+        "date": "25.12.2025",
+        "title": "Molecular lifting: the role of peptide bonds",
+        "text": "A study of how specific amino acids restore the dermal framework at the DNA level.",
+        "link": "Read article",
+        "tone": "green"
+      },
+      "neuro": {
+        "id": "neuro",
+        "date": "25.12.2025",
+        "title": "Neurobalance and skin: a direct connection",
+        "text": "How stress and cortisol management becomes a key step in appearance care.",
+        "link": "Read article",
+        "tone": "violet"
+      }
+    }
+  },
+  "principles": {
+    "sectionTitle": "Our principles",
+    "cards": {
+      "quality": {
+        "title": "Quality is not marketing. It’s control.",
+        "items": [
+          "Incoming raw materials control (HPLC / LC-MS)",
+          "Production stage control (GMP)",
+          "Final lab analysis of every batch"
+        ],
+        "button": "How we ensure quality"
+      },
+      "system": {
+        "title": "A system that goes beyond the jar.",
+        "items": [
+          "Personalized intake protocols",
+          "Integration with nutrition and lifestyle",
+          "Support from nutrition experts"
+        ],
+        "button": "View catalog"
+      },
+      "care": {
+        "title": "External care as a system booster",
+        "button": "Hair care"
+      },
+      "balance": {
+        "title": "Balance starts with resilience",
+        "button": "Structure Lab Library"
+      }
+    }
+  },
+  "infoBlock": {
+    "title": "Structure Lab — when form follows balance",
+    "text": "Open the catalog or leave your details for a callback. Combinations are explainable. Quality is verified.",
+    "primary": "Open catalog",
+    "secondary": "Request a call"
+  },
+  "footer": {
+    "description": "Maloé is the harmony of organic fabrics and handcraft. We turn the complexity of atelier techniques into tenderness that gives freedom to what you cherish most.",
+    "catalogColumn": "Catalog",
+    "companyColumn": "Company",
+    "contactColumn": "Contact",
+    "navNew": "New arrivals",
+    "navSale": "Sale",
+    "navGirls": "Girls",
+    "navBoys": "Boys",
+    "company": "COMPANY",
+    "structure": "CATALOG",
+    "contact": "CONTACT",
+    "structures": {
+      "skin": "Skin Structure",
+      "hair": "Hair Structure",
+      "balance": "Balance Structure",
+      "stress": "Stress Structure",
+      "gut": "Gut Structure",
+      "womenMen": "Women / Men / 40+"
+    },
+    "contacts": {
+      "email": "maloehelp@gmail.com",
+      "phone": "+38 (067) 967 01 63",
+      "callback": "Request a call →"
+    },
+    "bottom": {
+      "copyright": "© 2026 Maloe Atelier. ALL RIGHTS RESERVED",
+      "offer": "Public offer",
+      "privacy": "Privacy policy",
+      "madeBy": "Developed & supported by: KEYKEY"
+    }
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "page": "Page",
+    "prof": "Profile",
+    "order": "Checkout",
+    "cooperation": "Cooperation",
+    "product": "Product"
+  },
+  "cooperationPage": {
+    "heroEyebrow": "World of Heels Ecosystem",
+    "heroTitle": "We grow together",
+    "heroLead": "We create more than footwear — a professional tool for self-expression. Join our partner network.",
+    "cardWholesaleTitle": "Wholesale partners",
+    "cardWholesaleText": "For retailers and dropshippers who value quality and up-to-date design. Flexible purchasing terms and full marketing support.",
+    "cardWholesaleItem1": "Dedicated price list",
+    "cardWholesaleItem2": "Priority dispatch",
+    "cardWholesaleItem3": "Content for promotion",
+    "cardInstructorsTitle": "For instructors",
+    "cardInstructorsText": "You shape dance culture — we equip you and your students with the best gear. Special terms for thought leaders.",
+    "cardInstructorsItem1": "Referral program",
+    "cardInstructorsItem2": "New model testing",
+    "cardInstructorsItem3": "Social media collaborations",
+    "cardsSectionLabel": "Partnership options",
+    "whyTitle": "Why choose us",
+    "why1Index": "01",
+    "why1Title": "Fast logistics",
+    "why1Desc": "Timely delivery across Ukraine and international shipping with full order tracking.",
+    "why2Index": "02",
+    "why2Title": "Quality without compromise",
+    "why2Desc": "Original collections, inspection of every pair, and guaranteed adherence to stated standards.",
+    "why3Index": "03",
+    "why3Title": "Partner ecosystem",
+    "why3Desc": "Dedicated support, marketing assets, and flexible terms for your business.",
+    "why4Index": "04",
+    "why4Title": "Shipping worldwide",
+    "why4Desc": "We have already shipped orders to the USA, Canada, Germany, France, Italy, Spain, and Poland — and this list keeps growing.",
+    "why5Index": "05",
+    "why5Title": "Most competitive prices",
+    "why5Desc": "We offer some of the best prices without unnecessary markups — average savings of 500–1500 UAH per pair.",
+    "whyPaginationAria": "Advantages carousel navigation",
+    "requirementsTitle": "Partner requirements",
+    "requirements1Index": "/01",
+    "requirements1Title": "Sales channel presence",
+    "requirements1Desc": "We look for partners with an engaged audience on social media or physical stores/studios.",
+    "requirements2Index": "/02",
+    "requirements2Title": "Order volumes",
+    "requirements2Desc": "Minimum wholesale order — from 10 pairs across the assortment to receive special pricing.",
+    "ctaTitle": "Ready to get started?",
+    "ctaLead": "Contact our manager on Telegram for the presentation and wholesale price list.",
+    "ctaButton": "Discuss the details"
+  },
+  "wishlist": {
+    "title": "Wishlist",
+    "loadMore": "Show more favorites",
+    "addToWishlist": "Add to wishlist",
+    "removeFromWishlist": "Remove from wishlist",
+    "emptyText": "Your wishlist is empty",
+    "addSuccessMessage": "Product added to your wishlist",
+    "addSuccessCta": "VIEW WISHLIST"
+  },
+  "commerce": {
+    "productItem": {
+      "inCart": "Added to cart",
+      "outOfStock": "Out of stock",
+      "addToCart": "Add to cart"
+    },
+    "cartButton": {
+      "chooseVariant": "CHOOSE VARIANT",
+      "priceOnRequest": "PRICE ON REQUEST",
+      "outOfStock": "OUT OF STOCK",
+      "addToCart": "ADD TO CART",
+      "inCart": "In cart",
+      "restock": "Restocking",
+      "addToCartShort": "Add to cart",
+      "missingProductId": "Product has no unique ID"
+    },
+    "loadError": "Could not load data. Please try again later.",
+    "saleBlockDefaultTitle": "Sale offers",
+    "genericProduct": "Product",
+    "responseCode": "Response code: {code}"
+  },
+  "home": {
+    "heroCta": "View collection",
+    "heroFallbackTitle": "Atelier aesthetics\nin every detail",
+    "seasonEyebrow": "Lookbook Stories",
+    "seasonTitle": "Season collections",
+    "viewLookbook": "View lookbook",
+    "categorySectionAria": "Catalog categories",
+    "goToCatalog": "Go to catalog",
+    "saleOffersTitle": "Sale offers",
+    "allCatalogCta": "Full catalog"
+  },
+  "pdp": {
+    "pickVariantHint": "Select options",
+    "sizeChartTitle": "Size chart",
+    "accessoriesAria": "Accessories",
+    "seriesCategoryAria": "Series and category",
+    "recommendedStripTitle": "You may also like",
+    "viewedProductsTitle": "Recently viewed",
+    "viewedProductsSectionAria": "Recently viewed products",
+    "benefits": {
+      "deliveryTitle": "Delivery",
+      "deliveryText": "Delivery across Ukraine via trusted carriers (Nova Poshta).",
+      "warrantyTitle": "Warranty",
+      "warrantyText": "100% original certified product. Lab quality control for every batch.",
+      "paymentTitle": "Payment",
+      "paymentText": "Online payment by card (Visa/Mastercard) via secure LiqPay."
+    },
+    "gallery": {
+      "openPhoto": "Open photo",
+      "navAria": "Product photo navigation",
+      "thumbsAria": "Thumbnails",
+      "thumbShow": "Show photo {n}"
+    },
+    "block": {
+      "galleryAria": "Product gallery",
+      "infoAria": "Product information and options"
+    },
+    "skeletonAria": "Loading product"
+  },
+  "aria": {
+    "closeMenu": "Close menu",
+    "homeLogo": "Home",
+    "catalogLoading": "Loading catalog",
+    "closeReview": "Close",
+    "sizeTable": "Size table",
+    "reviewRating": "Rating",
+    "carouselPrev": "Previous slide",
+    "carouselNext": "Next slide",
+    "popularList": "Popular products list",
+    "categoryDefault": "Category",
+    "dialogClose": "Close",
+    "heroLoading": "Loading banner"
+  },
+  "filters": {
+    "modalTitle": "FILTRATION",
+    "closeModal": "Close filters",
+    "selectedHeading": "SELECTED:",
+    "clearFiltersModal": "CLEAR",
+    "showResultsModal": "SHOW",
+    "categories": "CATEGORIES",
+    "subcategories": "SUBCATEGORIES",
+    "targetSystems": "Target systems",
+    "price": "Price, UAH",
+    "priceMinAria": "Minimum price",
+    "priceMaxAria": "Maximum price",
+    "currency": "UAH",
+    "removeFilterAria": "Remove filter",
+    "onlyInStockSection": "Availability",
+    "onlyInStock": "In stock only"
+  },
+  "reviews": {
+    "sectionTitle": "Reviews",
+    "leaveReview": "Leave a review",
+    "sectionAria": "Reviews",
+    "paginationAria": "Review slider navigation",
+    "listEmpty": "No reviews yet. Be the first!",
+    "listLoadError": "Could not load reviews",
+    "submitError": "Could not submit your review. Please try again later.",
+    "submitErrorMissingProduct": "Product not found — try refreshing the page.",
+    "datePlaceholder": "—",
+    "nameFallback": "Customer",
+    "textFallback": "No review text",
+    "sentTitle": "Review sent",
+    "sentText": "Your review will appear on the site soon",
+    "modalSubtitle": "Share your experience with the product",
+    "nameLabel": "Your name",
+    "namePlaceholder": "Enter your name",
+    "textLabel": "Your review",
+    "textPlaceholder": "Write your review",
+    "ratingTitle": "Your rating",
+    "submitBtn": "Submit review",
+    "submitError": "Could not submit your review. Please try again.",
+    "submitErrorMissingProduct": "Could not determine the product for this review.",
+    "validation": {
+      "required": "This field is required",
+      "minText": "At least 10 characters",
+      "ratingRequired": "Please select a rating"
+    }
+  },
+  "catalog": {
+    "allProducts": "All products",
+    "products": "products",
+    "filters": "Filters",
+    "sort": "Sort",
+    "sortDefault": "Default",
+    "sortPriceDesc": "Price descending",
+    "sortPriceAsc": "Price ascending",
+    "sortTitleAsc": "By name (A–Z)",
+    "activeFiltersHeading": "Filters:",
+    "clearActiveFilters": "Clear",
+    "catalogTitleAll": "Footwear catalog",
+    "paginationPrev": "Previous",
+    "paginationNext": "Next",
+    "recommendedEyebrow": "Shop the look",
+    "recommendedTitle": "You may also like",
+    "loadErrorTitle": "Could not load the catalog",
+    "loadErrorDescription": "A server error occurred while loading products. Please try again or come back later.",
+    "loadErrorRetry": "Try again",
+    "searchResults": "Search results: \"{query}\"",
+    "bestsellersEyebrow": "Bestsellers",
+    "bestsellersTitle": "Popular models",
+    "bestsellersAddToCart": "+ Add to cart",
+    "bestsellersGoToProduct": "Go to product",
+    "archiveSelectionEyebrow": "SEASONAL OFFER",
+    "archiveSelectionTitle": "Archive Selection",
+    "archiveSelectionSummary": "The last pieces from past collections are now available at special prices. A conscious approach to fashion.",
+    "archiveSelectionCta": "View sale items",
+    "brandValuesQuote": "«Clothing created for moments that stay in memory forever»",
+    "brandValuesStatement": "We use only certified organic fabrics and the handwork of our craftspeople in Ukraine.",
+    "brandValuesCareTitle": "Care",
+    "brandValuesCareLabel": "Thoughtful tailoring",
+    "brandValuesLinenTitle": "Linen",
+    "brandValuesLinenLabel": "Natural linen",
+    "brandValuesEcoTitle": "Eco",
+    "brandValuesEcoLabel": "Eco-friendly packaging",
+    "carouselCta": "View category →",
+    "carouselDemoClothing": "Clothing",
+    "carouselDemoHeels": "High heels",
+    "carouselDemoAccessories": "Accessories",
+    "showMoreWithCount": "Show {count} more products"
+  },
+  "basket": {
+    "basketCount": "Items in basket",
+    "clearConfirm": "Are you sure you want to empty the cart?",
+    "closeAria": "Close cart",
+    "clearAria": "Clear cart",
+    "title": "Shopping cart",
+    "clearButton": "Clear",
+    "emptyText": "Your cart is empty",
+    "startShopping": "Start shopping",
+    "total": "Total:",
+    "checkout": "Checkout",
+    "continueShopping": "Continue shopping",
+    "pricePerUnit": "Price per unit"
+  },
+  "currency": {
+    "uah": "UAH"
+  },
+  "search": {
+    "placeholder": "Search…",
+    "close": "Close search",
+    "popular": "Popular:",
+    "popularItem1": "Linen set \"Sable\"",
+    "popularItem2": "Dress \"Fleur d'été\""
+  },
+  "authorization": {
+    "loginTitle": "Log in to your account",
+    "regTitle": "Account Registration",
+    "resetTitle": "Password Recovery",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@mail.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "nameLabel": "First and last name",
+    "namePlaceholder": "Your name",
+    "regNamePlaceholder": "Enter your first and last name",
+    "regEmailPlaceholder": "Enter your email",
+    "regPasswordPlaceholder": "Enter your password",
+    "rememberMe": "Remember me",
+    "newsletter": "I wish to receive news and special offers from the store",
+    "termsPrefix": "By registering, I accept the terms of the",
+    "termsLink": "user agreement",
+    "terms": "By registering, I accept the terms of the user agreement*",
+    "forgotPassword": "Forgot password?",
+    "loginBtn": "Log in",
+    "regBtn": "Register",
+    "phoneLabel": "Phone",
+    "phonePlaceholder": "+380 (__) ___ __ __",
+    "smsCodeLabel": "SMS code",
+    "smsCodePlaceholder": "Enter SMS code",
+    "sendCodeBtn": "Send email",
+    "resetEmailError": "Could not send the email. Please try again.",
+    "restoreBtn": "Restore password",
+    "resetBtn": "Reset password",
+    "newPasswordLabel": "New password",
+    "newPasswordPlaceholder": "Enter a new password",
+    "confirmPasswordLabel": "Confirm password",
+    "confirmPasswordPlaceholder": "Repeat the new password",
+    "savePasswordBtn": "Save password",
+    "phoneNotFound": "Phone number not found. Please check it or sign up.",
+    "resetTokenMissing": "Could not get a recovery token. Please try again.",
+    "resetPasswordError": "Failed to change password. Please try again.",
+    "recoveryTokenExpired": "The link has expired or the token is invalid. Please try again.",
+    "invalidCode": "Invalid code.",
+    "invalidCodeAttempts": "Invalid code. Attempts remaining: {{count}}",
+    "invalidSmsCode": "Invalid code. Attempts remaining: {{count}}",
+    "alreadyHaveAccount": "Already have an account?",
+    "loginLink": "Log in",
+    "backToLogin": "Back to login",
+    "noAccount": "Don't have an account?",
+    "regLink": "Register",
+    "validation": {
+      "required": "Required field",
+      "invalidEmail": "Invalid email format",
+      "minPassword": "Password must contain at least 6 characters",
+      "acceptTerms": "You must agree to the terms",
+      "passwordsMustMatch": "Passwords must match"
+    }
+  },
+  "checkout": {
+    "contactData": "Contact details",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email",
+    "phone": "Phone",
+    "delivery": "Delivery",
+    "payment": "Payment",
+    "updateProfile": "Save changes",
+    "npBranch": "Nova Poshta branch",
+    "meestBranch": "Meest branch",
+    "deliveryMethod": "Delivery method",
+    "chooseDeliveryMethod": "Choose delivery method",
+    "country": "Country",
+    "chooseCountry": "Choose country",
+    "chooseCountryFirst": "Choose country first",
+    "region": "Region",
+    "loading": "Loading…",
+    "chooseRegion": "Choose region",
+    "city": "City",
+    "chooseRegionFirst": "Choose region first",
+    "chooseCity": "Choose city",
+    "chooseCityFirst": "Choose city first",
+    "branch": "Branch",
+    "chooseBranch": "Choose branch",
+    "paymentOnlineTitle": "Online payment",
+    "paymentOnlineDesc": "Card via payment gateway",
+    "paymentPostpaidTitle": "Pay on delivery",
+    "paymentPostpaidDesc": "Cash or card when picking up",
+    "orderCreateError": "Could not place your order. Please try again."
+  },
+  "choose": "Select",
+  "txt-modal": {
+    "reg": {
+      "title": "Thank you for registering!",
+      "desc": "You can now use your personal account",
+      "btn": "Go to personal account"
+    },
+    "login": {
+      "title": "Thank you for registering!",
+      "desc": "You can now use your personal account",
+      "btn": "Go to personal account"
+    },
+    "reset": {
+      "title": "Password changed",
+      "desc": "You can now log in with your new password.",
+      "btn": "OK"
+    },
+    "forgotEmailSent": {
+      "title": "Check your email",
+      "desc": "If an account exists for this address, we have sent a message with a link to reset your password.",
+      "btn": "Got it"
+    },
+    "logout": {
+      "title": "Sign out",
+      "desc": "Are you sure you want to sign out? You will need to log in again.",
+      "btn": "Stay",
+      "btn2": "Sign out"
+    },
+    "orderSuccess": {
+      "title": "Order placed!",
+      "desc": "Your order has been placed and will be with you soon. Thank you for your trust!"
+    }
+  },
+  "failedOrderPage": {
+    "titlePrefix": "Payment not",
+    "titleAccent": "completed",
+    "subtitle": "Unfortunately, we could not confirm your transaction. Please check your balance or try another payment method.",
+    "orderLabel": "Order #{number}",
+    "placedAt": "Placed on {date}",
+    "itemQty": "{qty} pc.",
+    "delivery": "Delivery:",
+    "total": "Total:",
+    "retryButton": "Try payment again",
+    "supportLabel": "Any questions?",
+    "supportEmail": "maloe_support@gmail.com",
+    "homeLink": "Back to home",
+    "catalogLink": "Go to catalog",
+    "actionsAria": "Post-payment-failure navigation"
+  },
+  "successOrderPage": {
+    "titlePrefix": "Payment",
+    "titleAccent": "successful",
+    "subtitle": "Thank you! Your order is being prepared for shipment.",
+    "orderLabel": "Order #{number}",
+    "placedAt": "Placed on {date}",
+    "itemQty": "{qty} pc.",
+    "delivery": "Delivery:",
+    "total": "Total:",
+    "supportLabel": "Any questions?",
+    "supportEmail": "maloe_support@gmail.com",
+    "homeLink": "Back to home",
+    "catalogLink": "Go to catalog",
+    "actionsAria": "Post-checkout navigation"
+  },
+  "order-status": {
+    "title": "Your order",
+    "sum": "Subtotal",
+    "delivery": "Delivery",
+    "delivery-ststus": "per carrier rates",
+    "all-cost": "Total",
+    "btn": "Place order",
+    "promoPlaceholder": "Enter promo code",
+    "promoApply": "Apply"
+  },
+  "delivery": {
+    "novaPoshtaAreasErrorMessage": "Failed to load Nova Poshta regions. Please try again later.",
+    "novaPoshtaCitiesErrorMessage": "Failed to load Nova Poshta cities. Please try again later.",
+    "novaPoshtaWarehousesErrorMessage": "Failed to load Nova Poshta branches. Please try again later.",
+    "meestCountriesErrorMessage": "Failed to load Meest countries. Please try again later.",
+    "meestAreasErrorMessage": "Failed to load Meest regions. Please try again later.",
+    "meestCitiesErrorMessage": "Failed to load Meest cities. Please try again later.",
+    "meestWarehousesErrorMessage": "Failed to load Meest branches. Please try again later."
+  },
+  "profile": {
+    "title-prof": "Your profile",
+    "title-header": "Personal account",
+    "title-history": "Protocol Archive",
+    "subtitle-prof": "WELCOME, {name}",
+    "subtitle-history": "your order history",
+    "guestName": "Guest",
+    "noOrders": "You don't have any orders yet",
+    "orderNumber": "Order #{number}",
+    "orderDetails": "Order details",
+    "viewAllItems": "View all items",
+    "collapseItems": "Collapse",
+    "updateProfile": "Update profile",
+    "updateSuccess": "Profile updated successfully",
+    "updateError": "Error updating profile",
+    "orderNotFound": "Order not found",
+    "backToOrders": "Back to order history",
+    "link1": "personal information",
+    "link2": "order history",
+    "link3": "log out",
+    "order-title": "Order",
+    "order-br": "Archive / Order",
+    "order-detail-subtitle": "archive",
+    "order-data": "Recipient",
+    "order-stats1": "Status",
+    "order-stats2": "Full name",
+    "order-stats3": "E-mail",
+    "order-stats4": "Phone",
+    "order-stats5": "Delivery method",
+    "order-stats6": "City",
+    "order-stats7": "Address",
+    "order-t": "Order contents",
+    "order-all": "Total to pay",
+    "repeatOrder": "Repeat order"
+  },
+
+  "warrantyReturnsPage": {
+    "lead": "Warranty from Maloe Atelier",
+    "intro": "We strive to provide our customers with high-quality, reliable products, so we guarantee:",
+    "originality": "Product authenticity — we work only with official suppliers and verified manufacturers.",
+    "warranty": "Warranty service — all products are covered by the manufacturer's official warranty.",
+    "term": "The warranty period depends on the specific product and is stated in the product description.",
+    "returns": "Exchange and returns — if the product has a manufacturing defect or does not match the order, you may return or exchange it in accordance with the laws of Ukraine.",
+    "quality": "Quality control — before shipping, each item is checked for compliance with the stated specifications."
+},
+  "paymentDelivery": {
+    "lead": "Orders on the website are accepted 24/7; dispatch Mon–Fri from 9:00 to 17:00.",
+    "delivery": "Delivery across Ukraine is provided by major carriers — to a Nova Poshta branch, parcel locker, or by courier.",
+    "freeDelivery": "Free delivery in Ukraine for orders from UAH 3,000.",
+    "minDelivery": "Minimum delivery cost according to Nova Poshta rates — from UAH 60.",
+    "payment": "Payment method: Online payment by bank card (Visa/MasterCard) via the secure LiqPay service.",
+    "returns": "Exchange and returns — if the product has a manufacturing defect or does not match the order, you may return or exchange it in accordance with the laws of Ukraine.",
+    "defectContact": "In case of a product defect, contact:",
+    "phoneLabel": "Phone:",
+    "phone": "+38 (067) 967 01 63",
+    "emailLabel": "Email:",
+    "email": "maloe.help@gmail.com"
+
+  },
+  "contactsPage": {
+    "formTitle": "Write to us",
+    "nameLabel": "Your name",
+    "phoneLabel": "Your phone number",
+    "sourceLabel": "How did you hear about us?",
+    "sourcePlaceholder": "Select an option",
+    "sourceAria": "Source",
+    "messageLabel": "Your message",
+    "messagePlaceholder": "Your message...",
+    "submit": "Send request",
+    "sourceAds": "Advertising",
+    "sourceCoach": "Coach recommendation",
+    "sourceFriend": "Friend recommendation",
+    "sourceSelf": "Found on my own",
+    "emailHint": "We reply within 1 hour",
+    "phoneHint": "Mon–Fri, 9:00 AM–7:00 PM",
+    "chipEmail": "Email",
+    "chipPhone": "Phone"
+  },
+  "notFound": {
+    "back": "Go back",
+    "eyebrow": "Paths diverged",
+    "title": "It seems the thread has broken...",
+    "description": "This path leads into the unknown. Even the finest artisans need a new spool of thread. Let us return to where order and comfort reign in our atelier.",
+    "ctaHome": "Home",
+    "ctaCatalog": "View catalog"
+  }
+}

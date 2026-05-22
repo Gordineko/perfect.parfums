@@ -1,0 +1,133 @@
+.catalog-pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-lg;
+
+  @include tablet-only {
+    gap: 27px;
+  }
+
+  &__button-more {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 40px;
+    box-sizing: border-box;
+    border: 1px solid var(--Dark, #0d0d0d);
+    border-radius: 0;
+    background: $white;
+    cursor: pointer;
+    max-width: 100%;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease;
+
+    p {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      color: var(--Dark, #0d0d0d);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      line-height: normal;
+      letter-spacing: 0.56px;
+      transition: color 0.2s ease;
+
+      @include mobile-only {
+        font-size: 12px;
+      }
+    }
+
+    &:hover {
+      background: var(--Dark, #0d0d0d);
+      border-color: var(--Dark, #0d0d0d);
+
+      p {
+        color: var(--White, #fff);
+      }
+    }
+  }
+
+  &__nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-lg;
+    flex-wrap: nowrap;
+    width: 100%;
+    min-width: 0;
+  }
+
+  &__nav-text {
+    padding: $space-xs;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: var(--font-body);
+    font-size: 10px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    color: rgba(156, 163, 175, 0.5);
+    transition: color 0.2s ease;
+
+    &:hover:not(:disabled) {
+      color: rgba(156, 163, 175, 0.75);
+    }
+
+    &:disabled {
+      color: rgba(156, 163, 175, 0.25);
+      cursor: not-allowed;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex: 0 1 auto;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: nowrap;
+    min-width: 0;
+  }
+
+  &__item {
+    min-width: $space-lg;
+    padding: $space-xxs $space-xs;
+    border: 0;
+    border-bottom: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    transition: border-bottom-color 0.2s ease;
+
+    p {
+      margin: 0;
+      color: var(--color-text);
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: normal;
+      transition: opacity 0.2s ease;
+    }
+
+    &:hover:not(.is-active) p {
+      opacity: 0.75;
+    }
+
+    &.is-active {
+      border-bottom-color: var(--color-text);
+    }
+  }
+
+  &__dots {
+    color: $gray;
+    font-weight: $fw-regular;
+  }
+}

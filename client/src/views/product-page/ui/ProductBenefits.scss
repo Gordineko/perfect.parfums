@@ -1,0 +1,97 @@
+.product-benefits {
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border-radius: 40px;
+    border: 2px solid $white;
+    background: rgba(255, 255, 255, 0.5);
+    overflow: hidden;
+
+    @include down($bp-tablet) {
+      grid-template-columns: 1fr;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      gap: 12px;
+    }
+  }
+
+  &__item {
+    position: relative;
+    height: 206px;
+    padding: 40px;
+
+    @include down($bp-desktop) {
+      padding: 24px;
+      height: 185px;
+    }
+
+    @include down($bp-tablet) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+
+      padding: 16px 40px;
+      height: 135px;
+
+      border-radius: 40px;
+      border: 2px solid $white;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    &:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 2px;
+      height: 100%;
+      background: rgba(254, 254, 254, 1);
+
+      @include down($bp-tablet) {
+        display: none;
+      }
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  &__title {
+    color: $text-gray-dark;
+    font-family: $font-secondary;
+    font-size: 20px;
+    font-weight: $fw-semibold;
+    margin-bottom: 16px;
+
+    @include down($bp-desktop) {
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    @include down($bp-tablet) {
+      margin-bottom: 8px;
+    }
+  }
+
+  &__text {
+    color: $text-light;
+    font-family: $font-secondary;
+    font-size: 16px;
+    font-weight: $fw-medium;
+    max-width: 440px;
+
+    @include down($bp-desktop) {
+      font-size: 12px;
+    }
+  }
+}

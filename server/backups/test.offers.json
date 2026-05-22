@@ -1,0 +1,320 @@
+[{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d8a1"
+  },
+  "sku": "HYA-COMPLEX-60",
+  "__v": 0,
+  "available": true,
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.323Z"
+  },
+  "groupId": {
+    "$oid": "696f9c4bb7919bf78623d892"
+  },
+  "img": "https://cdn.site/demo/shampoo/cover.webp",
+  "opt_price": null,
+  "optionKey": "",
+  "optionValues": [],
+  "price": 3450,
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:22.323Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d8a2"
+  },
+  "sku": "COLLAGEN-C-30",
+  "__v": 1,
+  "available": true,
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.388Z"
+  },
+  "groupId": {
+    "$oid": "696f9c4bb7919bf78623d891"
+  },
+  "img": "https://cdn.site/demo/collagen/30.webp",
+  "opt_price": 1490,
+  "optionKey": "30",
+  "optionValues": [
+    30
+  ],
+  "price": 1341,
+  "updatedAt": {
+    "$date": "2026-01-28T14:01:23.876Z"
+  },
+  "optionMap": {
+    "A1": 30
+  },
+  "stocks": []
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d8a4"
+  },
+  "sku": "HAIR-GROWTH-90",
+  "__v": 0,
+  "available": true,
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.456Z"
+  },
+  "groupId": {
+    "$oid": "696f9c4bb7919bf78623d890"
+  },
+  "img": "https://cdn.site/demo/hair/90.webp",
+  "opt_price": null,
+  "optionKey": "",
+  "optionValues": [],
+  "price": 2100,
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:22.456Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d8a6"
+  },
+  "sku": "IMMUNE-SHIELD-60",
+  "__v": 0,
+  "available": true,
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.520Z"
+  },
+  "groupId": {
+    "$oid": "696f9c4bb7919bf78623d88f"
+  },
+  "img": "https://cdn.site/demo/immune/60.webp",
+  "opt_price": null,
+  "optionKey": "",
+  "optionValues": [],
+  "price": 698,
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:22.520Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "696f9aeab7919bf78623d860"
+  },
+  "sku": "VITC-ORANGE-30",
+  "__v": 1,
+  "available": true,
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.579Z"
+  },
+  "groupId": {
+    "$oid": "696f9c4bb7919bf78623d88d"
+  },
+  "img": "https://cdn.site/demo/vitc/orange-30.webp",
+  "opt_price": null,
+  "optionKey": "orange|30",
+  "optionValues": [
+    "orange",
+    30
+  ],
+  "price": 490,
+  "updatedAt": {
+    "$date": "2026-01-28T14:01:23.946Z"
+  },
+  "optionMap": {
+    "A1": "orange",
+    "A2": 30
+  },
+  "stocks": []
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d8b1"
+  },
+  "sku": "VITC-ORANGE-60",
+  "__v": 1,
+  "available": true,
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.638Z"
+  },
+  "groupId": {
+    "$oid": "696f9c4bb7919bf78623d88d"
+  },
+  "img": "https://cdn.site/demo/vitc/orange-60.webp",
+  "opt_price": null,
+  "optionKey": "orange|60",
+  "optionValues": [
+    "orange",
+    60
+  ],
+  "price": 790,
+  "updatedAt": {
+    "$date": "2026-01-28T14:01:24.006Z"
+  },
+  "optionMap": {
+    "A1": "orange",
+    "A2": 60
+  },
+  "stocks": []
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d8b2"
+  },
+  "sku": "VITC-BERRY-30",
+  "__v": 1,
+  "available": true,
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.697Z"
+  },
+  "groupId": {
+    "$oid": "696f9c4bb7919bf78623d88d"
+  },
+  "img": "https://cdn.site/demo/vitc/berry-30.webp",
+  "opt_price": null,
+  "optionKey": "berry|30",
+  "optionValues": [
+    "berry",
+    30
+  ],
+  "price": 520,
+  "updatedAt": {
+    "$date": "2026-01-28T14:01:24.067Z"
+  },
+  "optionMap": {
+    "A1": "berry",
+    "A2": 30
+  },
+  "stocks": []
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d8b3"
+  },
+  "sku": "VITC-BERRY-60",
+  "__v": 1,
+  "available": true,
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.756Z"
+  },
+  "groupId": {
+    "$oid": "696f9c4bb7919bf78623d88d"
+  },
+  "img": "https://cdn.site/demo/vitc/berry-60.webp",
+  "opt_price": null,
+  "optionKey": "berry|60",
+  "optionValues": [
+    "berry",
+    60
+  ],
+  "price": 820,
+  "updatedAt": {
+    "$date": "2026-01-28T14:01:24.129Z"
+  },
+  "optionMap": {
+    "A1": "berry",
+    "A2": 60
+  },
+  "stocks": []
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d8a8"
+  },
+  "sku": "CANDLE-MINIMAL-BLACK",
+  "__v": 1,
+  "available": true,
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.814Z"
+  },
+  "groupId": {
+    "$oid": "696f9c4bb7919bf78623d889"
+  },
+  "img": "https://cdn.site/demo/candle/black.webp",
+  "opt_price": null,
+  "optionKey": "black",
+  "optionValues": [
+    "black"
+  ],
+  "price": 280,
+  "updatedAt": {
+    "$date": "2026-01-28T14:01:24.188Z"
+  },
+  "optionMap": {
+    "A1": "black"
+  },
+  "stocks": []
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d8aa"
+  },
+  "sku": "CANDLE-MINIMAL-WHITE",
+  "__v": 1,
+  "available": true,
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.872Z"
+  },
+  "groupId": {
+    "$oid": "696f9c4bb7919bf78623d889"
+  },
+  "img": "https://cdn.site/demo/candle/white.webp",
+  "opt_price": null,
+  "optionKey": "white",
+  "optionValues": [
+    "white"
+  ],
+  "price": 260,
+  "updatedAt": {
+    "$date": "2026-01-28T14:01:24.249Z"
+  },
+  "optionMap": {
+    "A1": "white"
+  },
+  "stocks": []
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d8a9"
+  },
+  "sku": "CANDLE-MINIMAL-BEIGE",
+  "__v": 1,
+  "available": true,
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.930Z"
+  },
+  "groupId": {
+    "$oid": "696f9c4bb7919bf78623d889"
+  },
+  "img": "https://cdn.site/demo/candle/beige.webp",
+  "opt_price": null,
+  "optionKey": "beige",
+  "optionValues": [
+    "beige"
+  ],
+  "price": 270,
+  "updatedAt": {
+    "$date": "2026-01-28T14:01:24.309Z"
+  },
+  "optionMap": {
+    "A1": "beige"
+  },
+  "stocks": []
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d8ab"
+  },
+  "sku": "SOAP-NEUTRAL-1",
+  "__v": 0,
+  "available": true,
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.988Z"
+  },
+  "groupId": {
+    "$oid": "696f9c4bb7919bf78623d887"
+  },
+  "img": "https://cdn.site/demo/soap/cover.webp",
+  "opt_price": null,
+  "optionKey": "",
+  "optionValues": [],
+  "price": 190,
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:22.988Z"
+  }
+}]

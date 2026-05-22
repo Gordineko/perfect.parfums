@@ -1,0 +1,50 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+.page {
+  padding: 0 0 80px;
+
+  @include down($bp-tablet) {
+    padding: 0 0 48px;
+  }
+}
+
+.pageContainer {
+  @include mobile-only {
+    padding-inline: 24px;
+  }
+}
+
+.empty {
+  padding: 24px 0;
+  color: #6b7280;
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+
+  @include down($bp-tablet) {
+    font-size: 12px;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: $space-md;
+
+  @include up($bp-tablet) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  @include up($bp-desktop) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: $space-lg;
+  }
+
+  &:global(.product-cards-context) :global(.product-item) {
+    @include mobile-only {
+      max-width: none;
+      justify-self: stretch;
+      margin-inline: 0;
+    }
+  }
+}

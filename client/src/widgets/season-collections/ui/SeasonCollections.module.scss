@@ -1,0 +1,258 @@
+.root {
+  padding-top: var(--space-section-y);
+
+  @media (max-width: 767.98px) {
+    overflow-x: clip;
+  }
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--space-6);
+
+  @media (max-width: 767.98px) {
+    margin-bottom: var(--space-4);
+  }
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+
+  @media (max-width: 767.98px) {
+    gap: var(--space-2);
+  }
+}
+
+.eyebrow {
+  margin: 0;
+  color: #9ca3af;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+
+  @media (max-width: 767.98px) {
+    font-size: 8px;
+  }
+}
+
+.title {
+  margin: 0;
+
+  @media (max-width: 1249.98px) and (min-width: 768px) {
+    font-size: 36px;
+  }
+
+  @media (max-width: 767.98px) {
+    font-size: 28px;
+  }
+}
+
+.divider {
+  width: 100%;
+  border-bottom: 1px solid color-mix(in srgb, #d7d7d5 50%, transparent);
+  margin-bottom: var(--space-10);
+
+  @media (max-width: 1249.98px) and (min-width: 768px) {
+    margin-bottom: var(--space-8);
+  }
+
+  @media (max-width: 767.98px) {
+    margin-bottom: var(--space-4);
+  }
+}
+
+.sliderNav {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-6);
+
+  @media (max-width: 767.98px) {
+    display: none;
+  }
+}
+
+.control {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-regular);
+  line-height: 15px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text) 50%, transparent);
+  cursor: pointer;
+  transition: color 0.15s ease;
+
+  &:not(:disabled) {
+    color: var(--color-text);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.controlArrow {
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: inherit;
+}
+
+.swiper {
+  width: 100%;
+  overflow: hidden;
+
+  :global(.swiper-slide) {
+    height: auto;
+  }
+
+  @media (max-width: 767.98px) {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding-left: var(--container-pad-mobile);
+    box-sizing: border-box;
+  }
+}
+
+.card {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 660px;
+  overflow: hidden;
+  background: var(--color-surface-soft);
+  color: var(--color-white);
+
+  @media (max-width: 1249.98px) and (min-width: 768px) {
+    height: 520px;
+  }
+
+  @media (max-width: 767.98px) {
+    height: 420px;
+  }
+
+  &:hover .cardCta::after,
+  &:focus-visible .cardCta::after {
+    transform: scaleX(1);
+  }
+}
+
+.cardMedia {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.cardImg {
+  object-fit: cover;
+  object-position: top center;
+}
+
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: var(--space-12);
+  background: color-mix(in srgb, var(--color-text) 20%, transparent);
+  pointer-events: none;
+
+  @media (max-width: 1249.98px) and (min-width: 768px) {
+    padding: var(--space-6);
+  }
+
+  @media (max-width: 767.98px) {
+    padding: var(--space-4);
+  }
+}
+
+.cardLabel {
+  margin: 0 0 var(--space-3);
+  color: #fafafa;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+
+  @media (max-width: 1249.98px) {
+    font-size: 8px;
+  }
+}
+
+.cardTitle {
+  margin: 0 0 var(--space-6);
+  color: var(--color-white);
+  font-family: var(--font-title);
+  font-size: 36px;
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  letter-spacing: 1px;
+
+  @media (max-width: 1249.98px) and (min-width: 768px) {
+    font-size: 28px;
+    margin-bottom: var(--space-4);
+  }
+
+  @media (max-width: 767.98px) {
+    font-size: 24px;
+    margin-bottom: var(--space-3);
+  }
+}
+
+.cardCta {
+  position: relative;
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--color-white);
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.45s ease;
+  }
+
+  @media (max-width: 1249.98px) {
+    font-size: 8px;
+  }
+
+  @media (max-width: 767.98px) {
+    letter-spacing: 2px;
+  }
+}

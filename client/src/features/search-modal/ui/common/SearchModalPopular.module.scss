@@ -1,0 +1,76 @@
+@use "../../../../shared/ui/styles/variables.scss" as *;
+
+@mixin rowWrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  @include down($bp-tablet) {
+    gap: 12px;
+  }
+}
+
+.popular {
+  @include rowWrap;
+
+  .popularLabel {
+    color: rgba(156, 163, 175, 0.5);
+    font-family: var(--font-inter), Inter, sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: normal;
+
+    @include down($bp-tablet) {
+      font-size: 20px;
+    }
+  }
+
+  .tags {
+    @include rowWrap;
+
+    .tag {
+      padding: 8px 16px;
+      border-radius: 0;
+      cursor: pointer;
+      border: none;
+      transition:
+        opacity 0.2s ease,
+        filter 0.2s ease;
+
+      &:nth-child(odd) {
+        background: var(--Dark, #1a1a1a);
+      }
+
+      &:nth-child(even) {
+        background: rgba(156, 163, 175, 0.5);
+      }
+
+      &:hover {
+        opacity: 0.92;
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      &.tagActive {
+        outline: 2px solid rgba(26, 26, 26, 0.45);
+        outline-offset: 2px;
+      }
+
+      .tagText {
+        margin: 0;
+        color: var(--White, #fff);
+        font-family: var(--font-inter), Inter, sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: normal;
+
+        @include down($bp-tablet) {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

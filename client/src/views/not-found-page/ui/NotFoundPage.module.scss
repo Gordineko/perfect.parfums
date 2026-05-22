@@ -1,0 +1,198 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+$bg: #f0efed;
+$title-color: #5d4a3a;
+
+.shell {
+  min-height: calc(100vh - var(--header-offset, 96px));
+  background: $bg;
+}
+
+.page {
+  padding-bottom: clamp(48px, 8vw, 120px);
+
+  .container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding-inline: var(--container-pad-desktop);
+
+    @include tablet-only {
+      padding-inline: var(--container-pad-tablet);
+    }
+
+    @include mobile-only {
+      padding-inline: var(--container-pad-mobile);
+    }
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: clamp(40px, 6vw, 80px) 0 clamp(32px, 5vw, 64px);
+    text-align: center;
+  }
+
+  .code {
+    margin: 0 0 clamp(24px, 4vw, 40px);
+    color: var(--Dark, #1a1a1a);
+    font-family: var(--font-title);
+    font-size: clamp(120px, 18vw, 260px);
+    font-style: italic;
+    font-weight: var(--fw-regular);
+    letter-spacing: 2px;
+
+    @include mobile-only {
+      margin-bottom: 32px;
+      font-size: 140px;
+    }
+
+    @include up($bp-tablet) {
+      margin-bottom: 40px;
+    }
+  }
+
+  .eyebrow {
+    margin: 0 0 clamp(12px, 2vw, 16px);
+    color: var(--Gray, #9ca3af);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: var(--fw-light);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    @include down($bp-desktop) {
+      margin-bottom: 16px;
+      font-size: 12px;
+    }
+
+    @include mobile-only {
+      letter-spacing: 2px;
+    }
+  }
+
+  .title {
+    margin: 0 0 clamp(16px, 2.5vw, 24px);
+    color: $title-color;
+    font-family: var(--font-title);
+    font-size: clamp(28px, 4.5vw, 48px);
+    font-style: italic;
+    font-weight: var(--fw-regular);
+
+    @include down($bp-desktop) {
+      margin-bottom: 16px;
+    }
+
+    @include mobile-only {
+      font-size: 32px;
+    }
+
+    @include tablet-only {
+      font-size: 40px;
+    }
+
+    @include desktop-only {
+      max-width: 403px;
+      margin-bottom: 24px;
+    }
+  }
+
+  .desc {
+    margin: 0 0 clamp(24px, 4vw, 48px);
+    color: var(--Gray, #9ca3af);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 300;
+    letter-spacing: 3px;
+
+    @include down($bp-desktop) {
+      font-size: 12px;
+    }
+
+    @include mobile-only {
+      margin-bottom: 32px;
+      letter-spacing: 2px;
+    }
+
+    @include tablet-only {
+      margin-bottom: 40px;
+    }
+
+    @include desktop-only {
+      max-width: 489px;
+      margin-bottom: 48px;
+    }
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+
+    @include up($bp-tablet) {
+      gap: 16px;
+    }
+  }
+
+  .ctaPrimary,
+  .ctaSecondary {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 32px;
+    border: 1px solid transparent;
+    font-family: var(--font-body);
+    font-size: 8px;
+    font-weight: var(--fw-medium);
+    letter-spacing: 2px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease;
+
+    @include up($bp-tablet) {
+      padding: 16px 40px;
+      font-size: 10px;
+      letter-spacing: 3px;
+    }
+
+    @include desktop-only {
+      padding: 24px 64px;
+      font-size: 12px;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-text);
+      outline-offset: 3px;
+    }
+  }
+
+  .ctaPrimary {
+    background: var(--Dark, #1a1a1a);
+    color: var(--color-white);
+
+    &:hover {
+      background: rgba(26, 26, 26, 0.8);
+    }
+  }
+
+  .ctaSecondary {
+    border-color: var(--Dark, #1a1a1a);
+    background: transparent;
+    color: var(--Dark, #1a1a1a);
+
+    &:hover {
+      background: var(--Dark, #1a1a1a);
+      color: var(--color-white);
+    }
+  }
+}

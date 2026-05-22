@@ -1,0 +1,52 @@
+.lang-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: transparent;
+  cursor: default;
+}
+
+.lang {
+  position: absolute;
+  top: calc(100% + 32px);
+  right: 0;
+  z-index: 50;
+
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  padding: 16px;
+
+  background: $white;
+  border: 2px solid $accent;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+
+  &__item {
+    svg {
+      max-width: max-content;
+    }
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    &:hover,
+    &:focus,
+    &:active {
+      .lang__text {
+        color: $text-gray-dark;
+      }
+    }
+  }
+
+  &__text {
+    color: $text-gray;
+    font-family: "Plus Jakarta Sans";
+    font-size: 17px;
+    font-weight: 600;
+  }
+}

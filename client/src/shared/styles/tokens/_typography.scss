@@ -1,0 +1,88 @@
+:root {
+  --font-hero: Georgia, "Times New Roman", Times, serif;
+  --font-title: Georgia, "Times New Roman", Times, serif;
+  --font-body: var(--font-inter), system-ui, -apple-system, "Segoe UI",
+    Roboto, Arial, sans-serif;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-light: 300;
+
+  --fs-hero-title: 85px;
+  --fs-section-title: 44px;
+  --fs-page-title: 48px;
+  --fs-body: 14px;
+  --fs-label: 10px;
+  --fs-button: 16px;
+
+  --tracking-label: 2px;
+}
+
+.t-hero-title {
+  font-family: var(--font-hero);
+  font-size: var(--fs-hero-title);
+  font-weight: var(--fw-regular);
+  color: var(--color-text);
+  text-align: center;
+  line-height: 1.05;
+}
+
+.t-section-title {
+  font-family: var(--font-title);
+  font-size: var(--fs-section-title);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  color: var(--color-text);
+  line-height: 1.15;
+}
+
+.t-page-title {
+  margin: 0;
+  color: var(--color-dark);
+  font-family: var(--font-title);
+  font-size: var(--fs-page-title);
+  font-style: italic;
+  font-weight: var(--fw-regular);
+  line-height: normal;
+  letter-spacing: var(--tracking-label);
+  word-break: break-word;
+}
+
+@media (max-width: 1249.98px) {
+  .t-page-title {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .t-page-title {
+    font-size: 20px;
+  }
+}
+
+.t-body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-light);
+  color: var(--color-text-muted);
+  line-height: 1.6;
+}
+
+.t-label {
+  font-family: var(--font-body);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-medium);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-white);
+  line-height: 1.2;
+}
+
+.t-button {
+  font-family: var(--font-body);
+  font-size: var(--fs-button);
+  font-weight: var(--fw-regular);
+  color: var(--color-button-text);
+  line-height: 1.2;
+}
+

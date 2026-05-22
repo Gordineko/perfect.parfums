@@ -1,0 +1,54 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+.root {
+  position: fixed;
+  z-index: 12000;
+  top: calc(var(--header-offset, 96px) + 12px);
+  right: max(16px, env(safe-area-inset-right, 0px));
+  box-sizing: border-box;
+  width: max-content;
+  max-width: min(400px, calc(100vw - 32px));
+  padding: 16px;
+  border: 1px solid var(--Dark, #1a1a1a);
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font-inter), Inter, sans-serif;
+  transition: opacity 0.35s ease;
+
+  @include mobile-only {
+    max-width: calc(100vw - 32px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--Dark, #1a1a1a);
+    outline-offset: 2px;
+  }
+
+  .message {
+    margin: 0;
+    color: var(--Gray, #9ca3af);
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .cta {
+    display: block;
+    margin-top: 8px;
+    color: var(--Dark, #1a1a1a);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  &:hover .cta,
+  &:focus-visible .cta {
+    text-decoration: underline;
+  }
+}
+
+.rootExiting {
+  opacity: 0;
+  pointer-events: none;
+}

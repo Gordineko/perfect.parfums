@@ -1,0 +1,1498 @@
+openapi: 3.0.3
+info:
+  title: IAM API
+  version: 1.0.0
+  description: |
+    API для авторизации, профиля пользователя, wishlist, cart, checkout,
+    Monobank, Monobank Installments и заказов.
+
+servers:
+  - url: /v1/iam
+
+tags:
+  - name: Auth
+  - name: User
+  - name: Wishlist
+  - name: Cart
+  - name: Orders
+  - name: Checkout
+  - name: Payments
+  - name: Webhooks
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    LocalizedText:
+      type: object
+      additionalProperties: true
+      example:
+        ua: "Назва товару"
+        en: "Название товара"
+
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+
+    SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+      required:
+        - success
+
+    UserShort:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "67f2c5d1b9e12a0012345678"
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+          nullable: true
+        lastName:
+          type: string
+          nullable: true
+        middleName:
+          type: string
+          nullable: true
+        birthDate:
+          type: string
+          format: date-time
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        status:
+          type: string
+          enum: [active, blocked, pending]
+        bonusBalance:
+          type: number
+        referralBalance:
+          type: number
+        referralCode:
+          type: string
+          nullable: true
+        invitedBy:
+          type: string
+          nullable: true
+        deliveryProvince:
+          type: string
+          nullable: true
+        deliveryCity:
+          type: string
+          nullable: true
+        deliveryPostOffice:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+
+    AuthResponse:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserShort'
+        token:
+          type: string
+        expiresIn:
+          type: integer
+      required:
+        - user
+        - token
+        - expiresIn
+
+    AuthMeResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        email:
+          type: string
+          format: email
+        firstName:
+          type: string
+          nullable: true
+        lastName:
+          type: string
+          nullable: true
+        middleName:
+          type: string
+          nullable: true
+        birthDate:
+          type: string
+          format: date-time
+          nullable: true
+        phone:
+          type: string
+          nullable: true
+        deliveryProvince:
+          type: string
+          nullable: true
+        deliveryCity:
+          type: string
+          nullable: true
+        deliveryPostOffice:
+          type: string
+          nullable: true
+        status:
+          type: string
+        bonusBalance:
+          type: number
+        referralBalance:
+          type: number
+        referralCode:
+          type: string
+          nullable: true
+        invitedBy:
+          type: string
+          nullable: true
+        cart:
+          type: array
+          items:
+            $ref: '#/components/schemas/CartItemRaw'
+        wishlist:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductGroup'
+        orders:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserOrderRef'
+        createdAt:
+          type: string
+          format: date-time
+
+    UserOrderRef:
+      type: object
+      properties:
+        orderId:
+          type: string
+        orderNumber:
+          type: number
+        createdAt:
+          type: string
+          format: date-time
+        total:
+          type: number
+        status:
+          type: string
+
+    ProductGroup:
+      type: object
+      additionalProperties: true
+      description: |
+        ProductGroup отдается как есть из Mongo. Структура может быть шире,
+        чем описано здесь.
+      properties:
+        _id:
+          type: string
+        title:
+          $ref: '#/components/schemas/LocalizedText'
+        name:
+          $ref: '#/components/schemas/LocalizedText'
+        slug:
+          type: string
+        reviews:
+          type: array
+          items:
+            type: object
+
+    Offer:
+      type: object
+      additionalProperties: true
+      description: |
+        Offer отдается как есть из Mongo. Ниже указаны основные ожидаемые поля.
+      properties:
+        _id:
+          type: string
+        groupId:
+          type: string
+        sku:
+          type: string
+        integrationSku:
+          type: string
+        price:
+          type: number
+        effectivePrice:
+          type: number
+        discount:
+          type: number
+        quantity:
+          type: number
+        name:
+          $ref: '#/components/schemas/LocalizedText'
+
+    CartItemRaw:
+      type: object
+      properties:
+        offerId:
+          type: string
+        qty:
+          type: integer
+        priceAtAdd:
+          type: number
+        groupId:
+          type: string
+          nullable: true
+        sku:
+          type: string
+          nullable: true
+
+    CartItemResponse:
+      type: object
+      properties:
+        offerId:
+          type: string
+        qty:
+          type: integer
+        priceAtAdd:
+          type: number
+        offer:
+          allOf:
+            - $ref: '#/components/schemas/Offer'
+          nullable: true
+        group:
+          allOf:
+            - $ref: '#/components/schemas/ProductGroup'
+          nullable: true
+
+    OrderItem:
+      type: object
+      properties:
+        offerId:
+          type: string
+        groupId:
+          type: string
+          nullable: true
+        sku:
+          type: string
+          nullable: true
+        optionKey:
+          type: string
+          nullable: true
+        optionValues:
+          type: array
+          items: {}
+        titleSnapshot:
+          nullable: true
+        imgSnapshot:
+          type: string
+          nullable: true
+        qty:
+          type: integer
+        originalPricePerUnit:
+          type: number
+          description: Базовая цена товара на момент оформления, до применения скидки.
+        discountType:
+          type: string
+          enum:
+            - none
+            - percent
+            - amount
+        discount:
+          type: number
+          description: Процентная скидка, если применялась именно percent-модель.
+        discountUAH:
+          type: number
+          description: Абсолютная скидка за единицу товара в валюте заказа.
+        discountAmountPerUnit:
+          type: number
+          description: Фактически применённая скидка за единицу товара.
+        discountSubtotal:
+          type: number
+          description: Сумма скидки по позиции с учётом qty.
+        pricePerUnit:
+          type: number
+          description: Итоговая цена за единицу после применения скидки.
+        subtotal:
+          type: number
+          description: Итоговая сумма позиции после применения скидки.
+
+    Payment:
+      type: object
+      properties:
+        payment_method_id:
+          type: integer
+        payment_method:
+          type: string
+        amount:
+          type: number
+        description:
+          type: string
+          nullable: true
+        status:
+          type: string
+        invoiceId:
+          type: string
+          nullable: true
+        pageUrl:
+          type: string
+          nullable: true
+        monoPartsOrderId:
+          type: string
+          nullable: true
+        partsCount:
+          type: integer
+          nullable: true
+        sitniksOrderId:
+          type: integer
+          nullable: true
+        monoPartsConfirmed:
+          type: boolean
+        monoPartsConfirmedAt:
+          type: string
+          format: date-time
+          nullable: true
+        monoPartsConfirmResponse:
+          nullable: true
+
+    SitniksInfo:
+      type: object
+      properties:
+        orderId:
+          type: integer
+          nullable: true
+        statusId:
+          type: integer
+          nullable: true
+        statusCode:
+          type: string
+          nullable: true
+        statusTitle:
+          type: string
+          nullable: true
+        lastSyncAt:
+          type: string
+          format: date-time
+          nullable: true
+
+    Order:
+      type: object
+      properties:
+        _id:
+          type: string
+        orderNumber:
+          type: integer
+        order_number:
+          type: string
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+        userId:
+          type: string
+          nullable: true
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        subtotal:
+          type: number
+        usedBonusBalance:
+          type: number
+        usedReferralBalance:
+          type: number
+        totalToPay:
+          type: number
+        finalPrice:
+          type: number
+          nullable: true
+        currency:
+          type: string
+          example: UAH
+        lastName:
+          type: string
+        firstName:
+          type: string
+        middleName:
+          type: string
+          nullable: true
+        customerPhone:
+          type: string
+        customerEmail:
+          type: string
+          format: email
+        deliveryProvince:
+          type: string
+        deliveryCity:
+          type: string
+        deliveryPostOffice:
+          type: string
+        promoCode:
+          type: string
+        status:
+          type: string
+          enum:
+            - pending_payment
+            - paid
+            - processing
+            - shipped
+            - delivered
+            - cancelled
+            - installment_waiting_store_confirm
+        payment:
+          type: string
+        installmentMonths:
+          type: integer
+        sitniks:
+          $ref: '#/components/schemas/SitniksInfo'
+        createdAt:
+          type: string
+          format: date-time
+
+    CheckoutResponse:
+      type: object
+      properties:
+        orderId:
+          type: string
+        orderNumber:
+          type: integer
+        status:
+          type: string
+        subtotal:
+          type: number
+        usedBonusBalance:
+          type: number
+        usedReferralBalance:
+          type: number
+        totalToPay:
+          type: number
+        currency:
+          type: string
+        cashbackEarned:
+          type: number
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+        delivery:
+          type: object
+          properties:
+            lastName:
+              type: string
+            firstName:
+              type: string
+            middleName:
+              type: string
+              nullable: true
+            customerPhone:
+              type: string
+            customerEmail:
+              type: string
+              format: email
+            deliveryProvince:
+              type: string
+            deliveryCity:
+              type: string
+            deliveryPostOffice:
+              type: string
+        payment:
+          type: string
+        installmentMonths:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+
+    RegisterRequest:
+      type: object
+      required:
+        - email
+        - password
+        - firstName
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+        firstName:
+          type: string
+        ref:
+          type: string
+          nullable: true
+
+    LoginRequest:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+
+    ForgotPasswordRequest:
+      type: object
+      required:
+        - email
+      properties:
+        email:
+          type: string
+          format: email
+
+    ResetPasswordRequest:
+      type: object
+      required:
+        - token
+        - password
+      properties:
+        token:
+          type: string
+        password:
+          type: string
+          format: password
+
+    UpdateAuthMeRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        middleName:
+          type: string
+          nullable: true
+        birthDate:
+          type: string
+          format: date
+          nullable: true
+        phone:
+          type: string
+        deliveryProvince:
+          type: string
+        deliveryCity:
+          type: string
+        deliveryPostOffice:
+          type: string
+
+    UpdateUserRequest:
+      type: object
+      properties:
+        firstName:
+          type: string
+        lastName:
+          type: string
+        phone:
+          type: string
+
+    AddWishlistRequest:
+      type: object
+      required:
+        - groupId
+      properties:
+        groupId:
+          type: string
+
+    AddCartRequest:
+      type: object
+      required:
+        - offerId
+      properties:
+        offerId:
+          type: string
+        qty:
+          type: integer
+          default: 1
+
+    PatchCartRequest:
+      type: object
+      required:
+        - offerId
+        - qty
+      properties:
+        offerId:
+          type: string
+        qty:
+          type: integer
+
+    CreateMonoPaymentRequest:
+      type: object
+      required:
+        - totalCost
+        - orderNumber
+      properties:
+        totalCost:
+          type: number
+        orderNumber:
+          oneOf:
+            - type: string
+            - type: integer
+        description:
+          type: string
+          nullable: true
+
+    CreateMonoInstallmentItem:
+      type: object
+      properties:
+        title:
+          nullable: true
+        name:
+          nullable: true
+        quantity:
+          type: integer
+          nullable: true
+        qty:
+          type: integer
+          nullable: true
+        price:
+          type: number
+          nullable: true
+        sum:
+          type: number
+          nullable: true
+
+    CreateMonoInstallmentRequest:
+      type: object
+      required:
+        - totalCost
+        - orderNumber
+        - installmentMonths
+        - clientPhone
+      properties:
+        totalCost:
+          type: number
+        orderNumber:
+          oneOf:
+            - type: string
+            - type: integer
+        installmentMonths:
+          type: integer
+        clientPhone:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreateMonoInstallmentItem'
+
+    CheckoutRequest:
+      type: object
+      required:
+        - lastName
+        - firstName
+        - customerPhone
+        - customerEmail
+        - deliveryProvince
+        - deliveryCity
+        - deliveryPostOffice
+        - payment
+      properties:
+        useBonusBalance:
+          type: number
+          default: 0
+        useReferralBalance:
+          type: number
+          default: 0
+        lastName:
+          type: string
+        firstName:
+          type: string
+        middleName:
+          type: string
+          nullable: true
+        customerPhone:
+          type: string
+        customerEmail:
+          type: string
+          format: email
+        deliveryProvince:
+          type: string
+        deliveryCity:
+          type: string
+        deliveryPostOffice:
+          type: string
+        promoCode:
+          type: string
+          nullable: true
+        payment:
+          type: string
+          enum: [cod, iban, mono, installment]
+        installmentMonths:
+          type: integer
+          nullable: true
+
+    GuestCheckoutItem:
+      type: object
+      required:
+        - offerId
+        - qty
+      properties:
+        offerId:
+          type: string
+        qty:
+          type: integer
+
+    GuestCheckoutRequest:
+      type: object
+      required:
+        - items
+        - lastName
+        - firstName
+        - customerPhone
+        - customerEmail
+        - deliveryProvince
+        - deliveryCity
+        - deliveryPostOffice
+        - payment
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/GuestCheckoutItem'
+        lastName:
+          type: string
+        firstName:
+          type: string
+        middleName:
+          type: string
+          nullable: true
+        customerPhone:
+          type: string
+        customerEmail:
+          type: string
+          format: email
+        deliveryProvince:
+          type: string
+        deliveryCity:
+          type: string
+        deliveryPostOffice:
+          type: string
+        promoCode:
+          type: string
+          nullable: true
+        payment:
+          type: string
+          enum: [cod, iban, mono, installment]
+        installmentMonths:
+          type: integer
+          nullable: true
+
+    MonoInvoiceResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        invoiceId:
+          type: string
+        pageUrl:
+          type: string
+
+    SyncInstallmentsConfirmResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        processed:
+          type: integer
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              order_number:
+                type: string
+              sitniksOrderId:
+                type: integer
+              sitniksStatus:
+                type: object
+                properties:
+                  statusId:
+                    type: integer
+                  statusCode:
+                    type: string
+              monoPartsOrderId:
+                type: string
+              monoConfirm:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  status:
+                    type: integer
+
+paths:
+  /auth/register:
+    post:
+      tags: [Auth]
+      summary: Регистрация пользователя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Пользователь зарегистрирован
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '409':
+          description: Пользователь уже существует
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/login:
+    post:
+      tags: [Auth]
+      summary: Логин пользователя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Успешный вход
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'
+        '400':
+          description: Нет email или password
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Неверные данные
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Пользователь не активен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/me:
+    get:
+      tags: [Auth]
+      summary: Получить текущего пользователя
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Данные текущего пользователя
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthMeResponse'
+        '401':
+          description: Нет токена или он невалиден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    patch:
+      tags: [Auth]
+      summary: Обновить профиль текущего пользователя
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateAuthMeRequest'
+      responses:
+        '200':
+          description: Пользователь обновлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserShort'
+        '401':
+          description: Нет токена или он невалиден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/forgot-password:
+    post:
+      tags: [Auth]
+      summary: Запрос на сброс пароля
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ForgotPasswordRequest'
+      responses:
+        '200':
+          description: Ответ без раскрытия существования email
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Email обязателен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/reset-password:
+    post:
+      tags: [Auth]
+      summary: Сброс пароля по токену
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResetPasswordRequest'
+      responses:
+        '200':
+          description: Пароль обновлен
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Невалидный запрос или токен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Пользователь не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /auth/logout:
+    post:
+      tags: [Auth]
+      summary: Logout
+      responses:
+        '200':
+          description: Успешный logout
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SuccessResponse'
+
+  /user:
+    get:
+      tags: [User]
+      summary: Получить профиль пользователя
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Профиль пользователя
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserShort'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    patch:
+      tags: [User]
+      summary: Обновить профиль пользователя
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateUserRequest'
+      responses:
+        '200':
+          description: Профиль обновлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserShort'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /user/orders:
+    get:
+      tags: [Orders]
+      summary: Получить список заказов пользователя
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Список заказов
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /user/wishlist:
+    get:
+      tags: [Wishlist]
+      summary: Получить wishlist
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Wishlist пользователя
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductGroup'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    post:
+      tags: [Wishlist]
+      summary: Добавить ProductGroup в wishlist
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddWishlistRequest'
+      responses:
+        '200':
+          description: Обновленный wishlist
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductGroup'
+        '400':
+          description: groupId is required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /user/wishlist/{groupId}:
+    delete:
+      tags: [Wishlist]
+      summary: Удалить ProductGroup из wishlist
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Обновленный wishlist
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductGroup'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /user/cart:
+    get:
+      tags: [Cart]
+      summary: Получить корзину
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Список позиций корзины
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CartItemResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    post:
+      tags: [Cart]
+      summary: Добавить offer в корзину
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCartRequest'
+      responses:
+        '200':
+          description: Обновленная корзина
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CartItemResponse'
+        '400':
+          description: offerId is required или offer не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    patch:
+      tags: [Cart]
+      summary: Изменить количество товара в корзине
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchCartRequest'
+      responses:
+        '200':
+          description: Обновленная корзина
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CartItemResponse'
+        '400':
+          description: Некорректные данные
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Item not found in cart
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /user/cart/{offerId}:
+    delete:
+      tags: [Cart]
+      summary: Удалить offer из корзины
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: offerId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Обновленная корзина
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CartItemResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /checkout:
+    post:
+      tags: [Checkout]
+      summary: Checkout для авторизованного пользователя
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutRequest'
+      responses:
+        '201':
+          description: Заказ создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResponse'
+        '400':
+          description: Cart is empty или другие ошибки валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /guest-checkout:
+    post:
+      tags: [Checkout]
+      summary: Checkout для гостя
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GuestCheckoutRequest'
+      responses:
+        '201':
+          description: Заказ создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutResponse'
+        '400':
+          description: Некорректные items или offer не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /create-mono-payment:
+    post:
+      tags: [Payments]
+      summary: Создать обычный Monobank invoice
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMonoPaymentRequest'
+      responses:
+        '200':
+          description: Invoice создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MonoInvoiceResponse'
+        '400':
+          description: Missing totalCost or orderNumber / invalid basket
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Заказ не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /webhook-mono:
+    post:
+      tags: [Webhooks]
+      summary: Webhook от Monobank invoice
+      description: |
+        Endpoint для callback обычной оплаты Monobank.
+        Структура входящего тела зависит от Monobank.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: OK / Ignored / Already processed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Missing reference/invoiceId
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Order not found
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /create-mono-installment:
+    post:
+      tags: [Payments]
+      summary: Создать заявку Monobank Оплата частинами
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMonoInstallmentRequest'
+      responses:
+        '200':
+          description: Заявка создана
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '400':
+          description: Невалидный телефон или данные
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Заказ не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /webhook-mono-installment:
+    post:
+      tags: [Webhooks]
+      summary: Webhook от Monobank Installments
+      description: |
+        Endpoint для callback по "Оплате частинами".
+        В коде используются поля order_id, status, sub_status, amount.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: OK / Ignored / Already processed
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: Missing order_id
+          content:
+            text/plain:
+              schema:
+                type: string
+        '404':
+          description: Order not found
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /sync-installments-confirm:
+    post:
+      tags: [Payments]
+      summary: Проверить статусы Sitniks и подтвердить выдачу товара в Monobank Installments
+      responses:
+        '200':
+          description: Результат синхронизации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SyncInstallmentsConfirmResponse'
+        '500':
+          description: Ошибка синхронизации
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                  message:
+                    type: string

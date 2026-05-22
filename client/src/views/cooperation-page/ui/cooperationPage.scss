@@ -1,0 +1,443 @@
+.cooperation-page-shell {
+  overflow-x: hidden;
+
+  .products-layout-wrapper::before {
+    display: none;
+  }
+}
+
+.cooperation-page {
+  padding: 0 0 80px;
+
+  @include down($bp-desktop) {
+    padding: 0;
+  }
+
+  @include down($bp-tablet) {
+    padding-bottom: 48px;
+  }
+}
+
+.cooperation-cards-strip {
+  position: relative;
+  z-index: 0;
+  width: 100vw;
+  max-width: 100%;
+  margin-top: 80px;
+  margin-left: calc(50% - 50vw);
+  overflow: hidden;
+
+  @include down($bp-desktop) {
+    margin-top: 56px;
+  }
+
+  @include down($bp-tablet) {
+    margin-top: 24px;
+  }
+
+  &::before {
+    content: "COOPERATION";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+
+    font-family: $font-montserrat;
+    font-size: 280px;
+    font-style: normal;
+    font-weight: $fw-bold;
+    line-height: normal;
+    letter-spacing: -10px;
+
+    color: $gray-999-05;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: $gray-999-05;
+
+    white-space: nowrap;
+    pointer-events: none;
+
+    @include down($bp-desktop) {
+      font-size: 160px;
+      letter-spacing: -6px;
+    }
+
+    @include down($bp-tablet) {
+      font-size: 72px;
+      letter-spacing: -3px;
+    }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+}
+
+.cooperation-requirements-cta-wrap {
+  position: relative;
+  z-index: 0;
+  width: 100vw;
+  max-width: 100%;
+  margin-left: calc(50% - 50vw);
+  overflow: hidden;
+
+  &::before {
+    content: "HIGH HEELS";
+    position: absolute;
+    left: 50%;
+    top: 56%;
+    z-index: 0;
+    transform: translate(-50%, -50%);
+
+    font-family: $font-tertiary;
+    font-weight: $fw-bold;
+    font-size: 330px;
+    font-style: normal;
+    letter-spacing: -10px;
+    line-height: normal;
+
+    color: $gray-999-05;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: $gray-999-05;
+
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  > .cooperation-requirements,
+  > .cooperation-cta {
+    position: relative;
+    z-index: 1;
+  }
+
+  @include down($bp-desktop) {
+    &::before {
+      font-size: 180px;
+      letter-spacing: -6px;
+    }
+  }
+
+  @include tablet-only {
+    &::before {
+      width: 100vw;
+      max-width: 100vw;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      font-size: 200px;
+      letter-spacing: -6px;
+    }
+  }
+
+  @include down($bp-tablet) {
+    &::before {
+      display: none;
+    }
+  }
+}
+
+.cooperation-hero {
+  @include down($bp-tablet) {
+    display: none;
+  }
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 40px 64px;
+
+    @include down($bp-desktop) {
+      gap: 32px 40px;
+    }
+
+    @include down($bp-tablet) {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 24px;
+    }
+  }
+
+  &__left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    flex: 0 1 auto;
+    min-width: min(100%, 520px);
+
+    @include down($bp-desktop) {
+      gap: 16px;
+    }
+  }
+
+  &__eyebrow {
+    margin: 0;
+    color: $accent;
+    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: $fw-bold;
+    line-height: normal;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+
+  &__title {
+    margin: 0;
+    color: $dark;
+    font-family: $font-montserrat;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: $fw-bold;
+    line-height: normal;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+
+    @include down($bp-desktop) {
+      font-size: 40px;
+      letter-spacing: 0.4px;
+    }
+  }
+
+  &__lead {
+    flex: 0 1 420px;
+    margin: 0;
+    max-width: min(100%, 480px);
+    color: $gray;
+    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: $fw-bold;
+    line-height: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-align: left;
+
+    @include down($bp-desktop) {
+      display: none;
+    }
+  }
+}
+
+.cooperation-cards {
+  margin-top: 0;
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 24px;
+
+    @include down($bp-desktop) {
+      flex-direction: column;
+      align-items: stretch;
+      width: 100%;
+    }
+
+    @include down($bp-tablet) {
+      gap: 16px;
+    }
+  }
+
+  &__card {
+    box-sizing: border-box;
+    flex: 0 1 auto;
+    width: fit-content;
+    max-width: min(100%, 611px);
+    min-width: 0;
+    padding: 40px;
+    border: 1px solid rgba(153, 153, 153, 0.1);
+
+    @include down($bp-desktop) {
+      padding: 24px;
+    }
+
+    @include down($bp-desktop) {
+      width: 100%;
+      max-width: 100%;
+    }
+
+    &--light {
+      position: relative;
+      overflow: hidden;
+      background: $white;
+
+      &:hover .cooperation-cards__decor--bag svg path {
+        fill: $gray-999;
+      }
+
+      .cooperation-cards__icon {
+        @include down($bp-desktop) {
+          width: 10px;
+          height: 10px;
+        }
+      }
+    }
+
+    &--dark {
+      position: relative;
+      overflow: hidden;
+      background: $dark;
+    }
+  }
+
+  &__card-body {
+    position: relative;
+    z-index: 1;
+  }
+
+  &__decor {
+    pointer-events: none;
+
+    @include down($bp-tablet) {
+      display: none;
+    }
+
+    &--bag {
+      position: absolute;
+      right: -40px;
+      bottom: -36px;
+      z-index: 0;
+      width: 183px;
+      height: 203.003px;
+
+      @include down($bp-desktop) {
+        width: 128.001px;
+        height: 141.996px;
+      }
+
+      svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        path {
+          fill: $gray-999-50;
+          transition: fill 0.25s ease;
+        }
+      }
+    }
+
+    &--instructor {
+      position: absolute;
+      right: -40px;
+      bottom: -36px;
+      z-index: 0;
+      width: 158.999px;
+      height: 203.002px;
+
+      @include down($bp-desktop) {
+        width: 112.001px;
+        height: 142px;
+      }
+
+      svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+
+        path {
+          fill: $gray-999-50;
+        }
+      }
+    }
+  }
+
+  &__title {
+    margin: 0 0 12px;
+    color: $dark;
+    font-family: $font-montserrat;
+    font-size: 36px;
+    font-style: normal;
+    font-weight: $fw-semibold;
+    line-height: normal;
+    letter-spacing: 1.44px;
+    text-transform: uppercase;
+
+    @include down($bp-desktop) {
+      margin: 0 0 16px;
+      font-size: 28px;
+      letter-spacing: 1.1px;
+      text-align: center;
+    }
+
+    @include down($bp-tablet) {
+      font-size: 20px;
+      letter-spacing: 0.8px;
+    }
+
+    .cooperation-cards__card--dark & {
+      color: $accent;
+    }
+  }
+
+  &__text {
+    margin: 0 0 16px;
+    color: $gray;
+    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: $fw-medium;
+    line-height: normal;
+    letter-spacing: 0.4px;
+
+    @include down($bp-desktop) {
+      font-size: 18px;
+    }
+
+    @include down($bp-tablet) {
+      margin: 0 0 14px;
+      font-size: 14px;
+    }
+
+    .cooperation-cards__card--dark & {
+      color: $white;
+    }
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: $fw-medium;
+    line-height: normal;
+
+    @include down($bp-desktop) {
+      font-size: 18px;
+    }
+
+    @include down($bp-tablet) {
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    .cooperation-cards__card--light & {
+      color: $dark;
+    }
+
+    .cooperation-cards__card--dark & {
+      color: $white;
+    }
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    color: $accent;
+  }
+}

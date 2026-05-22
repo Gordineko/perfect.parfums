@@ -1,0 +1,128 @@
+html,
+body {
+  height: 100%;
+}
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding-top: var(--header-offset, 96px);
+}
+
+/* Inner pages (not Home): neutral canvas. */
+.main--soft-bg {
+  background: #fff;
+}
+
+.main--home {
+  padding-top: var(--header-offset);
+}
+
+body {
+  background: $white;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--container-pad-desktop);
+  padding-right: var(--container-pad-desktop);
+
+  @media (max-width: 1249.98px) {
+    padding-left: var(--container-pad-tablet);
+    padding-right: var(--container-pad-tablet);
+  }
+
+  @media (max-width: 767.98px) {
+    padding-left: var(--container-pad-mobile);
+    padding-right: var(--container-pad-mobile);
+  }
+}
+
+.section-margin {
+  margin-bottom: var(--space-section-y);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.section-heading-kicker {
+  @include section-heading-kicker;
+}
+
+.section-heading-title {
+  @include section-heading-title;
+}
+
+.title {
+  margin-bottom: 24px;
+
+  @include down($bp-desktop) {
+    margin-bottom: 16px;
+  }
+
+  @include down($bp-tablet) {
+    margin-bottom: 12px;
+  }
+
+  @include section-title-decor;
+}
+
+.swiper-pagination-circle {
+  position: relative !important;
+  display: inline-flex !important;
+  align-items: center;
+  width: max-content !important;
+  transition: transform 0.3s ease;
+  transform: translateX(0);
+  bottom: 0 !important;
+
+  .swiper-pagination-bullet {
+    width: 21px !important;
+    height: 21px !important;
+    border-radius: 1000px !important;
+    border: 1px solid $accent;
+    background: $white !important;
+    margin-right: 12px !important;
+    opacity: 1 !important;
+
+    &:last-child {
+      margin-right: 0 !important;
+    }
+  }
+
+  .swiper-pagination-bullet-active {
+    background: linear-gradient(
+      105deg,
+      $accent 0%,
+      $accent 100%
+    ) !important;
+  }
+}
+
+.product-hero {
+  display: grid;
+  grid-template-columns: 611px 1fr;
+  gap: 64px;
+  align-items: start;
+
+  @include down($bp-desktop) {
+    grid-template-columns: 348px 1fr;
+    gap: 24px;
+  }
+
+  @include down($bp-tablet) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  > * {
+    min-width: 0;
+  }
+}

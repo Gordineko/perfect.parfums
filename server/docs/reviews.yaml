@@ -1,0 +1,619 @@
+paths:
+  /reviews:
+    get:
+      tags:
+        - Reviews Admin
+      summary: Получить список отзывов
+      description: |
+        Возвращает список отзывов для админки.
+
+        Поддерживает:
+        - поиск по name/text через q
+        - поиск по тексту комментария через comment
+        - поиск по конкретному отзыву через reviewId
+        - фильтр по status
+        - фильтр по productId
+        - фильтр по rating через minRating/maxRating
+        - фильтр по isVisibleProduct/isVisibleMainPage
+        - пагинацию
+        - кастомный select
+        - сортировку
+      parameters:
+        - name: reviewId
+          in: query
+          required: false
+          description: Точный поиск отзыва по ObjectId
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+        - name: comment
+          in: query
+          required: false
+          description: Поиск по тексту комментария
+          schema:
+            type: string
+        - name: q
+          in: query
+          required: false
+          description: Общий поиск по имени автора и тексту отзыва
+          schema:
+            type: string
+        - name: productId
+          in: query
+          required: false
+          description: Фильтр по товару ProductGroup
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+        - name: status
+          in: query
+          required: false
+          description: |
+            Статусы через запятую.
+            Пример: published,draft
+          schema:
+            type: string
+        - name: isVisibleProduct
+          in: query
+          required: false
+          description: Фильтр по видимости на странице товара
+          schema:
+            type: boolean
+        - name: isVisibleMainPage
+          in: query
+          required: false
+          description: Фильтр по видимости на главной странице
+          schema:
+            type: boolean
+        - name: minRating
+          in: query
+          required: false
+          schema:
+            type: number
+            minimum: 1
+            maximum: 5
+        - name: maxRating
+          in: query
+          required: false
+          schema:
+            type: number
+            minimum: 1
+            maximum: 5
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: sort
+          in: query
+          required: false
+          description: |
+            Mongo-sort строка.
+            Примеры: -createdAt, position, -rating
+          schema:
+            type: string
+        - name: select
+          in: query
+          required: false
+          description: |
+            Список полей через запятую.
+            Пример: name,photoUrl,text
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Список отзывов
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewListResponse'
+
+  /reviews/search:
+    get:
+      tags:
+        - Reviews Admin
+      summary: Поиск отзывов по id и комментарию
+      description: |
+        Явный endpoint для поиска отзывов.
+
+        Поддерживает:
+        - точный поиск по reviewId
+        - полнотекстовый поиск по comment
+        - общий поиск по q
+        - те же фильтры и пагинацию, что и GET /reviews
+      parameters:
+        - name: reviewId
+          in: query
+          required: false
+          description: Точный поиск отзыва по ObjectId
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+        - name: comment
+          in: query
+          required: false
+          description: Поиск по тексту комментария
+          schema:
+            type: string
+        - name: q
+          in: query
+          required: false
+          description: Общий поиск по имени автора и тексту отзыва
+          schema:
+            type: string
+        - name: productId
+          in: query
+          required: false
+          description: Фильтр по товару ProductGroup
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+        - name: status
+          in: query
+          required: false
+          description: Статусы через запятую
+          schema:
+            type: string
+        - name: isVisibleProduct
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: isVisibleMainPage
+          in: query
+          required: false
+          schema:
+            type: boolean
+        - name: minRating
+          in: query
+          required: false
+          schema:
+            type: number
+            minimum: 1
+            maximum: 5
+        - name: maxRating
+          in: query
+          required: false
+          schema:
+            type: number
+            minimum: 1
+            maximum: 5
+        - name: page
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+        - name: sort
+          in: query
+          required: false
+          description: |
+            Mongo-sort строка.
+            Примеры: -createdAt, position, -rating
+          schema:
+            type: string
+        - name: select
+          in: query
+          required: false
+          description: |
+            Список полей через запятую.
+            Пример: name,photoUrl,text
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Результаты поиска отзывов
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewListResponse'
+
+    post:
+      tags:
+        - Reviews Admin
+      summary: Создать отзыв
+      description: |
+        Создает новый отзыв.
+
+        При создании backend:
+        - создает Review
+        - если передан product, добавляет review._id в ProductGroup.reviews
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReviewRequest'
+            examples:
+              basic:
+                value:
+                  name: Анна
+                  product: 69de35d0b9cc050661cb6f70
+                  photoUrl: https://example.com/review-anna.jpg
+                  text: Очень удобная модель, отлично держит стопу.
+                  rating: 5
+                  status: published
+                  position: 1
+                  isVisibleProduct: true
+                  isVisibleMainPage: true
+      responses:
+        '201':
+          description: Отзыв создан
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewItem'
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /reviews/{id}:
+    get:
+      tags:
+        - Reviews Admin
+      summary: Получить отзыв по id
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+      responses:
+        '200':
+          description: Отзыв найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewItem'
+        '404':
+          description: Отзыв не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    patch:
+      tags:
+        - Reviews Admin
+      summary: Обновить отзыв
+      description: |
+        Частично обновляет отзыв.
+
+        Если изменяется product:
+        - отзыв убирается из старого ProductGroup.reviews
+        - отзыв добавляется в новый ProductGroup.reviews
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateReviewRequest'
+            examples:
+              patch:
+                value:
+                  text: Обновленный текст отзыва
+                  rating: 4
+                  isVisibleMainPage: false
+      responses:
+        '200':
+          description: Отзыв обновлен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewItem'
+        '400':
+          description: Ошибка валидации
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Отзыв не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    delete:
+      tags:
+        - Reviews Admin
+      summary: Удалить отзыв
+      description: |
+        Удаляет отзыв и удаляет его id из ProductGroup.reviews.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+      responses:
+        '200':
+          description: Отзыв удален
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OkResponse'
+        '404':
+          description: Отзыв не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /reviews/{id}/cancel:
+    post:
+      tags:
+        - Reviews Admin
+      summary: Отменить отзыв
+      description: |
+        Отменяет отзыв без удаления записи.
+
+        Backend:
+        - переводит status в archived
+        - скрывает отзыв с главной страницы
+        - скрывает отзыв со страницы товара
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+      responses:
+        '200':
+          description: Отзыв отменен
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewItem'
+        '404':
+          description: Отзыв не найден
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /reviews/public/main:
+    get:
+      tags:
+        - Reviews Public
+      summary: Получить отзывы для главной страницы
+      description: |
+        Возвращает опубликованные отзывы, отмеченные для главной страницы.
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 10
+      responses:
+        '200':
+          description: Отзывы для главной
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewPublicListResponse'
+
+  /reviews/public/product/{productId}:
+    get:
+      tags:
+        - Reviews Public
+      summary: Получить отзывы для конкретного товара
+      description: |
+        Возвращает опубликованные отзывы, отмеченные для отображения на странице товара.
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/ObjectIdString'
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 20
+      responses:
+        '200':
+          description: Отзывы товара
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReviewPublicListResponse'
+
+components:
+  schemas:
+    ReviewStatus:
+      type: string
+      enum:
+        - draft
+        - published
+        - archived
+      example: published
+
+    ReviewProductShort:
+      type: object
+      properties:
+        _id:
+          $ref: '#/components/schemas/ObjectIdString'
+        slug:
+          type: string
+        title:
+          type: object
+          additionalProperties: true
+        subtitle:
+          type: object
+          additionalProperties: true
+        imageURL:
+          type: string
+        status:
+          type: string
+
+    ReviewItem:
+      type: object
+      required:
+        - _id
+        - name
+        - product
+        - text
+        - rating
+        - status
+        - position
+        - isVisibleProduct
+        - isVisibleMainPage
+        - createdAt
+        - updatedAt
+      properties:
+        _id:
+          $ref: '#/components/schemas/ObjectIdString'
+        name:
+          type: string
+        product:
+          oneOf:
+            - $ref: '#/components/schemas/ObjectIdString'
+            - $ref: '#/components/schemas/ReviewProductShort'
+        photoUrl:
+          type: string
+        text:
+          type: string
+        rating:
+          type: number
+          minimum: 1
+          maximum: 5
+        status:
+          $ref: '#/components/schemas/ReviewStatus'
+        position:
+          type: number
+        isVisibleProduct:
+          type: boolean
+        isVisibleMainPage:
+          type: boolean
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CreateReviewRequest:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+        - product
+        - text
+      properties:
+        name:
+          type: string
+        product:
+          $ref: '#/components/schemas/ObjectIdString'
+        photoUrl:
+          type: string
+        text:
+          type: string
+        rating:
+          type: number
+          minimum: 1
+          maximum: 5
+          default: 5
+        status:
+          $ref: '#/components/schemas/ReviewStatus'
+        position:
+          type: number
+          default: 0
+        isVisibleProduct:
+          type: boolean
+          default: true
+        isVisibleMainPage:
+          type: boolean
+          default: false
+
+    UpdateReviewRequest:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+        product:
+          oneOf:
+            - $ref: '#/components/schemas/ObjectIdString'
+            - type: 'null'
+        photoUrl:
+          type: string
+        text:
+          type: string
+        rating:
+          type: number
+          minimum: 1
+          maximum: 5
+        status:
+          $ref: '#/components/schemas/ReviewStatus'
+        position:
+          type: number
+        isVisibleProduct:
+          type: boolean
+        isVisibleMainPage:
+          type: boolean
+
+    ReviewListResponse:
+      type: object
+      required:
+        - items
+        - total
+        - page
+        - limit
+        - totalPages
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReviewItem'
+        total:
+          type: integer
+        page:
+          type: integer
+        limit:
+          type: integer
+        totalPages:
+          type: integer
+
+    ReviewPublicListResponse:
+      type: object
+      required:
+        - ok
+        - data
+      properties:
+        ok:
+          type: boolean
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReviewItem'

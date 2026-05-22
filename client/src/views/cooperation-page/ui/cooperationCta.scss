@@ -1,0 +1,131 @@
+.cooperation-cta {
+  margin-top: 120px;
+
+  @include down($bp-desktop) {
+    margin-top: 56px;
+  }
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 16px;
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: $container-padding;
+    padding-right: $container-padding;
+    box-sizing: border-box;
+
+    @include down($bp-tablet) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    color: $dark;
+    font-family: $font-montserrat;
+    font-size: 60px;
+    font-style: normal;
+    font-weight: $fw-bold;
+    line-height: normal;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+
+    @include down($bp-desktop) {
+      font-size: 40px;
+      letter-spacing: 0.45px;
+    }
+
+    @include down($bp-tablet) {
+      font-size: 32px;
+    }
+  }
+
+  &__lead {
+    margin: 0 auto;
+    max-width: 488px;
+    width: 100%;
+    text-align: center;
+    color: $gray;
+    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: $fw-semibold;
+    line-height: normal;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    @include down($bp-desktop) {
+      font-size: 12px;
+    }
+  }
+
+  &__btn {
+    display: flex;
+    align-self: center;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 16px 40px;
+    border: 0;
+    border-radius: 0;
+    background: rgba(255, 153, 214, 0.5);
+    color: $white;
+    text-align: center;
+    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: $fw-semibold;
+    line-height: normal;
+    letter-spacing: 0.64px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      box-shadow 0.2s ease;
+
+    @include down($bp-desktop) {
+      gap: 8px;
+      font-size: 14px;
+    }
+
+    @include down($bp-tablet) {
+      font-size: 12px;
+    }
+
+    &:hover {
+      background: var(--Main, #ff99d6);
+      box-shadow: 0 10px 20px -10px rgba(255, 153, 214, 0.5);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $dark;
+      outline-offset: 2px;
+    }
+  }
+
+  &__btn-icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+
+    svg {
+      display: block;
+      width: 19px;
+      height: 19px;
+
+      @include down($bp-tablet) {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
+}

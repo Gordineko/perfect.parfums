@@ -1,0 +1,29 @@
+.support-widget {
+  position: fixed;
+  right: 16px;
+  bottom: 40px;
+  z-index: 30;
+
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: $accent;
+  cursor: pointer;
+
+  transition: 0.2s all ease;
+
+  &:hover {
+    box-shadow:
+      0 0 98.436px 0 rgba(59, 130, 246, 0.5),
+      0 0 56.249px 0 rgba(59, 130, 246, 0.5),
+      0 0 32.812px 0 rgba(59, 130, 246, 0.5),
+      0 0 16.406px 0 rgba(59, 130, 246, 0.5),
+      0 0 4.687px 0 rgba(59, 130, 246, 0.5),
+      0 0 2.344px 0 rgba(59, 130, 246, 0.5);
+  }
+}

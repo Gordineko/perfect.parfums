@@ -1,0 +1,56 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+$mega-menu-z: 110;
+
+.wrap {
+  position: relative;
+  display: none;
+
+  @include up($bp-tablet) {
+    display: block;
+  }
+}
+
+.trigger {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.triggerActive {
+  opacity: 0.5;
+}
+
+.dropdown {
+  position: fixed;
+  top: var(--header-bottom, 96px);
+  left: 50%;
+  z-index: $mega-menu-z;
+  width: min(1200px, calc(100vw - 32px));
+  // padding-top: 8px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 6px);
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease,
+    transform 0.2s ease;
+
+  @include mobile-only {
+    display: none !important;
+  }
+
+  &.dropdownOpen {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+  }
+}
+
+.dropdownBridge {
+  // height: 8px;
+}

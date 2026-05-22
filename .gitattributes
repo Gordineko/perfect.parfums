@@ -1,0 +1,6 @@
+# Кінці рядків у репозиторії — LF (Node / Next.js).
+* text=auto eol=lf
+
+# Нативні Windows-скрипти
+*.cmd text eol=crlf
+*.bat text eol=crlf

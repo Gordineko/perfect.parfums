@@ -1,0 +1,15 @@
+{
+  "devDependencies": {
+    "husky": "^9.1.7"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "setup:git": "git config commit.template .gitmessage",
+    "monitoring:up": "docker compose -f docker-compose.monitoring.yml up -d --remove-orphans",
+    "monitoring:down": "docker compose -f docker-compose.monitoring.yml down --remove-orphans",
+    "monitoring:logs": "docker compose -f docker-compose.monitoring.yml logs -f prometheus loki promtail grafana",
+    "rabbitmq:up": "docker compose -f docker-compose.rabbitmq.yml up -d --remove-orphans",
+    "rabbitmq:down": "docker compose -f docker-compose.rabbitmq.yml down --remove-orphans",
+    "rabbitmq:logs": "docker compose -f docker-compose.rabbitmq.yml logs -f rabbitmq"
+  }
+}

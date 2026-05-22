@@ -1,0 +1,54 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+.form {
+    width: min(560px, 100%);
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.title {
+    margin: 0 0 10px;
+    color: $dark;
+    font-family: $font-montserrat;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
+    @include tablet-only {
+        font-size: 24px;
+    }
+    @include down($bp-tablet) {
+        font-size: 20px;
+    }
+}
+.group {
+    margin: 0;
+}
+.input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    outline: none;
+    &:hover{
+        border-color: #000000;
+    }
+    &:focus,
+    &:focus-visible,
+    &:active {
+        border-color: #9ca3af;
+        
+        outline: none;
+    }
+}
+.success {
+    color: #1a8f3c;
+    font-family: $font-secondary;
+    font-size: 14px;
+    font-weight: 600;
+}
+.submit {
+    margin-top: 8px;
+    width: 100%;
+    @include down($bp-tablet) {
+        min-height: 48px;
+    }
+}

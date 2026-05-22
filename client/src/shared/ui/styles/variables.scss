@@ -1,0 +1,333 @@
+/* layout — align with design tokens (--container-max) */
+$container-max: 1500px;
+$container-padding: 24px;
+$container-padding-mobile: 8px;
+/* colors */
+$white: #fefefe;
+$black: #000;
+$dark: #0d0d0d;
+$dark-70: rgba($dark, 0.7);
+$gray: #9ca3af;
+$gray-200: #e5e7eb;
+$text-light: #334155;
+$text-gray: $gray;
+$text-gray-dark: #0f172a;
+$gray-999: #999999;
+$gray-999-05: rgba($gray-999, 0.05);
+$gray-999-56: rgba($gray-999, 0.56);
+$gray-999-50: rgba($gray-999, 0.5);
+/* surfaces & overlays */
+$white-50: rgba($white, 0.5);
+$dark-08: rgba($dark, 0.08);
+$dark-20: rgba($dark, 0.2);
+$dark-40: rgba($dark, 0.4);
+$dark-00: rgba($dark, 0);
+$black-08: rgba($black, 0.08);
+$header-surface: rgba(250, 250, 250, 0.5);
+/* typography extras */
+$text-slate-500: #64748b;
+/* layout rhythm */
+$section-pad-y-xl: 96px;
+$section-pad-y-lg: 64px;
+$section-pad-y-md: 48px;
+$section-pad-y-sm: 32px;
+$section-pad-y-xs: 24px;
+/* hero */
+$hero-slide-placeholder: #d3d3d3;
+/* hover */
+$accent: #ff99d6;
+$accent-green: #10b981;
+$accent-violet: #8b5cf6;
+$accent-red: #fe0707;
+$accent-10: rgba($accent, 0.1);
+$accent-20: rgba($accent, 0.2);
+$accent-30: rgba($accent, 0.3);
+$accent-50: rgba($accent, 0.5);
+/* fonts */
+$font-primary:
+  var(--font-sofia-sans-condensed), sans-serif;
+$font-secondary: "Golos Text";
+$font-tertiary: var(--font-urbanist), $font-primary;
+$font-montserrat: "Montserrat", $font-primary;
+/* font weights */
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-semibold: 600;
+$fw-bold: 700;
+$fw-extrabold: 800;
+
+/* typography tokens */
+$section-heading-title-tablet: 24px;
+// mixins
+@mixin nav-text {
+  color: $dark;
+  font-family: $font-primary;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+@mixin hero-title {
+  color: $text-gray-dark;
+  font-family: $font-primary;
+  font-size: 64px;
+  font-weight: $fw-semibold;
+  @include down($bp-desktop) {
+    font-size: 48px;
+  }
+  @include down($bp-tablet) {
+    font-size: 24px;
+  }
+}
+@mixin hero-text-btn {
+  color: $white;
+  font-family: $font-secondary;
+  font-size: 20px;
+  font-weight: $fw-bold;
+  @include down($bp-desktop) {
+    font-size: 16px;
+  }
+  @include down($bp-tablet) {
+    font-size: 14px;
+  }
+}
+@mixin section-title {
+  color: $text-gray-dark;
+  font-family: $font-primary;
+  font-size: 64px;
+  font-weight: $fw-semibold;
+  margin-bottom: 40px;
+  @include down($bp-desktop) {
+    font-size: 48px;
+    margin-bottom: 24px;
+  }
+  @include down($bp-tablet) {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+}
+@mixin section-title-decor {
+  @include section-title;
+  position: relative;
+  padding-left: 21px;
+  @include down($bp-desktop) {
+    padding-left: 18px;
+  }
+  @include down($bp-tablet) {
+    padding-left: 16px;
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    transform: translateY(-50%);
+    width: 13px;
+    height: 13px;
+    border-radius: 100px;
+    background: linear-gradient(
+      105deg,
+      $accent 0%,
+      $accent 100%
+    );
+    box-shadow: 0 0 4px 4px
+      rgba($accent, 0.2);
+    @include down($bp-desktop) {
+      width: 10px;
+      height: 10px;
+    }
+    @include down($bp-tablet) {
+      width: 8px;
+      height: 8px;
+    }
+  }
+}
+
+@mixin section-heading-kicker {
+  margin: 0 0 4px;
+  color: $accent;
+  font-family: $font-secondary;
+  font-size: 10px;
+  font-weight: $fw-bold;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+@mixin section-heading-title {
+  margin: 0;
+  color: $dark;
+  font-family: $font-montserrat;
+  font-size: 60px;
+  font-weight: $fw-bold;
+  line-height: 1.1;
+  text-transform: uppercase;
+
+  @include down($bp-desktop) {
+    font-size: 48px;
+  }
+
+  @include tablet-only {
+    font-size: $section-heading-title-tablet;
+  }
+
+  @include down($bp-tablet) {
+    font-size: $section-heading-title-tablet;
+  }
+}
+
+@mixin second-title {
+  color: $text-gray-dark;
+  font-family: $font-primary;
+  font-size: 48px;
+  font-weight: $fw-medium;
+  @include down($bp-desktop) {
+    font-size: 36px;
+  }
+  @include down($bp-tablet) {
+    font-size: 24px;
+  }
+}
+@mixin about-us-text {
+  color: $text-light;
+  font-family: $font-secondary;
+  font-size: 20px;
+  font-weight: $fw-semibold;
+  @include down($bp-desktop) {
+    font-size: 16px;
+  }
+  @include down($bp-tablet) {
+    font-size: 14px;
+  }
+}
+@mixin about-us-btn {
+  color: $white;
+  font-family: $font-secondary;
+  font-size: 20px;
+  font-weight: $fw-bold;
+  @include down($bp-desktop) {
+    font-size: 16px;
+  }
+  @include down($bp-tablet) {
+    font-size: 12px;
+  }
+}
+/* breakpoints — mobile 320–768, tablet 768–1250, desktop 1250+ */
+$bp-desktop: 1250px;
+$bp-tablet: 768px;
+$bp-mobile-max: 767.98px;
+$bp-tablet-max: 1249.98px;
+$bp-desktop-narrow: 1200px;
+$bp-tablet-landscape-max: 1023.98px;
+
+$tablet: $bp-tablet;
+$desktop: $bp-desktop;
+
+@mixin down($bp) {
+  @if $bp == $bp-desktop {
+    @media (max-width: $bp-tablet-max) {
+      @content;
+    }
+  } @else if $bp == $bp-tablet {
+    @media (max-width: $bp-mobile-max) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $bp) {
+      @content;
+    }
+  }
+}
+
+@mixin up($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
+
+@mixin mobile-only {
+  @media (max-width: $bp-mobile-max) {
+    @content;
+  }
+}
+
+@mixin tablet-only {
+  @media (min-width: $bp-tablet) and (max-width: $bp-tablet-max) {
+    @content;
+  }
+}
+
+@mixin desktop-only {
+  @media (min-width: $bp-desktop) {
+    @content;
+  }
+}
+
+@mixin swiper-product-slide-borders {
+  .swiper-slide:nth-child(3n + 1) > .product-item {
+    border: 1px solid $accent;
+  }
+
+  .swiper-slide:nth-child(3n + 2) > .product-item {
+    border: 1px solid $accent-green;
+  }
+
+  .swiper-slide:nth-child(3n + 3) > .product-item {
+    border: 1px solid $accent-violet;
+  }
+}
+// animation
+@mixin button-lift {
+  transition: transform 0.3s ease;
+  will-change: transform;
+  &:hover,
+  &:focus-visible {
+    transform: translateY(-8px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    &:hover,
+    &:focus-visible,
+    &:active {
+      transform: none;
+    }
+  }
+}
+
+/* spacing rhythm */
+$space-xxs: 4px;
+$space-xs: 8px;
+$space-sm: 12px;
+$space-md: 16px;
+$space-lg: 24px;
+$space-xl: 32px;
+$font-size-filter-xs: 11px;
+
+/* catalog / filters */
+$catalog-header-divider: $gray-200;
+$catalog-breadcrumbs-gap-top: 20px;
+$catalog-breadcrumbs-gap-bottom: $space-md;
+$catalog-h1-size: 36px;
+$catalog-sort-border: 0.5px solid $accent;
+$active-filter-toolbar-border: #0d0d0d33;
+$active-filter-heading-muted: #9ca3af;
+$active-filter-tag-bg: #9999991a;
+$active-filter-clear-bg: #99999980;
+$filter-sticky-top: $space-md;
+$filter-card-gap: $space-xl;
+$filter-card-padding-y: $space-xl;
+$filter-card-padding-x: $space-lg;
+$filter-sidebar-width: 357px;
+$filter-card-shadow: 0 4px 24px rgba(13, 13, 13, 0.08);
+$filter-checkbox-size: 20px;
+$filter-checkbox-radius: 5px;
+$filter-checkbox-gap: $space-sm;
+$filter-section-gap: $space-md;
+$filter-card-radius: 32px;
+$filter-border-subtle: $black-08;
+/* above .header (100) and burger overlay (101) */
+$filter-modal-z: 110;
+$bp-mobile-xs: 480px;
+$bp-desktop-wide: 1400px;

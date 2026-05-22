@@ -1,0 +1,44 @@
+@import "../shared/styles/index.scss";
+@import "../shared/ui/styles/variables.scss";
+@import "../shared/ui/styles/utilities.scss";
+@import "../shared/ui/styles/productsLayout.scss";
+@import "../shared/ui/pageHeader.scss";
+
+@import "../views/catalog-page/ui/catalogView.scss";
+@import "../views/catalog-page/ui/catalogDescription.scss";
+@import "../views/product-page/ui/ProductBenefits.scss";
+@import "../views/product-page/ui/pdp.scss";
+@import "../views/order-page/ui/orderPage.scss";
+@import "../views/contacts-page/ui/contactsPage.scss";
+@import "../views/cooperation-page/ui/cooperationPage.scss";
+@import "../views/cooperation-page/ui/cooperationWhyUs.scss";
+@import "../views/cooperation-page/ui/cooperationRequirements.scss";
+@import "../views/cooperation-page/ui/cooperationCta.scss";
+
+@import "../widgets/burger-menu/ui/burgerMenu.scss";
+@import "../widgets/products-grid/ui/productsGrid.scss";
+@import "../widgets/catalog-page-skeleton/ui/catalogPageSkeleton.scss";
+@import "../widgets/recommended-products/ui/recommendedProducts.scss";
+@import "../widgets/review-swiper/ui/reviewSwiper.scss";
+@import "../widgets/product-info/ui/productInfo.scss";
+@import "../widgets/product-gallery/ui/productGallery.scss";
+@import "../widgets/viewed-products/ui/viewedProducts.scss";
+@import "../features/language-switcher/style/languageDropdown.scss";
+@import "../features/floating/ui/floating.scss";
+@import "../features/catalog-filter/ui/filters.scss";
+@import "../features/priceRange/ui/priceRange.scss";
+@import "../features/Sort/ui/sort.scss";
+@import "../features/catalog-pagination/ui/catalogPagination.scss";
+@import "../features/counter/ui/counter.scss";
+@import "../features/review-counter/ui/reviewCounter.scss";
+@import "../features/write-review/ui/writeReviewButton.scss";
+@import "../features/user-details/ui/userDetailsForm.scss";
+@import "../features/order-status/ui/orderStatus.scss";
+
+
+
+@import "../entities/product/ui/productItem.scss";
+@import "../entities/review-card/ui/reviewCard.scss";
+@import "../entities/order-item/ui/orderItem.scss";
+
+@import "./legacy.scss";

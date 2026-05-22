@@ -1,0 +1,6 @@
+feat(header): layout (#6000)
+
+# type: feat | fix | refactor | chore | docs | test | style | perf | ci | build | revert
+# scope: любой (a-z0-9-_ без пробелов)
+# example: fix(cart): round total price (#457)
+# example: feat(header): add wishlist page (#1203)

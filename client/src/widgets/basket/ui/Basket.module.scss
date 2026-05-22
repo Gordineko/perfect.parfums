@@ -1,0 +1,33 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10999;
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(15, 23, 42, 0.2);
+}
+
+.drawer {
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  width: 484px;
+  height: 100vh;
+  padding: 32px;
+  border-radius: 0;
+  background: var(--White, #fefefe);
+  box-shadow:
+    0 4px 4px 0 rgba(0, 0, 0, 0.25),
+    0 20px 40px -15px rgba(0, 0, 0, 0.25),
+    -2px 0 4px 0 rgba(0, 0, 0, 0.25);
+
+  @include down($bp-tablet) {
+    padding: 32px 16px;
+  }
+
+  @include down(480px) {
+    margin-right: 0;
+  }
+}

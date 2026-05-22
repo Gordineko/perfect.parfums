@@ -1,0 +1,261 @@
+@use "../../../../../shared/ui/styles/variables.scss" as *;
+
+@mixin inter($size, $weight: 400) {
+  font-family: Inter, sans-serif;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: normal;
+}
+
+@mixin profile-card {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #fbfbf9;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border-radius: 0;
+}
+
+.card {
+  @include profile-card;
+  padding: 40px;
+  text-align: left;
+
+  @include tablet-only {
+    padding: 32px 24px;
+  }
+
+  @include down($bp-tablet) {
+    padding: 24px 16px;
+  }
+}
+
+.cardHeader {
+  margin: 0 0 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  color: var(--Dark, #0d0d0d);
+  @include inter(24px, 500);
+
+  @include down($bp-tablet) {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    text-align: center;
+  }
+}
+
+.details {
+  display: grid;
+  grid-template-columns: minmax(180px, 280px) minmax(0, 1fr);
+  column-gap: 64px;
+  row-gap: 24px;
+  width: 100%;
+
+  @include tablet-only {
+    column-gap: 48px;
+    row-gap: 20px;
+  }
+
+  @include down($bp-tablet) {
+    grid-template-columns: minmax(120px, 42%) minmax(0, 1fr);
+    column-gap: 16px;
+    row-gap: 16px;
+  }
+}
+
+.row {
+  display: contents;
+}
+
+.label,
+.value {
+  margin: 0;
+  min-width: 0;
+  text-align: left;
+  @include inter(21px);
+}
+
+.label {
+  color: var(--Gray, #64748b);
+}
+
+.value {
+  color: var(--Text-color-1, #0f172a);
+  justify-self: start;
+
+  @include down($bp-tablet) {
+    word-break: break-word;
+  }
+}
+
+@include down($bp-tablet) {
+  .label,
+  .value {
+    font-size: 14px;
+  }
+}
+
+.productList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+
+  @include down($bp-tablet) {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+  }
+}
+
+.productItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  @include down($bp-tablet) {
+    align-items: flex-end;
+    gap: 8px;
+  }
+}
+
+.productMain {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+
+  @include down($bp-tablet) {
+    gap: 12px;
+  }
+
+  img {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    object-fit: cover;
+    border: 1px solid rgba(153, 153, 153, 0.5);
+  }
+}
+
+.productInfo {
+  margin: 0;
+  min-width: 0;
+
+  @include down($bp-tablet) {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    max-width: 155px;
+  }
+}
+
+.productTitle {
+  display: inline;
+  color: var(--Dark, #0d0d0d);
+  @include inter(18px, 500);
+
+  @include down($bp-tablet) {
+    display: block;
+    font-size: 16px;
+  }
+}
+
+.productCategory {
+  display: inline;
+  margin-left: 8px;
+  color: var(--Gray, #9ca3af);
+  @include inter(14px, 500);
+
+  @include down($bp-tablet) {
+    display: block;
+    margin-left: 0;
+    font-size: 12px;
+  }
+}
+
+.productMeta {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 16px;
+
+  @include down($bp-tablet) {
+    gap: 12px;
+  }
+}
+
+.productQty,
+.productPrice {
+  margin: 0;
+  color: var(--Dark, #0d0d0d);
+  @include inter(16px);
+
+  @include down($bp-tablet) {
+    font-size: 14px;
+  }
+}
+
+.productPrice {
+  font-weight: 600;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.totalLabel,
+.totalAmount {
+  margin: 0;
+  color: var(--Dark, #0d0d0d);
+  @include inter(24px);
+
+  @include down($bp-tablet) {
+    font-size: 16px;
+  }
+}
+
+.totalAmount {
+  font-weight: 600;
+}
+
+.repeat {
+  display: inline-flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  padding: 12px 40px;
+  border: 0;
+  border-radius: 0;
+  background: var(--Dark, #1a1a1a);
+  box-shadow: 0 10px 20px -10px #1a1a1a;
+  color: var(--White, #fff);
+  text-align: center;
+  cursor: pointer;
+  @include inter(20px, 500);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background: rgba(26, 26, 26, 0.8);
+  }
+
+  @include tablet-only {
+    font-size: 16px;
+  }
+
+  @include down($bp-tablet) {
+    font-size: 14px;
+  }
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

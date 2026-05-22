@@ -1,0 +1,314 @@
+[{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d892"
+  },
+  "slug": "hyaluronic-acid-complex",
+  "__v": 0,
+  "categoryIds": [
+    {
+      "$oid": "696f9c4ab7919bf78623d901"
+    }
+  ],
+  "characteristics": [
+    {
+      "key": "brand",
+      "type": "select",
+      "unit": null,
+      "value": "California Gold Nutrition",
+      "values": []
+    },
+    {
+      "key": "subtitle",
+      "type": "string",
+      "unit": null,
+      "value": "Глибоке зволоження, 60 капс.",
+      "values": []
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T13:15:21.860Z"
+  },
+  "imageURL": "https://cdn.site/demo/shampoo/cover.webp",
+  "status": "active",
+  "title": {
+    "ua": "Hyaluronic Acid Complex",
+    "en": "Hyaluronic Acid Complex"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:21.860Z"
+  },
+  "variationAxes": []
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d891"
+  },
+  "slug": "collagen-peptides-plus-c",
+  "__v": 0,
+  "categoryIds": [
+    {
+      "$oid": "696f9c4ab7919bf78623d901"
+    }
+  ],
+  "characteristics": [
+    {
+      "key": "brand",
+      "type": "select",
+      "unit": null,
+      "value": "MST",
+      "values": []
+    },
+    {
+      "key": "subtitle",
+      "type": "string",
+      "unit": null,
+      "value": "Морський колаген, 30 порцій",
+      "values": []
+    },
+    {
+      "key": "discount",
+      "type": "number",
+      "unit": "%",
+      "value": 10,
+      "values": []
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T13:15:21.927Z"
+  },
+  "imageURL": "https://cdn.site/demo/collagen/cover.webp",
+  "status": "active",
+  "title": {
+    "ua": "Collagen Peptides + C",
+    "en": "Collagen Peptides + C"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:21.927Z"
+  },
+  "variationAxes": [
+    {
+      "axisId": "A1",
+      "title": {
+        "ua": "Порцій",
+        "en": "Порций"
+      },
+      "type": "number",
+      "unit": "serv",
+      "valuesPreset": [
+        30
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d890"
+  },
+  "slug": "hair-growth-activator",
+  "__v": 0,
+  "categoryIds": [
+    {
+      "$oid": "696f9c4ab7919bf78623d902"
+    }
+  ],
+  "characteristics": [
+    {
+      "key": "subtitle",
+      "type": "string",
+      "unit": null,
+      "value": "Біотин та мінерали, 90 капс.",
+      "values": []
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T13:15:21.989Z"
+  },
+  "imageURL": "https://cdn.site/demo/hair/cover.webp",
+  "status": "active",
+  "title": {
+    "ua": "Hair Growth Activator",
+    "en": "Hair Growth Activator"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:21.989Z"
+  },
+  "variationAxes": []
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d88f"
+  },
+  "slug": "immune-defence-shield",
+  "__v": 0,
+  "categoryIds": [
+    {
+      "$oid": "696f9c4ab7919bf78623d905"
+    }
+  ],
+  "characteristics": [
+    {
+      "key": "subtitle",
+      "type": "string",
+      "unit": null,
+      "value": "Вітамін D3 + Цинк + C, 60 капс.",
+      "values": []
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.051Z"
+  },
+  "imageURL": "https://cdn.site/demo/immune/cover.webp",
+  "status": "active",
+  "title": {
+    "ua": "Immune Defence Shield",
+    "en": "Immune Defence Shield"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:22.051Z"
+  },
+  "variationAxes": []
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d88d"
+  },
+  "slug": "vitamin-c-liposomal",
+  "__v": 0,
+  "categoryIds": [
+    {
+      "$oid": "696f9c4ab7919bf78623d905"
+    }
+  ],
+  "characteristics": [
+    {
+      "key": "subtitle",
+      "type": "string",
+      "unit": null,
+      "value": "Ліпосомальний вітамін C",
+      "values": []
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.120Z"
+  },
+  "imageURL": "https://cdn.site/demo/vitc/cover.webp",
+  "status": "active",
+  "title": {
+    "ua": "Вітамін C Ліпосомальний",
+    "en": "Витамин C Липосомальный"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:22.120Z"
+  },
+  "variationAxes": [
+    {
+      "axisId": "A1",
+      "title": {
+        "ua": "Смак",
+        "en": "Вкус"
+      },
+      "type": "select",
+      "unit": null,
+      "valuesPreset": [
+        "orange",
+        "berry"
+      ]
+    },
+    {
+      "axisId": "A2",
+      "title": {
+        "ua": "Кількість",
+        "en": "Количество"
+      },
+      "type": "number",
+      "unit": "caps",
+      "valuesPreset": [
+        30,
+        60
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d889"
+  },
+  "slug": "candle-minimal",
+  "__v": 0,
+  "categoryIds": [
+    {
+      "$oid": "696f9c4ab7919bf78623d904"
+    }
+  ],
+  "characteristics": [
+    {
+      "key": "subtitle",
+      "type": "string",
+      "unit": null,
+      "value": "Аромасвічка",
+      "values": []
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.199Z"
+  },
+  "imageURL": "https://cdn.site/demo/candle/cover.webp",
+  "status": "active",
+  "title": {
+    "ua": "Свічка Minimal",
+    "en": "Свеча Minimal"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:22.199Z"
+  },
+  "variationAxes": [
+    {
+      "axisId": "A1",
+      "title": {
+        "ua": "Колір",
+        "en": "Цвет"
+      },
+      "type": "select",
+      "unit": null,
+      "valuesPreset": [
+        "black",
+        "white",
+        "beige"
+      ]
+    }
+  ]
+},
+{
+  "_id": {
+    "$oid": "696f9c4bb7919bf78623d887"
+  },
+  "slug": "hand-soap-neutral",
+  "__v": 0,
+  "categoryIds": [
+    {
+      "$oid": "696f9c4ab7919bf78623d901"
+    }
+  ],
+  "characteristics": [
+    {
+      "key": "subtitle",
+      "type": "string",
+      "unit": null,
+      "value": "Делікатний догляд для рук",
+      "values": []
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-01-28T13:15:22.260Z"
+  },
+  "imageURL": "https://cdn.site/demo/soap/cover.webp",
+  "status": "active",
+  "title": {
+    "ua": "Рідке мило Neutral",
+    "en": "Жидкое мыло Neutral"
+  },
+  "updatedAt": {
+    "$date": "2026-01-28T13:15:22.260Z"
+  },
+  "variationAxes": []
+}]

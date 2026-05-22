@@ -1,0 +1,28 @@
+:root {
+  color-scheme: light;
+  --header-offset: 96px;
+}
+
+@media (max-width: 1249.98px) and (min-width: 768px) {
+  :root {
+    --header-offset: 89px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  :root {
+    --header-offset: 60px;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-light);
+  color: var(--color-text-muted);
+}
+
+main {
+  flex: 1;
+}
+

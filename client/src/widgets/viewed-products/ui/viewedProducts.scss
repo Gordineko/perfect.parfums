@@ -1,0 +1,14 @@
+.viewed-products {
+  padding-top: 0;
+  margin: var(--space-section-y) 0 0;
+
+  &__swiper {
+    overflow: visible;
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
+  }
+}
+

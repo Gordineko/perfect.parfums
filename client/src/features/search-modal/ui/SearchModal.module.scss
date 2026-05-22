@@ -1,0 +1,151 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease;
+
+  &.rootOpen {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+}
+
+.close {
+  position: absolute;
+  top: -40px;
+  right: -100px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 0;
+  color: #0d0d0d;
+
+  &:hover {
+    color: #1a1a1a;
+  }
+
+  &:active {
+    transform: none;
+  }
+
+  svg {
+    width: 25px;
+    height: 25px;
+
+    @include down($bp-tablet) {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  @include down($bp-desktop) {
+    position: fixed;
+    top: clamp(160px, 12vh, 260px);
+    right: 24px;
+  }
+
+  @include down($bp-tablet) {
+    width: 15px;
+    height: 15px;
+    top: 120px;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  padding-top: 88px;
+  background: #fffbfe;
+
+  @include down($bp-tablet) {
+    justify-content: flex-start;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 738px;
+  padding: 0;
+  position: relative;
+
+  @include down($bp-desktop) {
+    max-width: 100%;
+    padding: 0 24px;
+  }
+
+  @include down($bp-tablet) {
+    padding: 0 16px;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  border-radius: 5px;
+
+  @include down($bp-tablet) {
+    width: 100%;
+    gap: 16px;
+    margin-top: 47px;
+  }
+}
+
+.input {
+  $underline: linear-gradient(
+    to bottom,
+    transparent calc(100% - 2px),
+    #1a1a1a calc(100% - 2px),
+    #1a1a1a 100%
+  );
+
+  width: 100%;
+  height: 107px;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding-left: 0;
+  color: var(--color-text, #1a1a1a);
+  font-family: var(--font-inter), Inter, sans-serif;
+  font-size: 64px;
+  font-weight: 400;
+  line-height: normal;
+  background-image: $underline;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+
+  @include down($bp-desktop) {
+    height: 86px;
+    font-size: 48px;
+  }
+
+  @include down($bp-tablet) {
+    font-size: 36px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &::placeholder {
+    color: rgba(26, 26, 26, 0.5);
+    font-family: inherit;
+    font-size: 1em;
+    font-weight: 400;
+    line-height: normal;
+  }
+}

@@ -1,0 +1,9 @@
+node_modules
+npm-debug.log
+.env
+.env.*
+logs
+uploads
+backups
+keycrm-export.xlsx
+src/scripts/keycrm-export.xlsx

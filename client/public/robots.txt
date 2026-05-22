@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://maloeatelier.com
+
+# Sitemaps
+Sitemap: https://maloeatelier.com/sitemap.xml

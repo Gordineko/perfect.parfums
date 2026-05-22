@@ -1,0 +1,321 @@
+@import "../../../shared/ui/styles/variables.scss";
+
+@mixin inter($size, $weight: 400) {
+  font-family: Inter, sans-serif;
+  font-size: $size;
+  font-weight: $weight;
+  line-height: normal;
+}
+
+@mixin order-card {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #fbfbf9;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border-radius: 0;
+}
+
+.order {
+  @include order-card;
+  margin-bottom: 16px;
+  padding: 40px;
+  font-family: $font-secondary;
+
+  @include tablet-only {
+    padding: 32px 24px;
+  }
+
+  @include down($bp-tablet) {
+    padding: 24px;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+
+    @include down($bp-tablet) {
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+      text-align: center;
+    }
+
+    &-txt {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+
+      @include tablet-only {
+        gap: 12px;
+      }
+
+      @include down($bp-tablet) {
+        align-items: center;
+        gap: 12px;
+      }
+
+      p:first-child {
+        color: var(--Dark, #0d0d0d);
+        @include inter(24px, 500);
+      }
+
+      p:last-child {
+        color: var(--Gray, #9ca3af);
+        text-transform: uppercase;
+        @include inter(14px);
+      }
+    }
+
+    &-status {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 40px;
+      border-radius: 0;
+      text-transform: uppercase;
+      @include inter(13px, 600);
+
+      @include down($bp-tablet) {
+        padding: 10px 24px;
+        font-size: 11px;
+      }
+
+      &--processing {
+        color: #3b82f6;
+        border: 1px solid #3b82f6;
+        background: rgba(59, 130, 246, 0.2);
+      }
+
+      &--done {
+        color: #10b981;
+        border: 1px solid #10b981;
+        background: rgba(16, 185, 129, 0.2);
+      }
+
+      &--cancelled {
+        color: #fe0707;
+        border: 1px solid #fe0707;
+        background: rgba(254, 7, 7, 0.2);
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+
+    @include down($bp-tablet) {
+      margin-bottom: 16px;
+      padding-bottom: 16px;
+    }
+  }
+
+  &__items-toggle {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: var(--Dark, #0d0d0d);
+    @include inter(16px, 500);
+  }
+
+  &__items-toggle-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 11px;
+    height: 16px;
+    line-height: 0;
+    transition: transform 0.2s ease;
+
+    svg {
+      display: block;
+      width: 100%;
+      height: 7px;
+    }
+
+    &.is-open {
+      transform: rotate(180deg);
+    }
+  }
+
+  &__func {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    p {
+      margin: 0;
+      color: var(--Dark, #0d0d0d);
+      @include inter(32px, 600);
+
+      @include tablet-only {
+        font-size: 24px;
+      }
+
+      @include down($bp-tablet) {
+        font-size: 20px;
+      }
+    }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 40px;
+      border: 0;
+      border-radius: 0;
+      background: var(--Dark, #1a1a1a);
+      box-shadow: 0 10px 20px -10px rgba(26, 26, 26, 0.5);
+      color: var(--White, #fff);
+      cursor: pointer;
+      @include inter(16px, 500);
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        background: rgba(26, 26, 26, 0.8);
+      }
+
+      @include tablet-only {
+        font-size: 14px;
+      }
+
+      @include down($bp-tablet) {
+        padding: 12px 24px;
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+.order-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  cursor: pointer;
+
+  @include down($bp-tablet) {
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    @include down($bp-tablet) {
+      gap: 12px;
+    }
+
+    img {
+      width: 46px;
+      height: 46px;
+      object-fit: cover;
+      border: 1px solid rgba(153, 153, 153, 0.5);
+    }
+
+    .t {
+      margin: 0;
+      max-width: 254px;
+
+      @include down($bp-tablet) {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        max-width: 155px;
+      }
+    }
+  }
+
+  &__title {
+    display: inline;
+    color: var(--Dark, #0d0d0d);
+    @include inter(18px, 500);
+
+    @include down($bp-tablet) {
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      text-overflow: ellipsis;
+      font-size: 16px;
+    }
+  }
+
+  &__category {
+    display: inline;
+    margin-left: 8px;
+    color: var(--Gray, #9ca3af);
+    @include inter(14px);
+
+    @include down($bp-tablet) {
+      display: block;
+      margin-left: 0;
+      font-size: 12px;
+    }
+  }
+
+  &__quantity,
+  &__cost {
+    margin: 0;
+    color: var(--Dark, #0d0d0d);
+    @include inter(16px);
+
+    @include down($bp-tablet) {
+      font-size: 14px;
+    }
+  }
+
+  &__cost {
+    color: var(--Dark, #1a1a1a);
+    font-weight: 600;
+  }
+}
+
+.ob {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+
+  @include down($bp-tablet) {
+    top: -30px;
+    right: 50%;
+    transform: translateX(50%);
+  }
+
+  &:hover {
+    color: #ff99d6;
+
+    svg path {
+      stroke: #ff99d6;
+    }
+  }
+}
+
+.or {
+  position: relative !important;
+}
