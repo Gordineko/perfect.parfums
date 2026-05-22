@@ -33,7 +33,7 @@
     margin: 0;
     color: #9ca3af;
     font-family: var(--font-body);
-    font-size: var(--fs-label);
+    font-size: 0.625rem;
     font-weight: var(--fw-medium);
     letter-spacing: 3px;
     text-transform: uppercase;
@@ -52,7 +52,7 @@
     }
 
     @media (max-width: 1249.98px) and (min-width: 768px) {
-      font-size: var(--fs-section-title);
+      font-size: var(--fs-h2);
     }
 
     @media (max-width: 767.98px) {
@@ -63,7 +63,7 @@
   &__summary {
     margin: 40px 0 0;
     max-width: 34ch;
-    color: var(--color-text-muted);
+    color: var(--color-grey);
     font-family: var(--font-body);
     font-size: 14px;
     font-weight: 300;
@@ -90,9 +90,9 @@
     justify-content: center;
     margin-top: 40px;
     padding: 16px 48px;
-    border: 1px solid var(--color-text);
+    border: 1px solid var(--color-black);
     background: transparent;
-    color: var(--color-text);
+    color: var(--color-black);
     font-family: var(--font-body);
     font-size: 10px;
     line-height: normal;
@@ -113,7 +113,7 @@
 
     &:hover,
     &:focus-visible {
-      background: var(--color-text);
+      background: var(--color-black);
       color: var(--color-white);
     }
   }
@@ -188,7 +188,7 @@
     :global(.swiper-pagination-bullet-active) {
       width: 80px !important;
       min-width: 80px;
-      background: var(--color-text) !important;
+      background: var(--color-black) !important;
     }
 
     @media (max-width: 1249.98px) {
@@ -248,7 +248,7 @@
     padding: 4px 12px;
     justify-content: center;
     align-items: center;
-    background: var(--color-text);
+    background: var(--color-black);
 
     @media (max-width: 767.98px) {
       top: 10px;
@@ -274,7 +274,7 @@
 
     :global(.product-item__title) {
       margin: 0;
-      color: var(--color-text);
+      color: var(--color-black);
       font-family: var(--font-body);
       font-size: 11px;
       font-weight: 500;
@@ -322,7 +322,7 @@
 
     :global(.product-item__price-old),
     :global(.product-item__price-line--sale) {
-      font-family: var(--font-title);
+      font-family: var(--font-heading);
       font-style: italic;
     }
 

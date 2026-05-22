@@ -55,8 +55,8 @@
 
   &__title {
     margin: 0;
-    color: var(--color-dark);
-    font-family: var(--font-title);
+    color: var(--color-black);
+    font-family: var(--font-heading);
     font-size: 24px;
     font-style: italic;
     font-weight: var(--fw-regular);
@@ -124,7 +124,7 @@
     display: -webkit-box;
     margin: 0;
     overflow: hidden;
-    color: var(--color-dark);
+    color: var(--color-black);
     font-family: var(--font-body);
     font-size: 18px;
     font-weight: var(--fw-medium);
@@ -148,7 +148,7 @@
 
   &__item-total {
     margin: 0;
-    color: var(--color-dark);
+    color: var(--color-black);
     font-family: var(--font-body);
     font-size: 14px;
     font-weight: var(--fw-regular);
@@ -157,7 +157,7 @@
 
   &__item-cost {
     margin: 0;
-    color: var(--color-dark);
+    color: var(--color-black);
     font-family: var(--font-body);
     font-size: 20px;
     font-weight: var(--fw-medium);
@@ -183,7 +183,7 @@
       margin: 0;
       min-width: 0;
       color: var(--Gray, #9ca3af);
-      font-family: Inter, sans-serif;
+      font-family: var(--font-body);
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
@@ -253,7 +253,7 @@
     padding: 16px 64px;
     border: 0;
     border-radius: 0;
-    background: var(--color-text);
+    background: var(--color-black);
     box-shadow: 0 10px 20px -10px rgba(26, 26, 26, 0.5);
     color: var(--color-white);
     font-family: var(--font-body);

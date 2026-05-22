@@ -1,5 +1,29 @@
 {
   "title": "Привіт",
+  "header": {
+    "top": {
+      "about": "Про нас",
+      "paymentDelivery": "Оплата та доставка",
+      "promotions": "Акції",
+      "contacts": "Контакти",
+      "blog": "Блог",
+      "account": "Особистий кабінет"
+    },
+    "tagline": "МАГАЗИН ПАРФУМЕРІЇ НА РОЗЛИВ",
+    "searchPlaceholder": "Пошук",
+    "menu": "Меню",
+    "topNavAria": "Інформаційне меню",
+    "categoryNavAria": "Каталог парфумів",
+    "nav": {
+      "men": "Чоловічі",
+      "women": "Жіночі",
+      "unisex": "Унісекс",
+      "elite": "Елітні",
+      "oriental": "Східні",
+      "niche": "Нішеві",
+      "gourmand": "Гурманські"
+    }
+  },
   "navigation": {
     "header": {
       "catalog": "Каталог",
@@ -418,7 +442,8 @@
     "showMoreWithCount": "Показати ще {count} товарів"
   },
   "basket": {
-    "basketCount": "Товарів у кошику",
+    "basketCount": "Товарів у кошику:",
+    "basketCountAria": "Товарів у кошику: {count}",
     "clearConfirm": "Ви впевнені, що хочете очистити кошик?",
     "closeAria": "Закрити кошик",
     "clearAria": "Очистити кошик",
@@ -439,7 +464,12 @@
     "close": "Закрити пошук",
     "popular": "Популярне:",
     "popularItem1": "Лляний сет \"Sable\"",
-    "popularItem2": "Плаття \"Fleur d'été\""
+    "popularItem2": "Плаття \"Fleur d'été\"",
+    "clear": "Очистити пошук",
+    "showAll": "Показати усі результати",
+    "loading": "Завантаження…",
+    "empty": "Результатів не знайдено",
+    "error": "Сталася помилка при завантаженні"
   },
   "authorization": {
     "loginTitle": "Вхід в акаунт",

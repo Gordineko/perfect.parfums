@@ -83,7 +83,7 @@ $success-icon-bg: #ddffe9;
   margin: 51px 0 0;
   color: var(--Dark, #1a1a1a);
   text-align: center;
-  font-family: var(--font-title);
+  font-family: var(--font-heading);
   font-size: 64px;
   font-style: italic;
   font-weight: 400;
@@ -105,7 +105,7 @@ $success-icon-bg: #ddffe9;
 
 .titleAccent {
   color: $success-green;
-  font-family: var(--font-title);
+  font-family: var(--font-heading);
   font-size: inherit;
   font-style: italic;
   font-weight: 400;
@@ -326,7 +326,7 @@ $success-icon-bg: #ddffe9;
 
 .productMeta {
   flex-shrink: 0;
-  color: var(--color-text);
+  color: var(--color-black);
   font-family: var(--font-body);
   font-size: 14px;
   font-weight: 400;

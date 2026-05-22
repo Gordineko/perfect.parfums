@@ -1,5 +1,29 @@
 {
   "title": "Hello",
+  "header": {
+    "top": {
+      "about": "About us",
+      "paymentDelivery": "Payment & delivery",
+      "promotions": "Promotions",
+      "contacts": "Contacts",
+      "blog": "Blog",
+      "account": "Personal account"
+    },
+    "tagline": "DECANT PERFUME STORE",
+    "searchPlaceholder": "Search",
+    "menu": "Menu",
+    "topNavAria": "Information menu",
+    "categoryNavAria": "Perfume catalog",
+    "nav": {
+      "men": "Men's",
+      "women": "Women's",
+      "unisex": "Unisex",
+      "elite": "Elite",
+      "oriental": "Oriental",
+      "niche": "Niche",
+      "gourmand": "Gourmand"
+    }
+  },
   "navigation": {
     "header": {
       "catalog": "Catalog",
@@ -411,7 +435,8 @@
     "showMoreWithCount": "Show {count} more products"
   },
   "basket": {
-    "basketCount": "Items in basket",
+    "basketCount": "Items in cart:",
+    "basketCountAria": "Items in cart: {count}",
     "clearConfirm": "Are you sure you want to empty the cart?",
     "closeAria": "Close cart",
     "clearAria": "Clear cart",
@@ -432,7 +457,12 @@
     "close": "Close search",
     "popular": "Popular:",
     "popularItem1": "Linen set \"Sable\"",
-    "popularItem2": "Dress \"Fleur d'été\""
+    "popularItem2": "Dress \"Fleur d'été\"",
+    "clear": "Clear search",
+    "showAll": "Show all results",
+    "loading": "Loading…",
+    "empty": "No results found",
+    "error": "Failed to load results"
   },
   "authorization": {
     "loginTitle": "Log in to your account",

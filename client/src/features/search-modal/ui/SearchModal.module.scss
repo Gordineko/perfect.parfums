@@ -121,8 +121,8 @@
   outline: none;
   background: transparent;
   padding-left: 0;
-  color: var(--color-text, #1a1a1a);
-  font-family: var(--font-inter), Inter, sans-serif;
+  color: var(--color-black, #1a1a1a);
+  font-family: var(--font-body), var(--font-body);
   font-size: 64px;
   font-weight: 400;
   line-height: normal;

@@ -3,7 +3,7 @@
 .root {
   padding: 0;
   background: var(--color-white);
-  color: var(--color-text);
+  color: var(--color-black);
 }
 
 .inner {
@@ -30,7 +30,7 @@
 .logo {
   width: 122px;
   height: 28px;
-  color: var(--color-text);
+  color: var(--color-black);
 }
 
 .logoSvg {
@@ -43,7 +43,7 @@
   font-size: 16px;
   font-weight: 300;
   line-height: normal;
-  color: var(--color-text-muted);
+  color: var(--color-grey);
 }
 
 .col {
@@ -54,13 +54,13 @@
 }
 
 .kicker {
-  font-family: var(--font-title);
+  font-family: var(--font-heading);
   font-size: 12px;
   font-style: italic;
   font-weight: 400;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--color-text-muted);
+  color: var(--color-grey);
 }
 
 .list {
@@ -76,7 +76,7 @@
   font-size: 15px;
   font-weight: 400;
   line-height: normal;
-  color: var(--color-text);
+  color: var(--color-black);
   transition: opacity 0.15s ease, text-decoration-color 0.15s ease;
   text-decoration: none;
 
@@ -93,7 +93,7 @@
   border: 0;
   padding: 0;
   cursor: pointer;
-  color: var(--color-text-muted);
+  color: var(--color-grey);
   font-weight: 500;
   transform: translateX(0);
   transition: transform 0.2s ease, opacity 0.15s ease;
@@ -117,12 +117,12 @@
   line-height: normal;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--color-text);
+  color: var(--color-black);
 }
 
 .divider {
   width: 100%;
-  border-top: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+  border-top: 1px solid color-mix(in srgb, var(--color-black) 8%, transparent);
 }
 
 .subfooter {
@@ -157,7 +157,7 @@
   line-height: normal;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--color-text);
+  color: var(--color-black);
   transition: opacity 0.15s ease;
   background: transparent;
   border: 0;
@@ -187,8 +187,8 @@
   padding: 12px;
   border-radius: 999px;
   background: var(--color-white);
-  border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
-  color: var(--color-text);
+  border: 1px solid color-mix(in srgb, var(--color-black) 8%, transparent);
+  color: var(--color-black);
   transition:
     transform 0.3s ease,
     opacity 0.15s ease;

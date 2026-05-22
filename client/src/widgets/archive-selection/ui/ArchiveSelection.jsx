@@ -176,7 +176,7 @@ export default function ArchiveSelection({
             <div className={styles["archive-selection__content"]}>
               <p className={styles["archive-selection__eyebrow"]}>{eyebrow}</p>
               <h2
-                className={`${styles["archive-selection__title"]} t-section-title`}
+                className={`${styles["archive-selection__title"]} t-h2`}
                 id={`${sectionId}-err`}
               >
                 {title}
@@ -219,7 +219,7 @@ export default function ArchiveSelection({
           <div className={styles["archive-selection__content"]}>
             <p className={styles["archive-selection__eyebrow"]}>{eyebrow}</p>
             <h2
-              className={`${styles["archive-selection__title"]} t-section-title`}
+              className={`${styles["archive-selection__title"]} t-h2`}
               id={sectionId}
             >
               {title}

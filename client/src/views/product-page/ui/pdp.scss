@@ -353,7 +353,7 @@
     &:hover,
     &:focus-visible,
     &.is-active {
-      border-color: var(--color-text-muted, #6b7280);
+      border-color: var(--color-grey, #6b7280);
     }
   }
 
@@ -482,7 +482,7 @@
   .product-item__price-line {
     margin: 0;
     color: #1a1a1a;
-    font-family: var(--font-title);
+    font-family: var(--font-heading);
     font-size: 36px;
     font-style: italic;
     font-weight: 400;
@@ -499,7 +499,7 @@
   .product-item__price-old {
     margin: 0;
     color: $gray;
-    font-family: var(--font-title);
+    font-family: var(--font-heading);
     font-size: 22px;
     font-style: italic;
     font-weight: 400;
@@ -569,7 +569,7 @@
   &__option-title {
     margin: 0 0 10px;
     color: var(--Dark, #0d0d0d);
-    font-family: var(--font-geologica), Georgia, serif;
+    font-family: var(--font-heading), Georgia, serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -1079,7 +1079,7 @@
     cursor: pointer;
     padding: 16px 0;
     color: var(--Dark, #1a1a1a);
-    font-family: var(--font-geologica), Georgia, serif;
+    font-family: var(--font-heading), Georgia, serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -1391,8 +1391,8 @@
 
   &__title {
     margin: 0;
-    color: var(--color-text);
-    font-family: var(--font-title);
+    color: var(--color-black);
+    font-family: var(--font-heading);
     font-size: 44px;
     font-style: italic;
     font-weight: 400;
@@ -1413,7 +1413,7 @@
 
   &__count {
     color: #1a1a1a;
-    font-family: var(--font-title), Georgia, serif;
+    font-family: var(--font-heading), Georgia, serif;
     font-size: 44px;
     font-style: italic;
     font-weight: 400;
@@ -1552,7 +1552,7 @@
   &__state-text {
     margin: 0 0 16px;
     color: var(--Dark, #1a1a1a);
-    font-family: var(--font-inter), Inter, sans-serif;
+    font-family: var(--font-body), var(--font-body);
     font-size: 16px;
     font-style: normal;
     font-weight: 400;

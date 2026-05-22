@@ -2,18 +2,18 @@ const Search = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="15"
-      height="15"
-      viewBox="0 0 15 15"
+      width="22"
+      height="22"
+      viewBox="0 0 22 22"
       fill="none"
+      aria-hidden
     >
       <path
-        d="M7 12.5C10.3137 12.5 13 9.81371 13 6.5C13 3.18629 10.3137 0.5 7 0.5C3.68629 0.5 1 3.18629 1 6.5C1 9.81371 3.68629 12.5 7 12.5Z"
+        d="M16.1917 16.1569L21 21M18.7778 9.88889C18.7778 14.7981 14.7981 18.7778 9.88889 18.7778C4.97969 18.7778 1 14.7981 1 9.88889C1 4.97969 4.97969 1 9.88889 1C14.7981 1 18.7778 4.97969 18.7778 9.88889Z"
         stroke="currentColor"
-      />
-      <path
-        d="M14 14L11 11"
-        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

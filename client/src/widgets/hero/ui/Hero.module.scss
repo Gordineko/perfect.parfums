@@ -64,7 +64,7 @@
 }
 
 .label {
-  color: var(--color-text);
+  color: var(--color-black);
   text-align: center;
   font-family: var(--font-body);
   font-size: 10px;
@@ -75,9 +75,9 @@
 }
 
 .title {
-  color: var(--color-text);
+  color: var(--color-black);
   text-align: center;
-  font-family: var(--font-title);
+  font-family: var(--font-heading);
   font-size: 85px;
   font-weight: 400;
   line-height: normal;
@@ -99,19 +99,19 @@
   align-items: center;
   justify-content: center;
   padding: 24px 64px;
-  background: var(--color-button-bg);
+  background: var(--color-burgundy);
   border: 0;
   cursor: pointer;
   margin-top: 16px;
-  color: var(--color-button-text);
+  color: var(--color-white);
   transition:
     background-color 0.15s ease,
     color 0.15s ease;
 
   &:hover,
   &:focus-visible {
-    background: color-mix(in srgb, var(--color-white) 98%, var(--color-text) 2%);
-    color: var(--color-text);
+    background: color-mix(in srgb, var(--color-white) 98%, var(--color-black) 2%);
+    color: var(--color-black);
   }
 }
 
@@ -127,7 +127,7 @@
 }
 
 .skeleton {
-  background: color-mix(in srgb, var(--color-text) 6%, transparent);
+  background: color-mix(in srgb, var(--color-black) 6%, transparent);
 }
 
 .skeletonLine,
@@ -135,7 +135,7 @@
 .skeletonBtn {
   width: 240px;
   height: 12px;
-  background: color-mix(in srgb, var(--color-text) 10%, transparent);
+  background: color-mix(in srgb, var(--color-black) 10%, transparent);
 }
 
 .skeletonTitle {

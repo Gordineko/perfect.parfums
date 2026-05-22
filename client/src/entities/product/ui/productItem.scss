@@ -85,7 +85,7 @@
 
   &__price-line {
     color: #1a1a1a;
-    font-family: var(--font-title);
+    font-family: var(--font-heading);
     font-size: 17px;
     font-style: italic;
     font-weight: 400;
@@ -102,7 +102,7 @@
   &__price {
     &-old {
       color: $text-light;
-      font-family: var(--font-main), "Golos Text", sans-serif;
+      font-family: var(--font-body);
       font-size: 16px;
       font-weight: $fw-medium;
       line-height: 1;
@@ -414,7 +414,7 @@ box-shadow: 0 10px 20px -10px rgba(30, 58, 138, 0.50);
 
     .product-item__title-row .product-item__price-old {
       color: var(--Dark, #0D0D0D);
-      font-family: Montserrat;
+      font-family: var(--font-body);
       font-size: 10px;
       font-style: normal;
       font-weight: 600;
@@ -529,7 +529,7 @@ box-shadow: 0 10px 20px -10px rgba(30, 58, 138, 0.50);
     .product-item__price-line {
       margin-top: 8px;
       color: #1a1a1a;
-      font-family: var(--font-title);
+      font-family: var(--font-heading);
       font-size: 17px;
       font-style: italic;
       font-weight: 400;
@@ -545,7 +545,7 @@ box-shadow: 0 10px 20px -10px rgba(30, 58, 138, 0.50);
     .product-item__price-old {
       margin-top: 8px;
       color: $gray;
-      font-family: "Montserrat", $font-primary;
+      font-family: var(--font-heading);
       font-size: 14px;
       font-style: normal;
       font-weight: $fw-semibold;
@@ -565,7 +565,7 @@ box-shadow: 0 10px 20px -10px rgba(30, 58, 138, 0.50);
     cursor: pointer;
     color: var(--Main);
     text-align: center;
-    font-family: "Golos Text", $font-secondary, sans-serif;
+    font-family: var(--font-body), $font-secondary, sans-serif;
     font-size: 10px;
     font-style: normal;
     font-weight: 700;

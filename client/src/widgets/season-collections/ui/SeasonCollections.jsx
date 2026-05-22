@@ -102,7 +102,7 @@ export default function SeasonCollections({ locale = "ua", categories }) {
             <p className={styles.eyebrow}>{t("home.seasonEyebrow")}</p>
             <h2
               id="season-collections-title"
-              className={`${styles.title} t-section-title`}
+              className={`${styles.title} t-h2`}
             >
               {t("home.seasonTitle")}
             </h2>

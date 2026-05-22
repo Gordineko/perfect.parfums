@@ -1,7 +1,5 @@
-/* layout — align with design tokens (--container-max) */
 $container-max: 1500px;
-$container-padding: 24px;
-$container-padding-mobile: 8px;
+$container-padding: clamp(1rem, 3vw, 2.5rem);
 /* colors */
 $white: #fefefe;
 $black: #000;
@@ -44,11 +42,9 @@ $accent-20: rgba($accent, 0.2);
 $accent-30: rgba($accent, 0.3);
 $accent-50: rgba($accent, 0.5);
 /* fonts */
-$font-primary:
-  var(--font-sofia-sans-condensed), sans-serif;
-$font-secondary: "Golos Text";
-$font-tertiary: var(--font-urbanist), $font-primary;
-$font-montserrat: "Montserrat", $font-primary;
+$font-primary: var(--font-heading);
+$font-secondary: var(--font-body);
+$font-montserrat: var(--font-heading);
 /* font weights */
 $fw-regular: 400;
 $fw-medium: 500;

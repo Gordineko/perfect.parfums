@@ -55,7 +55,7 @@
       align-items: center;
       justify-content: center;
       padding: 4px 12px;
-      background: var(--color-text);
+      background: var(--color-black);
 
       @include mobile-only {
         top: 10px;
@@ -236,7 +236,7 @@
 
       .product-item__price-old,
       .product-item__price-line--sale {
-        font-family: var(--font-title);
+        font-family: var(--font-heading);
         font-style: italic;
       }
 

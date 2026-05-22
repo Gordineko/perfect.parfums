@@ -1,6 +1,6 @@
 @mixin profile-input-value-text {
     color: var(--Dark, #0d0d0d);
-    font-family: Inter, sans-serif;
+    font-family: var(--font-body);
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -22,7 +22,7 @@
     select,
     textarea {
         color: var(--Dark, #0D0D0D);
-        font-family: "Golos Text";
+        font-family: var(--font-body);
         font-size: 16px;
         font-style: normal;
         font-weight: 600;
@@ -87,7 +87,7 @@
             overflow-wrap: anywhere;
             word-break: break-word;
             color: var(--Dark, #0D0D0D);
-            font-family: Montserrat;
+            font-family: var(--font-body);
             font-size: 32px;
             font-style: normal;
             font-weight: 700;
@@ -174,15 +174,15 @@
         }
 
         .user-details__head .num {
-            background: var(--color-text);
+            background: var(--color-black);
             color: var(--color-white);
         }
 
         .user-details__head span {
             flex: 1 1 auto;
             width: 100%;
-            color: var(--color-dark);
-            font-family: var(--font-title);
+            color: var(--color-black);
+            font-family: var(--font-heading);
             font-size: 33px;
             font-style: italic;
             font-weight: var(--fw-regular);
@@ -250,7 +250,7 @@
             min-height: 53px !important;
             padding: 0 16px !important;
             color: var(--Dark, #0d0d0d) !important;
-            font-family: Inter, sans-serif !important;
+            font-family: var(--font-body) !important;
             font-size: 16px !important;
             font-style: normal !important;
             font-weight: 400 !important;
@@ -353,7 +353,7 @@
             text-overflow: ellipsis !important;
             white-space: nowrap !important;
             color: var(--Dark, #0d0d0d) !important;
-            font-family: Inter, sans-serif !important;
+            font-family: var(--font-body) !important;
             font-size: 16px !important;
             font-style: normal !important;
             font-weight: 400 !important;
@@ -368,7 +368,7 @@
             margin: 0 !important;
             padding: 0 !important;
             color: var(--Dark, #0d0d0d) !important;
-            font-family: Inter, sans-serif !important;
+            font-family: var(--font-body) !important;
             font-size: 16px !important;
             font-weight: 400 !important;
             line-height: 20px !important;
@@ -405,7 +405,7 @@
 
         :global(.react-select__option) {
             color: var(--Dark, #0d0d0d) !important;
-            font-family: Inter, sans-serif !important;
+            font-family: var(--font-body) !important;
             font-size: 16px !important;
             font-style: normal !important;
             font-weight: 400 !important;
@@ -465,7 +465,7 @@
             padding: 16px 64px;
             border: 0;
             border-radius: 0;
-            background: var(--color-text);
+            background: var(--color-black);
             box-shadow: 0 10px 20px -10px rgba(26, 26, 26, 0.5);
             color: var(--color-white);
             text-align: center;
@@ -655,11 +655,11 @@
                 &:hover {
                     transform: none;
                     box-shadow: none;
-                    border-color: var(--color-text);
+                    border-color: var(--color-black);
                 }
 
                 &.active {
-                    border-color: var(--color-text);
+                    border-color: var(--color-black);
                     background: #fbfbf9;
                 }
 
@@ -669,8 +669,8 @@
             }
 
             &__title {
-                color: var(--color-dark);
-                font-family: var(--font-title);
+                color: var(--color-black);
+                font-family: var(--font-heading);
                 font-size: 20px;
                 font-style: italic;
                 font-weight: var(--fw-regular);
@@ -724,7 +724,7 @@
         box-shadow: 0 10px 20px -10px rgba(255, 153, 214, 0.50);
         color: var(--White, #FFF);
         text-align: center;
-        font-family: "Golos Text";
+        font-family: var(--font-body);
         font-size: 16px;
         font-weight: 700;
     }
@@ -768,7 +768,7 @@
     height: 53px !important;
     border-radius: 0 !important;
     color: var(--Dark, #0d0d0d) !important;
-    font-family: "Golos Text" !important;
+    font-family: var(--font-body) !important;
     font-size: 16px !important;
     font-style: normal !important;
     font-weight: 600 !important;
@@ -780,7 +780,7 @@
     height: 53px !important;
     padding: 0 16px !important;
     color: var(--Dark, #0d0d0d) !important;
-    font-family: Inter, sans-serif !important;
+    font-family: var(--font-body) !important;
     font-size: 16px !important;
     font-style: normal !important;
     font-weight: 400 !important;
@@ -890,7 +890,7 @@
         line-height: normal;
         @include down($bp-tablet) {
             color: var(--Dark, #0D0D0D);
-            font-family: "Golos Text";
+            font-family: var(--font-body);
             font-size: 18px;
             font-style: normal;
             font-weight: 600;
@@ -903,7 +903,7 @@
         overflow-wrap: anywhere;
         word-break: break-word;
         color: var(--Gray, #9CA3AF);
-        font-family: "Golos Text";
+        font-family: var(--font-body);
         font-size: 14px;
         font-style: normal;
         font-weight: 500;

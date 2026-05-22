@@ -1,6 +1,6 @@
 @use "../../../shared/ui/styles/variables.scss" as *;
 
-$font-inter-stack: var(--font-inter), Inter, sans-serif;
+$font-ui: var(--font-body);
 $review-heading-color: #1a1a1a;
 $submit-bg-hover: rgba(13, 13, 13, 0.8);
 
@@ -93,7 +93,7 @@ $submit-bg-hover: rgba(13, 13, 13, 0.8);
   .title {
     margin: 0 0 8px;
     color: $review-heading-color;
-    font-family: $font-inter-stack;
+    font-family: $font-ui;
     font-size: 32px;
     font-style: normal;
     font-weight: 300;
@@ -114,7 +114,7 @@ $submit-bg-hover: rgba(13, 13, 13, 0.8);
   .subtitle {
     margin: 0;
     color: var(--Gray, #{$gray});
-    font-family: $font-inter-stack;
+    font-family: $font-ui;
     font-size: 20px;
     font-style: normal;
     font-weight: $fw-regular;
@@ -175,7 +175,7 @@ $submit-bg-hover: rgba(13, 13, 13, 0.8);
   .labelAccent,
   .labelText {
     color: $review-heading-color;
-    font-family: $font-inter-stack;
+    font-family: $font-ui;
     font-size: 14px;
     font-style: normal;
     font-weight: $fw-medium;
@@ -192,7 +192,7 @@ $submit-bg-hover: rgba(13, 13, 13, 0.8);
     background: transparent;
     outline: none;
     color: $review-heading-color;
-    font-family: $font-inter-stack;
+    font-family: $font-ui;
     font-size: 16px;
     font-style: normal;
     font-weight: $fw-regular;
@@ -204,7 +204,7 @@ $submit-bg-hover: rgba(13, 13, 13, 0.8);
 
     &::placeholder {
       color: $gray-999-50;
-      font-family: $font-inter-stack;
+      font-family: $font-ui;
       font-size: 16px;
       font-style: normal;
       font-weight: $fw-regular;
@@ -231,7 +231,7 @@ $submit-bg-hover: rgba(13, 13, 13, 0.8);
 
     &::placeholder {
       color: $gray-999-50;
-      font-family: $font-inter-stack;
+      font-family: $font-ui;
       font-size: 16px;
       font-style: normal;
       font-weight: $fw-regular;
@@ -261,7 +261,7 @@ $submit-bg-hover: rgba(13, 13, 13, 0.8);
     align-self: flex-start;
     text-align: left;
     color: $review-heading-color;
-    font-family: $font-inter-stack;
+    font-family: $font-ui;
     font-size: 14px;
     font-style: normal;
     font-weight: $fw-medium;
@@ -288,7 +288,7 @@ $submit-bg-hover: rgba(13, 13, 13, 0.8);
   border-radius: 0;
   background: var(--Dark, #{$dark});
   color: var(--White, #fff);
-  font-family: $font-inter-stack;
+  font-family: $font-ui;
   font-size: 16px;
   font-style: normal;
   font-weight: $fw-regular;
@@ -334,7 +334,7 @@ $submit-bg-hover: rgba(13, 13, 13, 0.8);
 .successTitle {
   margin: 0;
   color: $review-heading-color;
-  font-family: $font-inter-stack;
+  font-family: $font-ui;
   font-size: 20px;
   font-style: normal;
   font-weight: $fw-medium;
@@ -346,7 +346,7 @@ $submit-bg-hover: rgba(13, 13, 13, 0.8);
   margin: 0;
   color: $review-heading-color;
   text-align: center;
-  font-family: $font-inter-stack;
+  font-family: $font-ui;
   font-size: 16px;
   font-style: normal;
   font-weight: $fw-regular;

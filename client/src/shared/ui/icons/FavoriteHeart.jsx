@@ -2,6 +2,8 @@ const FavoriteHeart = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
+      width="27"
+      height="24"
       viewBox="0 0 10 9"
       fill="none"
       aria-hidden

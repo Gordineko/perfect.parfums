@@ -1,19 +1,30 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import clsx from "clsx";
+import { useEffect, useRef, useState } from "react";
 
 import styles from "./Header.module.scss";
 
-export default function HeaderSticky({ children }) {
-  const [isScrolled, setIsScrolled] = useState(false);
+export default function HeaderSticky({ lightHeader, navBar }) {
+  const lightRef = useRef(null);
+  const navRef = useRef(null);
+  const sentinelRef = useRef(null);
+  const [isPinned, setIsPinned] = useState(false);
+  const [navHeight, setNavHeight] = useState(0);
   const [isNotFoundPage, setIsNotFoundPage] = useState(false);
 
   useEffect(() => {
-    const update = () => setIsScrolled(window.scrollY > 4);
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
-  }, []);
+    const sentinel = sentinelRef.current;
+    if (!sentinel || isNotFoundPage) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsPinned(!entry.isIntersecting),
+      { root: null, threshold: 0 },
+    );
+
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [isNotFoundPage]);
 
   useEffect(() => {
     const syncNotFound = () => {
@@ -32,18 +43,65 @@ export default function HeaderSticky({ children }) {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const lightEl = lightRef.current;
+    const navEl = navRef.current;
+    if (!lightEl) return;
+
+    const syncMetrics = () => {
+      const lightHeight = Math.ceil(lightEl.getBoundingClientRect().height);
+      const navH = navEl ? Math.ceil(navEl.getBoundingClientRect().height) : 0;
+
+      setNavHeight(navH);
+      document.documentElement.style.setProperty(
+        "--header-light-height",
+        `${lightHeight}px`,
+      );
+      document.documentElement.style.setProperty("--header-nav-height", `${navH}px`);
+      document.documentElement.style.setProperty(
+        "--header-offset",
+        `${lightHeight + navH}px`,
+      );
+      document.documentElement.style.setProperty(
+        "--header-offset-compact",
+        `${navH}px`,
+      );
+    };
+
+    syncMetrics();
+    const observer = new ResizeObserver(syncMetrics);
+    observer.observe(lightEl);
+    if (navEl) observer.observe(navEl);
+
+    return () => observer.disconnect();
+  }, [isNotFoundPage, isPinned]);
+
   return (
-    <header
-      className={[
-        styles.root,
-        isScrolled ? styles.scrolled : "",
-        isNotFoundPage ? styles.rootNotFound : "",
-      ]
-        .filter(Boolean)
-        .join(" ")}
+    <div
+      className={clsx(styles.siteHeader, isNotFoundPage && styles.siteHeaderNotFound)}
     >
-      {children}
-    </header>
+      <div ref={lightRef} className={styles.lightHeader}>
+        {lightHeader}
+      </div>
+
+      {!isNotFoundPage ? (
+        <>
+          <div ref={sentinelRef} className={styles.sentinel} aria-hidden="true" />
+          {isPinned && navHeight > 0 ? (
+            <div
+              className={styles.navPlaceholder}
+              style={{ height: navHeight }}
+              aria-hidden="true"
+            />
+          ) : null}
+          <div
+            ref={navRef}
+            className={clsx(styles.burgundyBar, isPinned && styles.burgundyPinned)}
+          >
+            {navBar}
+          </div>
+        </>
+      ) : null}
+    </div>
   );
 }
-

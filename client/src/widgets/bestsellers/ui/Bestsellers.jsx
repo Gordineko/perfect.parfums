@@ -121,7 +121,7 @@ export default function Bestsellers({
               {t("catalog.bestsellersEyebrow")}
             </p>
             <h2
-              className={`${styles.title} t-section-title`}
+              className={`${styles.title} t-h2`}
               id={`${sectionId}-err`}
             >
               {t("catalog.bestsellersTitle")}
@@ -153,7 +153,7 @@ export default function Bestsellers({
             <p className={styles.eyebrow}>
               {t("catalog.bestsellersEyebrow")}
             </p>
-            <h2 className={`${styles.title} t-section-title`} id={sectionId}>
+            <h2 className={`${styles.title} t-h2`} id={sectionId}>
               {t("catalog.bestsellersTitle")}
             </h2>
           </div>

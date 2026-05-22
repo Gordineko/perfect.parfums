@@ -40,7 +40,7 @@ export default function PageHeader({
 
       <div className="container">
         <div className="page-header__header">
-          <h1 className="page-header__title t-page-title">
+          <h1 className="page-header__title t-h1">
             {title}
           </h1>
         </div>

@@ -45,7 +45,7 @@
   width: 159px;
   height: 64px;
   flex-shrink: 0;
-  color: var(--color-dark);
+  color: var(--color-black);
 }
 
 .nav {
@@ -79,7 +79,7 @@
   font-size: var(--fs-button);
   font-weight: var(--fw-medium);
   line-height: normal;
-  letter-spacing: var(--tracking-label);
+  letter-spacing: 0.125rem;
   text-transform: uppercase;
   text-decoration: none;
   border: 0;
@@ -97,7 +97,7 @@
 }
 
 .navItemActive {
-  color: var(--color-text);
+  color: var(--color-black);
   font-weight: $fw-semibold;
 }
 

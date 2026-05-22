@@ -1,7 +1,7 @@
 @import "../../../shared/ui/styles/variables.scss";
 
 @mixin inter($size, $weight: 400) {
-  font-family: Inter, sans-serif;
+  font-family: var(--font-body);
   font-size: $size;
   font-weight: $weight;
   line-height: normal;

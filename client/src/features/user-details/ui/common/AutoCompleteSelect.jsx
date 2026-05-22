@@ -29,7 +29,7 @@ const PROFILE_BORDER_DEFAULT = "rgba(153, 153, 153, 0.5)";
 const PROFILE_BORDER_FOCUSED = "var(--Dark, #1A1A1A)";
 const PROFILE_VALUE_TEXT = {
   color: "var(--Dark, #0D0D0D)",
-  fontFamily: "Inter, sans-serif",
+  fontFamily: "var(--font-body)",
   fontSize: "16px",
   fontStyle: "normal",
   fontWeight: 400,
@@ -171,7 +171,7 @@ export default function AutoCompleteSelect({
       ? PROFILE_VALUE_TEXT
       : {
           color: "var(--Dark, #0D0D0D)",
-          fontFamily: "\"Golos Text\"",
+          fontFamily: "var(--font-body)",
           fontSize: controlFontSize,
           fontStyle: "normal",
           fontWeight: 600,

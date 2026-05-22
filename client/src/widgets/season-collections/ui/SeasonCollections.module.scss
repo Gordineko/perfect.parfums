@@ -38,7 +38,7 @@
   margin: 0;
   color: #9ca3af;
   font-family: var(--font-body);
-  font-size: var(--fs-label);
+  font-size: 0.625rem;
   font-weight: var(--fw-medium);
   letter-spacing: 3px;
   text-transform: uppercase;
@@ -94,17 +94,17 @@
   background: transparent;
   padding: 0;
   font-family: var(--font-body);
-  font-size: var(--fs-label);
+  font-size: 0.625rem;
   font-weight: var(--fw-regular);
   line-height: 15px;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--color-text) 50%, transparent);
+  color: color-mix(in srgb, var(--color-black) 50%, transparent);
   cursor: pointer;
   transition: color 0.15s ease;
 
   &:not(:disabled) {
-    color: var(--color-text);
+    color: var(--color-black);
   }
 
   &:disabled {
@@ -142,7 +142,7 @@
   width: 100%;
   height: 660px;
   overflow: hidden;
-  background: var(--color-surface-soft);
+  background: var(--color-nude);
   color: var(--color-white);
 
   @media (max-width: 1249.98px) and (min-width: 768px) {
@@ -179,7 +179,7 @@
   justify-content: flex-end;
   align-items: flex-start;
   padding: var(--space-12);
-  background: color-mix(in srgb, var(--color-text) 20%, transparent);
+  background: color-mix(in srgb, var(--color-black) 20%, transparent);
   pointer-events: none;
 
   @media (max-width: 1249.98px) and (min-width: 768px) {
@@ -195,9 +195,9 @@
   margin: 0 0 var(--space-3);
   color: #fafafa;
   font-family: var(--font-body);
-  font-size: var(--fs-label);
+  font-size: 0.625rem;
   font-weight: var(--fw-medium);
-  letter-spacing: var(--tracking-label);
+  letter-spacing: 0.125rem;
   text-transform: uppercase;
 
   @media (max-width: 1249.98px) {
@@ -208,7 +208,7 @@
 .cardTitle {
   margin: 0 0 var(--space-6);
   color: var(--color-white);
-  font-family: var(--font-title);
+  font-family: var(--font-heading);
   font-size: 36px;
   font-style: italic;
   font-weight: var(--fw-regular);
@@ -229,7 +229,7 @@
   position: relative;
   display: inline-block;
   font-family: var(--font-body);
-  font-size: var(--fs-label);
+  font-size: 0.625rem;
   font-weight: var(--fw-medium);
   letter-spacing: 3px;
   text-transform: uppercase;

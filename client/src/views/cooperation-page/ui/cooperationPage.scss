@@ -90,7 +90,7 @@
     z-index: 0;
     transform: translate(-50%, -50%);
 
-    font-family: $font-tertiary;
+    font-family: $font-secondary;
     font-weight: $fw-bold;
     font-size: 330px;
     font-style: normal;
@@ -176,7 +176,7 @@
   &__eyebrow {
     margin: 0;
     color: $accent;
-    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-family: var(--font-body), $font-secondary, sans-serif;
     font-size: 10px;
     font-style: normal;
     font-weight: $fw-bold;
@@ -207,7 +207,7 @@
     margin: 0;
     max-width: min(100%, 480px);
     color: $gray;
-    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-family: var(--font-body), $font-secondary, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: $fw-bold;
@@ -378,7 +378,7 @@
   &__text {
     margin: 0 0 16px;
     color: $gray;
-    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-family: var(--font-body), $font-secondary, sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: $fw-medium;
@@ -412,7 +412,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
-    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-family: var(--font-body), $font-secondary, sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: $fw-medium;

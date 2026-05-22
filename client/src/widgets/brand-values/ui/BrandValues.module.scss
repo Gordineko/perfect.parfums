@@ -40,9 +40,9 @@
 
 .quoteText {
   margin: 0;
-  color: var(--color-text);
+  color: var(--color-black);
   text-align: center;
-  font-family: var(--font-title);
+  font-family: var(--font-heading);
   font-size: 42px;
   font-style: italic;
   line-height: normal;
@@ -64,7 +64,7 @@
 
 .statement {
   margin: 0;
-  color: var(--color-text-muted);
+  color: var(--color-grey);
   text-align: center;
   font-family: var(--font-body);
   font-size: 14px;
@@ -121,8 +121,8 @@
 
 .pillarTitle {
   margin: 0;
-  color: var(--color-text);
-  font-family: var(--font-title);
+  color: var(--color-black);
+  font-family: var(--font-heading);
   font-size: 22px;
   font-style: italic;
   line-height: normal;
