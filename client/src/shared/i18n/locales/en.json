@@ -74,6 +74,11 @@
     "logoutError": "Failed to log out. Please try again."
   },
   "hero": {
+    "banner": {
+      "eyebrow": "ORIGINAL PERFUMERY",
+      "line1": "For those who",
+      "line2": "are used to leaving a mark"
+    },
     "slides": {
       "main": {
         "title": "Structure.Lab",
@@ -284,7 +289,7 @@
     "responseCode": "Response code: {code}"
   },
   "home": {
-    "heroCta": "View collection",
+    "heroCta": "Go to catalog",
     "heroFallbackTitle": "Atelier aesthetics\nin every detail",
     "seasonEyebrow": "Lookbook Stories",
     "seasonTitle": "Season collections",

@@ -74,6 +74,11 @@
     "logoutError": "Не вдалося вийти з акаунта. Спробуйте ще раз."
   },
   "hero": {
+    "banner": {
+      "eyebrow": "ОРИГІНАЛЬНА ПАРФУМЕРІЯ",
+      "line1": "Для тих, хто",
+      "line2": "звик залишати слід"
+    },
     "slides": {
       "main": {
         "title": "own the",
@@ -291,7 +296,7 @@
     "responseCode": "Код відповіді: {code}"
   },
   "home": {
-    "heroCta": "Дивитися колекцію",
+    "heroCta": "Перейти в каталог",
     "heroFallbackTitle": "Естетика ательє\nв кожній деталі",
     "seasonEyebrow": "Lookbook Stories",
     "seasonTitle": "Колекції сезону",

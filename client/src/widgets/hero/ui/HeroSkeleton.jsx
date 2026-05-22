@@ -13,9 +13,12 @@ export default function HeroSkeleton() {
       aria-busy="true"
       aria-label={t("aria.heroLoading")}
     >
+      <div className={styles.skeletonBanner}>
+        <div className={styles.skeletonHalf} />
+        <div className={styles.skeletonHalf} />
+      </div>
       <div className={styles.overlay}>
-        <div className={`ds-container ${styles.content}`}>
-          <div className={styles.skeletonLine} />
+        <div className={styles.content}>
           <div className={styles.skeletonTitle} />
           <div className={styles.skeletonBtn} />
         </div>

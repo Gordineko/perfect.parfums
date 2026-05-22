@@ -7,7 +7,6 @@ import {
 import ArchiveSelection from "@widgets/archive-selection";
 import Bestsellers from "@widgets/bestsellers";
 import { getPopularCatalogCards, getSaleCatalogCards } from "@shared/api/productsServices";
-import { getHomeBanners } from "@shared/api/bannerServices";
 import BrandValues from "@widgets/brand-values";
 import CategoryBanners from "@widgets/category-banners";
 import Footer from "@widgets/Footer";
@@ -34,13 +33,10 @@ export default async function HomePage({ params }) {
   const categories = await getAllCategory();
   const popularProducts = await getPopularCatalogCards();
   const saleProducts = await getSaleCatalogCards();
-  const bannersResponse = await getHomeBanners();
-  const banners = bannersResponse?.items ?? [];
-
   return (
     <>
       <Suspense fallback={<HeroSkeleton />}>
-        <HeroServerBlock locale={locale} banners={banners} />
+        <HeroServerBlock locale={locale} />
       </Suspense>
 
       <SeasonCollections locale={locale} categories={categories} />
