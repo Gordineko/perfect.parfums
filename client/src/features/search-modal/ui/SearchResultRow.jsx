@@ -1,6 +1,7 @@
 "use client";
 
 import { getLocalizedProductField } from "@entities/product/model/getLocalizedProductField";
+import { localePath } from "@shared/lib/localePath";
 import { pickPrimaryImageFromProduct } from "@entities/product/model/pickPrimaryImageFromProduct";
 import { resolveProductSlug } from "@entities/product/model/resolveProductSlug";
 import Image from "next/image";
@@ -12,11 +13,14 @@ export default function SearchResultRow({ product, locale, onClose }) {
   const slug = resolveProductSlug(product, locale);
   if (!slug) return null;
 
-  const href = `/${locale}/product/${slug
-    .split("/")
-    .filter(Boolean)
-    .map((segment) => encodeURIComponent(segment))
-    .join("/")}`;
+  const href = localePath(
+    locale,
+    `product/${slug
+      .split("/")
+      .filter(Boolean)
+      .map((segment) => encodeURIComponent(segment))
+      .join("/")}`,
+  );
 
   const title = getLocalizedProductField(product, "title", locale);
   const imageSrc = pickPrimaryImageFromProduct(product);

@@ -9,6 +9,7 @@ import MainNav, {
   FavoriteProductIcon,
   LanguageSwitcher,
 } from "@shared";
+import { localePath } from "@shared/lib/localePath";
 import { MODALS } from "@shared/config/modals";
 import { useI18n } from "@shared/i18n/use-i18n";
 import SocialLinks from "@shared/ui/SocialLinks";
@@ -61,7 +62,7 @@ const BurgerMenu = ({
       >
         <div className="burger-menu__header">
           <Link
-            href={`/${locale}`}
+            href={localePath(locale)}
             className="burger-menu__logo-link"
             aria-label={t("aria.homeLogo")}
             onClick={() => setIsModalOpen(null)}

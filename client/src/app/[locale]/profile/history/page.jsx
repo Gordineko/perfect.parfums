@@ -1,4 +1,5 @@
 import OrderItem from "@entities/order-item/ui/OrderItem";
+import { localePath } from "@shared/lib/localePath";
 import { getCurrentUser } from "@shared/api/authServices";
 import { getUserOrders } from "@shared/api/orderServices";
 import { getMessages } from "@shared/i18n/getMessages";
@@ -30,7 +31,7 @@ export default async function HistoryPage({ params }) {
         <div className={historyStyles.empty}>
           <p>{t("profile.noOrders")}</p>
           <Link
-            href={`/${locale}/categories/all`}
+            href={localePath(locale, "/categories/all")}
             className={historyStyles.emptyAction}
           >
             {t("basket.startShopping")}

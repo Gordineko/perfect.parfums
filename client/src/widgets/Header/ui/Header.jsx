@@ -1,4 +1,5 @@
 import { getLocalizedNavigation } from "@shared/config/navItems";
+import { localePath } from "@shared/lib/localePath";
 import { getMessages } from "@shared/i18n/getMessages";
 import { createI18nServer } from "@shared/i18n/server";
 import AuthModal from "@widgets/auth-modal/ui/AuthModal";
@@ -33,7 +34,7 @@ export default async function Header({ locale, categories }) {
               <ul className={styles.topList}>
                 {HEADER_TOP_LINKS.map(({ id, path, labelKey }) => (
                   <li key={id}>
-                    <Link href={`/${locale}/${path}`} className={styles.topLink}>
+                    <Link href={localePath(locale, path)} className={styles.topLink}>
                       {t(labelKey)}
                     </Link>
                   </li>
@@ -51,7 +52,7 @@ export default async function Header({ locale, categories }) {
             <div className={styles.mainRowTablet}>
               <HeaderMobileToggle labelKey="header.menu" variant="lines" />
               <Link
-                href={`/${locale}`}
+                href={localePath(locale)}
                 className={styles.logoLink}
                 aria-label={t("aria.homeLogo")}
               >
@@ -66,7 +67,7 @@ export default async function Header({ locale, categories }) {
             <div className={styles.mainRowMobile}>
               <HeaderMobileToggle labelKey="header.menu" variant="lines" />
               <Link
-                href={`/${locale}`}
+                href={localePath(locale)}
                 className={styles.logoLink}
                 aria-label={t("aria.homeLogo")}
               >
@@ -80,7 +81,7 @@ export default async function Header({ locale, categories }) {
 
             <div className={styles.mainRowDesktop}>
               <Link
-                href={`/${locale}`}
+                href={localePath(locale)}
                 className={styles.logoLink}
                 aria-label={t("aria.homeLogo")}
               >

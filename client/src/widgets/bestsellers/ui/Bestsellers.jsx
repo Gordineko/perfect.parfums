@@ -1,5 +1,6 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -158,7 +159,7 @@ export default function Bestsellers({
             </h2>
           </div>
           <Link
-            href={`/${locale}/categories/girls`}
+            href={localePath(locale, "/categories/girls")}
             className={styles.allLink}
           >
             {t("catalog.allProducts")}

@@ -1,4 +1,5 @@
 import { createI18nServer, getMessages } from "@shared";
+import { localePath } from "@shared/lib/localePath";
 import Hero from "@widgets/hero";
 
 export default async function HeroServerBlock({ locale }) {
@@ -15,7 +16,7 @@ export default async function HeroServerBlock({ locale }) {
       line1={t("hero.banner.line1")}
       line2={t("hero.banner.line2")}
       ctaLabel={t("home.heroCta")}
-      catalogHref={`/${locale}/categories/all`}
+      catalogHref={localePath(locale, "/categories/all")}
     />
   );
 }

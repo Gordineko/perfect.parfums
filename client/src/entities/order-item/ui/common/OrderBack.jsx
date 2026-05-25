@@ -1,5 +1,6 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import { useI18n } from "@shared/i18n/use-i18n";
 import { useParams, useRouter } from "next/navigation";
 
@@ -13,7 +14,7 @@ const OrderBack = () => {
     <span
       className="ob"
       onClick={() => {
-        router.push(`/${locale}/profile/history`);
+        router.push(localePath(locale, "/profile/history"));
       }}
     >
       <svg

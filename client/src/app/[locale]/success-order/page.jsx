@@ -4,6 +4,7 @@ import {
   getMessages,
 } from "@shared";
 import SuccessCheckIcon from "@shared/ui/icons/SuccessCheckIcon";
+import { localePath } from "@shared/lib/localePath";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -152,12 +153,12 @@ export default async function SuccessOrderPage({ params, searchParams }) {
             </div>
 
             <nav className={styles.actions} aria-label={t("successOrderPage.actionsAria")}>
-              <Link className={styles.actionLink} href={`/${locale}/`}>
+              <Link className={styles.actionLink} href={localePath(locale)}>
                 {t("successOrderPage.homeLink")}
               </Link>
               <Link
                 className={styles.actionLink}
-                href={`/${locale}/categories/all`}
+                href={localePath(locale, "/categories/all")}
               >
                 {t("successOrderPage.catalogLink")}
               </Link>

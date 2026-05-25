@@ -1,9 +1,6 @@
+import { localePath, pathWithoutLocale } from "@shared/lib/localePath";
 
 export const replaceLocaleInPath = (path, newLocale) => {
-  const segments = path.split("/").filter(Boolean);
-  if (segments.length > 0) {
-    segments[0] = newLocale;
-    return "/" + segments.join("/");
-  }
-  return "/" + newLocale;
+  const base = pathWithoutLocale(path);
+  return localePath(newLocale, base === "/" ? "" : base);
 };

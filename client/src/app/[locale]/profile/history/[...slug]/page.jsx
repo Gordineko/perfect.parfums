@@ -1,4 +1,5 @@
 import { getOrderItemCategoryLabel } from "@entities/order-item/lib/getOrderItemCategoryLabel";
+import { localePath } from "@shared/lib/localePath";
 import { getCities, getWarehouses } from "@shared/api/Nova-poshta";
 import { getMessages } from "@shared/i18n/getMessages";
 import { createI18nServer } from "@shared/i18n/server";
@@ -84,7 +85,7 @@ export default async function OrderPage({ params }) {
 
         <div className={`${ordStyles.card} ${ordStyles.empty}`}>
           <p>{t("profile.orderNotFound")}</p>
-          <Link href={`/${locale}/profile/history`} className="basket__action">
+          <Link href={localePath(locale, "/profile/history")} className="basket__action">
             <p>{t("profile.backToOrders")}</p>
           </Link>
         </div>

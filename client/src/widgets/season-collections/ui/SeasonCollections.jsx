@@ -1,5 +1,6 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import "swiper/css";
 
 import { BREAKPOINTS, useI18n } from "@shared";
@@ -44,7 +45,7 @@ function CollectionCard({ collection, locale, viewLookbookLabel }) {
 
   return (
     <Link
-      href={`/${locale}/categories/${collection.href}`}
+      href={localePath(locale, "/categories/${collection.href}")}
       className={styles.card}
     >
       <div className={styles.cardMedia}>

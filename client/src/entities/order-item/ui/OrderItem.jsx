@@ -1,4 +1,6 @@
 "use client";
+
+import { localePath } from "@shared/lib/localePath";
 import { useI18n } from "@shared/i18n/use-i18n";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -142,7 +144,7 @@ const OrderItem = ({ order, locale }) => {
         <p>{order.totalToPay} ₴</p>
         <button
           onClick={() =>
-            router.push(`/${locale}/profile/history/${order.orderNumber}`)
+            router.push(localePath(locale, "/profile/history/${order.orderNumber}"))
           }
         >
           {t("profile.orderDetails")}

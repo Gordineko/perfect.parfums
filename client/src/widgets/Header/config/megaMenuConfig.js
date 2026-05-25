@@ -1,3 +1,5 @@
+import { localePath } from "@shared/lib/localePath";
+
 const COLLECTION_IMAGE_BASE = "/img";
 
 export const MEGA_MENU_IDS = {
@@ -143,5 +145,5 @@ export function pickLocalizedText(value, locale) {
 
 export function megaMenuCategoryHref(locale, href) {
   const path = String(href ?? "").replace(/^\//, "");
-  return `/${locale}/categories/${path}`;
+  return localePath(locale, `/categories/${path}`);
 }

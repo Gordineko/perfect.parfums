@@ -1,5 +1,6 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import { useI18n } from "@shared/i18n/use-i18n";
 import clsx from "clsx";
 import Link from "next/link";
@@ -17,7 +18,7 @@ export default function HeaderCategoryNav({ locale }) {
       <div className="container">
         <ul className={styles.categoryList}>
           {HEADER_CATEGORY_NAV.map(({ id, slug, labelKey }) => {
-            const href = `/${locale}/categories/${slug}`;
+            const href = localePath(locale, `/categories/${slug}`);
             const isActive =
               typeof pathname === "string" &&
               (pathname === href || pathname.startsWith(`${href}/`));

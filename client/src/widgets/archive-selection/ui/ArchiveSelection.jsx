@@ -1,5 +1,6 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -183,7 +184,7 @@ export default function ArchiveSelection({
               </h2>
               <p className={styles["archive-selection__summary"]}>{summary}</p>
               <Link
-                href={`/${locale}/categories/sale`}
+                href={localePath(locale, "/categories/sale")}
                 className={styles["archive-selection__cta"]}
               >
                 {ctaLabel}
@@ -226,7 +227,7 @@ export default function ArchiveSelection({
             </h2>
             <p className={styles["archive-selection__summary"]}>{summary}</p>
             <Link
-              href={`/${locale}/categories/sale`}
+              href={localePath(locale, "/categories/sale")}
               className={styles["archive-selection__cta"]}
             >
               {ctaLabel}

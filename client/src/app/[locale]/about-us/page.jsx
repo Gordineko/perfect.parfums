@@ -5,6 +5,7 @@ import {
   getMessages,
 } from "@shared";
 import PageHeader from "@shared/ui/PageHeader";
+import { localePath } from "@shared/lib/localePath";
 import Footer from "@widgets/Footer";
 import Image from "next/image";
 import Link from "next/link";
@@ -106,7 +107,7 @@ export default async function AboutUsPage({ params }) {
 
           <section className={styles.cta}>
             <h2 className={styles.ctaTitle}>{t("aboutPage.ctaTitle")}</h2>
-            <Link href={`/${locale}/categories/all`} className={styles.ctaButton}>
+            <Link href={localePath(locale, "/categories/all")} className={styles.ctaButton}>
               {t("aboutPage.ctaButton")}
             </Link>
           </section>

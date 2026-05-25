@@ -1,5 +1,6 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import "./basket.scss";
 
 import ProductItem from "@entities/product";
@@ -84,7 +85,7 @@ const Basket = ({ locale }) => {
                     type="button"
                     className="basket__action"
                     onClick={() => {
-                      router.push(`/${locale}/categories/all`);
+                      router.push(localePath(locale, "/categories/all"));
                       setIsModalOpen(null);
                     }}
                   >
@@ -131,7 +132,7 @@ const Basket = ({ locale }) => {
                       type="button"
                       className="basket__checkout"
                       onClick={() => {
-                        router.push(`/${locale}/order`);
+                        router.push(localePath(locale, "/order"));
                         setIsModalOpen(null);
                       }}
                     >
@@ -142,7 +143,7 @@ const Basket = ({ locale }) => {
                       type="button"
                       className="basket__continue"
                       onClick={() => {
-                        router.push(`/${locale}/categories/all`);
+                        router.push(localePath(locale, "/categories/all"));
                         setIsModalOpen(null);
                       }}
                     >

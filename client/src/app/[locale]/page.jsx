@@ -8,7 +8,6 @@ import ArchiveSelection from "@widgets/archive-selection";
 import Bestsellers from "@widgets/bestsellers";
 import { getPopularCatalogCards, getSaleCatalogCards } from "@shared/api/productsServices";
 import BrandValues from "@widgets/brand-values";
-import CategoryBanners from "@widgets/category-banners";
 import Footer from "@widgets/Footer";
 import { HeroSkeleton } from "@widgets/hero";
 import { Suspense } from "react";
@@ -40,8 +39,6 @@ export default async function HomePage({ params }) {
       </Suspense>
 
       <BrandsCarousel />
-
-      <CategoryBanners locale={locale} />
 
       <Bestsellers fetchState="success" products={popularProducts}  />
 

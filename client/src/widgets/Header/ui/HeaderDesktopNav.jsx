@@ -1,6 +1,7 @@
 "use client";
 
 import { MQ } from "@shared";
+import { localePath } from "@shared/lib/localePath";
 import clsx from "clsx";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -145,7 +146,7 @@ export default function HeaderDesktopNav({ locale, labels, categories }) {
       onMouseLeave={handleWrapMouseLeave}
     >
       <nav className={headerStyles.nav} aria-label="Navigation">
-        <Link className={headerStyles.link} href={`/${locale}/categories/all?isNew=true`}>
+        <Link className={headerStyles.link} href={localePath(locale, "/categories/all?isNew=true")}>
           {labels.new}
         </Link>
 
@@ -159,7 +160,7 @@ export default function HeaderDesktopNav({ locale, labels, categories }) {
               <Link
                 key={id}
                 className={clsx(headerStyles.link, styles.trigger)}
-                href={`/${locale}/categories/${id}`}
+                href={localePath(locale, `/categories/${id}`)}
                 onMouseEnter={closeMenu}
                 onFocus={closeMenu}
               >
@@ -177,7 +178,7 @@ export default function HeaderDesktopNav({ locale, labels, categories }) {
                   styles.trigger,
                   isOpen && styles.triggerActive,
                 )}
-                href={`/${locale}/categories/${id}`}
+                href={localePath(locale, `/categories/${id}`)}
                 aria-expanded={isOpen}
                 aria-haspopup="true"
                 onMouseEnter={() => openMenu(id)}

@@ -20,6 +20,11 @@ export {
   QUERY_VALUE,
 } from "./consts/query-params";
 export { buildCatalogSearchResultsHref } from "./lib/buildCatalogSearchHref";
+export {
+  getLocaleFromPathname,
+  localePath,
+  pathWithoutLocale,
+} from "./lib/localePath";
 export { categoryIdsHasSale } from "./lib/categoryIdsHasSale";
 export {
   normalizeCategoryIdsForCardsQuery,

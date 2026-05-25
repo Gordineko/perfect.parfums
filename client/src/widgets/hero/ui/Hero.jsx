@@ -1,3 +1,4 @@
+import { localePath } from "@shared/lib/localePath";
 import Link from "next/link";
 
 import styles from "./Hero.module.scss";
@@ -18,7 +19,7 @@ export default function Hero({
   catalogHref = "",
 }) {
   const href =
-    catalogHref.trim() || `/${locale}/categories/all`;
+    catalogHref.trim() || localePath(locale, "/categories/all");
 
   return (
     <section className={styles.root} aria-label={eyebrow}>

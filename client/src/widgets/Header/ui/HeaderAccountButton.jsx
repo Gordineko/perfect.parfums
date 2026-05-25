@@ -1,6 +1,7 @@
 "use client";
 
 import { MODALS, useModals } from "@shared";
+import { localePath } from "@shared/lib/localePath";
 import { useI18n } from "@shared/i18n/use-i18n";
 import Profile from "@shared/ui/icons/Profile";
 import Cookies from "js-cookie";
@@ -20,7 +21,7 @@ export default function HeaderAccountButton({
 
   const handleClick = () => {
     if (hasToken) {
-      router.push(`/${locale}/profile/info`);
+      router.push(localePath(locale, "/profile/info"));
       return;
     }
     setIsModalOpen(MODALS.LOGIN);

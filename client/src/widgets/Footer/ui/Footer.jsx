@@ -1,16 +1,16 @@
 import { SocialLinks } from "@shared";
+import { localePath, pathWithoutLocale } from "@shared/lib/localePath";
 import Link from "next/link";
 
 import styles from "./Footer.module.scss";
 
 const Footer = ({ locale, data }) => {
   const toLocalizedHref = (href) => {
-    if (!href) return `/${locale}`;
+    if (!href) return localePath(locale);
     if (/^https?:\/\//i.test(href)) return href;
-    if (href.startsWith(`/${locale}`)) return href;
-    return href.startsWith("/")
-      ? `/${locale}${href}`
-      : `/${locale}/${href}`;
+    const raw = href.startsWith("/") ? href : `/${href}`;
+    const base = pathWithoutLocale(raw);
+    return localePath(locale, base === "/" ? "" : base);
   };
 
   const phoneHref = `tel:${data.contacts.phone.replace(/\s|\(|\)|-/g, "")}`;

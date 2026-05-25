@@ -1,6 +1,7 @@
 "use client"
 import { DELIVERY_TYPES } from '@features/user-details/const/delivery';
 import { clearCartAsync, getCartData } from "@shared";
+import { localePath } from "@shared/lib/localePath";
 import { createAuthorizedCheckout,createGuestCheckout } from '@shared/api/orderServices';
 import { MODALS } from '@shared/config/modals';
 import { useI18n } from '@shared/i18n/use-i18n';
@@ -97,7 +98,7 @@ export const useCheckoutFormOrder = (user, cartItems = []) => {
 
                 await new Promise((resolve) => window.setTimeout(resolve, 4000));
                 setIsModalOpen(null);
-                router.push(`/${locale}/`);
+                router.push(localePath(locale));
 
             } catch (error) {
                 const message =
