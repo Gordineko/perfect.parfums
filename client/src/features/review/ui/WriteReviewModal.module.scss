@@ -25,7 +25,7 @@ $submit-bg-hover: rgba(13, 13, 13, 0.8);
     margin: 0 8px;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     padding: 24px;
   }
 
@@ -106,7 +106,7 @@ $submit-bg-hover: rgba(13, 13, 13, 0.8);
       letter-spacing: 0.48px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       font-size: 28px;
     }
   }

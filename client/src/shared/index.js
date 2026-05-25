@@ -1,4 +1,4 @@
-export { BREAKPOINTS } from "./config/BREAKPOINTS";
+export { BREAKPOINTS, MQ } from "./config/BREAKPOINTS";
 export { getLocalizedCatalogSection } from "./config/catalogSection";
 export { getLocalizedFooter } from "./config/footer";
 export * from "./config/headerActionsList";

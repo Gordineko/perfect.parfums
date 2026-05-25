@@ -1,5 +1,5 @@
 .root {
-  padding-top: var(--space-section-y);
+  padding-block: var(--space-section-y);
 }
 
 .inner {
@@ -7,7 +7,7 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-6);
 
-  @media (max-width: 767.98px) {
+  @media (max-width: var(--bp-below-tablet-max)) {
     grid-template-columns: 1fr;
     gap: var(--space-4);
   }
@@ -42,7 +42,7 @@
     background: color-mix(in srgb, var(--color-black) 30%, transparent);
     pointer-events: none;
 
-    @media (max-width: 1249.98px) {
+    @media (max-width: var(--bp-tablet-max)) {
       gap: var(--space-3);
     }
   }
@@ -55,7 +55,7 @@
     font-style: italic;
     letter-spacing: 1px;
 
-    @media (max-width: 1249.98px) {
+    @media (max-width: var(--bp-tablet-max)) {
       font-size: 32px;
     }
   }
@@ -82,7 +82,7 @@
       transition: transform 0.45s ease;
     }
 
-    @media (max-width: 1249.98px) {
+    @media (max-width: var(--bp-tablet-max)) {
       font-size: 0.625rem;
     }
   }

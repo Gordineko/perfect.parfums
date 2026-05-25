@@ -1,7 +1,9 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
 .root {
   padding-block: var(--space-section-y);
 
-  @media (max-width: 1249.98px) {
+  @media (max-width: var(--bp-tablet-max)) {
     overflow-x: clip;
   }
 }
@@ -18,7 +20,7 @@
   gap: var(--space-6);
   margin-bottom: var(--space-6);
 
-  @media (max-width: 767.98px) {
+  @media (max-width: var(--bp-below-tablet-max)) {
     gap: var(--space-4);
     margin-bottom: var(--space-4);
   }
@@ -30,7 +32,7 @@
   gap: var(--space-3);
   min-width: 0;
 
-  @media (max-width: 767.98px) {
+  @media (max-width: var(--bp-below-tablet-max)) {
     gap: var(--space-2);
   }
 }
@@ -56,11 +58,11 @@
   border-bottom: 1px solid color-mix(in srgb, #d7d7d5 50%, transparent);
   margin-bottom: var(--space-10);
 
-  @media (max-width: 1249.98px) and (min-width: 768px) {
+  @media (max-width: var(--bp-tablet-max)) and (min-width: var(--bp-tablet)) {
     margin-bottom: var(--space-8);
   }
 
-  @media (max-width: 767.98px) {
+  @media (max-width: var(--bp-below-tablet-max)) {
     margin-bottom: var(--space-4);
   }
 }
@@ -74,21 +76,14 @@
   letter-spacing: 3px;
   text-transform: uppercase;
 
-  @media (max-width: 767.98px) {
+  @media (max-width: var(--bp-below-tablet-max)) {
     font-size: 8px;
   }
 }
 
 .title {
   margin: 0;
-
-  @media (max-width: 1249.98px) and (min-width: 768px) {
-    font-size: 36px;
-  }
-
-  @media (max-width: 767.98px) {
-    font-size: 28px;
-  }
+  @include section-h2-title;
 }
 
 .carouselShell {
@@ -106,7 +101,7 @@
   line-height: 0;
   transform: translateY(-50%);
 
-  @media (max-width: 1249.98px) {
+  @media (max-width: var(--bp-tablet-max)) {
     display: none;
   }
 
@@ -163,14 +158,14 @@
     background: #1a1a1a !important;
   }
 
-  @media (max-width: 1249.98px) {
+  @media (max-width: var(--bp-tablet-max)) {
     width: 100vw;
     margin-inline: calc(50% - 50vw);
     padding-inline: var(--container-pad-tablet);
     box-sizing: border-box;
   }
 
-  @media (max-width: 767.98px) {
+  @media (max-width: var(--bp-below-tablet-max)) {
     padding-inline: var(--container-pad-mobile);
   }
 }
@@ -256,7 +251,7 @@
   :global(.product-item__meta-text) {
     gap: 8px;
 
-    @media (max-width: 767.98px) {
+    @media (max-width: var(--bp-below-tablet-max)) {
       gap: 4px;
     }
 
@@ -275,7 +270,7 @@
       -webkit-line-clamp: initial;
       -webkit-box-orient: initial;
 
-      @media (max-width: 767.98px) {
+      @media (max-width: var(--bp-below-tablet-max)) {
         font-size: 8px;
       }
     }
@@ -287,7 +282,7 @@
     font-family: var(--font-body);
     font-size: 10px;
 
-    @media (max-width: 767.98px) {
+    @media (max-width: var(--bp-below-tablet-max)) {
       font-size: 7px;
     }
   }
@@ -303,7 +298,7 @@
       font-weight: 400;
       line-height: normal;
 
-      @media (max-width: 767.98px) {
+      @media (max-width: var(--bp-below-tablet-max)) {
         font-size: 12px;
       }
     }
@@ -334,7 +329,7 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 24px;
 
-    @media (max-width: 767.98px) {
+    @media (max-width: var(--bp-below-tablet-max)) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }

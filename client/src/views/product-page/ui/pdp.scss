@@ -67,7 +67,7 @@
     margin: 0 0 12px;
     min-width: 0;
 
-    @include mobile-only {
+    @include below-tablet {
       display: flex;
       margin: 0 0 16px;
     }
@@ -171,7 +171,7 @@
     margin-top: 12px;
     display: none !important;
 
-    @include mobile-only {
+    @include below-tablet {
       display: flex !important;
     }
   }
@@ -213,7 +213,7 @@
       padding: 6px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       font-size: 10px;
       padding: 6px;
     }
@@ -241,7 +241,7 @@
       right: 16px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       top: 16px;
       right: 48px;
     }
@@ -280,7 +280,7 @@
         padding: 8px;
       }
 
-      @include mobile-only {
+      @include below-tablet {
         width: 24px;
         height: 24px;
         padding: 0;
@@ -376,7 +376,7 @@
 
 .pdp-info {
   &__meta {
-    @include mobile-only {
+    @include below-tablet {
       display: none;
     }
   }
@@ -395,7 +395,7 @@
     letter-spacing: 2px;
     text-transform: uppercase;
 
-    @include mobile-only {
+    @include below-tablet {
       justify-content: center;
       margin: 0;
       gap: 8px;
@@ -513,7 +513,7 @@
       font-size: 17px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       font-size: 16px;
     }
   }
@@ -546,7 +546,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 
-    @include mobile-only {
+    @include below-tablet {
       font-size: 9px;
     }
   }
@@ -597,7 +597,7 @@
     }
   }
 
-  @include mobile-only {
+  @include below-tablet {
     &__option--heel-type,
     &__option--heel-height,
     &__option--sole-type {
@@ -746,7 +746,7 @@
     flex-wrap: wrap;
     align-items: center;
 
-    @include mobile-only {
+    @include below-tablet {
       gap: 12px;
     }
   }
@@ -770,7 +770,7 @@
       height: 36px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       width: 34px;
       height: 34px;
     }
@@ -863,7 +863,7 @@
       grid-template-columns: 1fr;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       grid-template-columns: 120px 1fr;
     }
   }
@@ -874,7 +874,7 @@
     margin: 24px 0 16px;
     background: rgba(153, 153, 153, 0.3);
 
-    @include mobile-only {
+    @include below-tablet {
       margin: 24px 0 0;
     }
   }
@@ -1053,7 +1053,7 @@
     gap: 0;
     overflow-anchor: none;
 
-    @include mobile-only {
+    @include below-tablet {
       margin-top: 4px;
     }
   }
@@ -1098,7 +1098,7 @@
       font-size: 14px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       padding: 12px 0;
     }
 
@@ -1213,7 +1213,7 @@
     justify-content: space-between;
     padding: 16px 24px;
 
-    @include mobile-only {
+    @include below-tablet {
       padding: 16px;
       gap: 12px;
     }
@@ -1240,7 +1240,7 @@
           height: 20px;
         }
 
-        @include mobile-only {
+        @include below-tablet {
           width: 16px;
           height: 16px;
         }
@@ -1363,7 +1363,7 @@
       margin-bottom: 16px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       flex-direction: row;
       align-items: flex-end;
       justify-content: space-between;
@@ -1384,7 +1384,7 @@
     text-transform: uppercase;
     text-align: left;
 
-    @include mobile-only {
+    @include below-tablet {
       margin: 0 0 4px;
     }
   }
@@ -1406,7 +1406,7 @@
       font-size: 36px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       font-size: 28px;
     }
   }
@@ -1423,7 +1423,7 @@
       font-size: 36px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       font-size: 28px;
     }
   }
@@ -1449,7 +1449,7 @@
       font-size: 12px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       font-size: 8px;
     }
 
@@ -1482,7 +1482,7 @@
     overflow: visible;
     cursor: grab;
 
-    @include mobile-only {
+    @include below-tablet {
       .swiper-slide {
         width: 100% !important;
       }
@@ -1544,7 +1544,7 @@
     background: #fff;
     border: 1px solid rgba(156, 163, 175, 0.2);
 
-    @include mobile-only {
+    @include below-tablet {
       padding: 16px;
     }
   }
@@ -1558,7 +1558,7 @@
     font-weight: 400;
     line-height: normal;
 
-    @include mobile-only {
+    @include below-tablet {
       font-size: 12px;
     }
   }
@@ -1580,7 +1580,7 @@
     text-decoration: none;
     cursor: pointer;
 
-    @include mobile-only {
+    @include below-tablet {
       font-size: 8px;
     }
 
@@ -1787,7 +1787,7 @@
   font-weight: $fw-medium;
   line-height: 1.45;
 
-  @include mobile-only {
+  @include below-tablet {
     font-size: 14px;
   }
 }
@@ -1799,7 +1799,7 @@
   font-weight: $fw-bold;
   color: $dark;
 
-  @include mobile-only {
+  @include below-tablet {
     font-size: 18px;
   }
 }

@@ -4,11 +4,13 @@ import styles from "./Hero.module.scss";
 
 const DEFAULT_MAIN = "/img/hero-perfume-main.png";
 const DEFAULT_SECONDARY = "/img/hero-perfume-secondary.png";
+const DEFAULT_MOBILE = "/img/hero-perfume-main-mob.png";
 
 export default function Hero({
   locale = "ua",
   mainImage = DEFAULT_MAIN,
   secondaryImage = DEFAULT_SECONDARY,
+  mobileImage = DEFAULT_MOBILE,
   eyebrow = "ОРИГІНАЛЬНА ПАРФУМЕРІЯ",
   line1 = "Для тих, хто",
   line2 = "звик залишати слід",
@@ -30,6 +32,12 @@ export default function Hero({
         <img
           className={styles.bannerSecondary}
           src={secondaryImage}
+          alt=""
+          fetchPriority="high"
+        />
+        <img
+          className={styles.bannerMob}
+          src={mobileImage}
           alt=""
           fetchPriority="high"
         />

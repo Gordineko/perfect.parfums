@@ -10,6 +10,7 @@ export default async function HeroServerBlock({ locale }) {
       locale={locale}
       mainImage="/img/hero-perfume-main.png"
       secondaryImage="/img/hero-perfume-secondary.png"
+      mobileImage="/img/hero-perfume-main-mob.png"
       eyebrow={t("hero.banner.eyebrow")}
       line1={t("hero.banner.line1")}
       line2={t("hero.banner.line2")}

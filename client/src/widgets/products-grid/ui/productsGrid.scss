@@ -28,7 +28,7 @@
     gap: $space-lg;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     margin-bottom: 24px;
   }
 }
@@ -57,7 +57,7 @@
       padding: 4px 12px;
       background: var(--color-black);
 
-      @include mobile-only {
+      @include below-tablet {
         top: 10px;
         left: 10px;
       }
@@ -82,7 +82,7 @@
       padding: 0;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       padding: 0;
       width: 100%;
       max-width: 176px;
@@ -194,7 +194,7 @@
       min-width: 0;
       flex: 1;
 
-      @include mobile-only {
+      @include below-tablet {
         gap: 4px;
       }
 
@@ -229,7 +229,7 @@
         gap: 16px;
         margin-bottom: 0;
 
-        @include mobile-only {
+        @include below-tablet {
           gap: var(--space-3);
         }
       }
@@ -252,7 +252,7 @@
         font-size: 17px;
       }
 
-      @include mobile-only {
+      @include below-tablet {
         .product-item__price-old {
           font-size: 8px;
         }
@@ -265,7 +265,7 @@
   }
 }
 
-@include mobile-only {
+@include below-tablet {
   .product-cards-context .product-item {
     .product-item__meta-container,
     .product-item__meta-container--catalog {

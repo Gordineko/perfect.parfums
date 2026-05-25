@@ -9,27 +9,18 @@
 @media (max-width: 1249.98px) and (min-width: 768px) {
   :root {
     --header-light-height: 8.5rem;
-    --header-nav-height: 2.75rem;
-    --header-offset: 11.25rem;
-    --header-offset-compact: 2.75rem;
-  }
-}
-
-@media (max-width: 1249.98px) and (min-width: 768px) {
-  :root {
-    --header-light-height: 5.5rem;
     --header-nav-height: 0px;
-    --header-offset: 5.5rem;
-    --header-offset-compact: 5.5rem;
+    --header-offset: 8.5rem;
+    --header-offset-compact: 8.5rem;
   }
 }
 
 @media (max-width: 767.98px) {
   :root {
-    --header-light-height: 3.25rem;
+    --header-light-height: 5.5rem;
     --header-nav-height: 0px;
-    --header-offset: 3.25rem;
-    --header-offset-compact: 3.25rem;
+    --header-offset: 5.5rem;
+    --header-offset-compact: 5.5rem;
   }
 }
 

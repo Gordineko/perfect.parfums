@@ -37,7 +37,7 @@
       letter-spacing: 0.56px;
       transition: color 0.2s ease;
 
-      @include mobile-only {
+      @include below-tablet {
         font-size: 12px;
       }
     }

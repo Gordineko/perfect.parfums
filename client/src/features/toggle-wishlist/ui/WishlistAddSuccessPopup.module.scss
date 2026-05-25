@@ -16,7 +16,7 @@
   font-family: var(--font-body), var(--font-body);
   transition: opacity 0.35s ease;
 
-  @include mobile-only {
+  @include below-tablet {
     max-width: calc(100vw - 32px);
   }
 

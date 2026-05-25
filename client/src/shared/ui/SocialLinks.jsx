@@ -13,7 +13,7 @@ const SocialLinks = () => {
             className="social-links__item"
           >
             <a
-              className="social-links__link"
+              className={`social-links__link social-links__link--${id}`}
               href={href}
               aria-label={label}
               target="_blank"

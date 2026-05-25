@@ -30,7 +30,7 @@ $title-color: #5d4a3a;
     font-weight: var(--fw-regular);
     letter-spacing: 2px;
 
-    @include mobile-only {
+    @include below-tablet {
       margin-bottom: 32px;
       font-size: 140px;
     }
@@ -54,7 +54,7 @@ $title-color: #5d4a3a;
       font-size: 12px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       letter-spacing: 2px;
     }
   }
@@ -71,7 +71,7 @@ $title-color: #5d4a3a;
       margin-bottom: 16px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       font-size: 32px;
     }
 
@@ -97,7 +97,7 @@ $title-color: #5d4a3a;
       font-size: 12px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       margin-bottom: 32px;
       letter-spacing: 2px;
     }

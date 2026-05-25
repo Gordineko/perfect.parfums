@@ -11,9 +11,9 @@ import BrandValues from "@widgets/brand-values";
 import CategoryBanners from "@widgets/category-banners";
 import Footer from "@widgets/Footer";
 import { HeroSkeleton } from "@widgets/hero";
-import SeasonCollections from "@widgets/season-collections";
 import { Suspense } from "react";
 
+import BrandsCarousel from "pages/Home/ui/BrandsCarousel";
 import ArchiveSelectionServerBlock from "./ArchiveSelectionServerBlock";
 import HeroServerBlock from "./HeroServerBlock";
 
@@ -39,9 +39,9 @@ export default async function HomePage({ params }) {
         <HeroServerBlock locale={locale} />
       </Suspense>
 
-      <SeasonCollections locale={locale} categories={categories} />
+      <BrandsCarousel />
 
-      <CategoryBanners locale={locale}  />
+      <CategoryBanners locale={locale} />
 
       <Bestsellers fetchState="success" products={popularProducts}  />
 

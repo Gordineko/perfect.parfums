@@ -1,13 +1,13 @@
 @mixin stack-gap {
-  @media (max-width: 767.98px) {
+  @media (max-width: var(--bp-below-tablet-max)) {
     gap: var(--space-6);
   }
 
-  @media (max-width: 1249.98px) and (min-width: 768px) {
+  @media (max-width: var(--bp-tablet-max)) and (min-width: var(--bp-tablet)) {
     gap: var(--space-8);
   }
 
-  @media (min-width: 1250px) {
+  @media (min-width: var(--bp-desktop)) {
     gap: var(--space-10);
   }
 }
@@ -48,15 +48,15 @@
   line-height: normal;
   letter-spacing: 0.42px;
 
-  @media (max-width: 767.98px) {
+  @media (max-width: var(--bp-below-tablet-max)) {
     font-size: 24px;
   }
 
-  @media (max-width: 1249.98px) and (min-width: 768px) {
+  @media (max-width: var(--bp-tablet-max)) and (min-width: var(--bp-tablet)) {
     font-size: 36px;
   }
 
-  @media (min-width: 1250px) {
+  @media (min-width: var(--bp-desktop)) {
     max-width: 672px;
     margin-inline: auto;
   }
@@ -73,17 +73,17 @@
   letter-spacing: 2px;
   text-transform: uppercase;
 
-  @media (max-width: 767.98px) {
+  @media (max-width: var(--bp-below-tablet-max)) {
     font-size: 10px;
   }
 
-  @media (max-width: 1249.98px) and (min-width: 768px) {
+  @media (max-width: var(--bp-tablet-max)) and (min-width: var(--bp-tablet)) {
     max-width: 534px;
     margin-inline: auto;
     font-size: 12px;
   }
 
-  @media (min-width: 1250px) {
+  @media (min-width: var(--bp-desktop)) {
     max-width: 744px;
     margin-inline: auto;
   }
@@ -127,7 +127,7 @@
   font-style: italic;
   line-height: normal;
 
-  @media (max-width: 1249.98px) and (min-width: 768px) {
+  @media (max-width: var(--bp-tablet-max)) and (min-width: var(--bp-tablet)) {
     font-size: 20px;
   }
 }

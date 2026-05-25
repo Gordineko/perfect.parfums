@@ -9,7 +9,7 @@
 }
 
 .pageContainer {
-  @include mobile-only {
+  @include below-tablet {
     padding-inline: 24px;
   }
 }
@@ -41,7 +41,7 @@
   }
 
   &:global(.product-cards-context) :global(.product-item) {
-    @include mobile-only {
+    @include below-tablet {
       max-width: none;
       justify-self: stretch;
       margin-inline: 0;

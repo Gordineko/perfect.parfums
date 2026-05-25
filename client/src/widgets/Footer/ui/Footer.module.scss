@@ -18,11 +18,8 @@
   display: flex;
   flex-direction: column;
   gap: clamp(3rem, 8vw, 6rem);
-  padding-block: clamp(3rem, 6vw, 5rem) clamp(2.5rem, 5vw, 4rem);
-
-  @include up($bp-desktop) {
-    padding-bottom: 0;
-  }
+  padding-top: clamp(3rem, 6vw, 5rem);
+  padding-bottom: 0;
 }
 
 .top {
@@ -131,7 +128,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  padding-top: 0.25rem;
+  padding-top: 0;
 }
 
 .brand {
@@ -159,7 +156,7 @@
 
 .root :global(.social-links) {
   display: flex;
-  gap: 16px;
+  gap: 20px;
   align-items: center;
   margin: 0;
   padding: 0;
@@ -176,63 +173,173 @@
   border: 0;
   border-radius: 0;
   background: transparent;
-  color: var(--color-nude);
+  color: var(--color-burgundy);
   text-decoration: none;
+  transition: color 0.3s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-burgundy-active);
+  }
 
   svg {
+    display: block;
     width: 40px;
     height: 40px;
-  }
-}
-
-.root :global(.social-links__item:first-child .social-links__link) {
-  width: 40px;
-  height: 40px;
-  padding: 8px;
-  border-radius: 999px;
-  background: var(--color-nude);
-  color: var(--color-burgundy-active);
-
-  svg {
-    width: 24px;
-    height: 24px;
+    flex-shrink: 0;
   }
 }
 
 @include down($bp-desktop) {
-  .top {
-    grid-template-columns: 1fr 1fr;
+  .title {
+    font-size: 20px;
   }
 
-  .socialCol {
-    grid-column: 1 / -1;
-    justify-content: center;
-    padding-top: 0.5rem;
+  .text,
+  .link {
+    font-size: 14px;
+  }
+
+  .list {
+    gap: 8px;
+
+    li {
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  .brandPerfect {
+    font-size: 80px;
+    letter-spacing: 4px;
+  }
+
+  .brandParfums {
+    font-size: 40px;
+    letter-spacing: 2px;
   }
 }
 
-@include down($bp-tablet) {
-  .top {
-    grid-template-columns: 1fr;
-    gap: 2rem;
+@include tablet-only {
+  .root :global(.social-links) {
+    gap: 12px;
   }
 
-  .socialCol {
-    justify-content: center;
+  .inner {
+    padding-top: 60px;
+    gap: 3rem;
+  }
+
+  .top {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    gap: 2rem 2.5rem;
   }
 
   .col {
-    align-items: center;
-    text-align: center;
+    gap: 16px;
+    align-items: flex-start;
+    text-align: left;
   }
 
   .title {
-    text-align: center;
+    text-align: left;
   }
 
   .textGroup,
   .list,
   .contactBlock {
+    align-items: flex-start;
+  }
+
+  .socialCol {
+    justify-content: flex-end;
+    align-items: flex-start;
+  }
+
+  .root :global(.social-links__link) {
+    width: 32px;
+    height: 32px;
+
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
+}
+
+@include below-tablet {
+  .root :global(.social-links) {
+    gap: 8px;
+    justify-content: center;
+  }
+
+  .root :global(.social-links__link) {
+    width: 28px;
+    height: 28px;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  .inner {
+    padding-top: 24px;
+    gap: 2rem;
+  }
+
+  .top {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .socialCol {
+    order: -1;
+    display: flex;
+    width: 100%;
+    justify-content: center;
     align-items: center;
+  }
+
+  .col {
+    align-items: flex-start;
+    text-align: left;
+    gap: 12px;
+  }
+
+  .title {
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .text,
+  .link {
+    font-size: 12px;
+  }
+
+  .textGroup,
+  .list,
+  .contactBlock {
+    align-items: flex-start;
+  }
+
+  .list .link {
+    line-height: 1.2;
+  }
+
+  .brand {
+    text-align: center;
+  }
+
+  .brandPerfect {
+    font-size: 60px;
+    letter-spacing: 2px;
+  }
+
+  .brandParfums {
+    font-size: 30px;
+    letter-spacing: 1px;
   }
 }

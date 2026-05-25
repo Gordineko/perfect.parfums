@@ -2,6 +2,7 @@
 
 import {
   formatUaPhone,
+  MQ,
   normalizeUaPhoneDigits,
   PageHeader,
   useI18n,
@@ -68,7 +69,7 @@ export default function ContactsPage() {
   const sourceRef = useRef(null);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767.98px)");
+    const mq = window.matchMedia(MQ.belowTablet);
     const sync = () => setIsSourceFieldHidden(mq.matches);
     sync();
     mq.addEventListener("change", sync);

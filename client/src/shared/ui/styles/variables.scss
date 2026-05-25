@@ -53,7 +53,11 @@ $fw-bold: 700;
 $fw-extrabold: 800;
 
 /* typography tokens */
-$section-heading-title-tablet: 24px;
+$section-h2-desktop: 1.75rem;
+$section-h2-tablet: 1.5rem;
+$section-h2-mobile: 1.25rem;
+$section-heading-title-tablet: $section-h2-tablet;
+$section-heading-title-mobile: $section-h2-mobile;
 // mixins
 @mixin nav-text {
   color: $dark;
@@ -151,26 +155,27 @@ $section-heading-title-tablet: 24px;
   text-transform: uppercase;
 }
 
-@mixin section-heading-title {
-  margin: 0;
-  color: $dark;
-  font-family: $font-montserrat;
-  font-size: 60px;
-  font-weight: $fw-bold;
-  line-height: 1.1;
+/* Заголовки секцій (не банер): desktop 28px, tablet 24px, mobile 20px */
+@mixin section-h2-title {
+  font-family: var(--font-heading);
+  font-size: $section-h2-desktop;
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-base);
   text-transform: uppercase;
-
-  @include down($bp-desktop) {
-    font-size: 48px;
-  }
+  color: var(--color-black);
 
   @include tablet-only {
-    font-size: $section-heading-title-tablet;
+    font-size: $section-h2-tablet;
   }
 
-  @include down($bp-tablet) {
-    font-size: $section-heading-title-tablet;
+  @include below-tablet {
+    font-size: $section-h2-mobile;
   }
+}
+
+@mixin section-heading-title {
+  margin: 0;
+  @include section-h2-title;
 }
 
 @mixin second-title {
@@ -209,11 +214,23 @@ $section-heading-title-tablet: 24px;
     font-size: 12px;
   }
 }
-/* breakpoints — mobile 320–768, tablet 768–1250, desktop 1250+ */
+/*
+ * Адаптив (єдині значення для SCSS і CSS-змінних у tokens/_layout.scss):
+ *
+ * | Діапазон viewport      | Міксін / змінна              |
+ * |------------------------|------------------------------|
+ * | ≤399.98px (макет 400)  | mobile-only                  |
+ * | ≤767.98px (до планшета)| below-tablet, down($bp-tablet)|
+ * | 768px … 1249.98px      | tablet-only                  |
+ * | ≥1250px                | desktop-only                 |
+ * | ≤1249.98px             | down($bp-desktop)            |
+ */
 $bp-desktop: 1250px;
 $bp-tablet: 768px;
-$bp-mobile-max: 767.98px;
 $bp-tablet-max: 1249.98px;
+$bp-mobile: 400px;
+$bp-mobile-max: 399.98px;
+$bp-below-tablet-max: 767.98px;
 $bp-desktop-narrow: 1200px;
 $bp-tablet-landscape-max: 1023.98px;
 
@@ -226,7 +243,7 @@ $desktop: $bp-desktop;
       @content;
     }
   } @else if $bp == $bp-tablet {
-    @media (max-width: $bp-mobile-max) {
+    @media (max-width: $bp-below-tablet-max) {
       @content;
     }
   } @else {
@@ -244,6 +261,12 @@ $desktop: $bp-desktop;
 
 @mixin mobile-only {
   @media (max-width: $bp-mobile-max) {
+    @content;
+  }
+}
+
+@mixin below-tablet {
+  @media (max-width: $bp-below-tablet-max) {
     @content;
   }
 }

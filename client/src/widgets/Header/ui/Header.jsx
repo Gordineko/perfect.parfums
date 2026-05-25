@@ -48,30 +48,49 @@ export default async function Header({ locale, categories }) {
       <div className={styles.rowMain}>
         <div className="container">
           <div className={styles.mainInner}>
-            <div className={styles.toolbarMobileLeft}>
-              <HeaderSearchBar locale={locale} mode="icon" />
-              <HeaderWishlistButton locale={locale} />
+            <div className={styles.mainRowTablet}>
+              <HeaderMobileToggle labelKey="header.menu" variant="lines" />
+              <Link
+                href={`/${locale}`}
+                className={styles.logoLink}
+                aria-label={t("aria.homeLogo")}
+              >
+                <TemplateLogo tagline={t("header.tagline")} />
+              </Link>
+              <div className={styles.toolbarTabletRight}>
+                <HeaderSearchBar locale={locale} mode="icon" />
+                <HeaderCartButton />
+              </div>
             </div>
-            <Link
-              href={`/${locale}`}
-              className={styles.logoLink}
-              aria-label={t("aria.homeLogo")}
-            >
-              <TemplateLogo tagline={t("header.tagline")} />
-            </Link>
-            <div className={styles.toolbarMobileRight}>
-              <HeaderAccountButton
-                locale={locale}
-                labelKey="header.top.account"
-                variant="icon"
-              />
-              <HeaderCartButton />
-              <HeaderMobileToggle labelKey="header.menu" />
+
+            <div className={styles.mainRowMobile}>
+              <HeaderMobileToggle labelKey="header.menu" variant="lines" />
+              <Link
+                href={`/${locale}`}
+                className={styles.logoLink}
+                aria-label={t("aria.homeLogo")}
+              >
+                <TemplateLogo />
+              </Link>
+              <div className={styles.toolbarMobileRight}>
+                <HeaderSearchBar locale={locale} mode="icon" />
+                <HeaderCartButton />
+              </div>
             </div>
-            <div className={styles.toolbarDesktop}>
-              <HeaderSearchBar locale={locale} mode="bar" />
-              <HeaderWishlistButton locale={locale} />
-              <HeaderCartButton />
+
+            <div className={styles.mainRowDesktop}>
+              <Link
+                href={`/${locale}`}
+                className={styles.logoLink}
+                aria-label={t("aria.homeLogo")}
+              >
+                <TemplateLogo tagline={t("header.tagline")} />
+              </Link>
+              <div className={styles.toolbarDesktop}>
+                <HeaderSearchBar locale={locale} mode="bar" />
+                <HeaderWishlistButton locale={locale} />
+                <HeaderCartButton />
+              </div>
             </div>
           </div>
         </div>

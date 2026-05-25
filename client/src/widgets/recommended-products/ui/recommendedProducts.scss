@@ -38,7 +38,7 @@
       font-size: 36px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       font-size: 28px;
     }
   }
@@ -61,7 +61,7 @@
         aspect-ratio: 10 / 9;
       }
 
-      @include mobile-only {
+      @include below-tablet {
         top: 8px;
         right: 8px;
         width: 24px;
@@ -139,7 +139,7 @@
         color: #1a1a1a;
       }
 
-      @include mobile-only {
+      @include below-tablet {
         .product-item__meta-container,
         .product-item__meta-container--catalog {
           padding: 8px 0 0;

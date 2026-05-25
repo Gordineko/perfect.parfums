@@ -1,5 +1,6 @@
 "use client";
 
+import { MQ } from "@shared";
 import clsx from "clsx";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -11,7 +12,7 @@ import headerStyles from "./Header.module.scss";
 import styles from "./HeaderDesktopNav.module.scss";
 
 const CLOSE_DELAY_MS = 180;
-const DESKTOP_NAV_MEDIA = "(min-width: 768px)";
+const DESKTOP_NAV_MEDIA = MQ.tabletUp;
 
 const MEGA_NAV_ITEMS = [
   { id: MEGA_MENU_IDS.GIRLS, labelKey: "girls" },
