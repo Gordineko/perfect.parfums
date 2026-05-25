@@ -365,6 +365,13 @@
     "onlyInStockSection": "Наявність",
     "onlyInStock": "Лише в наявності"
   },
+  "instagramFeed": {
+    "title": "Слідкуйте за нами в Instagram",
+    "username": "@perfect.parfums.raspiv",
+    "profileAria": "Відкрити Instagram @perfect.parfums.raspiv",
+    "postAria": "Відкрити публікацію Instagram {n}",
+    "imageAlt": "Публікація Instagram {n}"
+  },
   "homeFaq": {
     "titleLine1": "Маєте питання?",
     "titleLine2": "Ми з радістю відповимо",

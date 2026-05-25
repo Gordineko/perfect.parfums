@@ -358,6 +358,13 @@
     "onlyInStockSection": "Availability",
     "onlyInStock": "In stock only"
   },
+  "instagramFeed": {
+    "title": "Follow us on Instagram",
+    "username": "@perfect.parfums.raspiv",
+    "profileAria": "Open Instagram @perfect.parfums.raspiv",
+    "postAria": "Open Instagram post {n}",
+    "imageAlt": "Instagram post {n}"
+  },
   "homeFaq": {
     "titleLine1": "Have questions?",
     "titleLine2": "We are happy to answer",

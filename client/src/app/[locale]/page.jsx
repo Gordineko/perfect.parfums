@@ -12,6 +12,7 @@ import {
 } from "@shared/api/productsServices";
 import AboutBrand from "@widgets/about-brand";
 import HomeFaq from "@widgets/home-faq";
+import InstagramFeed from "@widgets/instagram-feed";
 import CustomerReviews from "@widgets/customer-reviews";
 import Footer from "@widgets/Footer";
 import { fetchMainReviews } from "@shared/api/reviewsServices";
@@ -59,6 +60,8 @@ export default async function HomePage({ params }) {
       <AboutBrand />
 
       <HomeFaq />
+
+      <InstagramFeed />
 
       <section className="products-layout-wrapper products-layout-wrapper--footer">
         <Footer

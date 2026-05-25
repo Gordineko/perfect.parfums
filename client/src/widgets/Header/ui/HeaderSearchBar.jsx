@@ -93,10 +93,11 @@ export default function HeaderSearchBar({ locale, mode = "bar" }) {
         >
           <CloseX />
         </button>
-      ) : null}
-      <span className={styles.searchBarIcon} aria-hidden>
-        <Search />
-      </span>
+      ) : (
+        <span className={styles.searchBarIcon} aria-hidden>
+          <Search />
+        </span>
+      )}
     </>
   );
 
