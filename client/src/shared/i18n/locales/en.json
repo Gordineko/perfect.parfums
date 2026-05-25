@@ -358,6 +358,36 @@
     "onlyInStockSection": "Availability",
     "onlyInStock": "In stock only"
   },
+  "homeFaq": {
+    "titleLine1": "Have questions?",
+    "titleLine2": "We are happy to answer",
+    "items": {
+      "original": {
+        "question": "Is this original perfumery?",
+        "answer": "Yes. We work with original fragrances in large bottles and decant them into convenient smaller volumes. You get the same composition without overpaying for brand packaging."
+      },
+      "decant": {
+        "question": "How is decanting different from a store with full bottles?",
+        "answer": "You buy the volume you need, not an entire bottle. It is convenient for trying a scent, travel, or when you want several favorites at once."
+      },
+      "longevity": {
+        "question": "How long-lasting are the scents?",
+        "answer": "Longevity depends on the composition, concentration, and your skin. We will help you choose a fragrance that matches your expectations and advise how to apply it for a longer wear."
+      },
+      "volumes": {
+        "question": "What volumes can I order?",
+        "answer": "Convenient sizes are available from miniatures to larger bottles, depending on the fragrance and stock. Current options are always listed on the product page."
+      },
+      "personalPick": {
+        "question": "Do you offer personal fragrance selection?",
+        "answer": "Yes. We started with curated picks on Instagram and still help you choose a scent for your style, mood, and season."
+      },
+      "delivery": {
+        "question": "Do you deliver across Ukraine?",
+        "answer": "Yes, we deliver orders across Ukraine. Details on methods, timing, and delivery cost are in the Payment & Delivery section."
+      }
+    }
+  },
   "aboutBrand": {
     "title": "About Perfect Parfums",
     "brandName": "Perfect parfums",
