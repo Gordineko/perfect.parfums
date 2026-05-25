@@ -4,16 +4,19 @@ import {
   getLocalizedFooter,
   getMessages,
 } from "@shared";
-import ArchiveSelection from "@widgets/archive-selection";
 import Bestsellers from "@widgets/bestsellers";
-import { getPopularCatalogCards, getSaleCatalogCards } from "@shared/api/productsServices";
-import BrandValues from "@widgets/brand-values";
+import NewArrivals from "@widgets/new-arrivals";
+import {
+  getNewCatalogCards,
+  getPopularCatalogCards,
+} from "@shared/api/productsServices";
+import CustomerReviews from "@widgets/customer-reviews";
 import Footer from "@widgets/Footer";
+import { fetchMainReviews } from "@shared/api/reviewsServices";
 import { HeroSkeleton } from "@widgets/hero";
 import { Suspense } from "react";
 
 import BrandsCarousel from "pages/Home/ui/BrandsCarousel";
-import ArchiveSelectionServerBlock from "./ArchiveSelectionServerBlock";
 import HeroServerBlock from "./HeroServerBlock";
 
 
@@ -23,15 +26,17 @@ export default async function HomePage({ params }) {
   const { t } = createI18nServer(messages);
   const footerData = getLocalizedFooter(t);
 
-  const archiveSection = {
-    title: t("catalog.archiveSelectionTitle"),
-    eyebrow: t("catalog.archiveSelectionEyebrow"),
-    summary: t("catalog.archiveSelectionSummary"),
-    ctaLabel: t("catalog.archiveSelectionCta"),
-  };
   const categories = await getAllCategory();
   const popularProducts = await getPopularCatalogCards();
-  const saleProducts = await getSaleCatalogCards();
+  const newProducts = await getNewCatalogCards();
+  let mainReviews = [];
+
+  try {
+    mainReviews = await fetchMainReviews({ limit: 6, revalidate: 120 });
+  } catch {
+    mainReviews = [];
+  }
+
   return (
     <>
       <Suspense fallback={<HeroSkeleton />}>
@@ -40,21 +45,14 @@ export default async function HomePage({ params }) {
 
       <BrandsCarousel />
 
-      <Bestsellers fetchState="success" products={popularProducts}  />
+      <Bestsellers fetchState="success" products={popularProducts} />
 
-      <Suspense
-        fallback={
-          <ArchiveSelection
-            data={archiveSection}
-            fetchState="loading"
-            products={saleProducts}
-          />
-        }
-      >
-        <ArchiveSelectionServerBlock data={archiveSection} />
-      </Suspense>
+      <NewArrivals fetchState="success" products={newProducts} />
 
-      <BrandValues />
+      <CustomerReviews
+        reviews={mainReviews}
+        useMockReviews={mainReviews.length === 0}
+      />
 
       <section className="products-layout-wrapper products-layout-wrapper--footer">
         <Footer

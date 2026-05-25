@@ -12,11 +12,9 @@
   --space-14: 56px;
   --space-16: 64px;
   --space-20: 80px;
-  /* Відступи між секціями: desktop 80px, tablet 60px, mobile 40px */
   --space-section-y: 5rem;
 }
 
-/* Літеральні px у media — var() у умовах @media не завжди спрацьовує */
 @media (max-width: 1249.98px) and (min-width: 768px) {
   :root {
     --space-section-y: 3.75rem;

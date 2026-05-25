@@ -8,11 +8,11 @@ import { BREAKPOINTS, CarouselNavArrow, useI18n } from "@shared";
 import { useId, useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import styles from "./Bestsellers.module.scss";
+import styles from "../../bestsellers/ui/Bestsellers.module.scss";
 
 const MIN_SLIDER_ITEMS = 6;
 
-export default function Bestsellers({
+export default function NewArrivals({
   fetchState = "success",
   errorMessage = "",
   httpStatus,
@@ -84,7 +84,7 @@ export default function Bestsellers({
             className={`${styles.title} t-h2`}
             id={`${sectionId}-err`}
           >
-            {t("catalog.bestsellersTitle")}
+            {t("catalog.newArrivalsTitle")}
           </h2>
           <div className={styles.state}>
             <p className={styles.stateText}>
@@ -105,7 +105,7 @@ export default function Bestsellers({
     <section className={styles.root} aria-labelledby={sectionId}>
       <div className={`ds-container ${styles.inner}`}>
         <h2 className={`${styles.title} t-h2`} id={sectionId}>
-          {t("catalog.bestsellersTitle")}
+          {t("catalog.newArrivalsTitle")}
         </h2>
 
         <div className={styles.carouselShell}>

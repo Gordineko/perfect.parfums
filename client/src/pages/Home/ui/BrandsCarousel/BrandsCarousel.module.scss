@@ -2,26 +2,22 @@
 
 .brandsCarousel {
   background: var(--color-nude);
-  padding-block: 5rem;
+  padding-block: var(--space-section-y);
   margin-top: 0;
 }
 
-@include tablet-only {
-  .brandsCarousel {
-    padding-block: 3.75rem;
-  }
-}
-
-@include below-tablet {
-  .brandsCarousel {
-    padding-block: 2.5rem;
-  }
-}
-
 .brandsCarousel__title {
-  margin: 0 0 2.5rem;
+  margin: 0 0 40px;
   text-align: center;
   @include section-h2-title;
+
+  @include tablet-only {
+    margin-bottom: 30px;
+  }
+
+  @include below-tablet {
+    margin-bottom: 24px;
+  }
 }
 
 .brandsCarousel__list {
@@ -154,8 +150,3 @@
   stroke: #11110f;
 }
 
-@include below-tablet {
-  .brandsCarousel__title {
-    margin-bottom: 32px;
-  }
-}

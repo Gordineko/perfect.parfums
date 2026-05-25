@@ -48,34 +48,6 @@
     margin-bottom: 0;
     box-sizing: border-box;
 
-    .product-item__favorite {
-      top: 12px;
-      right: 12px;
-      width: 24px;
-      height: 24px;
-
-      svg {
-        width: 12px;
-        height: auto;
-        max-height: 10.8px;
-        aspect-ratio: 10 / 9;
-      }
-
-      @include below-tablet {
-        top: 8px;
-        right: 8px;
-        width: 24px;
-        height: 24px;
-
-        svg {
-          width: 10px;
-          height: 8.508px;
-          max-height: none;
-          aspect-ratio: auto;
-        }
-      }
-    }
-
     @include tablet-only {
       .product-item {
         width: 100%;

@@ -1,99 +1,78 @@
 @use "../../../shared/ui/styles/variables.scss" as *;
 
 .root {
-  padding-block: var(--space-section-y);
+  padding-block-start: var(--space-section-y);
+  padding-block-end: 0;
 
   @media (max-width: var(--bp-tablet-max)) {
     overflow-x: clip;
   }
 }
 
+:global(.brandsCarousel) + .root {
+  padding-block-start: 0;
+}
+
 .inner {
   display: flex;
   flex-direction: column;
-}
-
-.header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: var(--space-6);
-  margin-bottom: var(--space-6);
-
-  @media (max-width: var(--bp-below-tablet-max)) {
-    gap: var(--space-4);
-    margin-bottom: var(--space-4);
-  }
-}
-
-.heading {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
   min-width: 0;
-
-  @media (max-width: var(--bp-below-tablet-max)) {
-    gap: var(--space-2);
-  }
-}
-
-.allLink {
-  flex-shrink: 0;
-  color: var(--color-black);
-  font-family: var(--font-body);
-  font-size: 0.625rem;
-  font-weight: var(--fw-medium);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: color 0.15s ease;
-
-  &:hover,
-  &:focus-visible {
-    color: color-mix(in srgb, var(--color-black) 70%, transparent);
-  }
-}
-
-.divider {
-  border-bottom: 1px solid color-mix(in srgb, #d7d7d5 50%, transparent);
-  margin-bottom: var(--space-10);
-
-  @media (max-width: var(--bp-tablet-max)) and (min-width: var(--bp-tablet)) {
-    margin-bottom: var(--space-8);
-  }
-
-  @media (max-width: var(--bp-below-tablet-max)) {
-    margin-bottom: var(--space-4);
-  }
-}
-
-.eyebrow {
-  margin: 0;
-  color: #9ca3af;
-  font-family: var(--font-body);
-  font-size: 0.625rem;
-  font-weight: var(--fw-medium);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-
-  @media (max-width: var(--bp-below-tablet-max)) {
-    font-size: 8px;
-  }
 }
 
 .title {
-  margin: 0;
+  margin: 0 0 40px;
+  text-align: center;
   @include section-h2-title;
+
+  @include tablet-only {
+    margin-bottom: 30px;
+  }
+
+  @include below-tablet {
+    margin-bottom: 24px;
+  }
 }
+
+$nav-arrow-size: 40px;
+$nav-arrow-gap-from-cards: 20px;
+$nav-carousel-inset: $nav-arrow-gap-from-cards + $nav-arrow-size;
+
+$nav-arrow-size-tablet: 32px;
+$nav-arrow-gap-tablet: 12px;
+$nav-carousel-inset-tablet: $nav-arrow-gap-tablet + $nav-arrow-size-tablet;
+
+$nav-arrow-size-mobile: 28px;
+$nav-arrow-gap-mobile: 8px;
+$nav-carousel-inset-mobile: $nav-arrow-gap-mobile + $nav-arrow-size-mobile;
+
+$card-shadow-spread: 16px;
 
 .carouselShell {
   position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: visible;
+  padding-inline: $nav-carousel-inset-mobile;
+  padding-bottom: $card-shadow-spread;
+
+  @include tablet-only {
+    padding-inline: $nav-carousel-inset-tablet;
+  }
+
+  @media (min-width: var(--bp-desktop)) {
+    padding-inline: $nav-carousel-inset;
+  }
 }
 
 .navButton {
   position: absolute;
-  top: 40%;
+  top: 50%;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0;
   border: 0;
   background: transparent;
@@ -101,206 +80,75 @@
   line-height: 0;
   transform: translateY(-50%);
 
-  @media (max-width: var(--bp-tablet-max)) {
-    display: none;
+  svg {
+    display: block;
+    width: $nav-arrow-size;
+    height: $nav-arrow-size;
+  }
+
+  @include tablet-only {
+    svg {
+      width: $nav-arrow-size-tablet;
+      height: $nav-arrow-size-tablet;
+    }
+  }
+
+  @include below-tablet {
+    svg {
+      width: $nav-arrow-size-mobile;
+      height: $nav-arrow-size-mobile;
+    }
   }
 
   &:disabled {
     cursor: not-allowed;
-    opacity: 1;
+    opacity: 0.35;
   }
 }
 
 .navButtonPrev {
-  left: -18.5px;
+  left: 0;
 }
 
 .navButtonNext {
-  right: -18.5px;
+  right: 0;
 }
 
 .carousel {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   overflow: hidden;
+  margin-inline: 0;
+  padding-bottom: $card-shadow-spread;
+  box-sizing: border-box;
 
   :global(.swiper-slide) {
     height: auto;
+    overflow: visible;
   }
 
   :global(.swiper-pagination) {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    width: max-content;
-    margin: 32px auto 0;
-    line-height: 0;
-  }
-
-  :global(.swiper-pagination-bullet) {
-    width: 40px !important;
-    height: 2px !important;
-    min-width: 40px;
-    margin: 0 !important;
-    border: 0 !important;
-    border-radius: 0 !important;
-    padding: 0 !important;
-    opacity: 1 !important;
-    background: rgba(153, 153, 153, 0.5) !important;
-    transition:
-      width 0.25s ease,
-      background-color 0.25s ease;
-  }
-
-  :global(.swiper-pagination-bullet-active) {
-    width: 80px !important;
-    min-width: 80px;
-    background: #1a1a1a !important;
-  }
-
-  @media (max-width: var(--bp-tablet-max)) {
-    width: 100vw;
-    margin-inline: calc(50% - 50vw);
-    padding-inline: var(--container-pad-tablet);
-    box-sizing: border-box;
-  }
-
-  @media (max-width: var(--bp-below-tablet-max)) {
-    padding-inline: var(--container-pad-mobile);
+    display: none !important;
   }
 }
 
 .slide {
   height: 100%;
+  box-sizing: border-box;
+  overflow: visible;
 
   :global(.product-item) {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "media"
-      "meta";
     width: 100%;
-    height: 100%;
-    margin: 0;
-    min-height: 0;
-    background: transparent;
-    box-shadow: none;
-    overflow: visible;
+    max-width: 100%;
   }
 
-  :global(.product-item__image-wrap) {
-    grid-area: media;
-    margin-bottom: 0;
-    border-radius: 0;
-  }
+  :global(.card) {
+    position: relative;
+    z-index: 0;
 
-  :global(.product-item__meta-container--catalog) {
-    grid-area: meta;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 0 0;
-  }
-
-  :global(.product-item__button) {
-    grid-area: media;
-    align-self: end;
-    justify-self: stretch;
-    z-index: 4;
-    width: auto;
-    height: auto;
-    margin: 0 16px 16px;
-    padding: 16px;
-    border: 0;
-    border-radius: 0;
-    background: rgba(26, 26, 26, 0.9);
-    box-shadow: none;
-    opacity: 0;
-    pointer-events: none;
-    transform: none;
-    transition: opacity 0.25s ease;
-
-    p {
-      margin: 0;
-      color: #fafafa;
-      font-family: var(--font-body);
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      text-align: center;
-    }
-
-    &:hover,
-    &:focus-visible {
-      transform: none;
-    }
-
-    &:global(.active) {
-      border-radius: 0;
-      background: rgba(26, 26, 26, 0.9);
-      box-shadow: none;
-    }
-  }
-
-  :global(.product-item:hover) :global(.product-item__button),
-  :global(.product-item:focus-within) :global(.product-item__button) {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  :global(.product-item__meta-text) {
-    gap: 8px;
-
-    @media (max-width: var(--bp-below-tablet-max)) {
-      gap: 4px;
-    }
-
-    :global(.product-item__title) {
-      margin: 0;
-      color: #1a1a1a;
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: block;
-      -webkit-line-clamp: initial;
-      -webkit-box-orient: initial;
-
-      @media (max-width: var(--bp-below-tablet-max)) {
-        font-size: 8px;
-      }
-    }
-  }
-
-  :global(.product-item__text) {
-    margin: 0;
-    color: #9ca3af;
-    font-family: var(--font-body);
-    font-size: 10px;
-
-    @media (max-width: var(--bp-below-tablet-max)) {
-      font-size: 7px;
-    }
-  }
-
-  :global(.product-item__meta-price) {
-    align-self: center;
-
-    :global(.product-item__price-line) {
-      color: #1a1a1a;
-      font-family: var(--font-heading);
-      font-size: 17px;
-      font-style: italic;
-      font-weight: 400;
-      line-height: normal;
-
-      @media (max-width: var(--bp-below-tablet-max)) {
-        font-size: 12px;
-      }
+    &:hover {
+      z-index: 1;
     }
   }
 }
@@ -312,16 +160,10 @@
     animation: bestsellers-skeleton 1.1s ease-in-out infinite;
   }
 
-  .skeletonKicker {
-    width: 120px;
-    height: 12px;
-    margin: 0 auto;
-  }
-
   .skeletonTitle {
     width: min(280px, 70%);
     height: 28px;
-    margin: 0 auto;
+    margin: 0 auto 2.5rem;
   }
 
   .skeletonCarousel {

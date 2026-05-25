@@ -71,6 +71,7 @@ export { default as ArrowSwiperButton } from "./ui/icons/ArrowSwiperButton";
 export { default as Basket } from "./ui/icons/Basket";
 export { default as BurgerMenu } from "./ui/icons/BurgerMenu";
 export { default as BurgerMenuCatalog } from "./ui/icons/BurgerMenuCatalog";
+export { default as CarouselNavArrow } from "./ui/icons/CarouselNavArrow";
 export { default as CloseBtn } from "./ui/icons/CloseBtn";
 export { default as CloseX } from "./ui/icons/CloseX";
 export { default as CounterMinusIcon } from "./ui/icons/CounterMinusIcon";
@@ -117,6 +118,7 @@ export {
 } from "./api/productsServices";
 export {
   createReview,
+  fetchMainReviews,
   fetchProductReviews,
   reviewsApiBaseUrl,
 } from "./api/reviewsServices";
