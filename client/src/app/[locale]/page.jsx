@@ -10,6 +10,7 @@ import {
   getNewCatalogCards,
   getPopularCatalogCards,
 } from "@shared/api/productsServices";
+import AboutBrand from "@widgets/about-brand";
 import CustomerReviews from "@widgets/customer-reviews";
 import Footer from "@widgets/Footer";
 import { fetchMainReviews } from "@shared/api/reviewsServices";
@@ -53,6 +54,8 @@ export default async function HomePage({ params }) {
         reviews={mainReviews}
         useMockReviews={mainReviews.length === 0}
       />
+
+      <AboutBrand />
 
       <section className="products-layout-wrapper products-layout-wrapper--footer">
         <Footer

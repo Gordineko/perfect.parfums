@@ -358,6 +358,15 @@
     "onlyInStockSection": "Availability",
     "onlyInStock": "In stock only"
   },
+  "aboutBrand": {
+    "title": "About Perfect Parfums",
+    "brandName": "Perfect parfums",
+    "brandLinkAria": "Go to About us page",
+    "leadSuffix": " is a space where fragrance becomes part of your style.",
+    "paragraph2": "We started on Instagram with a curated selection tailored to your style, and we have kept that philosophy in everything we do. Here you will find premium perfumery: from light everyday classics to niche, oriental, and gourmand scents.",
+    "paragraph3": "We carefully select compositions so that every fragrance sounds pure and deep, and unfolds on your skin the way you deserve.",
+    "imageAlt": "Perfect Parfums perfumery"
+  },
   "reviews": {
     "homeSectionTitle": "CUSTOMER REVIEWS",
     "productFallback": "Product",
