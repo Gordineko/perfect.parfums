@@ -2,7 +2,6 @@ import WriteReviewModal from "@features/review";
 import {
   createI18nServer,
   getAllCategory,
-  getAllProductsForSwiper,
   getLocalizedFooter,
   getMessages,
   getProductBySlug,
@@ -11,9 +10,9 @@ import {
 import Breadcrumbs from "@widgets/brad-crumps";
 import { resolvePdpBreadcrumbItems } from "@widgets/brad-crumps/server";
 import Footer from "@widgets/Footer";
+import InstagramFeed from "@widgets/instagram-feed";
 import { ProductPdpBlock } from "@widgets/product-pdp";
-import RecommendedProducts from "@widgets/recommended-products";
-import ReviewSwiper from "@widgets/review-swiper";
+import PdpReviewsList from "@widgets/pdp-reviews-list";
 import ViewedProducts, { TrackViewedProduct } from "@widgets/viewed-products";
 import { notFound } from "next/navigation";
 
@@ -62,7 +61,6 @@ export default async function ProductPdpPageContent({ params }) {
 
   const groupSlug = resolveCatalogGroupSlugParam(slug);
   const data = await getProductBySlug(groupSlug);
-  const actionsProducts = await getAllProductsForSwiper();
   const categories = await getAllCategory();
 
   const messages = await getMessages(locale);
@@ -106,60 +104,27 @@ export default async function ProductPdpPageContent({ params }) {
 
       <div className="container">
         <section className="pdp section-margin">
-          <header className="pdp__header">
-            <h1 className="pdp__title t-h1">
-              {productTitle}
-            </h1>
-          </header>
-
-          <div
-            className="pdp__mobile-meta"
-            aria-label="Collection and gender"
-          >
-            <p className="pdp-info__meta-row">
-              <span className="pdp-info__meta-label">Collection:</span>{" "}
-              <span className="pdp-info__meta-value pdp-info__meta-value--series">
-                SHOES
-              </span>
-              <span className="pdp-info__meta-sep" aria-hidden="true" />
-              <span className="pdp-info__meta-label pdp-info__meta-label--category">
-                Gender:
-              </span>{" "}
-              <span className="pdp-info__meta-value pdp-info__meta-value--category">
-                {categoryLabel}
-              </span>
-            </p>
-          </div>
-
-          <div className="pdp__grid">
-            <ProductPdpBlock
-              product={product}
-              locale={locale}
-              categoryLabel={categoryLabel}
-              galleryAriaLabel={t("pdp.block.galleryAria")}
-              infoAriaLabel={t("pdp.block.infoAria")}
-            />
-          </div>
+          <ProductPdpBlock
+            product={product}
+            locale={locale}
+            productTitle={productTitle}
+            categoryLabel={categoryLabel}
+            galleryAriaLabel={t("pdp.block.galleryAria")}
+            infoAriaLabel={t("pdp.block.infoAria")}
+          />
         </section>
 
         <TrackViewedProduct product={product} />
 
-        <ReviewSwiper product={product} />
+        <PdpReviewsList />
         <WriteReviewModal locale={locale} product={product} />
 
         <ViewedProducts />
       </div>
 
-      <section className="products-layout-wrapper products-layout-wrapper--pdp">
-        <div className="container products-layout-wrapper__inner">
-          <RecommendedProducts
-            products={actionsProducts?.items ?? []}
-            eyebrow={t("catalog.recommendedEyebrow")}
-            title={t("pdp.recommendedStripTitle")}
-            variant="pdp"
-          />
-        </div>
+      <InstagramFeed variant="afterCatalog" />
 
+      <section className="products-layout-wrapper products-layout-wrapper--footer">
         <Footer categories={categories} locale={locale} data={footerData} />
       </section>
     </div>

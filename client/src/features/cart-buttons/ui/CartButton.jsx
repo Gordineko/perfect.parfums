@@ -84,7 +84,7 @@ const CartButton = ({
         : t("commerce.cartButton.outOfStock");
     }
     if (pdpOffer.available === false) return t("commerce.cartButton.outOfStock");
-    return t("commerce.cartButton.addToCart");
+    return t("pdp.addToCart");
   };
 
   const resolveCompanionLines = async () => {

@@ -5,17 +5,33 @@
   padding-block: var(--space-section-y);
 }
 
-/* Після каталогу: зверху як відступ під сіткою товарів (margin + padding grid). */
+/* Після каталогу / PDP: 80px → лінія → 40px до заголовка. */
 .rootAfterCatalog {
-  padding-top: 64px;
-  padding-bottom: var(--space-section-y);
+  margin-top: 80px;
+  padding-block: 40px var(--space-section-y);
+  border-top: 1px solid #bdb8ae;
+  background: var(--color-white, #fefefa);
 
   @include tablet-only {
-    padding-top: 40px;
+    margin-top: 48px;
+    padding-top: 32px;
+    padding-bottom: 48px;
   }
 
   @include below-tablet {
-    padding-top: 40px;
+    margin-top: 32px;
+    padding-top: 24px;
+    padding-bottom: 40px;
+  }
+
+  .header {
+    @include tablet-only {
+      margin-bottom: 30px;
+    }
+
+    @include below-tablet {
+      margin-bottom: 24px;
+    }
   }
 }
 

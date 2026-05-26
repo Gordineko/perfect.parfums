@@ -13,7 +13,7 @@ export function getOfferDiscountBadgeDisplay(offer) {
     if (Number.isFinite(pct) && pct > 0) {
       const rounded = Math.round(pct);
       return {
-        text: `${rounded}%`,
+        text: `-${rounded}%`,
         ariaLabel: `${rounded}% discount`,
       };
     }
