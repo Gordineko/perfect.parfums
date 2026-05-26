@@ -1,6 +1,6 @@
 .sort-modal {
   position: absolute;
-  top: 40px;
+  top: calc(100% + 18px);
   left: 0;
   z-index: 90;
 
@@ -15,112 +15,70 @@
   }
 
   &__content {
-    width: 259px;
-    background: var(--color-white);
+    width: 359px;
+    max-width: calc(100vw - 32px);
+    box-sizing: border-box;
+    background: #fefefa;
+    border: none;
     border-radius: 0;
-    border: 0.5px solid color-mix(in srgb, var(--color-black) 35%, transparent);
     box-shadow: none;
+    overflow: hidden;
 
     @include down($bp-desktop) {
-      width: min(520px, 100%);
+      width: min(359px, 100%);
       max-height: 70vh;
       overflow-y: auto;
-      border-radius: 0;
     }
-  }
-
-  &__header {
-    padding: 14px 20px;
-    border-bottom: 0.5px solid color-mix(in srgb, var(--color-black) 12%, transparent);
-  }
-
-  &__title {
-    margin: 0;
-    text-align: center;
-    color: var(--color-black);
-    font-family: var(--font-body);
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    letter-spacing: 2px;
-    text-transform: uppercase;
   }
 
   &__list {
     display: flex;
     flex-direction: column;
-
-    li:last-child .sort-modal__item {
-      border-bottom: none;
-    }
+    margin: 0;
+    padding: 0;
+    list-style: none;
   }
 
   &__item {
+    display: block;
     width: 100%;
     margin: 0;
-    padding: 14px 20px;
-    text-align: left;
-    background: transparent;
-    border: none;
-    border-bottom: 0.5px solid color-mix(in srgb, var(--color-black) 12%, transparent);
-    cursor: pointer;
-    transition:
-      color 0.15s ease,
-      background-color 0.15s ease;
-    position: relative;
-    color: var(--color-black);
+    padding: 12px 89px;
+    box-sizing: border-box;
 
-    p {
-      margin: 0;
-      font-family: var(--font-body);
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 300;
-      line-height: normal;
-      letter-spacing: 0;
-      color: inherit;
+    @include down($bp-desktop) {
+      padding: 12px 24px;
+    }
+    border: none;
+    border-radius: 0;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    color: #0d1717;
+    font-family: var(--font-body);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    transition: background-color 0.15s ease;
+
+    @include tablet-only {
+      font-size: 16px;
     }
 
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: var(--color-black);
-      border-radius: 0;
-      opacity: 0;
-      transition: opacity 0.15s ease;
+    @include below-tablet {
+      padding: 10px 16px;
+      font-size: 14px;
     }
 
     &:hover,
     &:focus-visible {
-      background: color-mix(in srgb, var(--color-black) 4%, transparent);
-      color: var(--color-black);
-
-      p {
-        font-weight: 400;
-      }
-    }
-
-    &:focus-visible {
-      outline: 2px solid color-mix(in srgb, var(--color-black) 25%, transparent);
-      outline-offset: -2px;
+      background: #dedede;
+      outline: none;
     }
 
     &--active {
-      color: var(--color-black);
-      background: color-mix(in srgb, var(--color-black) 6%, transparent);
-
-      p {
-        font-weight: 500;
-      }
-
-      &::before {
-        opacity: 1;
-      }
+      background: #dedede;
     }
   }
 }

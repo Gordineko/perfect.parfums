@@ -13,13 +13,13 @@ main {
   flex: 1;
 }
 
-/* Inner pages (not Home): neutral canvas. */
-.main--soft-bg {
+/* Головна: базовий білий фон; інші сторінки — #FEFEFA. */
+body {
   background: #fff;
 }
 
-body {
-  background: $white;
+.main--soft-bg {
+  background: var(--color-white, #fefefa);
 }
 
 .section-margin {

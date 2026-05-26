@@ -10,6 +10,7 @@ export default function CatalogPagination({
   pageSize,
   moreLabel,
   labels = {},
+  variant = "default",
 }) {
   const { t } = useI18n();
   const router = useRouter();
@@ -74,8 +75,14 @@ export default function CatalogPagination({
 
   const pagesArray = getPagesArray();
 
+  const isCompact = variant === "compact";
+
   return (
-    <div className="catalog-pagination">
+    <div
+      className={`catalog-pagination${
+        isCompact ? " catalog-pagination--compact" : ""
+      }`}
+    >
       {showLoadMore && currentPage < totalPages && (
         <button
           type="button"
@@ -90,14 +97,16 @@ export default function CatalogPagination({
       )}
 
       <div className="catalog-pagination__nav-row">
-        <button
-          type="button"
-          className="catalog-pagination__nav-text"
-          disabled={currentPage <= 1}
-          onClick={() => goToPage(currentPage - 1)}
-        >
-          {prevLabel}
-        </button>
+        {!isCompact && (
+          <button
+            type="button"
+            className="catalog-pagination__nav-text"
+            disabled={currentPage <= 1}
+            onClick={() => goToPage(currentPage - 1)}
+          >
+            {prevLabel}
+          </button>
+        )}
 
         <div className="catalog-pagination__wrapper">
           {pagesArray.map((page, index) => {
@@ -112,7 +121,9 @@ export default function CatalogPagination({
               );
             }
 
-            const label = String(page).padStart(2, "0");
+            const label = isCompact
+              ? String(page)
+              : String(page).padStart(2, "0");
 
             return (
               <button
@@ -125,21 +136,24 @@ export default function CatalogPagination({
                 aria-current={
                   currentPage === page ? "page" : undefined
                 }
+                aria-label={`${page}`}
               >
-                <p>{label}</p>
+                <span>{label}</span>
               </button>
             );
           })}
         </div>
 
-        <button
-          type="button"
-          className="catalog-pagination__nav-text"
-          disabled={currentPage >= totalPages}
-          onClick={() => goToPage(currentPage + 1)}
-        >
-          {nextLabel}
-        </button>
+        {!isCompact && (
+          <button
+            type="button"
+            className="catalog-pagination__nav-text"
+            disabled={currentPage >= totalPages}
+            onClick={() => goToPage(currentPage + 1)}
+          >
+            {nextLabel}
+          </button>
+        )}
       </div>
     </div>
   );

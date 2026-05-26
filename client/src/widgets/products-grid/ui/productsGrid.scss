@@ -7,18 +7,47 @@
 
   margin-bottom: 48px;
 
+  &--empty {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    padding: 0 var(--space-4, 16px) var(--space-4, 16px);
+
+    @include down($bp-desktop) {
+      min-height: 160px;
+      padding-bottom: var(--space-3, 12px);
+    }
+
+    @include below-tablet {
+      min-height: 120px;
+      padding-inline: var(--space-3, 12px);
+      padding-bottom: var(--space-2, 8px);
+    }
+  }
+
   &__empty {
-    grid-column: 1 / -1;
     margin: 0;
-    padding: $space-lg 0;
+    padding: 0 12px;
     text-align: center;
-    font-family: $font-montserrat;
-    font-size: 14px;
-    font-weight: $fw-medium;
-    color: var(--Dark, #0d0d0d);
+    color: #000;
+    font-family: var(--font-heading), "Cormorant", serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    @include tablet-only {
+      font-size: 20px;
+    }
+
+    @include below-tablet {
+      font-size: 18px;
+    }
   }
 
   @include tablet-only {
+    gap: 14px;
     margin-bottom: 24px;
   }
 
@@ -27,11 +56,13 @@
   }
 
   @include up($bp-desktop) {
-    gap: $space-lg;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
   }
 
   @include below-tablet {
-    margin-bottom: 24px;
+    gap: 10px;
+    margin-bottom: 20px;
   }
 }
 

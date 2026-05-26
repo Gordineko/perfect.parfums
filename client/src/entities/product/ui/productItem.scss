@@ -18,6 +18,41 @@
     &:focus-visible {
       outline: none;
     }
+
+    @include down($bp-desktop) {
+      .product-item__meta-container {
+        padding-top: 8px;
+        gap: $space-xs;
+      }
+
+      .product-item__title {
+        font-size: 10px;
+        letter-spacing: 0.6px;
+      }
+
+      .product-item__price-line {
+        font-size: 14px;
+      }
+
+      .product-item__meta-text {
+        gap: 4px;
+      }
+    }
+
+    @include below-tablet {
+      .product-item__meta-container {
+        padding-top: 6px;
+      }
+
+      .product-item__title {
+        font-size: 9px;
+        letter-spacing: 0.5px;
+      }
+
+      .product-item__price-line {
+        font-size: 13px;
+      }
+    }
   }
 
   &__image-wrap {

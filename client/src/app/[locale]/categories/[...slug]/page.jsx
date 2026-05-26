@@ -7,13 +7,12 @@ import { createI18nServer, getLocalizedFooter, getMessages } from "@shared";
 import {
   getAllFilters,
   getAllProducts,
-  getAllProductsForSwiper,
   getCharacteristicsMeta,
 } from "@shared";
 import { getAllCategory, parseCategoryIdsFromResolvedSearch } from "@shared";
 import { resolveCatalogPageBreadcrumbItems } from "@widgets/brad-crumps/server";
 import Footer from "@widgets/Footer";
-import RecommendedProducts from "@widgets/recommended-products";
+import InstagramFeed from "@widgets/instagram-feed";
 import { notFound } from "next/navigation";
 
 function pickLocalizedCategoryTitle(cat, locale) {
@@ -118,7 +117,6 @@ export default async function CategoriesPage({
     { throwOnHttpError: true },
   );
   const filters = await getAllFilters(apiSearchParams, categoryId, locale);
-  console.log(filters, "filters");
   const characteristicsMetaRaw = await getCharacteristicsMeta({
     status: "active",
   });
@@ -127,8 +125,6 @@ export default async function CategoriesPage({
     typeof characteristicsMetaRaw === "object"
       ? characteristicsMetaRaw
       : { items: [] };
-  const actionsProducts = await getAllProductsForSwiper();
-
   return (
     <div className="category-page">
       <CatalogView
@@ -142,11 +138,14 @@ export default async function CategoriesPage({
           products={products}
           labels={{
             breadcrumbHome: t("breadcrumbs.home"),
+            breadcrumbCatalog: t("breadcrumbs.catalog"),
             breadcrumbPage: t("breadcrumbs.page"),
             allProducts: t("catalog.allProducts"),
             filters: t("catalog.filters"),
             sort: t("catalog.sort"),
+            sortBy: t("catalog.sortBy"),
             sortDefault: t("catalog.sortDefault"),
+            sortPopular: t("catalog.sortPopular"),
             sortPriceDesc: t("catalog.sortPriceDesc"),
             sortPriceAsc: t("catalog.sortPriceAsc"),
             sortTitleAsc: t("catalog.sortTitleAsc"),
@@ -156,6 +155,8 @@ export default async function CategoriesPage({
             clearActiveFilters: t(
               "catalog.clearActiveFilters",
             ),
+            noProductsForFilters: t("catalog.noProductsForFilters"),
+            noProductsEmpty: t("catalog.noProductsEmpty"),
             paginationPrev: t("catalog.paginationPrev"),
             paginationNext: t("catalog.paginationNext"),
           }}
@@ -176,14 +177,9 @@ export default async function CategoriesPage({
           }}
       />
 
+      <InstagramFeed variant="afterCatalog" />
+
       <section className="products-layout-wrapper products-layout-wrapper--footer">
-        <div className="container products-layout-wrapper__inner">
-          <RecommendedProducts
-            products={actionsProducts?.items ?? []}
-            eyebrow={t("catalog.recommendedEyebrow")}
-            title={t("catalog.recommendedTitle")}
-          />
-        </div>
         <Footer
           categories={categories}
           locale={locale}

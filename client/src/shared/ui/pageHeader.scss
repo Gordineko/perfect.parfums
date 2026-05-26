@@ -1,11 +1,7 @@
 .page-header {
   &__breadcrumbs {
-    margin: 24px 0;
-
-    @include down($bp-desktop) {
-      margin: 0;
-      padding-block: 16px;
-    }
+    margin: 0;
+    padding: 0;
   }
 
   &__breadcrumbs-full {

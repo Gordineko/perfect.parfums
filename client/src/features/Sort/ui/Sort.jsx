@@ -17,8 +17,8 @@ const Sort = ({
       label: labels.sortDefault ?? "",
     },
     {
-      id: "title_asc",
-      label: labels.sortTitleAsc ?? "",
+      id: "popularity",
+      label: labels.sortPopular ?? "",
     },
     {
       id: "price_asc",
@@ -48,15 +48,11 @@ const Sort = ({
         className="sort-modal__content"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="sort-modal__header">
-          <p className="sort-modal__title">
-            {labels?.sort ?? ""}
-          </p>
-        </div>
         <ul className="sort-modal__list">
           {sortOptions.map((opt) => (
             <li key={opt.id}>
               <button
+                type="button"
                 className={`sort-modal__item ${
                   currentSort === opt.id
                     ? "sort-modal__item--active"
@@ -64,7 +60,7 @@ const Sort = ({
                 }`}
                 onClick={() => handleSortChange(opt.id)}
               >
-                <p>{opt.label}</p>
+                {opt.label}
               </button>
             </li>
           ))}

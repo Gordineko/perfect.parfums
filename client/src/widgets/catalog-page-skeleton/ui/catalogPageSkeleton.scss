@@ -25,62 +25,132 @@
 
 .catalog-page-skeleton {
   pointer-events: none;
-  padding-bottom: $space-xl;
-
-  &__layout {
-    margin-top: $space-md;
-  }
+  padding-bottom: 0;
+  background: var(--color-white, #fefefa);
 
   &__breadcrumbs {
-    height: 14px;
-    width: min(280px, 55%);
-    margin-top: $catalog-breadcrumbs-gap-top;
-    margin-bottom: $catalog-breadcrumbs-gap-bottom;
-    @include catalog-page-skeleton-block;
-  }
+    width: 100%;
+    padding: var(--space-10, 40px) 0;
+    border-top: 1px solid var(--color-burgundy, #68181f);
+    border-bottom: 1px solid #bdb8ae;
+    box-sizing: border-box;
 
-  &__title {
-    height: clamp(28px, 6vw, $catalog-h1-size);
-    width: min(420px, 85%);
-    margin-bottom: $space-xs;
-    @include catalog-page-skeleton-block;
-  }
+    @include down($bp-desktop) {
+      padding-top: var(--space-8, 32px);
+      padding-bottom: var(--space-8, 32px);
+    }
 
-  &__chip {
-    height: 34px;
-    width: 120px;
-    @include catalog-page-skeleton-block;
-
-    &--wide {
-      width: min(259px, 70%);
+    @include below-tablet {
+      padding-top: 12px;
+      padding-bottom: 12px;
     }
   }
 
-  &__sidebar {
-    .catalog-page-skeleton__sidebar-card {
-      padding: $filter-card-padding-y $filter-card-padding-x;
-      border-radius: $filter-card-radius;
-      box-shadow: $filter-card-shadow;
-      background: $white;
+  &__breadcrumbs-line {
+    height: 20px;
+    width: min(360px, 70%);
+    @include catalog-page-skeleton-block;
+
+    @include below-tablet {
+      height: 12px;
+    }
+  }
+
+  &__filters-zone {
+    width: 100%;
+  }
+
+  &__toolbar {
+    position: relative;
+    width: 100%;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 1px;
+      background: #bdb8ae;
+      pointer-events: none;
+    }
+  }
+
+  &__control-bar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.5fr) minmax(0, 1fr);
+    align-items: stretch;
+    min-height: 52px;
+
+    @include down($bp-desktop) {
+      display: flex;
+      gap: 12px;
+      min-height: auto;
     }
 
-    .catalog-page-skeleton__sidebar-title {
-      height: 18px;
-      width: 70%;
-      margin-bottom: $filter-card-gap;
+    @include below-tablet {
+      gap: 8px;
+    }
+  }
+
+  &__control-cell {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 14px 24px;
+    border-right: 1px solid #bdb8ae;
+
+    @include down($bp-desktop) {
+      flex: 1;
+      min-width: 0;
+      padding: 10px 12px;
+      border-right: none;
+    }
+
+    @include below-tablet {
+      padding: 8px 10px;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      height: 20px;
+      width: min(120px, 80%);
       @include catalog-page-skeleton-block;
     }
 
-    .catalog-page-skeleton__sidebar-row {
-      height: 14px;
-      width: 100%;
-      margin-bottom: $filter-section-gap;
+    &--title {
+      justify-content: center;
 
-      &:last-child {
-        margin-bottom: 0;
+      @include down($bp-desktop) {
+        display: none;
       }
 
-      @include catalog-page-skeleton-block;
+      &::after {
+        width: min(240px, 55%);
+      }
+    }
+
+    &:last-child {
+      border-right: none;
+      justify-content: flex-end;
+
+      &::after {
+        width: min(88px, 60%);
+        margin-left: auto;
+      }
+    }
+  }
+
+  &__layout {
+    padding-top: var(--space-20, 80px);
+
+    @include down($bp-desktop) {
+      padding-top: var(--space-10, 40px);
+    }
+
+    @include below-tablet {
+      padding-top: var(--space-8, 32px);
     }
   }
 
@@ -88,13 +158,26 @@
     display: grid;
     gap: $space-md;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 48px;
+    padding-bottom: 16px;
+
+    @include tablet-only {
+      gap: 14px;
+      margin-bottom: 24px;
+    }
 
     @include up($bp-tablet) {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     @include up($bp-desktop) {
-      gap: $space-lg;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    @include below-tablet {
+      gap: 10px;
+      margin-bottom: 20px;
     }
   }
 
@@ -108,6 +191,7 @@
   &__media {
     aspect-ratio: 176 / 221;
     width: 100%;
+    border-radius: 0;
     @include catalog-page-skeleton-block;
   }
 
@@ -123,7 +207,68 @@
     &--price {
       width: 40%;
       height: 14px;
-      margin-top: $space-xxs;
+    }
+  }
+
+  &__pagination {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    padding: 32px 0;
+
+    @include down($bp-desktop) {
+      gap: var(--space-4, 16px);
+      padding: var(--space-6, 24px) 0;
+    }
+
+    @include below-tablet {
+      gap: var(--space-2, 8px);
+      padding: var(--space-4, 16px) 0;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      max-width: 100vw;
+      height: 1px;
+      background: #bdb8ae;
+      pointer-events: none;
+    }
+
+    &::before {
+      top: 0;
+    }
+
+    &::after {
+      bottom: 0;
+    }
+  }
+
+  &__page-dot {
+    flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    @include catalog-page-skeleton-block;
+
+    @include tablet-only {
+      width: 44px;
+      height: 44px;
+    }
+
+    @include below-tablet {
+      width: 40px;
+      height: 40px;
+    }
+
+    &:first-child {
+      opacity: 0.85;
     }
   }
 }

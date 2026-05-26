@@ -1,9 +1,11 @@
 .pdp-page {
   min-height: 100vh;
   overflow-x: hidden;
+  background: var(--color-white, #fefefa);
 
   &__breadcrumbs {
-    margin: 16px 0;
+    margin: 0;
+    padding: 0;
   }
 
 }
