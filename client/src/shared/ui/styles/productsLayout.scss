@@ -33,7 +33,7 @@
   }
 
   &:not(&--footer) {
-    background: #fff;
+    background: var(--color-white, #fefefa);
   }
 
   &:not(&--footer) &__inner {

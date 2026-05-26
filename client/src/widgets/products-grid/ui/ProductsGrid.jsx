@@ -4,7 +4,7 @@ import ProductItem from "@entities/product";
 import ProductWishlistButton from "@features/toggle-wishlist";
 import { CATALOG_GRID_PRIORITY_IMAGE_COUNT } from "@shared/api/productsServices";
 
-export default function ProductsGrid({ products }) {
+export default function ProductsGrid({ products, emptyMessage }) {
   const isRequestFailed = Array.isArray(products);
   const items =
     !isRequestFailed && Array.isArray(products?.items)
@@ -19,9 +19,10 @@ export default function ProductsGrid({ products }) {
 
   if (showEmptyMessage) {
     return (
-      <div className="products-grid">
+      <div className="products-grid products-grid--empty">
         <p className="products-grid__empty" role="status">
-          На жаль, за вашими параметрами товарів не знайдено
+          {emptyMessage ??
+            "На жаль, за вашими параметрами товарів не знайдено"}
         </p>
       </div>
     );

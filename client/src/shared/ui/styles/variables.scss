@@ -1,7 +1,7 @@
 $container-max: 1500px;
 $container-padding: clamp(1rem, 3vw, 2.5rem);
 /* colors */
-$white: #fefefe;
+$white: #fefefa;
 $black: #000;
 $dark: #0d0d0d;
 $dark-70: rgba($dark, 0.7);
@@ -342,8 +342,39 @@ $filter-sidebar-width: 357px;
 $filter-card-shadow: 0 4px 24px rgba(13, 13, 13, 0.08);
 $filter-checkbox-size: 20px;
 $filter-checkbox-radius: 5px;
-$filter-checkbox-gap: $space-sm;
+$filter-checkbox-gap: $space-xs;
+$filter-row-gap: $space-xs;
 $filter-section-gap: $space-md;
+$filter-value-color: var(--black, #11110f);
+$filter-value-font-size: 20px;
+$filter-value-line-height: 1.3;
+$filter-divider-color: #bdb8ae;
+
+/* Лінія на всю ширину секції (батько на всю ширину сторінки). */
+@mixin section-bleed-line($edge: bottom, $color: $filter-divider-color) {
+  content: "";
+  position: absolute;
+  #{$edge}: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: $color;
+  pointer-events: none;
+}
+
+/* Лінія на всю ширину вікна (для елементів усередині .container). */
+@mixin viewport-bleed-line($edge: bottom, $color: $filter-divider-color) {
+  content: "";
+  position: absolute;
+  #{$edge}: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: 100vw;
+  height: 1px;
+  background: $color;
+  pointer-events: none;
+}
 $filter-card-radius: 32px;
 $filter-border-subtle: $black-08;
 /* above .header (100) and burger overlay (101) */

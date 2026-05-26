@@ -10,12 +10,18 @@ import {
 } from "../model/instagramFeedImages";
 import styles from "./InstagramFeed.module.scss";
 
-export default function InstagramFeed() {
+export default function InstagramFeed({ variant = "default" }) {
   const sectionId = useId();
   const { t } = useI18n();
+  const rootClassName = [
+    styles.root,
+    variant === "afterCatalog" ? styles.rootAfterCatalog : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <section className={styles.root} aria-labelledby={sectionId}>
+    <section className={rootClassName} aria-labelledby={sectionId}>
       <div className={`ds-container ${styles.inner}`}>
         <header className={styles.header}>
           <h2 className={styles.title} id={sectionId}>
