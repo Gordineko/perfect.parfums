@@ -11,6 +11,7 @@ import {
   QUERY_PRICE_MAX,
   QUERY_PRICE_MIN,
 } from "@shared";
+import { localePath } from "@shared/lib/localePath";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   useCallback as useReactCallback,
@@ -38,7 +39,7 @@ function setJsonSearchParam(params, queryKey, obj) {
 }
 
 function parseCategoriesPathFromPathname(pathname, locale) {
-  const prefix = `/${locale}/categories/`;
+  const prefix = `${localePath(locale, "/categories")}/`;
   if (!pathname.startsWith(prefix)) return "";
   const rest = pathname.slice(prefix.length).replace(/\/$/, "");
   return rest || "all";

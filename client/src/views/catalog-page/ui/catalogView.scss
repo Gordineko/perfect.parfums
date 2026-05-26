@@ -48,7 +48,7 @@
     min-width: 0;
     height: auto;
     padding: $space-xs $space-md;
-    border: 0.5px solid var(--color-text);
+    border: 0.5px solid var(--color-black);
     border-radius: 0;
     background: $white;
     box-sizing: border-box;
@@ -66,7 +66,7 @@
 
     p {
       margin: 0;
-      color: var(--color-dark);
+      color: var(--color-black);
       font-family: var(--font-body);
       font-size: 14px;
       font-weight: 300;
@@ -74,7 +74,7 @@
       letter-spacing: 0;
       text-align: left;
 
-      @include mobile-only {
+      @include below-tablet {
         font-size: 12px;
       }
     }
@@ -138,7 +138,7 @@
       gap: $space-md;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       justify-content: space-between;
     }
   }
@@ -234,7 +234,7 @@
 
   &__title,
   &__value {
-    color: var(--color-text);
+    color: var(--color-black);
     font-family: var(--font-body);
     font-size: 11px;
     font-weight: 500;
@@ -253,7 +253,7 @@
     background: transparent;
     cursor: pointer;
     line-height: 0;
-    color: var(--color-text);
+    color: var(--color-black);
 
     &:hover,
     &:focus-visible {
@@ -272,7 +272,7 @@
     border: 0;
     border-radius: 0;
     background: rgba(153, 153, 153, 0.5);
-    color: var(--color-text);
+    color: var(--color-black);
     font-family: var(--font-body);
     font-size: 9px;
     font-weight: 500;

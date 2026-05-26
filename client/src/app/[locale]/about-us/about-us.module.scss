@@ -44,7 +44,7 @@ $about-section-gap-handheld: 48px;
     background-size: cover;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     height: 400px;
     max-height: 400px;
     background-position: top center;
@@ -83,7 +83,7 @@ $about-section-gap-handheld: 48px;
     font-size: 14px;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     margin-bottom: 16px;
     font-size: 10px;
     letter-spacing: 1.5px;
@@ -93,7 +93,7 @@ $about-section-gap-handheld: 48px;
 .bannerTitle {
   margin: 0;
   color: var(--Dark, #0d0d0d);
-  font-family: var(--font-title);
+  font-family: var(--font-heading);
   font-size: 96px;
   font-style: italic;
   font-weight: 400;
@@ -109,7 +109,7 @@ $about-section-gap-handheld: 48px;
     font-size: 48px;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     max-width: 255px;
     margin-bottom: 16px;
     font-size: 32px;
@@ -131,7 +131,7 @@ $about-section-gap-handheld: 48px;
     font-size: 16px;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     max-width: 225px;
     font-size: 10px;
     letter-spacing: 1.5px;
@@ -161,7 +161,7 @@ $about-section-gap-handheld: 48px;
     gap: 32px;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     grid-template-columns: minmax(0, 1fr);
     justify-items: stretch;
     width: 100%;
@@ -184,7 +184,7 @@ $about-section-gap-handheld: 48px;
     text-align: center;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     max-width: 100%;
     text-align: center;
     align-items: center;
@@ -208,7 +208,7 @@ $about-section-gap-handheld: 48px;
     text-align: center;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     margin-bottom: 16px;
     width: 100%;
     font-size: 10px;
@@ -219,7 +219,7 @@ $about-section-gap-handheld: 48px;
 .storyTitle {
   margin: 0 0 16px;
   color: #1a1a1a;
-  font-family: var(--font-title);
+  font-family: var(--font-heading);
   font-size: 44px;
   font-style: italic;
   font-weight: 400;
@@ -234,7 +234,7 @@ $about-section-gap-handheld: 48px;
     text-align: center;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     margin-inline: auto;
     margin-bottom: 16px;
     width: 368px;
@@ -261,7 +261,7 @@ $about-section-gap-handheld: 48px;
     text-align: center;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     margin-inline: auto;
     width: 368px;
     max-width: 100%;
@@ -283,7 +283,7 @@ $about-section-gap-handheld: 48px;
     overflow: visible;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
@@ -301,7 +301,7 @@ $about-section-gap-handheld: 48px;
     display: none;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     display: block;
     box-sizing: border-box;
     width: 100%;
@@ -365,7 +365,7 @@ $about-section-gap-handheld: 48px;
   max-height: 473px !important;
   object-fit: contain;
 
-  @include mobile-only {
+  @include below-tablet {
     width: 100% !important;
     max-width: 100% !important;
     height: auto !important;
@@ -399,7 +399,7 @@ $about-section-gap-handheld: 48px;
     width: 100%;
     color: #1a1a1a;
     text-align: center;
-    font-family: var(--font-title);
+    font-family: var(--font-heading);
     font-size: 64px;
     font-style: italic;
     font-weight: 400;
@@ -412,19 +412,19 @@ $about-section-gap-handheld: 48px;
     margin-inline: auto;
     color: #1a1a1a;
     text-align: center;
-    font-family: var(--font-title);
+    font-family: var(--font-heading);
     font-size: 36px;
     font-style: italic;
     font-weight: 400;
     line-height: normal;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     max-width: 100%;
     padding-inline: var(--container-pad-mobile);
     color: #1a1a1a;
     text-align: center;
-    font-family: var(--font-title);
+    font-family: var(--font-heading);
     font-size: 24px;
     font-style: italic;
     font-weight: 400;
@@ -450,7 +450,7 @@ $about-section-gap-handheld: 48px;
     background: #f6f5f3;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     order: 2;
     box-sizing: border-box;
     width: 100%;
@@ -474,7 +474,7 @@ $about-section-gap-handheld: 48px;
     gap: 48px;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -503,7 +503,7 @@ $about-section-gap-handheld: 48px;
 .valuesCardTitle {
   margin: 0;
   color: var(--Dark, #1a1a1a);
-  font-family: var(--font-title);
+  font-family: var(--font-heading);
   font-size: 32px;
   font-style: italic;
   font-weight: 400;
@@ -513,7 +513,7 @@ $about-section-gap-handheld: 48px;
     font-size: 32px;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     font-size: 24px;
   }
 }
@@ -535,7 +535,7 @@ $about-section-gap-handheld: 48px;
     font-size: 14px;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     width: 100%;
     max-width: 336px;
     margin-inline: auto;
@@ -561,7 +561,7 @@ $about-section-gap-handheld: 48px;
     margin-top: $about-section-gap-handheld;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     order: 3;
     display: flex;
     flex-direction: column;
@@ -577,7 +577,7 @@ $about-section-gap-handheld: 48px;
   @include desktop-only {
     color: #1a1a1a;
     text-align: center;
-    font-family: var(--font-title);
+    font-family: var(--font-heading);
     font-size: 64px;
     font-style: italic;
     font-weight: 400;
@@ -588,19 +588,19 @@ $about-section-gap-handheld: 48px;
     max-width: 100%;
     color: #1a1a1a;
     text-align: center;
-    font-family: var(--font-title);
+    font-family: var(--font-heading);
     font-size: 36px;
     font-style: italic;
     font-weight: 400;
     line-height: normal;
   }
 
-  @include mobile-only {
+  @include below-tablet {
     max-width: 100%;
     padding-inline: var(--container-pad-mobile);
     color: #1a1a1a;
     text-align: center;
-    font-family: var(--font-title);
+    font-family: var(--font-heading);
     font-size: 24px;
     font-style: italic;
     font-weight: 400;
@@ -655,7 +655,7 @@ $about-section-gap-handheld: 48px;
     }
   }
 
-  @include mobile-only {
+  @include below-tablet {
     display: inline-flex;
     align-items: center;
     justify-content: center;

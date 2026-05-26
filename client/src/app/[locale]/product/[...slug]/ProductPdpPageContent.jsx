@@ -107,7 +107,7 @@ export default async function ProductPdpPageContent({ params }) {
       <div className="container">
         <section className="pdp section-margin">
           <header className="pdp__header">
-            <h1 className="pdp__title t-page-title">
+            <h1 className="pdp__title t-h1">
               {productTitle}
             </h1>
           </header>

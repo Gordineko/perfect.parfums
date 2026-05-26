@@ -1,0 +1,230 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+.root {
+  position: relative;
+  background: var(--color-nude, #fffaf0);
+  padding-block: var(--space-section-y);
+
+  @include tablet-only {
+    padding-block: 30px;
+  }
+
+  @include below-tablet {
+    padding-block: 24px;
+  }
+}
+
+.inner {
+  min-width: 0;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 50px;
+  align-items: start;
+
+  @include desktop-only {
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 48px;
+  }
+
+  @include below-tablet {
+    gap: 40px;
+  }
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  text-align: left;
+
+  @include desktop-only {
+    align-self: center;
+  }
+
+  @include tablet-only {
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+  }
+
+  @include below-tablet {
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+  }
+}
+
+.titleLine1 {
+  margin: 0;
+  color: var(--color-black, #11110f);
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+  letter-spacing: 5.6px;
+  text-transform: uppercase;
+
+  @include tablet-only {
+    font-size: 24px;
+    letter-spacing: 4.8px;
+  }
+
+  @include below-tablet {
+    font-size: 20px;
+    letter-spacing: 4px;
+  }
+}
+
+.titleLine2 {
+  margin: 0;
+  color: var(--color-black, #11110f);
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+  letter-spacing: 6.4px;
+
+  @include tablet-only {
+    font-size: 28px;
+    letter-spacing: 5.6px;
+  }
+
+  @include below-tablet {
+    font-size: 16px;
+    letter-spacing: 3.2px;
+  }
+}
+
+.accordion {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: var(--faq-accordion-min-height, auto);
+}
+
+.measure {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  width: min(100%, calc(var(--container-max) * 1.05));
+  max-width: 100%;
+  height: auto;
+  overflow: hidden;
+  inset: auto;
+  left: -9999px;
+}
+
+.item {
+  border-bottom: 1px solid #bdb8ae;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.trigger {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+
+}
+
+.question {
+  flex: 1;
+  min-width: 0;
+  color: var(--color-black, #11110f);
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: 1.2px;
+
+  @include tablet-only {
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+
+  @include below-tablet {
+    font-size: 16px;
+    letter-spacing: 0.8px;
+  }
+}
+
+.icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+
+  @include below-tablet {
+    width: 16px;
+    height: 16px;
+  }
+
+  svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.panel {
+  box-sizing: border-box;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+.panelOpen {
+  height: var(--faq-answer-slot-height, auto);
+}
+
+.panelInner {
+  box-sizing: border-box;
+  min-height: var(--faq-answer-slot-height, auto);
+  padding-bottom: 8px;
+}
+
+.answer {
+  margin: 0;
+  max-width: 52em;
+  color: var(--color-burgundy, #68181f);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  letter-spacing: 0.9px;
+
+  @include tablet-only {
+    font-size: 14px;
+    letter-spacing: 0.7px;
+  }
+
+  @include below-tablet {
+    font-size: 12px;
+    letter-spacing: 0.6px;
+  }
+}

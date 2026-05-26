@@ -1,23 +1,7 @@
+.container,
 .ds-container {
   width: 100%;
   max-width: var(--container-max);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--container-pad-desktop);
-  padding-right: var(--container-pad-desktop);
+  margin-inline: auto;
+  padding-inline: var(--container-pad-x);
 }
-
-@media (max-width: 1249.98px) {
-  .ds-container {
-    padding-left: var(--container-pad-tablet);
-    padding-right: var(--container-pad-tablet);
-  }
-}
-
-@media (max-width: 767.98px) {
-  .ds-container {
-    padding-left: var(--container-pad-mobile);
-    padding-right: var(--container-pad-mobile);
-  }
-}
-

@@ -104,7 +104,7 @@
     flex-shrink: 0;
     min-width: 72px;
     color: $gray-999-50;
-    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-family: var(--font-body), $font-secondary, sans-serif;
     font-size: 36px;
     font-style: normal;
     font-weight: $fw-bold;
@@ -133,7 +133,7 @@
   &__title {
     margin: 0;
     color: $dark;
-    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-family: var(--font-body), $font-secondary, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: $fw-semibold;
@@ -149,7 +149,7 @@
   &__desc {
     margin: 0;
     color: $gray;
-    font-family: var(--font-main), $font-secondary, sans-serif;
+    font-family: var(--font-body), $font-secondary, sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: $fw-regular;

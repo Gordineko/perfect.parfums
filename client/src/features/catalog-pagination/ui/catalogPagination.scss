@@ -37,7 +37,7 @@
       letter-spacing: 0.56px;
       transition: color 0.2s ease;
 
-      @include mobile-only {
+      @include below-tablet {
         font-size: 12px;
       }
     }
@@ -108,7 +108,7 @@
 
     p {
       margin: 0;
-      color: var(--color-text);
+      color: var(--color-black);
       text-align: center;
       font-family: var(--font-body);
       font-size: 14px;
@@ -122,7 +122,7 @@
     }
 
     &.is-active {
-      border-bottom-color: var(--color-text);
+      border-bottom-color: var(--color-black);
     }
   }
 

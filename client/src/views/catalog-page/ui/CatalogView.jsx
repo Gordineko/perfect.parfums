@@ -121,7 +121,7 @@ const CatalogView = ({
       <div className="container">
         <header className="catalog-page__header">
           <div className="catalog-page__heading">
-            <h1 className="catalog-page__title t-page-title">
+            <h1 className="catalog-page__title t-h1">
               {pageTitle}
             </h1>
           </div>

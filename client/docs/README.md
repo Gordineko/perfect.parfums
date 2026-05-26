@@ -1,5 +1,7 @@
 # 📐 Frontend Architecture Guidelines (FSD)
 
+> Адаптив і брейкпоінти: [breakpoints.md](./breakpoints.md)
+
 ## 🎯 Цель
 
 Установить единые правила архитектуры фронтенд-кода в команде,  

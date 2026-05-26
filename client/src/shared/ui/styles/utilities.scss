@@ -11,7 +11,6 @@ body {
 
 main {
   flex: 1;
-  padding-top: var(--header-offset, 96px);
 }
 
 /* Inner pages (not Home): neutral canvas. */
@@ -19,31 +18,8 @@ main {
   background: #fff;
 }
 
-.main--home {
-  padding-top: var(--header-offset);
-}
-
 body {
   background: $white;
-}
-
-.container {
-  width: 100%;
-  max-width: var(--container-max);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--container-pad-desktop);
-  padding-right: var(--container-pad-desktop);
-
-  @media (max-width: 1249.98px) {
-    padding-left: var(--container-pad-tablet);
-    padding-right: var(--container-pad-tablet);
-  }
-
-  @media (max-width: 767.98px) {
-    padding-left: var(--container-pad-mobile);
-    padding-right: var(--container-pad-mobile);
-  }
 }
 
 .section-margin {

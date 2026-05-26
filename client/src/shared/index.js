@@ -1,4 +1,4 @@
-export { BREAKPOINTS } from "./config/BREAKPOINTS";
+export { BREAKPOINTS, MQ } from "./config/BREAKPOINTS";
 export { getLocalizedCatalogSection } from "./config/catalogSection";
 export { getLocalizedFooter } from "./config/footer";
 export * from "./config/headerActionsList";
@@ -20,6 +20,11 @@ export {
   QUERY_VALUE,
 } from "./consts/query-params";
 export { buildCatalogSearchResultsHref } from "./lib/buildCatalogSearchHref";
+export {
+  getLocaleFromPathname,
+  localePath,
+  pathWithoutLocale,
+} from "./lib/localePath";
 export { categoryIdsHasSale } from "./lib/categoryIdsHasSale";
 export {
   normalizeCategoryIdsForCardsQuery,
@@ -66,6 +71,7 @@ export { default as ArrowSwiperButton } from "./ui/icons/ArrowSwiperButton";
 export { default as Basket } from "./ui/icons/Basket";
 export { default as BurgerMenu } from "./ui/icons/BurgerMenu";
 export { default as BurgerMenuCatalog } from "./ui/icons/BurgerMenuCatalog";
+export { default as CarouselNavArrow } from "./ui/icons/CarouselNavArrow";
 export { default as CloseBtn } from "./ui/icons/CloseBtn";
 export { default as CloseX } from "./ui/icons/CloseX";
 export { default as CounterMinusIcon } from "./ui/icons/CounterMinusIcon";
@@ -112,6 +118,7 @@ export {
 } from "./api/productsServices";
 export {
   createReview,
+  fetchMainReviews,
   fetchProductReviews,
   reviewsApiBaseUrl,
 } from "./api/reviewsServices";
@@ -147,12 +154,6 @@ export {
   toggleWishlistAsync,
 } from "./redux/Wishlist/lib/WishlistSlice";
 export { default } from "./ui/MainNav";
-export {
-  geologica,
-  manrope,
-  inter,
-  sofiaSansCondensed,
-  urbanist,
-} from "./ui/styles/font";
+export { cormorant, italiana, lato } from "./ui/styles/font";
 export { default as SwiperPagination } from "./ui/SwiperPagination";
 export { default as Title } from "./ui/Title";

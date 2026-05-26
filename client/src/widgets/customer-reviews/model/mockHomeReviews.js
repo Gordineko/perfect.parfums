@@ -1,0 +1,83 @@
+export const MOCK_HOME_REVIEWS = [
+  {
+    _id: "review-mock-1",
+    name: "Лариса",
+    text: "Шикарний аромат, залишає за собою приємний шлейф. Довго зберігається аромат на одязі, навіть після прання слабо відчувається. Завжди їх використовую і не хочу змінювати на інші.",
+    rating: 4,
+    createdAt: "2025-10-19T12:00:00.000Z",
+    photoUrl: "",
+    product: {
+      slug: "ex-nihilo-fleur-narcotique",
+      title: { ua: "Ex Nihilo Fleur Narcotique", en: "Ex Nihilo Fleur Narcotique" },
+      imageURL: "/img/product-placeholder.png",
+    },
+  },
+  {
+    _id: "review-mock-2",
+    name: "Олександра",
+    text: "Справжній терпкий чай з маленькою долькою лимону. Стійкість середня, аромат не трансформується в щось інше, пахне, як є. Легкий і унісекс.",
+    rating: 5,
+    createdAt: "2026-05-02T10:00:00.000Z",
+    photoUrl: "",
+    product: {
+      slug: "moncler-la-cordee",
+      title: { ua: "Moncler La Cordée", en: "Moncler La Cordée" },
+      imageURL: "/img/product-placeholder.png",
+    },
+  },
+  {
+    _id: "review-mock-3",
+    name: "Саша",
+    text: "Аромат для підняття настрою, не навʼязливий, простий, кисленький. Тримається близько 5 годин, у міру шлейфовий — для тих, кому подобаються свіжі аромати.",
+    rating: 5,
+    createdAt: "2026-03-19T14:00:00.000Z",
+    photoUrl: "",
+    product: {
+      slug: "french-avenue-pinnace",
+      title: { ua: "French Avenue Pinnace", en: "French Avenue Pinnace" },
+      imageURL: "/img/product-placeholder.png",
+    },
+  },
+  {
+    _id: "review-mock-4",
+    name: "Катерина",
+    text: "Розкішне поєднання уду і солодкої квітковості. Перший уд, який мені сподобався. Аромат із серії «дорого-розкішно-статусно».",
+    rating: 5,
+    createdAt: "2026-04-15T09:00:00.000Z",
+    photoUrl: "",
+    product: {
+      slug: "roja-parfums-sweetie-aoud",
+      title: { ua: "Roja Parfums Sweetie Aoud", en: "Roja Parfums Sweetie Aoud" },
+      imageURL: "/img/product-placeholder.png",
+    },
+  },
+  {
+    _id: "review-mock-5",
+    name: "Світлана",
+    text: "Отримала пробник, з першого затесту — любов. Теплий, затишний, мʼякий аромат. Зігріваючий для холодної пори року, не душить і делікатний.",
+    rating: 5,
+    createdAt: "2026-01-10T16:00:00.000Z",
+    photoUrl: "",
+    product: {
+      slug: "maison-margiela-by-the-fireplace",
+      title: {
+        ua: "Maison Margiela By the Fireplace",
+        en: "Maison Margiela By the Fireplace",
+      },
+      imageURL: "/img/product-placeholder.png",
+    },
+  },
+  {
+    _id: "review-mock-6",
+    name: "Леся",
+    text: "Аромат супер. Густий, насичений, пʼянкий, чуттєвий. Настільки оригінальний, що сподобається і прихильникам солодких, і свіжих ароматів.",
+    rating: 5,
+    createdAt: "2026-01-09T11:00:00.000Z",
+    photoUrl: "",
+    product: {
+      slug: "tom-ford-figue-erotique",
+      title: { ua: "Tom Ford Figue Érotique", en: "Tom Ford Figue Érotique" },
+      imageURL: "/img/product-placeholder.png",
+    },
+  },
+];

@@ -50,7 +50,7 @@
       margin: 0;
       padding: 0;
 
-      color: var(--color-text);
+      color: var(--color-black);
       font-family: var(--font-body);
       font-size: 16px;
       font-style: normal;
@@ -76,7 +76,7 @@
 
     .range-wrapper__currency {
       flex-shrink: 0;
-      color: var(--color-text);
+      color: var(--color-black);
       font-family: var(--font-body);
       font-size: 16px;
       font-style: normal;
@@ -133,7 +133,7 @@ $slider-thumb-inset: 8px;
   top: 50%;
   height: 4px;
   border-radius: 2px;
-  background: var(--color-text);
+  background: var(--color-black);
   transform: translateY(-50%);
 }
 
@@ -143,7 +143,7 @@ $slider-thumb-inset: 8px;
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 3px solid var(--color-text);
+  border: 3px solid var(--color-black);
   background: $white;
   transform: translate(-50%, -50%);
   cursor: pointer;

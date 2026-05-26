@@ -3,7 +3,7 @@
 .root {
   position: fixed;
   z-index: 12000;
-  top: calc(var(--header-offset, 96px) + 12px);
+  top: calc(var(--header-offset-compact, var(--header-nav-height, 3rem)) + 12px);
   right: max(16px, env(safe-area-inset-right, 0px));
   box-sizing: border-box;
   width: max-content;
@@ -13,10 +13,10 @@
   background: #fff;
   text-align: left;
   cursor: pointer;
-  font-family: var(--font-inter), Inter, sans-serif;
+  font-family: var(--font-body), var(--font-body);
   transition: opacity 0.35s ease;
 
-  @include mobile-only {
+  @include below-tablet {
     max-width: calc(100vw - 32px);
   }
 

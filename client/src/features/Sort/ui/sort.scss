@@ -18,7 +18,7 @@
     width: 259px;
     background: var(--color-white);
     border-radius: 0;
-    border: 0.5px solid color-mix(in srgb, var(--color-text) 35%, transparent);
+    border: 0.5px solid color-mix(in srgb, var(--color-black) 35%, transparent);
     box-shadow: none;
 
     @include down($bp-desktop) {
@@ -31,13 +31,13 @@
 
   &__header {
     padding: 14px 20px;
-    border-bottom: 0.5px solid color-mix(in srgb, var(--color-text) 12%, transparent);
+    border-bottom: 0.5px solid color-mix(in srgb, var(--color-black) 12%, transparent);
   }
 
   &__title {
     margin: 0;
     text-align: center;
-    color: var(--color-text);
+    color: var(--color-black);
     font-family: var(--font-body);
     font-size: 12px;
     font-style: normal;
@@ -63,13 +63,13 @@
     text-align: left;
     background: transparent;
     border: none;
-    border-bottom: 0.5px solid color-mix(in srgb, var(--color-text) 12%, transparent);
+    border-bottom: 0.5px solid color-mix(in srgb, var(--color-black) 12%, transparent);
     cursor: pointer;
     transition:
       color 0.15s ease,
       background-color 0.15s ease;
     position: relative;
-    color: var(--color-text);
+    color: var(--color-black);
 
     p {
       margin: 0;
@@ -89,7 +89,7 @@
       top: 0;
       bottom: 0;
       width: 2px;
-      background: var(--color-text);
+      background: var(--color-black);
       border-radius: 0;
       opacity: 0;
       transition: opacity 0.15s ease;
@@ -97,8 +97,8 @@
 
     &:hover,
     &:focus-visible {
-      background: color-mix(in srgb, var(--color-text) 4%, transparent);
-      color: var(--color-text);
+      background: color-mix(in srgb, var(--color-black) 4%, transparent);
+      color: var(--color-black);
 
       p {
         font-weight: 400;
@@ -106,13 +106,13 @@
     }
 
     &:focus-visible {
-      outline: 2px solid color-mix(in srgb, var(--color-text) 25%, transparent);
+      outline: 2px solid color-mix(in srgb, var(--color-black) 25%, transparent);
       outline-offset: -2px;
     }
 
     &--active {
-      color: var(--color-text);
-      background: color-mix(in srgb, var(--color-text) 6%, transparent);
+      color: var(--color-black);
+      background: color-mix(in srgb, var(--color-black) 6%, transparent);
 
       p {
         font-weight: 500;

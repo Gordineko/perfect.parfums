@@ -1,0 +1,278 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+.root {
+  background: var(--color-nude, #fffaf0);
+  padding-block: var(--space-section-y);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.title {
+  margin: 0 0 40px;
+  text-align: center;
+  @include section-h2-title;
+
+  @include tablet-only {
+    margin-bottom: 30px;
+  }
+
+  @include below-tablet {
+    margin-bottom: 24px;
+  }
+}
+
+.carouselShell {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.carousel {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  margin-inline: 0;
+  box-sizing: border-box;
+
+  :global(.swiper-slide) {
+    height: auto;
+  }
+
+  :global(.swiper-pagination) {
+    display: none !important;
+  }
+}
+
+.slide {
+  height: 100%;
+  box-sizing: border-box;
+
+  .card {
+    height: 100%;
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  border: 1px solid var(--color-burgundy, #68181f);
+  background: var(--color-white, #fefefa);
+
+  @include tablet-only {
+    gap: 16px;
+    padding: 16px;
+  }
+
+  @include below-tablet {
+    gap: 14px;
+    padding: 20px;
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 0;
+}
+
+.avatarWrap {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  overflow: visible;
+  background: transparent;
+
+  @include tablet-only {
+    width: 36px;
+    height: 36px;
+
+    svg {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  @include below-tablet {
+    width: 32px;
+    height: 32px;
+
+    svg {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+.avatar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.userMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  flex: 1;
+}
+
+.userName {
+  margin: 0;
+  color: #000;
+  text-align: left;
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+
+  @include tablet-only {
+    font-size: 20px;
+  }
+
+  @include below-tablet {
+    font-size: 16px;
+  }
+}
+
+.userDate {
+  margin: 4px 0 0;
+  color: #bdb8ae;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 130%;
+
+  @include tablet-only {
+    font-size: 12px;
+  }
+
+  @include below-tablet {
+    font-size: 10px;
+  }
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 0;
+  text-decoration: none;
+  color: inherit;
+
+  &:hover .productTitle {
+    color: #68181f;
+  }
+}
+
+.productImageWrap {
+  flex-shrink: 0;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  background: #fefefa;
+
+  @include tablet-only {
+    width: 76px;
+    height: 76px;
+  }
+
+  @include below-tablet {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+.productImage {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.productMeta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.productTitle {
+  margin: 0;
+  color: #000;
+  text-align: left;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 130%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  transition: color 0.2s ease;
+
+  @include tablet-only {
+    font-size: 14px;
+  }
+
+  @include below-tablet {
+    font-size: 12px;
+  }
+}
+
+.productMeta :global(.stars) {
+  justify-content: flex-start;
+  gap: 2px;
+}
+
+.productMeta :global(.star svg) {
+  width: 14px;
+  height: 13px;
+}
+
+.text {
+  margin: 0;
+  color: #000;
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 130%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+
+  @include tablet-only {
+    font-size: 16px;
+  }
+
+  @include below-tablet {
+    margin-top: 2px;
+    font-size: 14px;
+    -webkit-line-clamp: 5;
+  }
+}

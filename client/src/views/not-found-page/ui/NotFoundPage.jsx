@@ -1,5 +1,6 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import { useI18n } from "@shared";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -54,11 +55,11 @@ export default function NotFoundPage({ locale: localeFromServer }) {
           </p>
 
           <div className={styles.actions}>
-            <Link href={`/${locale}`} className={styles.ctaPrimary}>
+            <Link href={localePath(locale)} className={styles.ctaPrimary}>
               {t("notFound.ctaHome")}
             </Link>
             <Link
-              href={`/${locale}/categories/new`}
+              href={localePath(locale, "/categories/new")}
               className={styles.ctaSecondary}
             >
               {t("notFound.ctaCatalog")}

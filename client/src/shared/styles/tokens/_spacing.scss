@@ -12,18 +12,18 @@
   --space-14: 56px;
   --space-16: 64px;
   --space-20: 80px;
-  --space-section-y: 96px;
+  --space-section-y: 5rem;
 }
 
 @media (max-width: 1249.98px) and (min-width: 768px) {
   :root {
-    --space-section-y: var(--space-16);
+    --space-section-y: 3.75rem;
   }
 }
 
 @media (max-width: 767.98px) {
   :root {
-    --space-section-y: var(--space-14);
+    --space-section-y: 2.5rem;
   }
 }
 

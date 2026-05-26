@@ -1,5 +1,29 @@
 {
   "title": "Hello",
+  "header": {
+    "top": {
+      "about": "About us",
+      "paymentDelivery": "Payment & delivery",
+      "promotions": "Promotions",
+      "contacts": "Contacts",
+      "blog": "Blog",
+      "account": "Personal account"
+    },
+    "tagline": "DECANT PERFUME STORE",
+    "searchPlaceholder": "Search",
+    "menu": "Menu",
+    "topNavAria": "Information menu",
+    "categoryNavAria": "Perfume catalog",
+    "nav": {
+      "men": "Men's",
+      "women": "Women's",
+      "unisex": "Unisex",
+      "elite": "Elite",
+      "oriental": "Oriental",
+      "niche": "Niche",
+      "gourmand": "Gourmand"
+    }
+  },
   "navigation": {
     "header": {
       "catalog": "Catalog",
@@ -50,6 +74,11 @@
     "logoutError": "Failed to log out. Please try again."
   },
   "hero": {
+    "banner": {
+      "eyebrow": "ORIGINAL PERFUMERY",
+      "line1": "For those who",
+      "line2": "are used to leaving a mark"
+    },
     "slides": {
       "main": {
         "title": "Structure.Lab",
@@ -156,35 +185,25 @@
     "secondary": "Request a call"
   },
   "footer": {
-    "description": "Maloé is the harmony of organic fabrics and handcraft. We turn the complexity of atelier techniques into tenderness that gives freedom to what you cherish most.",
-    "catalogColumn": "Catalog",
-    "companyColumn": "Company",
-    "contactColumn": "Contact",
-    "navNew": "New arrivals",
-    "navSale": "Sale",
-    "navGirls": "Girls",
-    "navBoys": "Boys",
-    "company": "COMPANY",
-    "structure": "CATALOG",
-    "contact": "CONTACT",
-    "structures": {
-      "skin": "Skin Structure",
-      "hair": "Hair Structure",
-      "balance": "Balance Structure",
-      "stress": "Stress Structure",
-      "gut": "Gut Structure",
-      "womenMen": "Women / Men / 40+"
-    },
     "contacts": {
-      "email": "maloehelp@gmail.com",
-      "phone": "+38 (067) 967 01 63",
-      "callback": "Request a call →"
+      "title": "CONTACTS",
+      "showroomLabel": "Showroom address:",
+      "showroomAddress": "Dnipro, 92 Yevropeiska St.",
+      "phoneLabel": "Phone:",
+      "phone": "099-000-00-00",
+      "scheduleLabel": "Opening hours:",
+      "scheduleValue": "Mon–Sun 9:00 – 20:00"
     },
-    "bottom": {
-      "copyright": "© 2026 Maloe Atelier. ALL RIGHTS RESERVED",
-      "offer": "Public offer",
+    "information": {
+      "title": "INFORMATION",
+      "paymentDelivery": "Payment & delivery",
+      "publicOffer": "Public offer",
       "privacy": "Privacy policy",
-      "madeBy": "Developed & supported by: KEYKEY"
+      "deliveryReturns": "Delivery & returns"
+    },
+    "brand": {
+      "perfect": "Perfect",
+      "parfums": "Parfums"
     }
   },
   "breadcrumbs": {
@@ -270,7 +289,7 @@
     "responseCode": "Response code: {code}"
   },
   "home": {
-    "heroCta": "View collection",
+    "heroCta": "Go to catalog",
     "heroFallbackTitle": "Atelier aesthetics\nin every detail",
     "seasonEyebrow": "Lookbook Stories",
     "seasonTitle": "Season collections",
@@ -339,7 +358,55 @@
     "onlyInStockSection": "Availability",
     "onlyInStock": "In stock only"
   },
+  "instagramFeed": {
+    "title": "Follow us on Instagram",
+    "username": "@perfect.parfums.raspiv",
+    "profileAria": "Open Instagram @perfect.parfums.raspiv",
+    "postAria": "Open Instagram post {n}",
+    "imageAlt": "Instagram post {n}"
+  },
+  "homeFaq": {
+    "titleLine1": "Have questions?",
+    "titleLine2": "We are happy to answer",
+    "items": {
+      "original": {
+        "question": "Is this original perfumery?",
+        "answer": "Yes. We work with original fragrances in large bottles and decant them into convenient smaller volumes. You get the same composition without overpaying for brand packaging."
+      },
+      "decant": {
+        "question": "How is decanting different from a store with full bottles?",
+        "answer": "You buy the volume you need, not an entire bottle. It is convenient for trying a scent, travel, or when you want several favorites at once."
+      },
+      "longevity": {
+        "question": "How long-lasting are the scents?",
+        "answer": "Longevity depends on the composition, concentration, and your skin. We will help you choose a fragrance that matches your expectations and advise how to apply it for a longer wear."
+      },
+      "volumes": {
+        "question": "What volumes can I order?",
+        "answer": "Convenient sizes are available from miniatures to larger bottles, depending on the fragrance and stock. Current options are always listed on the product page."
+      },
+      "personalPick": {
+        "question": "Do you offer personal fragrance selection?",
+        "answer": "Yes. We started with curated picks on Instagram and still help you choose a scent for your style, mood, and season."
+      },
+      "delivery": {
+        "question": "Do you deliver across Ukraine?",
+        "answer": "Yes, we deliver orders across Ukraine. Details on methods, timing, and delivery cost are in the Payment & Delivery section."
+      }
+    }
+  },
+  "aboutBrand": {
+    "title": "About Perfect Parfums",
+    "brandName": "Perfect parfums",
+    "brandLinkAria": "Go to About us page",
+    "leadSuffix": " is a space where fragrance becomes part of your style.",
+    "paragraph2": "We started on Instagram with a curated selection tailored to your style, and we have kept that philosophy in everything we do. Here you will find premium perfumery: from light everyday classics to niche, oriental, and gourmand scents.",
+    "paragraph3": "We carefully select compositions so that every fragrance sounds pure and deep, and unfolds on your skin the way you deserve.",
+    "imageAlt": "Perfect Parfums perfumery"
+  },
   "reviews": {
+    "homeSectionTitle": "CUSTOMER REVIEWS",
+    "productFallback": "Product",
     "sectionTitle": "Reviews",
     "leaveReview": "Leave a review",
     "sectionAria": "Reviews",
@@ -389,21 +456,16 @@
     "loadErrorRetry": "Try again",
     "searchResults": "Search results: \"{query}\"",
     "bestsellersEyebrow": "Bestsellers",
-    "bestsellersTitle": "Popular models",
+    "bestsellersTitle": "Best sellers",
     "bestsellersAddToCart": "+ Add to cart",
     "bestsellersGoToProduct": "Go to product",
+    "newArrivalsTitle": "New arrivals",
+    "newArrivalsAddToCart": "+ Add to cart",
+    "newArrivalsGoToProduct": "Go to product",
     "archiveSelectionEyebrow": "SEASONAL OFFER",
     "archiveSelectionTitle": "Archive Selection",
     "archiveSelectionSummary": "The last pieces from past collections are now available at special prices. A conscious approach to fashion.",
     "archiveSelectionCta": "View sale items",
-    "brandValuesQuote": "«Clothing created for moments that stay in memory forever»",
-    "brandValuesStatement": "We use only certified organic fabrics and the handwork of our craftspeople in Ukraine.",
-    "brandValuesCareTitle": "Care",
-    "brandValuesCareLabel": "Thoughtful tailoring",
-    "brandValuesLinenTitle": "Linen",
-    "brandValuesLinenLabel": "Natural linen",
-    "brandValuesEcoTitle": "Eco",
-    "brandValuesEcoLabel": "Eco-friendly packaging",
     "carouselCta": "View category →",
     "carouselDemoClothing": "Clothing",
     "carouselDemoHeels": "High heels",
@@ -411,7 +473,8 @@
     "showMoreWithCount": "Show {count} more products"
   },
   "basket": {
-    "basketCount": "Items in basket",
+    "basketCount": "Items in cart:",
+    "basketCountAria": "Items in cart: {count}",
     "clearConfirm": "Are you sure you want to empty the cart?",
     "closeAria": "Close cart",
     "clearAria": "Clear cart",
@@ -432,7 +495,12 @@
     "close": "Close search",
     "popular": "Popular:",
     "popularItem1": "Linen set \"Sable\"",
-    "popularItem2": "Dress \"Fleur d'été\""
+    "popularItem2": "Dress \"Fleur d'été\"",
+    "clear": "Clear search",
+    "showAll": "Show all results",
+    "loading": "Loading…",
+    "empty": "No results found",
+    "error": "Failed to load results"
   },
   "authorization": {
     "loginTitle": "Log in to your account",

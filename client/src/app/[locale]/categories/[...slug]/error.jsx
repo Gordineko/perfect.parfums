@@ -17,7 +17,7 @@ export default function CategoriesRouteError({ error, reset }) {
       <div className="container">
         <header className="catalog-page__header catalog-page-skeleton-error">
           <div className="catalog-page__heading">
-            <h1 className="catalog-page__title t-page-title">
+            <h1 className="catalog-page__title t-h1">
               {t("catalog.loadErrorTitle")}
             </h1>
           </div>

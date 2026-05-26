@@ -76,7 +76,7 @@
   &__modal-title {
     margin: 0;
     color: $dark;
-    font-family: var(--font-main), "Golos Text", sans-serif;
+    font-family: var(--font-body);
     font-size: 14px;
     font-style: normal;
     font-weight: $fw-semibold;
@@ -137,7 +137,7 @@
         border: none;
         border-radius: 0;
         background: rgba(153, 153, 153, 0.5);
-        color: var(--color-text);
+        color: var(--color-black);
         font-family: var(--font-body);
         font-size: 9px;
         font-style: normal;
@@ -151,7 +151,7 @@
         &:hover,
         &:focus-visible {
           background: #999;
-          color: var(--color-text);
+          color: var(--color-black);
         }
       }
 
@@ -227,7 +227,7 @@
     padding: 12px 17px;
     border-radius: 0;
     cursor: pointer;
-    font-family: var(--font-main), "Golos Text", sans-serif;
+    font-family: var(--font-body);
     font-size: 10px;
     font-weight: $fw-semibold;
     line-height: 1;
@@ -290,7 +290,7 @@
 
   &__accordion-chevron {
     flex-shrink: 0;
-    color: var(--color-text);
+    color: var(--color-black);
     transition: transform 0.3s ease;
   }
 
@@ -324,8 +324,8 @@
   }
 
   &__title {
-    color: var(--color-text);
-    font-family: var(--font-geologica), Georgia, serif;
+    color: var(--color-black);
+    font-family: var(--font-heading), Georgia, serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
@@ -417,7 +417,7 @@
     background: transparent;
     cursor: pointer;
     line-height: 0;
-    color: var(--color-text);
+    color: var(--color-black);
 
     &:focus-visible {
       outline: 2px solid rgba($accent, 0.55);
@@ -451,28 +451,28 @@
     font-weight: 300;
     line-height: normal;
     letter-spacing: 0.16px;
-    color: var(--color-text);
+    color: var(--color-black);
     transition:
       color 0.2s ease,
       font-weight 0.2s ease;
 
     &:hover,
     &:focus-visible {
-      color: var(--color-text);
+      color: var(--color-black);
       font-weight: 400;
     }
 
     &--active,
     &--active:hover,
     &--active:focus-visible {
-      color: var(--color-text);
+      color: var(--color-black);
       font-weight: 400;
     }
 
     &--active &-count,
     &--active:hover &-count,
     &--active:focus-visible &-count {
-      color: var(--color-text);
+      color: var(--color-black);
       font-weight: 400;
     }
 
@@ -545,7 +545,7 @@
     }
 
     input:checked ~ .filters__color-label {
-      color: var(--color-text);
+      color: var(--color-black);
       font-weight: 400;
     }
 
@@ -583,7 +583,7 @@
   &__color-label {
     flex: 1;
     min-width: 0;
-    color: var(--color-text);
+    color: var(--color-black);
     font-family: var(--font-body);
     font-size: 16px;
     font-style: normal;
@@ -627,7 +627,7 @@
     }
 
     &__text {
-      color: var(--color-text);
+      color: var(--color-black);
       font-family: var(--font-body);
       font-size: 16px;
       font-style: normal;
@@ -639,7 +639,7 @@
     }
 
     input:checked ~ &__text {
-      color: var(--color-text);
+      color: var(--color-black);
       font-weight: 400;
     }
 
@@ -675,8 +675,8 @@
     }
 
     input:checked + &__box {
-      border-color: var(--color-text);
-      background: var(--color-text);
+      border-color: var(--color-black);
+      background: var(--color-black);
 
       &::after {
         content: "";
@@ -690,7 +690,7 @@
     }
 
     &__text {
-      color: var(--color-text);
+      color: var(--color-black);
       font-family: var(--font-body);
       font-size: 16px;
       font-style: normal;
@@ -725,22 +725,22 @@
     }
 
     input:checked ~ &__text:not(:has(.filters-check__title)) {
-      color: var(--color-text);
+      color: var(--color-black);
       font-weight: 400;
     }
 
     input:checked ~ &__text:has(.filters-check__title) &__title {
-      color: var(--color-text);
+      color: var(--color-black);
       font-weight: 400;
     }
 
     input:checked ~ &__text:has(.filters-check__title) &__count {
-      color: var(--color-text);
+      color: var(--color-black);
       font-weight: 400;
     }
 
     &__text:not(:has(.filters-check__title)) {
-      color: var(--color-text);
+      color: var(--color-black);
     }
 
     &--radio-look &__box {
@@ -798,7 +798,7 @@
     }
 
     &--category-radio-checked &__text {
-      color: var(--color-text);
+      color: var(--color-black);
       font-weight: 400;
     }
   }
@@ -831,7 +831,7 @@
       border: 1px solid rgba($dark, 0.1);
       border-radius: 0;
       background: rgba($dark, 0.03);
-      color: var(--color-text);
+      color: var(--color-black);
       cursor: pointer;
 
       transition:

@@ -1,17 +1,26 @@
 :root {
   color-scheme: light;
-  --header-offset: 96px;
+  --header-light-height: 9rem;
+  --header-nav-height: 3rem;
+  --header-offset: 12rem;
+  --header-offset-compact: 3rem;
 }
 
 @media (max-width: 1249.98px) and (min-width: 768px) {
   :root {
-    --header-offset: 89px;
+    --header-light-height: 8.5rem;
+    --header-nav-height: 0px;
+    --header-offset: 8.5rem;
+    --header-offset-compact: 8.5rem;
   }
 }
 
 @media (max-width: 767.98px) {
   :root {
-    --header-offset: 60px;
+    --header-light-height: 5.5rem;
+    --header-nav-height: 0px;
+    --header-offset: 5.5rem;
+    --header-offset-compact: 5.5rem;
   }
 }
 
@@ -19,7 +28,12 @@ body {
   font-family: var(--font-body);
   font-size: var(--fs-body);
   font-weight: var(--fw-light);
-  color: var(--color-text-muted);
+  line-height: var(--lh-base);
+  color: var(--color-black);
+}
+
+html.is-not-found-page main {
+  padding-top: var(--header-light-height, 4.25rem);
 }
 
 main {

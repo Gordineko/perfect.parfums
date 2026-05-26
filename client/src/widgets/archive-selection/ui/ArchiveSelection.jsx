@@ -1,11 +1,12 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import "swiper/css";
 import "swiper/css/pagination";
 
 import ProductItem from "@entities/product";
 import ProductWishlistButton from "@features/toggle-wishlist";
-import { BREAKPOINTS, useI18n } from "@shared";
+import { BREAKPOINTS, CarouselNavArrow, useI18n } from "@shared";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useId, useEffect, useMemo, useState } from "react";
@@ -35,34 +36,6 @@ function getArchiveDiscountBadge(offers) {
     text: `-${rounded}%`,
     ariaLabel: `${rounded}% discount`,
   };
-}
-
-function CarouselArrow({ direction, active }) {
-  const fill = active ? "#1A1A1A" : "#8D8D8D";
-  const isPrev = direction === "prev";
-
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="37"
-      height="37"
-      viewBox="0 0 37 37"
-      fill="none"
-      aria-hidden="true"
-    >
-      <rect
-        width="37"
-        height="37"
-        transform={isPrev ? "matrix(-1 0 0 1 37 0)" : undefined}
-        fill={fill}
-      />
-      <path
-        d={isPrev ? "M20 24L17 18.5L20 13" : "M17 24L20 18.5L17 13"}
-        stroke="#FEFEFE"
-        strokeWidth="2"
-      />
-    </svg>
-  );
 }
 
 export default function ArchiveSelection({
@@ -176,14 +149,14 @@ export default function ArchiveSelection({
             <div className={styles["archive-selection__content"]}>
               <p className={styles["archive-selection__eyebrow"]}>{eyebrow}</p>
               <h2
-                className={`${styles["archive-selection__title"]} t-section-title`}
+                className={`${styles["archive-selection__title"]} t-h2`}
                 id={`${sectionId}-err`}
               >
                 {title}
               </h2>
               <p className={styles["archive-selection__summary"]}>{summary}</p>
               <Link
-                href={`/${locale}/categories/sale`}
+                href={localePath(locale, "/categories/sale")}
                 className={styles["archive-selection__cta"]}
               >
                 {ctaLabel}
@@ -219,14 +192,14 @@ export default function ArchiveSelection({
           <div className={styles["archive-selection__content"]}>
             <p className={styles["archive-selection__eyebrow"]}>{eyebrow}</p>
             <h2
-              className={`${styles["archive-selection__title"]} t-section-title`}
+              className={`${styles["archive-selection__title"]} t-h2`}
               id={sectionId}
             >
               {title}
             </h2>
             <p className={styles["archive-selection__summary"]}>{summary}</p>
             <Link
-              href={`/${locale}/categories/sale`}
+              href={localePath(locale, "/categories/sale")}
               className={styles["archive-selection__cta"]}
             >
               {ctaLabel}
@@ -241,7 +214,7 @@ export default function ArchiveSelection({
               disabled={atStart}
               aria-label={t("common.back")}
             >
-              <CarouselArrow direction="prev" active={!atStart} />
+              <CarouselNavArrow direction="prev" />
             </button>
 
             <Swiper
@@ -292,7 +265,7 @@ export default function ArchiveSelection({
               disabled={atEnd}
               aria-label={t("common.next")}
             >
-              <CarouselArrow direction="next" active={!atEnd} />
+              <CarouselNavArrow direction="next" />
             </button>
           </div>
         </div>

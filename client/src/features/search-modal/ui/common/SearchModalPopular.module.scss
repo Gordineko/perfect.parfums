@@ -16,7 +16,7 @@
 
   .popularLabel {
     color: rgba(156, 163, 175, 0.5);
-    font-family: var(--font-inter), Inter, sans-serif;
+    font-family: var(--font-body), var(--font-body);
     font-size: 24px;
     font-weight: 500;
     line-height: normal;
@@ -62,7 +62,7 @@
       .tagText {
         margin: 0;
         color: var(--White, #fff);
-        font-family: var(--font-inter), Inter, sans-serif;
+        font-family: var(--font-body), var(--font-body);
         font-size: 14px;
         font-weight: 400;
         line-height: normal;

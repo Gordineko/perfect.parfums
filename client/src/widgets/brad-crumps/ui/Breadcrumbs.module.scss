@@ -1,7 +1,7 @@
 @use "../../../shared/ui/styles/variables.scss" as *;
 
 %crumb-text {
-  font-family: Inter, sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 2px;
@@ -20,7 +20,7 @@
 
 .root {
   margin: 24px 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--color-black) 8%, transparent);
   scrollbar-width: none;
   -ms-overflow-style: none;
 

@@ -1,13 +1,13 @@
 @use "../../../shared/ui/styles/variables.scss" as *;
 
-$auth-inter: var(--font-inter), "Inter", sans-serif;
+$auth-font: var(--font-body);
 $auth-dark: var(--Dark, #1a1a1a);
 $auth-field-reg: var(--Dark, #0d0d0d);
 
 @mixin auth-title-h4 {
   margin: 0 0 16px;
   color: $auth-dark;
-  font-family: $auth-inter;
+  font-family: $auth-font;
   font-size: 20px;
   font-weight: $fw-medium;
   line-height: normal;
@@ -19,7 +19,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
 @mixin auth-placeholder {
   &::placeholder {
     color: var(--Gray, #{$gray});
-    font-family: $auth-inter;
+    font-family: $auth-font;
     font-size: 14px;
     font-weight: $fw-regular;
     line-height: normal;
@@ -33,7 +33,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
 
   :global(.form-group) label {
     color: $label-color;
-    font-family: $auth-inter;
+    font-family: $auth-font;
     font-size: 16px;
     font-weight: $fw-regular;
     line-height: normal;
@@ -41,7 +41,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
 
   :global(.form-group) input {
     color: $input-color;
-    font-family: $auth-inter;
+    font-family: $auth-font;
     font-size: 16px;
     font-weight: $fw-regular;
     line-height: normal;
@@ -53,7 +53,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
 @mixin auth-submit-dark($font-weight) {
   background: $auth-dark;
   color: var(--White, #fff);
-  font-family: $auth-inter;
+  font-family: $auth-font;
   font-size: 15px;
   font-weight: $font-weight;
   line-height: normal;
@@ -79,7 +79,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
     justify-content: center;
     width: 100%;
     color: var(--Gray, #{$gray});
-    font-family: $auth-inter;
+    font-family: $auth-font;
     font-size: 14px;
     font-weight: $fw-regular;
     line-height: normal;
@@ -88,7 +88,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
 
   b {
     color: $auth-dark;
-    font-family: $auth-inter;
+    font-family: $auth-font;
     font-size: 14px;
     font-weight: $fw-medium;
     line-height: normal;
@@ -184,7 +184,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
     :global(.auth-txt__title) {
       margin: 0;
       color: var(--Dark, #1a1a1a);
-      font-family: Inter, sans-serif;
+      font-family: var(--font-body);
       font-size: 20px;
       font-style: normal;
       font-weight: 500;
@@ -198,7 +198,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
       margin: 0;
       color: var(--Dark, #1a1a1a);
       text-align: center;
-      font-family: Inter, sans-serif;
+      font-family: var(--font-body);
       font-size: 16px;
       font-style: normal;
       font-weight: 400;
@@ -214,7 +214,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
       background: $auth-dark;
       color: var(--White, #fff);
       text-align: center;
-      font-family: $auth-inter;
+      font-family: $auth-font;
       font-size: 15px;
       font-weight: $fw-medium;
       line-height: normal;
@@ -230,7 +230,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
   :global(.auth-txt__title) {
     margin: 0 0 16px;
     text-align: center;
-    color: var(--color-text, #{$dark});
+    color: var(--color-black, #{$dark});
     font-family: $font-montserrat, sans-serif;
     font-size: 24px;
     font-weight: $fw-bold;
@@ -255,7 +255,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
     }
 
     b {
-      color: var(--color-text, #{$dark});
+      color: var(--color-black, #{$dark});
       font-size: 14px;
       font-weight: $fw-semibold;
       cursor: pointer;
@@ -265,7 +265,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
       }
 
       &:focus-visible {
-        outline: 2px solid var(--color-text, #{$dark});
+        outline: 2px solid var(--color-black, #{$dark});
         outline-offset: 2px;
         border-radius: 4px;
       }
@@ -288,7 +288,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
     color: var(--text-color-1, #{$text-gray-dark});
 
     &:focus-visible {
-      outline: 2px solid var(--color-text, #{$dark});
+      outline: 2px solid var(--color-black, #{$dark});
       outline-offset: 2px;
     }
 
@@ -306,7 +306,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
   }
 
   :global(.custom-checkbox-text) {
-    color: var(--color-text, #{$dark});
+    color: var(--color-black, #{$dark});
     font-family: $font-secondary, sans-serif;
     font-size: 14px;
     font-weight: $fw-regular;
@@ -370,12 +370,12 @@ $auth-field-reg: var(--Dark, #0d0d0d);
   }
 
   :global(.custom-checkbox-box.checked) {
-    background: var(--color-text, #{$dark});
+    background: var(--color-black, #{$dark});
     border-color: transparent;
   }
 
   :global(.custom-checkbox-box.checked svg rect) {
-    fill: var(--color-text, #{$dark});
+    fill: var(--color-black, #{$dark});
   }
 
   :global(.form-checkbox__wrapper) {
@@ -388,7 +388,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
   :global(.new-password) {
     margin: 0;
     cursor: pointer;
-    color: var(--color-text, #{$dark});
+    color: var(--color-black, #{$dark});
     font-size: 14px;
     font-weight: $fw-medium;
     line-height: normal;
@@ -398,7 +398,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
     }
 
     &:focus-visible {
-      outline: 2px solid var(--color-text, #{$dark});
+      outline: 2px solid var(--color-black, #{$dark});
       outline-offset: 2px;
       border-radius: 4px;
     }
@@ -411,7 +411,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
       padding: 14px 32px;
       border: none;
       border-radius: 0;
-      background: var(--color-text, #{$dark});
+      background: var(--color-black, #{$dark});
       color: var(--color-white, #{$white});
       text-align: center;
       font-family: $font-secondary, sans-serif;
@@ -423,7 +423,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
         transform 0.05s ease;
 
       &:hover {
-        background: color-mix(in srgb, var(--color-text, #{$dark}) 92%, #000);
+        background: color-mix(in srgb, var(--color-black, #{$dark}) 92%, #000);
       }
 
       &:active {
@@ -431,7 +431,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
       }
 
       &:focus-visible {
-        outline: 2px solid var(--color-text, #{$dark});
+        outline: 2px solid var(--color-black, #{$dark});
         outline-offset: 2px;
       }
 
@@ -453,7 +453,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
 
     :global(.auth-submit--secondary) {
       background: transparent;
-      color: var(--color-text, #{$dark});
+      color: var(--color-black, #{$dark});
       border: 1px solid $black-08;
     }
   }
@@ -480,7 +480,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
 
     :global(.auth-txt__desc) {
       margin: 0;
-      color: var(--color-text, #{$dark});
+      color: var(--color-black, #{$dark});
       text-align: center;
       font-family: $font-secondary, sans-serif;
       font-size: 18px;
@@ -507,7 +507,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
     margin-bottom: 0;
 
     label {
-      color: var(--color-text, #{$dark});
+      color: var(--color-black, #{$dark});
       font-family: $font-secondary, sans-serif;
       font-size: 14px;
       font-weight: $fw-semibold;
@@ -522,7 +522,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
       border-radius: 0;
       outline: none;
       background: var(--color-white, #{$white});
-      color: var(--color-text, #{$dark});
+      color: var(--color-black, #{$dark});
       font-family: $font-secondary, sans-serif;
       font-size: 14px;
       font-weight: $fw-regular;
@@ -533,7 +533,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
       }
 
       &:focus-visible {
-        border-color: var(--color-text, #{$dark});
+        border-color: var(--color-black, #{$dark});
         box-shadow: none;
       }
 
@@ -608,7 +608,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
 
     :global(.custom-checkbox-text),
     :global(.new-password) {
-      font-family: $auth-inter;
+      font-family: $auth-font;
       font-size: 14px;
       line-height: normal;
     }
@@ -641,7 +641,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
 
     :global(.custom-checkbox-text) {
       color: $auth-field-reg;
-      font-family: $auth-inter;
+      font-family: $auth-font;
       font-size: 14px;
       font-weight: $fw-regular;
       line-height: normal;
@@ -649,7 +649,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
 
     :global(.auth-terms-link),
     :global(.auth-terms-asterisk) {
-      font-family: $auth-inter;
+      font-family: $auth-font;
     }
 
     :global(.auth-submit) {
@@ -684,7 +684,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
 
       b {
         color: $auth-dark;
-        font-family: $auth-inter;
+        font-family: $auth-font;
         font-size: 14px;
         font-weight: $fw-medium;
         line-height: normal;
@@ -705,7 +705,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
     :global(.auth-txt__title) {
       margin: 0;
       color: var(--Dark, #0d0d0d);
-      font-family: $auth-inter;
+      font-family: $auth-font;
       font-size: 24px;
       font-style: normal;
       font-weight: 600;
@@ -718,7 +718,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
     :global(.auth-txt__desc) {
       margin: 0;
       color: var(--Dark, #0d0d0d);
-      font-family: $auth-inter;
+      font-family: $auth-font;
       font-size: 18px;
       font-style: normal;
       font-weight: 400;
@@ -739,7 +739,7 @@ $auth-field-reg: var(--Dark, #0d0d0d);
         border: 0;
         border-radius: 0;
         color: var(--White, #fff);
-        font-family: $auth-inter;
+        font-family: $auth-font;
         font-size: 16px;
         font-style: normal;
         font-weight: 500;

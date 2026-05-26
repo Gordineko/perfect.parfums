@@ -29,10 +29,15 @@
     background: #fff;
     margin-bottom: 16px;
 
-    .logo-svg {
+    .burger-menu__logo-link {
+      display: inline-flex;
+      flex-shrink: 0;
+    }
+
+    .burger-menu__logo {
       display: block;
-      width: 112px;
-      height: 44px;
+      width: clamp(6.5rem, 28vw, 7rem);
+      height: auto;
     }
   }
 
@@ -372,22 +377,24 @@
       justify-content: center;
       width: 40px;
       height: 40px;
-      padding: 10px;
-      border-radius: 999px;
-      background: var(--color-white);
-      border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
-      color: var(--color-text);
+      padding: 0;
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+      color: var(--color-burgundy);
       text-decoration: none;
-      transition: opacity 0.15s ease;
-
-      svg {
-        width: 20px;
-        height: 20px;
-      }
+      transition: color 0.3s ease;
 
       &:hover,
       &:focus-visible {
-        opacity: 0.5;
+        color: var(--color-burgundy-active);
+      }
+
+      svg {
+        display: block;
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
       }
     }
   }

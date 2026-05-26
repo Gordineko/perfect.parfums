@@ -41,7 +41,7 @@
 
   &__title {
     color: var(--Dark, #1a1a1a);
-    font-family: var(--font-inter), Inter, sans-serif;
+    font-family: var(--font-body), var(--font-body);
     font-size: 24px;
     font-weight: 400;
     line-height: normal;
@@ -64,7 +64,7 @@
     &-text {
       margin-bottom: 24px;
       color: var(--Dark, #1a1a1a);
-      font-family: var(--font-inter), Inter, sans-serif;
+      font-family: var(--font-body), var(--font-body);
       font-size: 20px;
       font-weight: 300;
       line-height: normal;
@@ -98,7 +98,7 @@
       margin: 0;
       color: var(--White, #fefefe);
       text-align: center;
-      font-family: var(--font-inter), Inter, sans-serif;
+      font-family: var(--font-body), var(--font-body);
       font-size: 16px;
       font-weight: 400;
       line-height: normal;
@@ -120,7 +120,7 @@
     p {
       margin: 0;
       color: var(--Dark, #1a1a1a);
-      font-family: var(--font-inter), Inter, sans-serif;
+      font-family: var(--font-body), var(--font-body);
       font-size: 14px;
       font-weight: 300;
       line-height: normal;
@@ -188,7 +188,7 @@
 
     &-label,
     &-value {
-      font-family: var(--font-inter), Inter, sans-serif;
+      font-family: var(--font-body), var(--font-body);
       line-height: normal;
     }
 
@@ -235,7 +235,7 @@
       margin: 0;
       color: var(--White, #fefefe);
       text-align: center;
-      font-family: var(--font-inter), Inter, sans-serif;
+      font-family: var(--font-body), var(--font-body);
       font-size: 16px;
       font-weight: 400;
       line-height: normal;
@@ -265,7 +265,7 @@
     p {
       margin: 0;
       color: inherit;
-      font-family: var(--font-inter), Inter, sans-serif;
+      font-family: var(--font-body), var(--font-body);
       font-size: 16px;
       font-weight: 500;
       line-height: normal;
@@ -300,7 +300,7 @@
     &__count,
     &__price-line,
     &__price-until {
-      font-family: var(--font-inter), Inter, sans-serif;
+      font-family: var(--font-body), var(--font-body);
       line-height: normal;
     }
 

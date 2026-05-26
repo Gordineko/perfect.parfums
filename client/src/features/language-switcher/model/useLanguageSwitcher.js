@@ -2,6 +2,8 @@
 import { MODALS, useModals } from "@shared";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+import { getLocaleFromPathname } from "@shared/lib/localePath";
+
 import { replaceLocaleInPath } from "../lib/replaceLocaleInPath";
 
 export const useLanguageSwitcher = () => {
@@ -10,10 +12,7 @@ export const useLanguageSwitcher = () => {
   const searchParams = useSearchParams();
   const { isModalOpen, setIsModalOpen } = useModals();
 
-  const getCurrentLocale = () => {
-    const segments = pathname.split("/").filter(Boolean);
-    return segments[0] || "ua";
-  };
+  const getCurrentLocale = () => getLocaleFromPathname(pathname);
 
   const currentLocale = getCurrentLocale();
   const isOpen = isModalOpen === MODALS.LANGUAGE;

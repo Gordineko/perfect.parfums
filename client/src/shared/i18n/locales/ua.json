@@ -1,5 +1,29 @@
 {
   "title": "Привіт",
+  "header": {
+    "top": {
+      "about": "Про нас",
+      "paymentDelivery": "Оплата та доставка",
+      "promotions": "Акції",
+      "contacts": "Контакти",
+      "blog": "Блог",
+      "account": "Особистий кабінет"
+    },
+    "tagline": "МАГАЗИН ПАРФУМЕРІЇ НА РОЗЛИВ",
+    "searchPlaceholder": "Пошук",
+    "menu": "Меню",
+    "topNavAria": "Інформаційне меню",
+    "categoryNavAria": "Каталог парфумів",
+    "nav": {
+      "men": "Чоловічі",
+      "women": "Жіночі",
+      "unisex": "Унісекс",
+      "elite": "Елітні",
+      "oriental": "Східні",
+      "niche": "Нішеві",
+      "gourmand": "Гурманські"
+    }
+  },
   "navigation": {
     "header": {
       "catalog": "Каталог",
@@ -50,6 +74,11 @@
     "logoutError": "Не вдалося вийти з акаунта. Спробуйте ще раз."
   },
   "hero": {
+    "banner": {
+      "eyebrow": "ОРИГІНАЛЬНА ПАРФУМЕРІЯ",
+      "line1": "Для тих, хто",
+      "line2": "звик залишати слід"
+    },
     "slides": {
       "main": {
         "title": "own the",
@@ -154,35 +183,25 @@
     "secondary": "Отримати дзвінок"
   },
   "footer": {
-    "description": "Maloé — це гармонія органічних тканин та ручної роботи. Ми втілюємо складність ательєрних технік у ніжність, що дарує свободу вашим найціннішим",
-    "catalogColumn": "Каталог",
-    "companyColumn": "Компанія",
-    "contactColumn": "Звʼязок",
-    "navNew": "Новинки",
-    "navSale": "Акції",
-    "navGirls": "Дівчаткам",
-    "navBoys": "Хлопчикам",
-    "company": "КОМПАНІЯ",
-    "structure": "КАТАЛОГ",
-    "contact": "ЗВʼЯЗОК",
-    "structures": {
-      "skin": "Skin Structure",
-      "hair": "Hair Structure",
-      "balance": "Balance Structure",
-      "stress": "Stress Structure",
-      "gut": "Gut Structure",
-      "womenMen": "Women / Men / 40+"
-    },
     "contacts": {
-      "email": "maloehelp@gmail.com",
-      "phone": "+38 (067) 967 01 63",
-      "callback": "Замовити дзвінок →"
+      "title": "КОНТАКТИ",
+      "showroomLabel": "Шоурум за адресою:",
+      "showroomAddress": "м. Дніпро, вул Європейська, 92",
+      "phoneLabel": "Телефон:",
+      "phone": "099-000-00-00",
+      "scheduleLabel": "Графік роботи:",
+      "scheduleValue": "Пн-нд - 9:00 - 20:00"
     },
-    "bottom": {
-      "copyright": "© 2026 Maloe Atelier. ВСІ ПРАВА ЗАХИЩЕНІ",
-      "offer": "Публічна оферта",
+    "information": {
+      "title": "ІНФОРМАЦІЯ",
+      "paymentDelivery": "Оплата та доставка",
+      "publicOffer": "Публічна оферта",
       "privacy": "Політика конфіденційності",
-      "madeBy": "Розробка та підтримка сайту: KEYKEY"
+      "deliveryReturns": "Доставка та повернення"
+    },
+    "brand": {
+      "perfect": "Perfect",
+      "parfums": "Parfums"
     }
   },
   "breadcrumbs": {
@@ -277,7 +296,7 @@
     "responseCode": "Код відповіді: {code}"
   },
   "home": {
-    "heroCta": "Дивитися колекцію",
+    "heroCta": "Перейти в каталог",
     "heroFallbackTitle": "Естетика ательє\nв кожній деталі",
     "seasonEyebrow": "Lookbook Stories",
     "seasonTitle": "Колекції сезону",
@@ -346,7 +365,55 @@
     "onlyInStockSection": "Наявність",
     "onlyInStock": "Лише в наявності"
   },
+  "instagramFeed": {
+    "title": "Слідкуйте за нами в Instagram",
+    "username": "@perfect.parfums.raspiv",
+    "profileAria": "Відкрити Instagram @perfect.parfums.raspiv",
+    "postAria": "Відкрити публікацію Instagram {n}",
+    "imageAlt": "Публікація Instagram {n}"
+  },
+  "homeFaq": {
+    "titleLine1": "Маєте питання?",
+    "titleLine2": "Ми з радістю відповимо",
+    "items": {
+      "original": {
+        "question": "Це оригінальна парфумерія?",
+        "answer": "Так. Ми працюємо з оригінальними ароматами у великих флаконах, які розливаємо у зручні менші об’єми. Ви отримуєте ту саму композицію, але без переплати за бренд-пакування."
+      },
+      "decant": {
+        "question": "Чим розпив відрізняється від магазину з повними флаконами?",
+        "answer": "Ви купуєте потрібний об’єм, а не цілий флакон. Це зручно для знайомства з ароматом, подорожей або коли хочете мати кілька улюблених композицій одночасно."
+      },
+      "longevity": {
+        "question": "Наскільки стійкі аромати?",
+        "answer": "Стійкість залежить від конкретної композиції, концентрації та особливостей шкіри. Ми допоможемо підібрати аромат під ваші очікування та порадимо, як краще наносити, щоб він розкривався довше."
+      },
+      "volumes": {
+        "question": "Які об’єми можна замовити?",
+        "answer": "Доступні зручні об’єми від мініатюр до більших флаконів — залежно від аромату та наявності. Актуальні варіанти завжди вказані на сторінці товару."
+      },
+      "personalPick": {
+        "question": "Ви робите індивідуальний підбір аромату?",
+        "answer": "Так. Ми починали з авторського підбору в Instagram і досі допомагаємо обрати аромат під ваш стиль, настрій та сезон."
+      },
+      "delivery": {
+        "question": "Чи є доставка по Україні?",
+        "answer": "Так, ми доставляємо замовлення по Україні. Деталі щодо способів, термінів і вартості доставки — у розділі «Оплата та доставка»."
+      }
+    }
+  },
+  "aboutBrand": {
+    "title": "Про Perfect Parfums",
+    "brandName": "Perfect parfums",
+    "brandLinkAria": "Перейти на сторінку «Про нас»",
+    "leadSuffix": " — це простір, де аромат стає частиною вашого стилю.",
+    "paragraph2": "Ми почали свій шлях в Instagram, створюючи авторський підбір під ваш стиль, і зберегли цю філософію в усьому, що робимо. У нас ви знайдете парфумерію преміальної якості: від легкої повсякденної класики до нішевих, східних і гурманських ароматів.",
+    "paragraph3": "Ми уважно підбираємо композиції, щоб кожен аромат звучав чисто, глибоко і розкривався на шкірі так, як цього заслуговуєте саме ви.",
+    "imageAlt": "Парфумерія Perfect Parfums"
+  },
   "reviews": {
+    "homeSectionTitle": "ВІДГУКИ ПОКУПЦІВ",
+    "productFallback": "Товар",
     "sectionTitle": "Відгуки",
     "leaveReview": "Залишити відгук",
     "sectionAria": "Відгуки",
@@ -396,21 +463,16 @@
     "loadErrorRetry": "Спробувати знову",
     "searchResults": "Результати пошуку: \"{query}\"",
     "bestsellersEyebrow": "Bestsellers",
-    "bestsellersTitle": "Популярні моделі",
+    "bestsellersTitle": "Хіти продажів",
     "bestsellersAddToCart": "+ Додати в кошик",
     "bestsellersGoToProduct": "Перейти до товару",
+    "newArrivalsTitle": "Новинки",
+    "newArrivalsAddToCart": "+ Додати в кошик",
+    "newArrivalsGoToProduct": "Перейти до товару",
     "archiveSelectionEyebrow": "SEASONAL OFFER",
     "archiveSelectionTitle": "Archive Selection",
     "archiveSelectionSummary": "Останні одиниці з минулих колекцій тепер доступні за особливими цінами. Свідомий підхід до моди.",
     "archiveSelectionCta": "Дивитися акційні товари",
-    "brandValuesQuote": "«Одяг, створений для моментів, що залишаються в пам'яті назавжди»",
-    "brandValuesStatement": "МИ ВИКОРИСТОВУЄМО ЛИШЕ СЕРТИФІКОВАНІ ОРГАНІЧНІ ТКАНИНИ ТА РУЧНУ РОБОТУ НАШИХ МАЙСТРІВ В УКРАЇНІ.",
-    "brandValuesCareTitle": "Care",
-    "brandValuesCareLabel": "ДБАЙЛИВИЙ ПОШИВ",
-    "brandValuesLinenTitle": "Linen",
-    "brandValuesLinenLabel": "НАТУРАЛЬНИЙ ЛЬОН",
-    "brandValuesEcoTitle": "Eco",
-    "brandValuesEcoLabel": "ЕКОЛОГІЧНА УПАКОВКА",
     "carouselCta": "Перейти в категорію →",
     "carouselDemoClothing": "Одяг",
     "carouselDemoHeels": "Танцювальні підбори",
@@ -418,7 +480,8 @@
     "showMoreWithCount": "Показати ще {count} товарів"
   },
   "basket": {
-    "basketCount": "Товарів у кошику",
+    "basketCount": "Товарів у кошику:",
+    "basketCountAria": "Товарів у кошику: {count}",
     "clearConfirm": "Ви впевнені, що хочете очистити кошик?",
     "closeAria": "Закрити кошик",
     "clearAria": "Очистити кошик",
@@ -439,7 +502,12 @@
     "close": "Закрити пошук",
     "popular": "Популярне:",
     "popularItem1": "Лляний сет \"Sable\"",
-    "popularItem2": "Плаття \"Fleur d'été\""
+    "popularItem2": "Плаття \"Fleur d'été\"",
+    "clear": "Очистити пошук",
+    "showAll": "Показати усі результати",
+    "loading": "Завантаження…",
+    "empty": "Результатів не знайдено",
+    "error": "Сталася помилка при завантаженні"
   },
   "authorization": {
     "loginTitle": "Вхід в акаунт",

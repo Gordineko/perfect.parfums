@@ -1,0 +1,152 @@
+@use "../../../../shared/ui/styles/variables.scss" as *;
+
+.brandsCarousel {
+  background: var(--color-nude);
+  padding-block: var(--space-section-y);
+  margin-top: 0;
+}
+
+.brandsCarousel__title {
+  margin: 0 0 40px;
+  text-align: center;
+  @include section-h2-title;
+
+  @include tablet-only {
+    margin-bottom: 30px;
+  }
+
+  @include below-tablet {
+    margin-bottom: 24px;
+  }
+}
+
+.brandsCarousel__list {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem 3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include down($bp-desktop) {
+    display: none;
+  }
+}
+
+.brandsCarousel__carousel {
+  display: none;
+  overflow: hidden;
+
+  @include down($bp-desktop) {
+    display: block;
+  }
+}
+
+.brandsCarousel__swiper {
+  overflow: visible;
+}
+
+.brandsCarousel__slide {
+  width: auto;
+  height: auto;
+}
+
+.brandsCarousel__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  min-width: 5.5rem;
+  max-width: 12rem;
+
+  @include tablet-only {
+    min-width: 6.5rem;
+    height: 50px;
+  }
+
+  @include below-tablet {
+    min-width: 6.5rem;
+    max-width: 14rem;
+    height: 44px;
+  }
+
+  @include mobile-only {
+    min-width: 7rem;
+    height: 48px;
+  }
+}
+
+.brandsCarousel__list .brandsCarousel__item {
+  flex: 1 1 0;
+  min-width: 7rem;
+  max-width: none;
+  height: auto;
+}
+
+.brandsCarousel__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 100%;
+
+  @include below-tablet {
+    height: 44px;
+  }
+
+  @include mobile-only {
+    height: 48px;
+  }
+}
+
+.brandsCarousel__logoSvg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  svg {
+    display: block;
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+  }
+
+  svg :is(path, rect, circle, g):not([fill="#FFFAF0"]) {
+    fill: #bdb8ae;
+    transition: fill 0.3s ease, stroke 0.3s ease;
+  }
+
+  svg :is(path, rect, circle, g)[fill="#FFFAF0"] {
+    fill: var(--color-nude);
+  }
+
+  svg :is(path, rect, circle, g)[stroke]:not([stroke="none"]) {
+    stroke: #bdb8ae;
+    transition: fill 0.3s ease, stroke 0.3s ease;
+  }
+}
+
+.brandsCarousel__item:hover
+  .brandsCarousel__logoSvg
+  svg
+  :is(path, rect, circle, g):not([fill="#FFFAF0"]) {
+  fill: #11110f;
+}
+
+.brandsCarousel__item:hover
+  .brandsCarousel__logoSvg
+  svg
+  :is(path, rect, circle, g)[fill="#FFFAF0"] {
+  fill: var(--color-nude);
+}
+
+.brandsCarousel__item:hover
+  .brandsCarousel__logoSvg
+  svg
+  :is(path, rect, circle, g)[stroke]:not([stroke="none"]) {
+  stroke: #11110f;
+}
+

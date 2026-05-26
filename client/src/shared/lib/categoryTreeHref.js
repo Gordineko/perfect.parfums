@@ -1,3 +1,5 @@
+import { localePath } from "./localePath";
+
 export function categoryNodeFullSlug(cat) {
   if (!cat || typeof cat !== "object") {
     return "";
@@ -18,10 +20,10 @@ export function categoryNodeFullSlug(cat) {
 export function categoryTreeItemHref(locale, cat) {
   const fs = categoryNodeFullSlug(cat);
   if (fs) {
-    return `/${locale}/categories/${fs}`;
+    return localePath(locale, `/categories/${fs}`);
   }
   if (cat?.slug) {
-    return `/${locale}/categories/${String(cat.slug)}`;
+    return localePath(locale, `/categories/${String(cat.slug)}`);
   }
-  return `/${locale}/categories/all`;
+  return localePath(locale, "/categories/all");
 }

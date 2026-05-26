@@ -8,11 +8,13 @@ import MainNav, {
   CloseBtn,
   FavoriteProductIcon,
   LanguageSwitcher,
-  Logo,
 } from "@shared";
+import { localePath } from "@shared/lib/localePath";
 import { MODALS } from "@shared/config/modals";
 import { useI18n } from "@shared/i18n/use-i18n";
 import SocialLinks from "@shared/ui/SocialLinks";
+import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 import BurgerMenuCatalogTree from "./BurgerMenuCatalogTree";
@@ -59,7 +61,21 @@ const BurgerMenu = ({
         className={`burger-menu ${isOpenModal ? "open" : ""}`}
       >
         <div className="burger-menu__header">
-          <Logo />
+          <Link
+            href={localePath(locale)}
+            className="burger-menu__logo-link"
+            aria-label={t("aria.homeLogo")}
+            onClick={() => setIsModalOpen(null)}
+          >
+            <Image
+              src="/img/perfect-parfums-logo.svg"
+              alt=""
+              width={171}
+              height={60}
+              className="burger-menu__logo"
+              priority
+            />
+          </Link>
 
           <button
             type="button"

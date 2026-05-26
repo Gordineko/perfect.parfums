@@ -1,9 +1,9 @@
 @use "../../../shared/ui/styles/variables.scss" as *;
 
 $mega-dark: #1a1a1a;
-$font-geologica: var(--font-geologica), Geologica, sans-serif;
-$font-geologica-italic: var(--font-geologica), Georgia, serif;
-$image-placeholder: color-mix(in srgb, var(--color-text) 4%, transparent);
+$font-heading-stack: var(--font-heading);
+$font-heading-italic: var(--font-heading);
+$image-placeholder: color-mix(in srgb, var(--color-black) 4%, transparent);
 
 .panel {
   background: $white;
@@ -71,7 +71,7 @@ $image-placeholder: color-mix(in srgb, var(--color-text) 4%, transparent);
   margin: 0;
   text-align: center;
   color: $mega-dark;
-  font-family: Georgia, var(--font-title), "Times New Roman", Times, serif;
+  font-family: Georgia, var(--font-heading), "Times New Roman", Times, serif;
   font-size: 24px;
   font-style: italic;
   font-weight: $fw-regular;
@@ -103,7 +103,7 @@ $image-placeholder: color-mix(in srgb, var(--color-text) 4%, transparent);
 .columnTitle {
   margin: 0 0 20px;
   color: var(--Gray, #{$gray});
-  font-family: $font-geologica;
+  font-family: $font-heading-stack;
   font-size: 12px;
   font-weight: $fw-regular;
   letter-spacing: 0.6px;
@@ -122,9 +122,9 @@ $image-placeholder: color-mix(in srgb, var(--color-text) 4%, transparent);
 .menuLink {
   display: inline-block;
   color: $mega-dark;
-  font-family: $font-geologica-italic;
+  font-family: $font-heading-italic;
   font-size: 16px;
-  font-variation-settings: "slnt" -12, "CRSV" 1, "wght" 100;
+  font-style: italic;
   letter-spacing: 0.8px;
   text-decoration: none;
   transition: transform 0.2s ease;
@@ -171,7 +171,7 @@ $image-placeholder: color-mix(in srgb, var(--color-text) 4%, transparent);
 .bannerCaption {
   margin: 0;
   color: $mega-dark;
-  font-family: $font-geologica;
+  font-family: $font-heading-stack;
   font-size: 12px;
   font-weight: 300;
   letter-spacing: 0.6px;
