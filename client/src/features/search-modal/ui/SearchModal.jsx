@@ -120,8 +120,9 @@ const SearchModal = ({ isOpen, onClose, labels, locale }) => {
     <div
       className={`${styles.root} ${isOpen ? styles.rootOpen : ""}`}
       aria-hidden={!isOpen}
+      onClick={onClose}
     >
-      <div className={styles.content}>
+      <div className={styles.content} onClick={(e) => e.stopPropagation()}>
         <div className={styles.container}>
           <button
             type="button"
