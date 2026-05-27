@@ -225,14 +225,21 @@ export default function AutoCompleteSelect({
   };
 
   return (
-    <div className="custom-select-wrapper">
-      <label htmlFor={id} className="custom-select-label">
-        {label}
-      </label>
+    <div
+      className={`custom-select-wrapper${
+        isProfile ? " custom-select-wrapper--no-label" : ""
+      }`}
+    >
+      {!isProfile ? (
+        <label htmlFor={id} className="custom-select-label">
+          {label}
+        </label>
+      ) : null}
       <Select
         instanceId={id} 
         inputId={id}
         name={name}
+        aria-label={isProfile ? label : undefined}
         className="select-new-post"
         classNamePrefix="react-select"
         options={options}

@@ -1,4 +1,8 @@
 .page-header {
+  &--breadcrumbs-only {
+    margin-bottom: 0;
+  }
+
   &__breadcrumbs {
     margin: 0;
     padding: 0;

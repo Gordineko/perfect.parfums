@@ -65,7 +65,8 @@ export default function ProfilePageHeader({
       breadcrumbsLabels={breadcrumbsLabels}
       breadcrumbsItems={breadcrumbsItems}
       breadcrumbsItemsCompact={breadcrumbsItemsCompact}
-      title={copy.titleProf}
+      showTitle={false}
+      plainBreadcrumbs
     />
   );
 }

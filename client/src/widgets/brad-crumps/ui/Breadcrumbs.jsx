@@ -19,6 +19,7 @@ const Breadcrumbs = ({
   pageName,
   className,
   embedInPage = false,
+  plain = false,
   hideHome = false,
 }) => {
   const router = useRouter();
@@ -30,6 +31,7 @@ const Breadcrumbs = ({
   const rootClass = [
     styles.root,
     embedInPage ? styles.rootEmbedded : "",
+    plain ? styles.rootPlain : "",
     className,
   ]
     .filter(Boolean)

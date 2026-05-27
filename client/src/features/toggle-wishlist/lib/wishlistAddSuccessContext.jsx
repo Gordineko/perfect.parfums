@@ -1,6 +1,7 @@
 "use client";
 
 import { BREAKPOINTS } from "@shared";
+import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import {
   createContext,
@@ -62,7 +63,9 @@ export function WishlistAddSuccessProvider({ children, locale }) {
   const goToWishlist = useCallback(() => {
     closePopup();
     const loc = locale ?? "ua";
-    router.push(`/${loc}/wishlist`);
+    const hasToken = Boolean(Cookies.get("auth_token"));
+    const path = hasToken ? "profile/wishlist" : "wishlist";
+    router.push(`/${loc}/${path}`);
   }, [closePopup, locale, router]);
 
   useEffect(() => {
