@@ -39,7 +39,7 @@ $font-heading: var(--font-heading), "Cormorant", serif;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    padding: 0;
+    padding: 6px;
     border: 0;
     border-radius: 0;
     background: transparent;
@@ -53,12 +53,14 @@ $font-heading: var(--font-heading), "Cormorant", serif;
       height: 21px;
     }
 
-    &:hover,
-    &:focus-visible {
-      opacity: 0.85;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background: rgba(189, 184, 174, 0.1);
     }
 
     &:focus-visible {
+      background: rgba(189, 184, 174, 0.1);
       outline: 2px solid rgba(254, 254, 250, 0.6);
       outline-offset: 2px;
     }

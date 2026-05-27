@@ -3,31 +3,414 @@
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: 10999;
+  z-index: 1200;
   display: flex;
-  justify-content: flex-end;
-  background: rgba(15, 23, 42, 0.2);
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.45);
 }
 
-.drawer {
-  z-index: 10000;
+.modal {
+  position: relative;
+  z-index: 1201;
   display: flex;
   flex-direction: column;
-  width: 484px;
-  height: 100vh;
-  padding: 32px;
+  width: min(100%, 920px);
+  max-width: 920px;
+  max-height: min(90vh, 760px);
+  padding: 0;
   border-radius: 0;
-  background: var(--White, #fefefe);
+  background: var(--white, #fefefa);
+  overflow: hidden;
   box-shadow:
-    0 4px 4px 0 rgba(0, 0, 0, 0.25),
     0 20px 40px -15px rgba(0, 0, 0, 0.25),
-    -2px 0 4px 0 rgba(0, 0, 0, 0.25);
+    0 4px 4px 0 rgba(0, 0, 0, 0.25);
 
-  @include down($bp-tablet) {
-    padding: 32px 16px;
+  @include down($bp-desktop) {
+    width: min(100%, 720px);
+    max-height: min(92vh, 680px);
   }
 
-  @include down(480px) {
-    margin-right: 0;
+  @include below-tablet {
+    width: calc(100% - 32px);
+    max-width: none;
+    max-height: 94vh;
+    margin: 0 16px;
+  }
+}
+
+.header {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 25px 40px;
+  background: var(--burgundy, #68181f);
+
+  @include down($bp-desktop) {
+    padding: 20px 32px;
+  }
+
+  @include below-tablet {
+    padding: 16px 20px;
+  }
+}
+
+.title {
+  margin: 0;
+  color: var(--white, #fefefa);
+  text-align: center;
+  font-family: var(--font-heading), "Cormorant", serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+
+  @include down($bp-desktop) {
+    font-size: 24px;
+  }
+
+  @include below-tablet {
+    font-size: 20px;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--white, #fefefa);
+
+  svg {
+    display: block;
+    width: 20px;
+    height: 21px;
+  }
+
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background: rgba(189, 184, 174, 0.1);
+  }
+
+  &:focus-visible {
+    background: rgba(189, 184, 174, 0.1);
+    outline: 2px solid rgba(254, 254, 250, 0.6);
+    outline-offset: 2px;
+  }
+
+  @include down($bp-desktop) {
+    right: 32px;
+  }
+
+  @include below-tablet {
+    right: 16px;
+    padding: 4px;
+
+    svg {
+      width: 18px;
+      height: 19px;
+    }
+  }
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 0;
+  padding: 40px;
+  background: var(--white, #fefefa);
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  @include down($bp-desktop) {
+    padding: 32px;
+    gap: 20px;
+  }
+
+  @include below-tablet {
+    padding: 16px;
+    gap: 16px;
+  }
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px 0;
+
+  @include down($bp-desktop) {
+    gap: 32px;
+    padding: 32px 0;
+  }
+
+  @include below-tablet {
+    gap: 24px;
+    padding: 24px 0;
+  }
+}
+
+.emptyText {
+  margin: 0;
+  color: var(--black, #11110f);
+  text-align: center;
+  font-family: var(--font-body), "Lato", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.3;
+
+  @include below-tablet {
+    font-size: 16px;
+  }
+}
+
+.emptyAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 80px;
+  border: 1px solid var(--burgundy, #68181f);
+  background: var(--white, #fefefa);
+  color: var(--black, #11110f);
+  text-align: center;
+  font-family: var(--font-body), "Lato", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.3;
+  cursor: pointer;
+  border-radius: 0;
+  white-space: nowrap;
+
+  &:hover {
+    background: rgba(189, 184, 174, 0.1);
+  }
+
+  &:focus-visible {
+    background: rgba(189, 184, 174, 0.1);
+    border-color: var(--burgundy, #68181f);
+    outline: 2px solid rgba(104, 24, 31, 0.35);
+    outline-offset: 2px;
+  }
+
+  @include down($bp-desktop) {
+    padding: 10px 48px;
+    font-size: 18px;
+  }
+
+  @include below-tablet {
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 16px;
+    white-space: normal;
+  }
+}
+
+.list {
+  min-height: 0;
+  max-height: 420px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include down($bp-desktop) {
+    max-height: 360px;
+  }
+
+  @include below-tablet {
+    max-height: min(42vh, 320px);
+  }
+}
+
+.footer {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  gap: 80px;
+
+  @include down($bp-desktop) {
+    gap: 48px;
+  }
+
+  @include below-tablet {
+    gap: 32px;
+  }
+}
+
+.totalBox {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px 24px;
+  border: 1px solid #bdb8ae;
+  background: var(--nude, #fffaf0);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  @include down($bp-desktop) {
+    padding: 16px 20px;
+    gap: 10px;
+  }
+
+  @include below-tablet {
+    padding: 14px 16px;
+    gap: 8px;
+  }
+}
+
+.totalLabel {
+  margin: 0;
+  color: var(--black, #0d1717);
+  font-family: var(--font-heading), "Cormorant", serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  @include down($bp-desktop) {
+    font-size: 22px;
+  }
+
+  @include below-tablet {
+    font-size: 20px;
+  }
+}
+
+.totalValue {
+  margin: 0;
+  color: var(--burgundy, #68181f);
+  font-family: var(--font-body), "Lato", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  @include down($bp-desktop) {
+    font-size: 22px;
+  }
+
+  @include below-tablet {
+    font-size: 20px;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+
+  @include down($bp-desktop) {
+    gap: 24px;
+  }
+
+  @include below-tablet {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+}
+
+.btnOutline,
+.btnPrimary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  cursor: pointer;
+  text-align: center;
+  font-family: var(--font-body), "Lato", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+
+  &:focus-visible {
+    outline: 2px solid rgba(104, 24, 31, 0.35);
+    outline-offset: 2px;
+  }
+
+  @include down($bp-desktop) {
+    font-size: 18px;
+  }
+
+  @include below-tablet {
+    width: 100%;
+    font-size: 16px;
+    white-space: normal;
+  }
+}
+
+.btnOutline {
+  padding: 11px 70px;
+  border: 1px solid var(--burgundy, #68181f);
+  background: var(--white, #fefefa);
+  color: var(--black, #11110f);
+
+  @include down($bp-desktop) {
+    padding: 10px 40px;
+  }
+
+  @include below-tablet {
+    padding: 10px 20px;
+  }
+
+  &:hover {
+    background: rgba(189, 184, 174, 0.1);
+  }
+
+  &:focus-visible {
+    background: rgba(189, 184, 174, 0.1);
+    border-color: var(--burgundy, #68181f);
+  }
+}
+
+.btnPrimary {
+  padding: 11px 59px;
+  border: 0;
+  background: var(--burgundy, #68181f);
+  color: var(--white, #fefefa);
+
+  @include down($bp-desktop) {
+    padding: 10px 36px;
+  }
+
+  @include below-tablet {
+    padding: 10px 20px;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: var(--color-burgundy-active, #521217);
   }
 }
