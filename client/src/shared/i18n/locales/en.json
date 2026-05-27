@@ -300,6 +300,21 @@
     "allCatalogCta": "Full catalog"
   },
   "pdp": {
+    "articleLabel": "SKU:",
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
+    "perMl": "per 1 ml",
+    "chooseVolume": "Choose volume",
+    "totalLabel": "Total:",
+    "addToCart": "ADD TO CART",
+    "addToWishlist": "Add to wishlist",
+    "meta": {
+      "gender": "Gender",
+      "brand": "Brand",
+      "fragranceGroup": "Fragrance group"
+    },
+    "descriptionTitle": "DESCRIPTION",
+    "specsTableTitle": "SPECIFICATIONS",
     "pickVariantHint": "Select options",
     "sizeChartTitle": "Size chart",
     "accessoriesAria": "Accessories",
@@ -324,6 +339,12 @@
     "block": {
       "galleryAria": "Product gallery",
       "infoAria": "Product information and options"
+    },
+    "reviews": {
+      "sectionTitle": "REVIEWS",
+      "addReview": "Add review",
+      "empty": "No reviews yet",
+      "sectionAria": "Reviews"
     },
     "skeletonAria": "Loading product"
   },
@@ -418,15 +439,19 @@
     "datePlaceholder": "—",
     "nameFallback": "Customer",
     "textFallback": "No review text",
-    "sentTitle": "Review sent",
-    "sentText": "Your review will appear on the site soon",
+    "sentTitle": "Review sent!",
+    "sentText": "Thank you, your rating will appear on the site soon",
+    "modalTitle": "Add review",
     "modalSubtitle": "Share your experience with the product",
     "nameLabel": "Your name",
     "namePlaceholder": "Enter your name",
     "textLabel": "Your review",
     "textPlaceholder": "Write your review",
+    "commentLabel": "Your comment",
+    "commentPlaceholder": "Write your comment",
     "ratingTitle": "Your rating",
     "submitBtn": "Submit review",
+    "publishBtn": "Publish review",
     "submitError": "Could not submit your review. Please try again.",
     "submitErrorMissingProduct": "Could not determine the product for this review.",
     "validation": {

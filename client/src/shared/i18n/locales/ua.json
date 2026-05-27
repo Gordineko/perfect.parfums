@@ -307,6 +307,21 @@
     "allCatalogCta": "Весь каталог"
   },
   "pdp": {
+    "articleLabel": "Артикул:",
+    "inStock": "В наявності",
+    "outOfStock": "Немає в наявності",
+    "perMl": "за 1 мл",
+    "chooseVolume": "Оберіть об'єм",
+    "totalLabel": "Вартість:",
+    "addToCart": "В КОШИК",
+    "addToWishlist": "Додати до списку бажань",
+    "meta": {
+      "gender": "Стать",
+      "brand": "Бренд",
+      "fragranceGroup": "Група аромату"
+    },
+    "descriptionTitle": "ОПИС",
+    "specsTableTitle": "ТАБЛИЦЯ ХАРАКТЕРИСТИК",
     "pickVariantHint": "Оберіть параметри",
     "sizeChartTitle": "Розмірна сітка",
     "accessoriesAria": "Аксесуари",
@@ -331,6 +346,12 @@
     "block": {
       "galleryAria": "Галерея товару",
       "infoAria": "Інформація та вибір параметрів"
+    },
+    "reviews": {
+      "sectionTitle": "ВІДГУКИ",
+      "addReview": "Додати відгук",
+      "empty": "Відгуків поки немає",
+      "sectionAria": "Відгуки"
     },
     "skeletonAria": "Завантаження товару"
   },
@@ -425,15 +446,19 @@
     "datePlaceholder": "—",
     "nameFallback": "Покупець",
     "textFallback": "Текст відгуку відсутній",
-    "sentTitle": "Відгук відправлено",
-    "sentText": "Згодом ваш відгук з’явиться на сайті",
+    "sentTitle": "Відгук надіслано!",
+    "sentText": "Дякуємо, скоро Ваша оцінка з’явиться на сайті",
+    "modalTitle": "Додати відгук",
     "modalSubtitle": "Поділіться досвідом про товар",
     "nameLabel": "Ваше ім'я",
     "namePlaceholder": "Введіть ім'я",
     "textLabel": "Ваш відгук",
     "textPlaceholder": "Напишіть ваш відгук",
+    "commentLabel": "Ваш коментар",
+    "commentPlaceholder": "Напишіть ваш коментар",
     "ratingTitle": "Ваша оцінка",
     "submitBtn": "Надіслати відгук",
+    "publishBtn": "Опублікувати відгук",
     "submitError": "Не вдалося надіслати відгук. Спробуйте ще раз.",
     "submitErrorMissingProduct": "Не вдалося визначити товар для відгуку.",
     "validation": {

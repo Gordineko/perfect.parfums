@@ -9,19 +9,31 @@ import { useWriteReviewForm } from "../lib/useWriteReviewForm";
 
 import styles from "./WriteReviewModal.module.scss";
 
-function getLocalizedProductTitle(product, locale) {
+function ModalCloseIcon() {
   return (
-    product?.title?.[locale] ??
-    product?.title?.ua ??
-    product?.title?.uk ??
-    product?.title?.en ??
-    product?.title ??
-    ""
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="21"
+      viewBox="0 0 20 21"
+      fill="none"
+      aria-hidden="true"
+    >
+      <path
+        d="M1.74414 1.0215L18.9778 19.0212"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+      <path
+        d="M0.977539 19.0213L18.2111 1.02157"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
-
-const WRITE_REVIEW_MODAL_CLOSE_PATH =
-  "M8.01335 9.52277L14.1589 15.6683C14.3638 15.8662 14.6382 15.9757 14.9231 15.9733C15.2079 15.9708 15.4804 15.8565 15.6818 15.6551C15.8832 15.4537 15.9975 15.1812 16 14.8964C16.0024 14.6115 15.8929 14.3371 15.695 14.1322L9.54947 7.98665L15.695 1.84108C15.8929 1.63619 16.0024 1.36177 16 1.07693C15.9975 0.792085 15.8832 0.519611 15.6818 0.31819C15.4804 0.116769 15.2079 0.00251626 14.9231 4.10675e-05C14.6382 -0.00243413 14.3638 0.107065 14.1589 0.304956L8.01335 6.45053L1.86778 0.304956C1.66196 0.111957 1.38914 0.00660217 1.10703 0.0111832C0.824916 0.0157641 0.555655 0.129922 0.356217 0.329501C0.156779 0.52908 0.0428113 0.798422 0.0384299 1.08054C0.0340485 1.36265 0.139597 1.6354 0.332741 1.84108L6.47723 7.98665L0.331654 14.1322C0.227895 14.2324 0.145134 14.3523 0.0881987 14.4849C0.0312633 14.6174 0.00129449 14.7599 4.1018e-05 14.9042C-0.00121245 15.0484 0.0262742 15.1915 0.0808977 15.325C0.135521 15.4585 0.216187 15.5798 0.318189 15.6818C0.420191 15.7838 0.541486 15.8645 0.674996 15.9191C0.808507 15.9737 0.951559 16.0012 1.09581 16C1.24005 15.9987 1.38261 15.9687 1.51515 15.9118C1.64769 15.8549 1.76756 15.7721 1.86778 15.6683L8.01335 9.52277Z";
 
 const WriteReviewModal = ({ product, locale }) => {
   const { t } = useI18n();
@@ -162,45 +174,36 @@ const WriteReviewModal = ({ product, locale }) => {
       >
         {isSent ? (
           <>
-            <button
-              type="button"
-              className={styles.close}
-              onClick={closeModal}
-              ref={successCloseBtnRef}
-              aria-label={t("common.close")}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="16"
-                height="16"
-                viewBox="0 0 16 16"
-                fill="none"
-                aria-hidden="true"
-              >
-                <path
-                  fillRule="evenodd"
-                  clipRule="evenodd"
-                  d={WRITE_REVIEW_MODAL_CLOSE_PATH}
-                  fill="currentColor"
-                />
-              </svg>
-            </button>
-            <div className={styles.success} role="status" aria-live="polite">
-              <p className={styles.successTitle} id="write-review-sent-title">
+            <div className={styles.header}>
+              <h2 className={styles.title} id="write-review-sent-title">
                 {t("reviews.sentTitle")}
-              </p>
+              </h2>
+
+              <button
+                type="button"
+                className={styles.close}
+                onClick={closeModal}
+                ref={successCloseBtnRef}
+                aria-label={t("common.close")}
+              >
+                <ModalCloseIcon />
+              </button>
+            </div>
+
+            <div
+              className={styles.success}
+              role="status"
+              aria-live="polite"
+            >
               <p className={styles.successText}>{t("reviews.sentText")}</p>
             </div>
           </>
         ) : (
           <>
             <div className={styles.header}>
-              <div className={styles.heading}>
-                <h2 className={styles.title} id="write-review-modal-title">
-                  {getLocalizedProductTitle(product, locale)}
-                </h2>
-                <p className={styles.subtitle}>{t("reviews.modalSubtitle")}</p>
-              </div>
+              <h2 className={styles.title} id="write-review-modal-title">
+                {t("reviews.modalTitle")}
+              </h2>
 
               <button
                 type="button"
@@ -208,30 +211,29 @@ const WriteReviewModal = ({ product, locale }) => {
                 onClick={closeModal}
                 aria-label={t("common.close")}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                  aria-hidden="true"
-                >
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d={WRITE_REVIEW_MODAL_CLOSE_PATH}
-                    fill="currentColor"
-                  />
-                </svg>
+                <ModalCloseIcon />
               </button>
             </div>
 
-            <form className={styles.form} onSubmit={handleSubmit}>
+            <form className={styles.body} onSubmit={handleSubmit}>
+              <div className={styles.rating}>
+                <p className={styles.ratingTitle}>
+                  {t("reviews.ratingTitle")}
+                </p>
+                <div className={styles.stars}>
+                  <StarCounter
+                    appearance="outline"
+                    rating={values.rating}
+                    onSelect={(val) => setFieldValue("rating", val)}
+                  />
+                </div>
+                {touched.rating && errors.rating ? (
+                  <div className="error-text">{errors.rating}</div>
+                ) : null}
+              </div>
+
               <div className={styles.field}>
-                <label
-                  htmlFor="name"
-                  className={clsx(styles.label, styles.labelAccent)}
-                >
+                <label htmlFor="name" className={styles.label}>
                   {t("reviews.nameLabel")}
                 </label>
                 <input
@@ -252,11 +254,8 @@ const WriteReviewModal = ({ product, locale }) => {
               </div>
 
               <div className={styles.field}>
-                <label
-                  htmlFor="text"
-                  className={clsx(styles.label, styles.labelText)}
-                >
-                  {t("reviews.textLabel")}
+                <label htmlFor="text" className={styles.label}>
+                  {t("reviews.commentLabel")}
                 </label>
                 <textarea
                   id="text"
@@ -265,32 +264,12 @@ const WriteReviewModal = ({ product, locale }) => {
                     styles.textarea,
                     touched.text && errors.text && "error",
                   )}
-                  placeholder={t("reviews.textPlaceholder")}
-                  rows={1}
+                  placeholder={t("reviews.commentPlaceholder")}
+                  rows={4}
                   {...formik.getFieldProps("text")}
                 />
                 {touched.text && errors.text ? (
                   <div className="error-text">{errors.text}</div>
-                ) : null}
-              </div>
-
-              <div className={styles.rating}>
-                <p
-                  className={clsx(
-                    styles.ratingTitle,
-                    styles.ratingTitleAccent,
-                  )}
-                >
-                  {t("reviews.ratingTitle")}
-                </p>
-                <div className={styles.stars}>
-                  <StarCounter
-                    rating={values.rating}
-                    onSelect={(val) => setFieldValue("rating", val)}
-                  />
-                </div>
-                {touched.rating && errors.rating ? (
-                  <div className="error-text">{errors.rating}</div>
                 ) : null}
               </div>
 
@@ -305,7 +284,7 @@ const WriteReviewModal = ({ product, locale }) => {
                 className={styles.submitButton}
                 disabled={isSubmitting}
               >
-                {t("reviews.submitBtn")}
+                {t("reviews.publishBtn")}
               </button>
             </form>
           </>

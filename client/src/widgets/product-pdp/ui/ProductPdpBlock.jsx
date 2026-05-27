@@ -5,9 +5,12 @@ import ProductInfo from "@widgets/product-info";
 import { collectGallerySlides } from "@widgets/product-info/lib/pdpVariations";
 import { useCallback, useMemo, useState } from "react";
 
+import PdpDetailSections from "./PdpDetailSections";
+
 export default function ProductPdpBlock({
   product,
   locale,
+  productTitle,
   categoryLabel,
   galleryAriaLabel,
   infoAriaLabel,
@@ -38,29 +41,33 @@ export default function ProductPdpBlock({
 
   return (
     <>
-      <aside
-        className="pdp__gallery"
-        aria-label={galleryAriaLabel}
-      >
-        <ProductGallery
-          product={product}
-          slides={slides}
-          locale={locale}
-          activeOffer={activeOfferForGallery}
-        />
-      </aside>
-      <div
-        className="pdp__info"
-        aria-label={infoAriaLabel}
-      >
-        <ProductInfo
-          product={product}
-          locale={locale}
-          categoryLabel={categoryLabel}
-          onGallerySlidesChange={onGallerySlidesChange}
-          onActiveOfferChange={onActiveOfferChange}
-        />
+      <div className="pdp__grid">
+        <aside
+          className="pdp__gallery"
+          aria-label={galleryAriaLabel}
+        >
+          <ProductGallery
+            product={product}
+            slides={slides}
+            locale={locale}
+            activeOffer={activeOfferForGallery}
+          />
+        </aside>
+        <div
+          className="pdp__info"
+          aria-label={infoAriaLabel}
+        >
+          <ProductInfo
+            product={product}
+            locale={locale}
+            productTitle={productTitle}
+            categoryLabel={categoryLabel}
+            onGallerySlidesChange={onGallerySlidesChange}
+            onActiveOfferChange={onActiveOfferChange}
+          />
+        </div>
       </div>
+      <PdpDetailSections product={product} locale={locale} />
     </>
   );
 }

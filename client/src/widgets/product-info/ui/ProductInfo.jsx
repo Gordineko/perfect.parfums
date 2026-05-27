@@ -1,12 +1,9 @@
 "use client";
 
-import {
-  ProductDescription,
-  ProductPrice,
-} from "@entities/product";
+import { ProductPrice } from "@entities/product";
 import CartButton from "@features/cart-buttons/ui/CartButton";
-import Counter from "@features/counter";
 import { useI18n } from "@shared";
+import { formatPriceDigits } from "@shared/lib/formatPrice";
 import {
   getOfferCrossPrice,
   getOfferUnitPrice,
@@ -31,33 +28,29 @@ import {
 } from "@widgets/product-info/lib/pdpVariations";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useState } from "react";
 
+import {
+  PDP_USE_API_VARIATIONS,
+  resolvePdpMetaRows,
+} from "../lib/pdpStubMeta";
+import {
+  formatStubVolumeLabel,
+  isVolumeAxis,
+  PDP_STUB_VOLUME_DEFAULT_ML,
+  PDP_STUB_VOLUME_OPTIONS_ML,
+  productHasVolumeAxis,
+  resolvePdpArticleSku,
+  resolvePdpDisplayPrices,
+} from "../lib/pdpStubVolume";
+import PdpProductMetaSpecs from "./PdpProductMetaSpecs";
 import { buildAccessoryCartLines } from "../lib/resolveAccessoryCartLines";
-import PdpAccordionChevron from "./PdpAccordionChevron";
 import ProductInfoAccessoriesSection from "./ProductInfoAccessoriesSection";
-import ProductInfoCharacteristicsSection from "./ProductInfoCharacteristicsSection";
 import ProductInfoSizeChartDialog from "./ProductInfoSizeChartDialog";
+import PdpWishlistAction from "./PdpWishlistAction";
 
 function trimStr(v) {
   if (v == null) return "";
   const s = String(v).trim();
   return s;
-}
-
-function pickGroupArticleSku(product) {
-  if (!product || typeof product !== "object") return "";
-  const keys = [
-    "sku",
-    "article",
-    "articleNumber",
-    "vendorCode",
-    "productSku",
-    "groupSku",
-  ];
-  for (const k of keys) {
-    const s = trimStr(product[k]);
-    if (s) return s;
-  }
-  return "";
 }
 
 function num(v) {
@@ -66,29 +59,10 @@ function num(v) {
   return Number.isFinite(n) ? n : NaN;
 }
 
-function sortedContentSections(product) {
-  const list = Array.isArray(product?.contentSections)
-    ? [...product.contentSections]
-    : [];
-  return list.sort((a, b) => (a?.sort ?? 0) - (b?.sort ?? 0));
-}
-
-function initialAccordionState(sections) {
-  const o = {};
-  if (!sections.length) {
-    o.fallback = true;
-    return o;
-  }
-  sections.forEach((s, i) => {
-    const k = s.key ?? `section-${i}`;
-    o[k] = i === 0;
-  });
-  return o;
-}
-
 const ProductInfo = ({
   product,
   locale: localeProp,
+  productTitle = "",
   categoryLabel,
   onGallerySlidesChange,
   onActiveOfferChange,
@@ -99,18 +73,18 @@ const ProductInfo = ({
   const offers = product?.offers ?? [];
 
   const [quantity, setQuantity] = useState(1);
+  const [stubVolumeMl, setStubVolumeMl] = useState(
+    PDP_STUB_VOLUME_DEFAULT_ML,
+  );
   const [selectedByAxisId, setSelectedByAxisId] = useState(() => ({}));
   const [isSizeChartOpen, setIsSizeChartOpen] = useState(false);
 
-  const contentSections = useMemo(
-    () => sortedContentSections(product),
-    [product],
+  const hasApiVolumeAxis = useMemo(
+    () => productHasVolumeAxis(axes, locale),
+    [axes, locale],
   );
-
-  const [accordionOpen, setAccordionOpen] = useState(() => ({
-    ...initialAccordionState(sortedContentSections(product)),
-    specTable: false,
-  }));
+  const useStubVolumeSelect =
+    !PDP_USE_API_VARIATIONS || !hasApiVolumeAxis;
 
   const [selectedAccessoryIds, setSelectedAccessoryIds] = useState(() => {
     const list = product?.accessories ?? [];
@@ -126,11 +100,7 @@ const ProductInfo = ({
   useEffect(() => {
     setSelectedByAxisId({});
     setQuantity(1);
-    const secs = sortedContentSections(product);
-    setAccordionOpen({
-      ...initialAccordionState(secs),
-      specTable: false,
-    });
+    setStubVolumeMl(PDP_STUB_VOLUME_DEFAULT_ML);
     const acc = product?.accessories ?? [];
     setSelectedAccessoryIds(
       new Set(
@@ -205,7 +175,7 @@ const ProductInfo = ({
     return 0;
   }, [activeOffer, hasActiveSku, pricing?.min]);
 
-  const oldPrice = useMemo(() => {
+  const oldPriceFromApi = useMemo(() => {
     if (hasActiveSku) {
       const cross = getOfferCrossPrice(activeOffer);
       return cross != null ? cross : null;
@@ -216,31 +186,58 @@ const ProductInfo = ({
     return null;
   }, [activeOffer, hasActiveSku, pricing?.max, pricing?.min]);
 
+  const { current: displayCurrentPrice, old: displayOldPrice } =
+    useMemo(
+      () =>
+        resolvePdpDisplayPrices({
+          hasNumericPrice,
+          currentPrice,
+          oldPriceFromApi,
+        }),
+      [hasNumericPrice, currentPrice, oldPriceFromApi],
+    );
+
+  const showPdpPrices =
+    hasNumericPrice ||
+    (displayCurrentPrice > 0 && displayOldPrice > 0);
+
   const currency = pricing?.currency ?? "UAH";
 
-  const artLine = useMemo(() => {
-    const sku = trimStr(activeOffer?.sku);
-    if (sku) {
-      return `ART: ${sku}`;
-    }
-    const groupArticle = pickGroupArticleSku(product);
-    if (axes.length > 0 && offers.length > 0) {
-      if (groupArticle) {
-        return `ART: ${groupArticle}`;
-      }
-      return t("pdp.pickVariantHint");
-    }
-    if (groupArticle) {
-      return `ART: ${groupArticle}`;
-    }
-    return "";
+  const displayArticleSku = useMemo(
+    () => resolvePdpArticleSku(product, activeOffer),
+    [activeOffer, product],
+  );
+
+  const inStock = Boolean(
+    activeOffer && offerIsPurchasable(activeOffer),
+  );
+
+  const volumeMultiplier = useStubVolumeSelect ? stubVolumeMl : 1;
+
+  const lineTotal = useMemo(() => {
+    if (!showPdpPrices) return null;
+    return displayCurrentPrice * quantity * volumeMultiplier;
   }, [
-    activeOffer?._id,
-    activeOffer?.sku,
-    axes.length,
-    offers.length,
-    product,
-    t,
+    displayCurrentPrice,
+    quantity,
+    showPdpPrices,
+    volumeMultiplier,
+  ]);
+
+  const lineTotalOld = useMemo(() => {
+    if (
+      displayOldPrice == null ||
+      !Number.isFinite(displayOldPrice) ||
+      displayOldPrice === displayCurrentPrice
+    ) {
+      return null;
+    }
+    return displayOldPrice * quantity * volumeMultiplier;
+  }, [
+    displayCurrentPrice,
+    displayOldPrice,
+    quantity,
+    volumeMultiplier,
   ]);
 
   const isUnavailable =
@@ -269,20 +266,15 @@ const ProductInfo = ({
     [product],
   );
 
-  const characteristics = Array.isArray(product?.characteristics)
-    ? product.characteristics
-    : [];
-
-  const specRows = useMemo(() => characteristics, [characteristics]);
-
-  const toggleAccordion = (key) => {
-    setAccordionOpen((prev) => ({ ...prev, [key]: !prev[key] }));
-  };
-
-  const metaCategory =
-    typeof categoryLabel === "string" && categoryLabel.trim()
-      ? categoryLabel.toUpperCase()
-      : "—";
+  const metaSpecRows = useMemo(
+    () =>
+      resolvePdpMetaRows(product, locale, {
+        gender: t("pdp.meta.gender"),
+        brand: t("pdp.meta.brand"),
+        fragranceGroup: t("pdp.meta.fragranceGroup"),
+      }),
+    [locale, product, t],
+  );
 
   const accessories = Array.isArray(product?.accessories)
     ? product.accessories
@@ -322,118 +314,187 @@ const ProductInfo = ({
     ],
   );
 
-  const renderContentAccordions = () => {
-    if (contentSections.length) {
-      return contentSections.map((section, idx) => {
-        const key = section.key ?? `section-${idx}`;
-        const title =
-          pickLocalizedString(section.title, locale) ||
-          String(key).toUpperCase();
-        const body = pickLocalizedString(section.content, locale);
-        const open = Boolean(accordionOpen[key]);
-        const panelId = `pdp-content-${key}-panel`;
-        const triggerId = `pdp-content-${key}-trigger`;
+  const sizeChart = product?.sizeChart;
 
-        return (
-          <div
-            key={key}
-            className={`pdp-info__accordion ${open ? "is-open" : ""}`}
-          >
-            <button
-              type="button"
-              className="pdp-info__accordion-head"
-              aria-expanded={open}
-              aria-controls={panelId}
-              id={triggerId}
-              onClick={() => toggleAccordion(key)}
-            >
-              <span>{title}</span>
-              <span className="pdp-info__accordion-icon" aria-hidden="true">
-                <PdpAccordionChevron />
-              </span>
-            </button>
-            <div
-              id={panelId}
-              className="pdp-info__accordion-panel"
-              role="region"
-              aria-labelledby={triggerId}
-              aria-hidden={!open}
-            >
-              <div className="pdp-info__accordion-panel-inner">
-                <div className="pdp-info__accordion-body">
-                  <ProductDescription text={body} />
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      });
-    }
-
-    const fallback = pickLocalizedString(product?.description, locale);
-    if (!fallback) return null;
+  const renderVariationAxis = (axis, axisIndex) => {
+    const axisId = axis?.axisId;
+    const title =
+      axis?.title?.[locale] ??
+      axis?.title?.ua ??
+      axis?.title?.uk ??
+      axis?.title?.en ??
+      axisId ??
+      "";
+    const options = valuesForAxis(
+      product,
+      axisIndex,
+      selectedByAxisId,
+      "display",
+    );
+    const current =
+      axisId != null ? selectedByAxisId?.[axisId] : undefined;
+    const titleLc = String(title).toLowerCase();
+    const showSizeChart =
+      Boolean(sizeChart?.imageUrl) &&
+      (titleLc.includes("розмір") ||
+        titleLc.includes("size") ||
+        titleLc.includes("розм") ||
+        titleLc.includes("стельк"));
+    const useColorSwatches = isPdpColorSwatchAxis(axis);
+    const useVolumeSelect = isVolumeAxis(axis, locale);
 
     return (
       <div
-        className={`pdp-info__accordion ${accordionOpen.fallback ? "is-open" : ""}`}
+        key={axisId ?? axisIndex}
+        className={`pdp-info__option pdp-info__option--axis${useColorSwatches ? " pdp-info__option--color" : ""}${useVolumeSelect ? " pdp-info__option--volume" : ""}`}
       >
-        <button
-          type="button"
-          className="pdp-info__accordion-head"
-          aria-expanded={accordionOpen.fallback}
-          aria-controls="pdp-fallback-desc"
-          id="pdp-fallback-trigger"
-          onClick={() => toggleAccordion("fallback")}
-        >
-          <span>ОПИС МОДЕЛІ</span>
-          <span className="pdp-info__accordion-icon" aria-hidden="true">
-            <PdpAccordionChevron />
-          </span>
-        </button>
-        <div
-          id="pdp-fallback-desc"
-          className="pdp-info__accordion-panel"
-          role="region"
-          aria-labelledby="pdp-fallback-trigger"
-          aria-hidden={!accordionOpen.fallback}
-        >
-          <div className="pdp-info__accordion-panel-inner">
-            <div className="pdp-info__accordion-body">
-              <ProductDescription text={fallback} />
-            </div>
-          </div>
+        <div className="pdp-info__option-head pdp-info__option-head--between">
+          <p className="pdp-info__option-title">
+            {useVolumeSelect ? t("pdp.chooseVolume") : title}
+          </p>
+          {showSizeChart ? (
+            <button
+              type="button"
+              className="pdp-info__size-chart"
+              onClick={() => setIsSizeChartOpen(true)}
+            >
+              {(
+                pickLocalizedString(sizeChart?.title, locale) ||
+                t("pdp.sizeChartTitle")
+              ).toUpperCase()}
+            </button>
+          ) : null}
         </div>
+        {useVolumeSelect ? (
+          <select
+            className="pdp-info__volume-select"
+            aria-label={t("pdp.chooseVolume")}
+            value={current != null ? stringifyOptionPart(current) : ""}
+            onChange={(e) => {
+              const raw = e.target.value;
+              const match = options.find(
+                (opt) => stringifyOptionPart(opt) === raw,
+              );
+              if (match !== undefined) {
+                handleAxisPick(axisIndex, match);
+              }
+            }}
+          >
+            {options.map((opt) => {
+              const optionLabel = getAxisOptionLabel(axis, opt, locale);
+              const selectable = axisOptionHasPurchasableOffer(
+                product,
+                axisIndex,
+                opt,
+                selectedByAxisId,
+              );
+              return (
+                <option
+                  key={`${axisId}-${stringifyOptionPart(opt)}`}
+                  value={stringifyOptionPart(opt)}
+                  disabled={!selectable}
+                >
+                  {optionLabel}
+                </option>
+              );
+            })}
+          </select>
+        ) : (
+          <div
+            className={`pdp-info__chips${useColorSwatches ? " pdp-info__chips--color-swatches" : ""}`}
+            role="list"
+            aria-label={title}
+          >
+            {options.map((opt) => {
+              const active =
+                String(opt) === String(current) ||
+                (typeof opt === "number" &&
+                  typeof current === "number" &&
+                  opt === current);
+              const selectable = axisOptionHasPurchasableOffer(
+                product,
+                axisIndex,
+                opt,
+                selectedByAxisId,
+              );
+              const optionLabel = getAxisOptionLabel(axis, opt, locale);
+
+              if (useColorSwatches) {
+                const hex = colorPresetValueToHex(opt);
+                const isWhite =
+                  String(opt).toLowerCase().trim() === "white";
+                return (
+                  <button
+                    key={`${axisId}-${stringifyOptionPart(opt)}`}
+                    type="button"
+                    role="listitem"
+                    className={`pdp-info__color-swatch${isWhite ? " pdp-info__color-swatch--white" : ""}${active ? " is-active" : ""}${!selectable ? " is-disabled" : ""}`}
+                    style={
+                      hex
+                        ? { backgroundColor: hex }
+                        : { backgroundColor: "#bdbdbd" }
+                    }
+                    aria-label={optionLabel}
+                    aria-pressed={active ? "true" : "false"}
+                    disabled={!selectable}
+                    onClick={() => handleAxisPick(axisIndex, opt)}
+                  />
+                );
+              }
+
+              return (
+                <button
+                  key={`${axisId}-${stringifyOptionPart(opt)}`}
+                  type="button"
+                  role="listitem"
+                  className={`pdp-info__chip${active ? " is-active" : ""}${!selectable ? " is-disabled" : ""}`}
+                  aria-pressed={active ? "true" : "false"}
+                  disabled={!selectable}
+                  onClick={() => handleAxisPick(axisIndex, opt)}
+                >
+                  {optionLabel}
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
     );
   };
 
-  const sizeChart = product?.sizeChart;
+  const hasNonVolumeAxes = axes.some(
+    (axis) => !isVolumeAxis(axis, locale),
+  );
 
   return (
     <div className="pdp-info">
-      <div className="pdp-info__meta">
-        <p className="pdp-info__meta-row">
-          <span className="pdp-info__meta-label">Collection:</span>{" "}
-          <span className="pdp-info__meta-value pdp-info__meta-value--series">
-            SHOES
-          </span>
-          <span className="pdp-info__meta-sep" aria-hidden="true" />
-          <span className="pdp-info__meta-label pdp-info__meta-label--category">
-            Gender:
-          </span>{" "}
-          <span className="pdp-info__meta-value pdp-info__meta-value--category">
-            {metaCategory}
-          </span>
+      <div className="pdp-info__head">
+        <h1 className="pdp-info__title">{productTitle}</h1>
+        <p
+          className={`pdp-info__stock${inStock ? " pdp-info__stock--in" : " pdp-info__stock--out"}`}
+        >
+          {inStock ? t("pdp.inStock") : t("pdp.outOfStock")}
         </p>
       </div>
 
+      <p className="pdp-info__article">
+        <span className="pdp-info__article-label">
+          {t("pdp.articleLabel")}
+        </span>{" "}
+        <span className="pdp-info__article-value">
+          {displayArticleSku.value}
+        </span>
+      </p>
+
+      <div className="pdp-info__meta-divider" aria-hidden="true" />
+
       <div className="pdp-info__price-row">
-        {hasNumericPrice ? (
+        {showPdpPrices ? (
           <ProductPrice
-            quantity={quantity}
+            variant="pdp"
             price={{
-              min: currentPrice,
-              old: oldPrice,
+              min: displayCurrentPrice,
+              old: displayOldPrice,
               currency,
             }}
             isBasket={false}
@@ -443,140 +504,58 @@ const ProductInfo = ({
         ) : (
           <p className="pdp-info__price-on-request">Ціна за запитом</p>
         )}
+      </div>
 
-        {artLine ? (
-          <span className="pdp-info__art" title={artLine}>
-            {artLine}
-          </span>
+      <div className="pdp-info__purchase-panel">
+        {useStubVolumeSelect ? (
+          <div className="pdp-info__option pdp-info__option--volume pdp-info__option--volume-stub">
+            <p className="pdp-info__option-title">{t("pdp.chooseVolume")}</p>
+            <select
+              className="pdp-info__volume-select"
+              aria-label={t("pdp.chooseVolume")}
+              value={String(stubVolumeMl)}
+              onChange={(e) => {
+                const next = Number(e.target.value);
+                if (Number.isFinite(next) && next > 0) {
+                  setStubVolumeMl(next);
+                }
+              }}
+            >
+              {PDP_STUB_VOLUME_OPTIONS_ML.map((ml) => (
+                <option key={ml} value={String(ml)}>
+                  {formatStubVolumeLabel(ml, locale)}
+                </option>
+              ))}
+            </select>
+          </div>
+        ) : (
+          PDP_USE_API_VARIATIONS
+            ? axes.map((axis, axisIndex) =>
+                isVolumeAxis(axis, locale)
+                  ? renderVariationAxis(axis, axisIndex)
+                  : null,
+              )
+            : null
+        )}
+
+        {showPdpPrices && lineTotal != null ? (
+          <div className="pdp-info__total-row">
+            <span className="pdp-info__total-label">{t("pdp.totalLabel")}</span>
+            <span className="pdp-info__total-prices">
+              <span className="pdp-info__total-value">
+                {formatPriceDigits(lineTotal)} {t("currency.uah")}
+              </span>
+              {lineTotalOld != null && lineTotalOld !== lineTotal ? (
+                <span className="pdp-info__total-old">
+                  {formatPriceDigits(lineTotalOld)} {t("currency.uah")}
+                </span>
+              ) : null}
+            </span>
+          </div>
         ) : null}
       </div>
 
-      {axes.length > 0 ? (
-        <div className="pdp-info__options">
-          {axes.map((axis, axisIndex) => {
-            const axisId = axis?.axisId;
-            const title =
-              axis?.title?.[locale] ??
-              axis?.title?.ua ??
-              axis?.title?.uk ??
-              axis?.title?.en ??
-              axisId ??
-              "";
-            const options = valuesForAxis(
-              product,
-              axisIndex,
-              selectedByAxisId,
-              "display",
-            );
-            const current = axisId != null ? selectedByAxisId?.[axisId] : undefined;
-            const titleLc = String(title).toLowerCase();
-            const showSizeChart =
-              Boolean(sizeChart?.imageUrl) &&
-              (titleLc.includes("розмір") ||
-                titleLc.includes("size") ||
-                titleLc.includes("розм") ||
-                titleLc.includes("стельк"));
-            const useColorSwatches = isPdpColorSwatchAxis(axis);
-
-            return (
-              <div
-                key={axisId ?? axisIndex}
-                className={`pdp-info__option pdp-info__option--axis${useColorSwatches ? " pdp-info__option--color" : ""}`}
-              >
-                <div className="pdp-info__option-head pdp-info__option-head--between">
-                  <p className="pdp-info__option-title">{title}</p>
-                  {showSizeChart ? (
-                    <button
-                      type="button"
-                      className="pdp-info__size-chart"
-                      onClick={() => setIsSizeChartOpen(true)}
-                    >
-                      {(
-                        pickLocalizedString(sizeChart?.title, locale) ||
-                        t("pdp.sizeChartTitle")
-                      ).toUpperCase()}
-                    </button>
-                  ) : null}
-                </div>
-                <div
-                  className={`pdp-info__chips${useColorSwatches ? " pdp-info__chips--color-swatches" : ""}`}
-                  role="list"
-                  aria-label={title}
-                >
-                  {options.map((opt) => {
-                    const active =
-                      String(opt) === String(current) ||
-                      (typeof opt === "number" &&
-                        typeof current === "number" &&
-                        opt === current);
-                    const selectable = axisOptionHasPurchasableOffer(
-                      product,
-                      axisIndex,
-                      opt,
-                      selectedByAxisId,
-                    );
-                    const optionLabel = getAxisOptionLabel(
-                      axis,
-                      opt,
-                      locale,
-                    );
-
-                    if (useColorSwatches) {
-                      const hex = colorPresetValueToHex(opt);
-                      const isWhite =
-                        String(opt).toLowerCase().trim() === "white";
-                      return (
-                        <button
-                          key={`${axisId}-${stringifyOptionPart(opt)}`}
-                          type="button"
-                          role="listitem"
-                          className={`pdp-info__color-swatch${isWhite ? " pdp-info__color-swatch--white" : ""}${active ? " is-active" : ""}${!selectable ? " is-disabled" : ""}`}
-                          style={
-                            hex
-                              ? { backgroundColor: hex }
-                              : { backgroundColor: "#bdbdbd" }
-                          }
-                          aria-label={optionLabel}
-                          aria-pressed={active ? "true" : "false"}
-                          disabled={!selectable}
-                          onClick={() => handleAxisPick(axisIndex, opt)}
-                        />
-                      );
-                    }
-
-                    return (
-                      <button
-                        key={`${axisId}-${stringifyOptionPart(opt)}`}
-                        type="button"
-                        role="listitem"
-                        className={`pdp-info__chip${active ? " is-active" : ""}${!selectable ? " is-disabled" : ""}`}
-                        aria-pressed={active ? "true" : "false"}
-                        disabled={!selectable}
-                        onClick={() => handleAxisPick(axisIndex, opt)}
-                      >
-                        {optionLabel}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      ) : null}
-
       <div className="pdp-info__buy">
-        <Counter
-          value={quantity}
-          min={1}
-          max={maxQty}
-          onIncrement={() =>
-            setQuantity((q) =>
-              typeof maxQty === "number" ? Math.min(maxQty, q + 1) : q + 1,
-            )
-          }
-          onDecrement={() => setQuantity((q) => Math.max(1, q - 1))}
-        />
         <CartButton
           product={product}
           activeOffer={activeOffer}
@@ -585,9 +564,20 @@ const ProductInfo = ({
           style="pdp-info__add-to-cart"
           getCompanionCartItems={getCompanionCartItems}
         />
+        <PdpWishlistAction product={product} />
       </div>
 
-      <div className="pdp-info__divider" aria-hidden="true" />
+      <PdpProductMetaSpecs rows={metaSpecRows} />
+
+      {PDP_USE_API_VARIATIONS && hasNonVolumeAxes ? (
+        <div className="pdp-info__options">
+          {axes.map((axis, axisIndex) =>
+            isVolumeAxis(axis, locale)
+              ? null
+              : renderVariationAxis(axis, axisIndex),
+          )}
+        </div>
+      ) : null}
 
       {accessories.length > 0 ? (
         <ProductInfoAccessoriesSection
@@ -597,17 +587,6 @@ const ProductInfo = ({
           onToggleAccessory={toggleAccessory}
         />
       ) : null}
-
-      <div className="pdp-info__accordions">
-        {renderContentAccordions()}
-
-        <ProductInfoCharacteristicsSection
-          specRows={specRows}
-          locale={locale}
-          isOpen={Boolean(accordionOpen.specTable)}
-          onToggle={() => toggleAccordion("specTable")}
-        />
-      </div>
 
       <ProductInfoSizeChartDialog
         open={isSizeChartOpen}

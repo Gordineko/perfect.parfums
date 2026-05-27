@@ -13,6 +13,7 @@ const ProductPrice = ({
   showCurrent = true,
   showOld = true,
   hasDiscount = false,
+  variant,
 }) => {
   const safePriceValue = parsePriceLikeNumber(price?.min);
   const safeOldPriceValue = parsePriceLikeNumber(price?.old);
@@ -28,19 +29,27 @@ const ProductPrice = ({
   const currencyLabel =
     currency === "UAH" ? t("currency.uah") : currency;
 
-  const lineCurrent = quantity
-    ? quantity * safePrice
-    : safePrice;
-  const lineOld = quantity
-    ? quantity * safeOldPrice
-    : safeOldPrice;
+  const isPdp = variant === "pdp";
+  const lineCurrent = isPdp
+    ? safePrice
+    : quantity
+      ? quantity * safePrice
+      : safePrice;
+  const lineOld = isPdp
+    ? safeOldPrice
+    : quantity
+      ? quantity * safeOldPrice
+      : safeOldPrice;
 
   const hasOldFromBackend =
     price?.old != null &&
     String(price.old).trim() !== "" &&
     Number.isFinite(safeOldPriceValue);
-  const isDiscount =
-    hasOldFromBackend && safeOldPrice > safePrice;
+  const isDiscount = isPdp
+    ? hasOldFromBackend &&
+      Number.isFinite(safeOldPriceValue) &&
+      safeOldPrice !== safePrice
+    : hasOldFromBackend && safeOldPrice > safePrice;
   const saleHighlight = Boolean(hasDiscount || isDiscount);
 
   const priceTextOther = (value) =>
@@ -54,13 +63,18 @@ const ProductPrice = ({
         withSaleAccent && saleHighlight
           ? "product-item__price-line--sale"
           : "",
+        isPdp ? "product-item__price-line--pdp" : "",
       ]
         .filter(Boolean)
         .join(" ")}
     >
-      {currency === "UAH"
-        ? priceTextOther(value)
-        : priceTextOther(value)}
+      {priceTextOther(value)}
+      {isPdp ? (
+        <span className="pdp-info__price-suffix">
+          {" "}
+          {t("pdp.perMl")}
+        </span>
+      ) : null}
     </span>
   );
 
@@ -71,22 +85,29 @@ const ProductPrice = ({
       itemType="https://schema.org/Offer"
       className={[
         "product-item__wrapper",
+        isPdp ? "product-item__wrapper--pdp" : "",
         showOld && isDiscount ? "product-item__wrapper--discount" : "",
       ]
         .filter(Boolean)
         .join(" ")}
     >
-      {showOld && isDiscount && (
-        <span className="product-item__price-old">
-          {priceTextOther(lineOld)}
-        </span>
-      )}
-
       {showCurrent && (
         <>
           <meta itemProp="price" content={String(lineCurrent)} />
           {renderPriceLine(lineCurrent, true)}
         </>
+      )}
+
+      {showOld && isDiscount && (
+        <span className="product-item__price-old">
+          {priceTextOther(lineOld)}
+          {isPdp ? (
+            <span className="pdp-info__price-suffix">
+              {" "}
+              {t("pdp.perMl")}
+            </span>
+          ) : null}
+        </span>
       )}
 
       {isBasket && (

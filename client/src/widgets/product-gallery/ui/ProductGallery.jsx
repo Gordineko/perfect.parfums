@@ -3,7 +3,6 @@
 import "swiper/css";
 import "yet-another-react-lightbox/styles.css";
 
-import WishlistButton from "@features/wish-buttons";
 import { useI18n } from "@shared";
 import { BREAKPOINTS } from "@shared/config/BREAKPOINTS";
 import { pickLocalizedString } from "@shared/lib/pickLocalized";
@@ -120,9 +119,6 @@ const ProductGallery = ({
                 />
               </button>
 
-              <div className="pdp-gallery__wishlist">
-                <WishlistButton product={product} />
-              </div>
             </div>
           </SwiperSlide>
         ))}
