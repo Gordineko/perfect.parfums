@@ -20,12 +20,22 @@ export const useCheckoutFormOrder = (user, cartItems = []) => {
     const dispatch = useDispatch();
     const { setIsModalOpen, setIsTxt } = useModals();
 
+    const requiredFieldMessage = (fieldLabel) =>
+        `Поле “${fieldLabel}” повинно бути заповнено`;
+
+    const normalizeInitialPhone = () => {
+        const raw = String(user?.phone || user?.customerPhone || "").trim();
+        if (!raw) return "";
+        if (raw === "+380" || raw === "380") return "";
+        return raw;
+    };
+
     const formik = useFormik({
         initialValues: {
             firstName: user?.firstName || '',
             lastName: user?.lastName || '',
             email: user?.email || user?.customerEmail || '',
-            phone: user?.phone || user?.customerPhone || '',
+            phone: normalizeInitialPhone(),
             deliveryType: DELIVERY_TYPES.NOVA_POSHTA_BRANCH,
             country: user?.deliveryCountry || '',
             paymentMethod: "cod",
@@ -33,20 +43,21 @@ export const useCheckoutFormOrder = (user, cartItems = []) => {
             city: user?.deliveryCity || '',
             warehouse: user?.deliveryPostOffice || '',
             promoCode: "",
+            comment: "",
         },
         validationSchema: Yup.object({
-            firstName: Yup.string().required(t('authorization.validation.required')),
-            lastName: Yup.string().required(t('authorization.validation.required')),
+            firstName: Yup.string().required(requiredFieldMessage("Ім’я")),
+            lastName: Yup.string().required(requiredFieldMessage("Прізвище")),
             // email: Yup.string().email(t('authorization.validation.invalidEmail')).required(t('authorization.validation.required')),
-            phone: Yup.string().required(t('authorization.validation.required')),
-            paymentMethod: Yup.string().required(t('authorization.validation.required')),
+            phone: Yup.string().required(requiredFieldMessage("Номер")),
+            paymentMethod: Yup.string().required(requiredFieldMessage("Оплата")),
             country: Yup.string().when('deliveryType', {
                 is: DELIVERY_TYPES.MEEST_BRANCH,
-                then: () => Yup.string().required(t('authorization.validation.required')),
+                then: () => Yup.string().required(requiredFieldMessage("Країна")),
             }),
-            area: Yup.string().required(t('authorization.validation.required')),
-            city: Yup.string().required(t('authorization.validation.required')),
-            warehouse: Yup.string().required(t('authorization.validation.required')),
+            area: Yup.string().required(requiredFieldMessage("Область")),
+            city: Yup.string().required(requiredFieldMessage("Місто")),
+            warehouse: Yup.string().required(requiredFieldMessage("Відділення/поштомат")),
         }),
         onSubmit: async (values) => {
             formik.setStatus(undefined);
@@ -65,6 +76,7 @@ export const useCheckoutFormOrder = (user, cartItems = []) => {
                     payment: values.paymentMethod,
                     installmentMonths: 0,
                     promoCode: (values.promoCode || "").trim(),
+                    comment: (values.comment || "").trim(),
                 };
 
                 if (token || user) {

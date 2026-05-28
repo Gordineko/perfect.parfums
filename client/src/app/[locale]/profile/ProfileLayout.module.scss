@@ -2,6 +2,37 @@
 
 .shell {
   width: 100%;
+
+  input,
+  select,
+  textarea,
+  :global(.react-tel-input .form-control),
+  :global(.react-select__control) {
+    border: 1px solid #bdb8ae !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  input:hover,
+  select:hover,
+  textarea:hover,
+  input:focus,
+  select:focus,
+  textarea:focus,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  :global(.react-tel-input .form-control:hover),
+  :global(.react-tel-input .form-control:focus),
+  :global(.react-tel-input .form-control:focus-visible),
+  :global(.react-select__control:hover),
+  :global(.react-select__control--is-focused),
+  :global(.react-select__control:focus-within) {
+    border-color: var(--burgundy, #68181f) !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
 }
 
 .container {

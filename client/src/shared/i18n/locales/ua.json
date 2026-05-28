@@ -521,7 +521,8 @@
     "total": "Всього до сплати:",
     "checkout": "Перейти до оформлення",
     "continueShopping": "Продовжити покупки",
-    "pricePerUnit": "Ціна за шт."
+    "pricePerUnit": "Ціна за шт.",
+    "removeItem": "Видалити товар"
   },
   "currency": {
     "uah": "₴"
@@ -622,6 +623,11 @@
     "paymentPostpaidTitle": "Оплата при отриманні",
     "paymentPostpaidDesc": "Готівка або карта при отриманні в відділенні",
     "orderCreateError": "Не вдалося створити замовлення. Спробуйте ще раз."
+    ,
+    "paymentMethodLabel": "Спосіб оплати*",
+    "choosePaymentMethod": "Оберіть спосіб оплати",
+    "comment": "Коментар",
+    "commentPlaceholder": "Коментар до замовлення..."
   },
   "choose": "Оберіть",
   "txt-modal": {
@@ -693,7 +699,7 @@
     "sum": "Сума",
     "delivery": "Доставка",
     "delivery-ststus": "за тарифами перевізника",
-    "all-cost": "Разом",
+    "all-cost": "Всього до сплати:",
     "btn": "Оформити замовлення",
     "promoPlaceholder": "Введіть промокод",
     "promoApply": "Застосувати"
