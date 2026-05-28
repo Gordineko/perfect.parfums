@@ -56,6 +56,12 @@ const UserDetailsForm = ({ location, user, profileSection = "personal" }) => {
     const { t } = useI18n();
     const cart = useSelector((state) => state.cart);
     let formik;
+
+    const normalizePhoneForInput = (value) => {
+        const raw = String(value || "").trim();
+        if (raw === "+380" || raw === "380") return "";
+        return raw;
+    };
     
     if (location === "profile") {
         formik = useCheckoutForm(user, { profileSection });
@@ -105,6 +111,7 @@ const UserDetailsForm = ({ location, user, profileSection = "personal" }) => {
                                         id="firstName"
                                         name="firstName"
                                         type="text"
+                                        placeholder="Імʼя"
                                         disabled={isSubmitting}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
@@ -121,6 +128,7 @@ const UserDetailsForm = ({ location, user, profileSection = "personal" }) => {
                                         id="lastName"
                                         name="lastName"
                                         type="text"
+                                        placeholder="Прізвище*"
                                         disabled={isSubmitting}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
@@ -134,10 +142,13 @@ const UserDetailsForm = ({ location, user, profileSection = "personal" }) => {
                                 <div className="form-group form-group--no-label">
                                     <PhoneInput
                                         country={'ua'}
-                                        value={formik.values.phone}
-                                        onChange={(phone) => formik.setFieldValue('phone', `+${phone}`)}
+                                        value={normalizePhoneForInput(formik.values.phone)}
+                                        onChange={(phone) => {
+                                            const next = phone ? `+${phone}` : "";
+                                            formik.setFieldValue('phone', next === "+380" ? "" : next);
+                                        }}
                                         onBlur={() => formik.setFieldTouched('phone', true)}
-                                        placeholder={t('authorization.phonePlaceholder')}
+                                        placeholder={`${t('authorization.phonePlaceholder')}*`}
                                         inputProps={{
                                             id: 'phone',
                                             name: 'phone',
@@ -159,7 +170,7 @@ const UserDetailsForm = ({ location, user, profileSection = "personal" }) => {
                                         id="email"
                                         name="email"
                                         type="email"
-                                        placeholder={t('checkout.email')}
+                                        placeholder="Email"
                                         disabled={isSubmitting}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
@@ -192,7 +203,6 @@ const UserDetailsForm = ({ location, user, profileSection = "personal" }) => {
                     <>
                         <div className="user-details__group">
                             <div className="user-details__head">
-                                <div className="num"><p>1</p></div>
                                 <span>{t('checkout.contactData')}</span>
                             </div>
 
@@ -203,6 +213,7 @@ const UserDetailsForm = ({ location, user, profileSection = "personal" }) => {
                                         id="firstName"
                                         name="firstName"
                                         type="text"
+                                        placeholder="Імʼя"
                                         disabled={isSubmitting}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
@@ -219,6 +230,7 @@ const UserDetailsForm = ({ location, user, profileSection = "personal" }) => {
                                         id="lastName"
                                         name="lastName"
                                         type="text"
+                                        placeholder="Прізвище*"
                                         disabled={isSubmitting}
                                         onChange={formik.handleChange}
                                         onBlur={formik.handleBlur}
@@ -230,28 +242,16 @@ const UserDetailsForm = ({ location, user, profileSection = "personal" }) => {
                                 </div>
 
                                 <div className="form-group">
-                                    <label htmlFor="email" className="user-details__field-label">{t('checkout.email')}</label>
-                                    <input
-                                        id="email"
-                                        name="email"
-                                        type="email"
-                                        disabled={isSubmitting}
-                                        onChange={formik.handleChange}
-                                        onBlur={formik.handleBlur}
-                                        value={formik.values.email}
-                                    />
-                                    {formik.touched.email && formik.errors.email && (
-                                        <div className="error-text">{formik.errors.email}</div>
-                                    )}
-                                </div>
-
-                                <div className="form-group">
                                     <label htmlFor="phone" className="user-details__field-label">{t('checkout.phone')}</label>
                                     <PhoneInput
                                         country={'ua'}
-                                        value={formik.values.phone}
-                                        onChange={(phone) => formik.setFieldValue('phone', `+${phone}`)}
+                                        value={normalizePhoneForInput(formik.values.phone)}
+                                        onChange={(phone) => {
+                                            const next = phone ? `+${phone}` : "";
+                                            formik.setFieldValue('phone', next === "+380" ? "" : next);
+                                        }}
                                         onBlur={() => formik.setFieldTouched('phone', true)}
+                                        placeholder={`${t('authorization.phonePlaceholder')}*`}
                                         inputProps={{
                                             id: 'phone',
                                             name: 'phone',
@@ -266,17 +266,33 @@ const UserDetailsForm = ({ location, user, profileSection = "personal" }) => {
                                         <div className="error-text">{formik.errors.phone}</div>
                                     )}
                                 </div>
+
+                                <div className="form-group">
+                                    <label htmlFor="email" className="user-details__field-label">{t('checkout.email')}</label>
+                                    <input
+                                        id="email"
+                                        name="email"
+                                        type="email"
+                                        placeholder="Email"
+                                        disabled={isSubmitting}
+                                        onChange={formik.handleChange}
+                                        onBlur={formik.handleBlur}
+                                        value={formik.values.email}
+                                    />
+                                    {formik.touched.email && formik.errors.email && (
+                                        <div className="error-text">{formik.errors.email}</div>
+                                    )}
+                                </div>
                             </div>
                         </div>
 
                         <div className="user-details__group">
                             <div className="user-details__head">
-                                <div className="num"><p>2</p></div>
                                 <span>{t('checkout.delivery')}</span>
                             </div>
 
                             <div className="user-details__form-group">
-                                <DeliverySection formik={formik} variant="profile" />
+                                <DeliverySection formik={formik} variant="checkout" />
                             </div>
                         </div>
                     </>
@@ -285,18 +301,66 @@ const UserDetailsForm = ({ location, user, profileSection = "personal" }) => {
                 {location === "order" &&
                     <div className="user-details__group">
                         <div className="user-details__head">
-                            <div className="num"><p>3</p></div>
                             <span>{t('checkout.payment')}</span>
                         </div>
 
-                        <div className="user-details__form-group width">
-                            <PaySection formik={formik} />
+                        <div className="user-details__form-group">
+                            <div className="form-group">
+                                <PaySection formik={formik} variant="checkout" />
+                            </div>
                         </div>
                     </div>
                 }
+
+                {location === "order" && (
+                  <div className="user-details__group">
+                    <div className="user-details__head">
+                      <span>{t('checkout.comment')}</span>
+                    </div>
+
+                    <div className="user-details__form-group user-details__form-group--full">
+                      <div className="form-group form-group--span-2">
+                        <textarea
+                          id="comment"
+                          name="comment"
+                          rows={3}
+                          disabled={isSubmitting}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          value={formik.values.comment}
+                          placeholder={t("checkout.commentPlaceholder")}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
             </form>
         </div>
-        {location === "order" && <OrderStatus formik={formik} />}
+        {location === "order" ? (
+          <div className="order__sidebar">
+            <OrderStatus formik={formik} />
+
+            <div className="order__submit">
+              {formik?.status?.submitError ? (
+                <div className="error-text" role="alert" aria-live="polite">
+                  {formik.status.submitError}
+                </div>
+              ) : null}
+
+              <button
+                form="prof-checkout-form"
+                type="submit"
+                className="order__submit-btn"
+                disabled={Boolean(formik?.isSubmitting)}
+                aria-busy={Boolean(formik?.isSubmitting)}
+              >
+                {formik?.isSubmitting
+                  ? `${t("order-status.btn")}...`
+                  : t("order-status.btn")}
+              </button>
+            </div>
+          </div>
+        ) : null}
         </>
     )
 }

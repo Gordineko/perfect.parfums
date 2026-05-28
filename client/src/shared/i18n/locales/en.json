@@ -3,7 +3,7 @@
   "header": {
     "top": {
       "about": "About us",
-      "paymentDelivery": "Payment & delivery",
+      "paymentDelivery": "Payment and Delivery",
       "promotions": "Promotions",
       "contacts": "Contacts",
       "blog": "Blog",
@@ -43,7 +43,7 @@
       "aboutUs": "About us",
       "laboratory": "Laboratory",
       "library": "Library",
-      "paymentDelivery": "Payment and delivery",
+      "paymentDelivery": "Payment and Delivery",
       "warrantyReturns": "Warranty and returns",
       "cooperation": "Cooperation"
     },
@@ -203,10 +203,10 @@
     },
     "information": {
       "title": "INFORMATION",
-      "paymentDelivery": "Payment & delivery",
+      "paymentDelivery": "Payment and Delivery",
       "publicOffer": "Public offer",
       "privacy": "Privacy policy",
-      "deliveryReturns": "Delivery & returns"
+      "deliveryReturns": "Warranty and returns"
     },
     "brand": {
       "perfect": "Perfect",
@@ -521,7 +521,8 @@
     "total": "Total due:",
     "checkout": "Proceed to checkout",
     "continueShopping": "Continue shopping",
-    "pricePerUnit": "Price per unit"
+    "pricePerUnit": "Price per unit",
+    "removeItem": "Remove item"
   },
   "currency": {
     "uah": "UAH"
@@ -621,7 +622,11 @@
     "paymentOnlineDesc": "Card via payment gateway",
     "paymentPostpaidTitle": "Pay on delivery",
     "paymentPostpaidDesc": "Cash or card when picking up",
-    "orderCreateError": "Could not place your order. Please try again."
+    "orderCreateError": "Could not place your order. Please try again.",
+    "paymentMethodLabel": "Payment method*",
+    "choosePaymentMethod": "Choose payment method",
+    "comment": "Comment",
+    "commentPlaceholder": "Order comment..."
   },
   "choose": "Select",
   "txt-modal": {
@@ -692,7 +697,7 @@
     "sum": "Subtotal",
     "delivery": "Delivery",
     "delivery-ststus": "per carrier rates",
-    "all-cost": "Total",
+    "all-cost": "Total due:",
     "btn": "Place order",
     "promoPlaceholder": "Enter promo code",
     "promoApply": "Apply"
@@ -749,7 +754,7 @@
   },
 
   "warrantyReturnsPage": {
-    "lead": "Warranty from Maloe Atelier",
+    "lead": "Warranty from Perfect Parfums",
     "intro": "We strive to provide our customers with high-quality, reliable products, so we guarantee:",
     "originality": "Product authenticity — we work only with official suppliers and verified manufacturers.",
     "warranty": "Warranty service — all products are covered by the manufacturer's official warranty.",

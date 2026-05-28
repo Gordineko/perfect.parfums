@@ -7,14 +7,10 @@
 }
 
 .shell {
-  padding: 0 0 80px;
-
-  @include tablet-only {
-    padding-bottom: 0;
-  }
+  padding: 40px 0 80px;
 
   @include below-tablet {
-    padding-bottom: 48px;
+    padding: 24px 0 48px;
   }
 }
 
@@ -32,7 +28,7 @@
   }
 }
 
-.lead {
+.strong {
   margin: 0;
   color: var(--Dark, #{$dark});
   font-family: var(--font-body);
@@ -40,12 +36,8 @@
   font-weight: 500;
   line-height: normal;
 
-  @include tablet-only {
-    font-size: 20px;
-  }
-
   @include below-tablet {
-    font-size: 16px;
+    font-size: 20px;
   }
 }
 
@@ -60,14 +52,10 @@
   font-weight: 400;
   line-height: normal;
 
-  @include tablet-only {
-    font-size: 18px;
-  }
-
   @include below-tablet {
     margin-top: 12px;
     gap: 12px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   p {
@@ -76,5 +64,14 @@
 }
 
 .emphasis {
+  margin: 0;
+  color: var(--Dark, #{$dark});
+  font-family: var(--font-body);
+  font-size: 20px;
   font-weight: 500;
+  line-height: normal;
+
+  @include below-tablet {
+    font-size: 16px;
+  }
 }
