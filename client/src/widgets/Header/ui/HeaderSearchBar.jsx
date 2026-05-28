@@ -27,6 +27,7 @@ export default function HeaderSearchBar({ locale, mode = "bar" }) {
   };
 
   const showDropdown = isOpen && searchQuery.trim().length > 0;
+  const showOverlay = showDropdown;
 
   const clearSearch = () => {
     setSearchQuery("");
@@ -113,6 +114,13 @@ export default function HeaderSearchBar({ locale, mode = "bar" }) {
         >
           <Search />
         </button>
+        {showOverlay ? (
+          <div
+            className={styles.searchOverlay}
+            onMouseDown={() => setIsOpen(false)}
+            aria-hidden="true"
+          />
+        ) : null}
         {isOpen ? (
           <div className={styles.searchMobilePanel}>
             <form className={styles.searchWrap} onSubmit={handleSubmit}>
@@ -134,7 +142,17 @@ export default function HeaderSearchBar({ locale, mode = "bar" }) {
   }
 
   return (
-    <div ref={wrapRef} className={styles.searchField}>
+    <div
+      ref={wrapRef}
+      className={`${styles.searchField} ${isOpen ? styles.searchFieldOpen : ""}`}
+    >
+      {showOverlay ? (
+        <div
+          className={styles.searchOverlay}
+          onMouseDown={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      ) : null}
       <form className={styles.searchWrap} onSubmit={handleSubmit}>
         {searchInput}
       </form>

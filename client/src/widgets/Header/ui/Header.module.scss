@@ -200,11 +200,23 @@
   max-width: 400px;
 }
 
+.searchFieldOpen {
+  z-index: 106;
+}
+
+.searchOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 105;
+  background: rgba(15, 23, 42, 0.45);
+}
+
 .searchWrap {
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
+  z-index: 106;
   padding-block: 15px;
   padding-inline: 20px 72px;
   border: 1.5px solid var(--color-burgundy);
