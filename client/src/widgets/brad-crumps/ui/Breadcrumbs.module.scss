@@ -49,6 +49,11 @@
   border-bottom: 1px solid #bdb8ae;
   padding-top: 40px;
   padding-bottom: 40px;
+
+  @include below-tablet {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }
 
 .inner {

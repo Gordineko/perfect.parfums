@@ -26,13 +26,14 @@ export default async function WarrantyReturnsPage({ params }) {
           page: t("breadcrumbs.page"),
         }}
         breadcrumbsItems={[{ label: pageTitle }]}
-        title={pageTitle}
+        showTitle={false}
+        plainBreadcrumbs
       />
 
       <div className="container">
         <section className={styles.shell}>
           <div className={styles.card}>
-            <p className={styles.lead}>{t("warrantyReturnsPage.lead")}</p>
+            <p className={styles.strong}>{t("warrantyReturnsPage.lead")}</p>
 
             <div className={styles.content}>
               <p>{t("warrantyReturnsPage.intro")}</p>
