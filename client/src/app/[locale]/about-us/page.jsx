@@ -5,12 +5,22 @@ import {
   getMessages,
 } from "@shared";
 import PageHeader from "@shared/ui/PageHeader";
-import { localePath } from "@shared/lib/localePath";
 import Footer from "@widgets/Footer";
-import Image from "next/image";
-import Link from "next/link";
 
 import styles from "./about-us.module.scss";
+
+const OFFER_LIST_ITEMS = [
+  { titleKey: "aboutPage.offerItem1Title", textKey: "aboutPage.offerItem1Text" },
+  { titleKey: "aboutPage.offerItem2Title", textKey: "aboutPage.offerItem2Text" },
+  { titleKey: "aboutPage.offerItem3Title", textKey: "aboutPage.offerItem3Text" },
+  { titleKey: "aboutPage.offerItem4Title", textKey: "aboutPage.offerItem4Text" },
+];
+
+const WHY_LIST_ITEMS = [
+  { titleKey: "aboutPage.whyItem1Title", textKey: "aboutPage.whyItem1Text" },
+  { titleKey: "aboutPage.whyItem2Title", textKey: "aboutPage.whyItem2Text" },
+  { titleKey: "aboutPage.whyItem3Title", textKey: "aboutPage.whyItem3Text" },
+];
 
 export default async function AboutUsPage({ params }) {
   const { locale = "ua" } = await params;
@@ -29,88 +39,36 @@ export default async function AboutUsPage({ params }) {
           page: t("breadcrumbs.page"),
         }}
         breadcrumbsItems={[{ label: pageTitle }]}
-        title={pageTitle}
+        showTitle={false}
+        plainBreadcrumbs
       />
 
       <div className="container">
         <section className={styles.shell}>
-          <div className={styles.banner}>
-            <div className={styles.bannerInner}>
-              <p className={styles.bannerEyebrow}>{t("aboutPage.bannerEyebrow")}</p>
-              <h2 className={styles.bannerTitle}>{t("aboutPage.bannerTitle")}</h2>
-              <p className={styles.bannerSubtitle}>{t("aboutPage.bannerSubtitle")}</p>
-            </div>
+          <div className={styles.content}>
+            <p className={styles.lead}>{t("aboutPage.lead")}</p>
+            <p className={styles.intro}>{t("aboutPage.intro")}</p>
+            <p className={styles.lead}>{t("aboutPage.offerTitle")}</p>
+            <p className={styles.intro}>{t("aboutPage.offerIntro")}</p>
+            <ul className={styles.list}>
+              {OFFER_LIST_ITEMS.map((item) => (
+                <li key={item.titleKey}>
+                  {t(item.titleKey)} — {t(item.textKey)}
+                </li>
+              ))}
+            </ul>
+            <p className={styles.lead}>{t("aboutPage.whyTitle")}</p>
+            <ul className={styles.list}>
+              {WHY_LIST_ITEMS.flatMap((item) => [
+                <li key={item.titleKey}>{t(item.titleKey)}</li>,
+                <li key={item.textKey}>{t(item.textKey)}</li>,
+              ])}
+            </ul>
+            <p className={styles.lead}>{t("aboutPage.cultureTitle")}</p>
+            <p className={styles.intro}>{t("aboutPage.cultureText")}</p>
+            <p className={styles.lead}>{t("aboutPage.closingTitle")}</p>
+            <p className={styles.intro}>{t("aboutPage.closingText")}</p>
           </div>
-
-          <section className={styles.story}>
-            <div className={styles.storyContent}>
-              <p className={styles.storyEyebrow}>{t("aboutPage.storyEyebrow")}</p>
-              <h2 className={styles.storyTitle}>{t("aboutPage.storyTitle")}</h2>
-              <p className={styles.storyText}>{t("aboutPage.storyText")}</p>
-            </div>
-            <div className={styles.storyMedia}>
-              <div className={styles.storyImageWrapDesktop}>
-                <Image
-                  className={styles.storyImage}
-                  src="/img/about-story.png"
-                  alt={t("aboutPage.storyImageAlt")}
-                  width={1365}
-                  height={1820}
-                  sizes="(max-width: 767.98px) 100%, (max-width: 1249.98px) 0px, 50vw"
-                />
-              </div>
-              <div className={styles.storyImageWrapTablet}>
-                <Image
-                  className={styles.storyImage}
-                  src="/img/about-story-tab.png"
-                  alt={t("aboutPage.storyImageAlt")}
-                  width={1365}
-                  height={1820}
-                  sizes="(min-width: 768px) and (max-width: 1249.98px) 100vw, 0px"
-                />
-              </div>
-            </div>
-          </section>
-
-          <section className={styles.manifesto}>
-            <blockquote className={styles.manifestoQuote}>
-              {t("aboutPage.manifestoQuote")}
-            </blockquote>
-          </section>
-
-          <section className={styles.values}>
-            <div className={styles.valuesGrid}>
-              <article className={styles.valuesCard}>
-                <h3 className={styles.valuesCardTitle}>
-                  {t("aboutPage.valuesNaturalnessTitle")}
-                </h3>
-                <p className={styles.valuesCardText}>
-                  {t("aboutPage.valuesNaturalnessText")}
-                </p>
-              </article>
-              <article className={styles.valuesCard}>
-                <h3 className={styles.valuesCardTitle}>
-                  {t("aboutPage.valuesCraftTitle")}
-                </h3>
-                <p className={styles.valuesCardText}>{t("aboutPage.valuesCraftText")}</p>
-              </article>
-              <article className={styles.valuesCard}>
-                <h3 className={styles.valuesCardTitle}>
-                  {t("aboutPage.valuesAestheticTitle")}
-                </h3>
-                <p className={styles.valuesCardText}>
-                  {t("aboutPage.valuesAestheticText")}
-                </p>
-              </article>
-            </div>
-          </section>
-
-          <section className={styles.cta}>
-            <h2 className={styles.ctaTitle}>{t("aboutPage.ctaTitle")}</h2>
-            <Link href={localePath(locale, "/categories/all")} className={styles.ctaButton}>
-              {t("aboutPage.ctaButton")}
-            </Link>
-          </section>
         </section>
       </div>
 

@@ -21,6 +21,16 @@ export const lato = localFont({
       style: "normal",
     },
     {
+      path: "../../../../public/fonts/lato/Lato-Medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../../../public/fonts/lato/Lato-SemiBold.ttf",
+      weight: "600",
+      style: "normal",
+    },
+    {
       path: "../../../../public/fonts/lato/Lato-Bold.ttf",
       weight: "700",
       style: "normal",
