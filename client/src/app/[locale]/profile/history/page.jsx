@@ -23,10 +23,8 @@ export default async function HistoryPage({ params }) {
 
   return (
     <div className={pageStyles.page}>
-      <div className={pageStyles.intro}>
-        <p className={pageStyles.subtitle}>{t("profile.subtitle-history")}</p>
-        <h2 className={pageStyles.title}>{t("profile.title-history")}</h2>
-      </div>
+      <h2 className={pageStyles.sectionTitle}>{t("profile.title-history")}</h2>
+
       {normalizedOrders.length === 0 ? (
         <div className={historyStyles.empty}>
           <p>{t("profile.noOrders")}</p>
@@ -40,7 +38,12 @@ export default async function HistoryPage({ params }) {
       ) : (
         <div className={historyStyles.root}>
           {normalizedOrders.map((order, index) => (
-            <OrderItem order={order} key={index} locale={locale} />
+            <OrderItem
+              order={order}
+              key={order?.orderNumber ?? order?.order_number ?? index}
+              locale={locale}
+              variant="profile"
+            />
           ))}
         </div>
       )}

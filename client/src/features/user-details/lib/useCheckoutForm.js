@@ -8,7 +8,8 @@ import * as Yup from 'yup';
 
 import { DELIVERY_TYPES } from '../const/delivery';
 
-export const useCheckoutForm = (user) => {
+export const useCheckoutForm = (user, options = {}) => {
+    const { profileSection } = options;
 
     const token = Cookies.get("auth_token");
     const { t } = useI18n();
@@ -36,36 +37,50 @@ export const useCheckoutForm = (user) => {
             city: user?.deliveryCity || '',
             warehouse: user?.deliveryPostOffice || ''
         },
-        validationSchema: Yup.object({
-            firstName: Yup.string().required(t('authorization.validation.required')),
-            lastName: Yup.string().required(t('authorization.validation.required')),
-            email: Yup.string().email(t('validation.invalidEmail')).required(t('authorization.validation.required')),
-            phone: Yup.string()
-                .required(t('authorization.validation.required'))
-                .test("e164-phone", t('authorization.validation.required'), (value) => {
-                    const raw = String(value || "").trim();
-                    const digits = raw.replace(/\D/g, "");
-                    return raw.startsWith("+") && digits.length >= 10;
-                }),
+        validationSchema: (() => {
+            const personalFields = {
+                firstName: Yup.string().required(t('authorization.validation.required')),
+                lastName: Yup.string().required(t('authorization.validation.required')),
+                email: Yup.string().email(t('validation.invalidEmail')).required(t('authorization.validation.required')),
+                phone: Yup.string()
+                    .required(t('authorization.validation.required'))
+                    .test("e164-phone", t('authorization.validation.required'), (value) => {
+                        const raw = String(value || "").trim();
+                        const digits = raw.replace(/\D/g, "");
+                        return raw.startsWith("+") && digits.length >= 10;
+                    }),
+            };
 
-            deliveryType: Yup.string().required(t('authorization.validation.required')),
-            country: Yup.string().when('deliveryType', {
-                is: DELIVERY_TYPES.MEEST_BRANCH,
-                then: () => Yup.string().required(t('authorization.validation.required'))
-            }),
-            area: Yup.string().when('deliveryType', {
-                is: (val) => val && val !== '',
-                then: () => Yup.string().required(t('authorization.validation.required'))
-            }),
-            city: Yup.string().when('area', {
-                is: (val) => val && val !== '',
-                then: () => Yup.string().required(t('authorization.validation.required'))
-            }),
-            warehouse: Yup.string().when('city', {
-                is: (val) => val && val !== '',
-                then: () => Yup.string().required(t('authorization.validation.required'))
-            }),
-        }),
+            const deliveryFields = {
+                deliveryType: Yup.string().required(t('authorization.validation.required')),
+                country: Yup.string().when('deliveryType', {
+                    is: DELIVERY_TYPES.MEEST_BRANCH,
+                    then: () => Yup.string().required(t('authorization.validation.required'))
+                }),
+                area: Yup.string().when('deliveryType', {
+                    is: (val) => val && val !== '',
+                    then: () => Yup.string().required(t('authorization.validation.required'))
+                }),
+                city: Yup.string().when('area', {
+                    is: (val) => val && val !== '',
+                    then: () => Yup.string().required(t('authorization.validation.required'))
+                }),
+                warehouse: Yup.string().when('city', {
+                    is: (val) => val && val !== '',
+                    then: () => Yup.string().required(t('authorization.validation.required'))
+                }),
+            };
+
+            if (profileSection === "personal") {
+                return Yup.object(personalFields);
+            }
+
+            if (profileSection === "delivery") {
+                return Yup.object(deliveryFields);
+            }
+
+            return Yup.object({ ...personalFields, ...deliveryFields });
+        })(),
         onSubmit: async (values) => {
             formik.setStatus(undefined);
             const result = {

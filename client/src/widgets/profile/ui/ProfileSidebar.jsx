@@ -8,9 +8,14 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 
-import { IconOrderHistory, IconPersonalInfo } from "./ProfileSidebarIcons";
-import ProfileSidebarLogo from "./ProfileSidebarLogo";
 import styles from "./ProfileSidebar.module.scss";
+
+const NAV_ITEMS = [
+  { path: "/profile/info", labelKey: "profile.link1" },
+  { path: "/profile/delivery", labelKey: "profile.link4" },
+  { path: "/profile/wishlist", labelKey: "profile.link5" },
+  { path: "/profile/history", labelKey: "profile.link2" },
+];
 
 const ProfileSidebar = () => {
   const { setIsModalOpen } = useModals();
@@ -19,43 +24,38 @@ const ProfileSidebar = () => {
   const params = useParams();
   const locale = params?.locale ?? "ua";
 
-  const isActive = (path) => pathname.includes(path);
+  const isActive = (path) => {
+    const localized = localePath(locale, path);
+    if (path === "/profile/history") {
+      return pathname.includes("/profile/history");
+    }
+    return pathname === localized || pathname.endsWith(path);
+  };
 
   return (
     <aside className={styles.sidebar}>
-      <nav className={styles.nav}>
-        <div className={styles.logoWrap}>
-          <ProfileSidebarLogo className={styles.logo} />
-        </div>
-
-        <Link
-          className={clsx(
-            styles.navItem,
-            isActive("/profile/info") && styles.navItemActive,
-          )}
-          href={localePath(locale, "/profile/info")}
-        >
-          <IconPersonalInfo className={styles.navIcon} />
-          {t("profile.link1")}
-        </Link>
-
-        <Link
-          className={clsx(
-            styles.navItem,
-            isActive("/profile/history") && styles.navItemActive,
-          )}
-          href={localePath(locale, "/profile/history")}
-        >
-          <IconOrderHistory className={styles.navIcon} />
-          {t("profile.link2")}
-        </Link>
+      <nav className={styles.nav} aria-label={t("profile.title-header")}>
+        {NAV_ITEMS.map(({ path, labelKey }) => (
+          <Link
+            key={path}
+            className={clsx(
+              styles.navItem,
+              isActive(path) && styles.navItemActive,
+            )}
+            href={localePath(locale, path)}
+          >
+            {t(labelKey)}
+          </Link>
+        ))}
       </nav>
-      <p
-        className={clsx(styles.navItem, styles.navItemLogout)}
+
+      <button
+        type="button"
+        className={styles.logout}
         onClick={() => setIsModalOpen(MODALS.LOGOUT)}
       >
-        <span className={styles.logoutArrow}>→</span> {t("profile.link3")}
-      </p>
+        {t("profile.link3")}
+      </button>
     </aside>
   );
 };

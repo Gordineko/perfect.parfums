@@ -8,7 +8,7 @@ import React, { useMemo, useState } from "react";
 
 import { formatOrderDate } from "../lib/formatOrderDate";
 
-const OrderItem = ({ order, locale }) => {
+const OrderItem = ({ order, locale, variant = "default" }) => {
   const fallback = "/img/fallback.png";
 
   const { t } = useI18n();
@@ -74,8 +74,13 @@ const OrderItem = ({ order, locale }) => {
     return isExpanded ? items : items.slice(0, 2);
   }, [hasMoreThanTwoItems, isExpanded, items]);
 
+  const orderNumber =
+    order?.orderNumber ?? order?.order_number ?? "";
+
   return (
-    <div className="order">
+    <div
+      className={`order${variant === "profile" ? " order--profile" : ""}`}
+    >
       <div className="order__header">
         <div className="order__header-txt">
           <p>{t("profile.orderNumber", { number: order.orderNumber })}</p>
@@ -143,8 +148,11 @@ const OrderItem = ({ order, locale }) => {
       <div className="order__func">
         <p>{order.totalToPay} ₴</p>
         <button
+          type="button"
           onClick={() =>
-            router.push(localePath(locale, "/profile/history/${order.orderNumber}"))
+            router.push(
+              localePath(locale, `/profile/history/${orderNumber}`),
+            )
           }
         >
           {t("profile.orderDetails")}

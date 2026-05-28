@@ -61,12 +61,13 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
         }
     };
 
-    const spanTabletClass =
-        variant === "profile" ? " form-group--span-tablet" : "";
+    const isProfile = variant === "profile";
+    const formGroupClass = isProfile ? "form-group form-group--no-label" : "form-group";
+    const spanTabletClass = isProfile ? " form-group--span-tablet" : "";
 
     return (
         <>
-            <div className="form-group">
+            <div className={formGroupClass}>
                 <AutoCompleteSelect
                     variant={variant}
                     id="delivery-type-select"
@@ -92,7 +93,7 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
                     ) : null}
 
                     {values.deliveryType === DELIVERY_TYPES.MEEST_BRANCH && (
-                        <div className="form-group">
+                        <div className={formGroupClass}>
                             <AutoCompleteSelect
                                 variant={variant}
                                 id="country-select"
@@ -111,7 +112,7 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
                         </div>
                     )}
 
-                    <div className="form-group">
+                    <div className={formGroupClass}>
                         <AutoCompleteSelect
                             variant={variant}
                             id="area-select" 
@@ -141,7 +142,7 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className={formGroupClass}>
                         <AutoCompleteSelect
                             variant={variant}
                             id="city-select" 
@@ -159,7 +160,7 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
                         />
                     </div>
 
-                    <div className={`form-group${spanTabletClass}`}>
+                    <div className={`${formGroupClass}${spanTabletClass}`}>
                         <AutoCompleteSelect
                             variant={variant}
                             id="warehouse-select" 

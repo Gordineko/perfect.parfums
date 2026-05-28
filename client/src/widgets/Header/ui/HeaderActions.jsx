@@ -66,16 +66,19 @@ const HeaderActions = ({
 
     if (id === "basket") return toggleModal(MODALS.BASKET);
 
-    if (id === "favorite") return router.push(localePath(locale, "/wishlist"));
+    if (id === "favorite") {
+      return router.push(
+        localePath(
+          locale,
+          id_token ? "/profile/wishlist" : "/wishlist",
+        ),
+      );
+    }
 
-    if (id === "profile")
+    if (id === "profile") {
       return id_token
         ? router.push(localePath(locale, "/profile/info"))
         : toggleModal(MODALS.LOGIN);
-
-    if (id === "favorite") {
-      router.push(localePath(locale, "/wishlist"));
-      return;
     }
   };
 
