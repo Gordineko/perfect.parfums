@@ -5,6 +5,9 @@ export const PDP_STUB_VOLUME_OPTIONS_ML = Object.freeze([
 
 export const PDP_STUB_VOLUME_DEFAULT_ML = 10;
 
+/** Поки cart line не містить variationAxes — показувати заглушку об'єму в кошику. */
+export const BASKET_USE_STUB_VOLUME = true;
+
 /** Приклад артикулу з макету, поки API не віддає sku. */
 export const PDP_STUB_ARTICLE_SKU = "0123456";
 
@@ -93,6 +96,16 @@ export function formatStubVolumeLabel(ml, locale = "ua") {
   const n = Number(ml);
   if (!Number.isFinite(n)) return "";
   return locale === "en" ? `${n} ml` : `${n} мл`;
+}
+
+export function resolveBasketVolumeLine(apiLine, locale = "ua") {
+  const line = String(apiLine ?? "").trim();
+  if (line) return line;
+  if (!BASKET_USE_STUB_VOLUME) return "";
+
+  const loc = locale === "en" ? "en" : "ua";
+  const ml = formatStubVolumeLabel(PDP_STUB_VOLUME_DEFAULT_ML, loc);
+  return loc === "en" ? `Volume: ${ml}` : `Об'єм: ${ml}`;
 }
 
 export function isVolumeAxis(axis, locale) {

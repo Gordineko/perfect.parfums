@@ -518,8 +518,8 @@
     "clearButton": "Очистити",
     "emptyText": "Ваш кошик порожній",
     "startShopping": "Розпочати покупки",
-    "total": "Всього:",
-    "checkout": "Оформити замовлення",
+    "total": "Всього до сплати:",
+    "checkout": "Перейти до оформлення",
     "continueShopping": "Продовжити покупки",
     "pricePerUnit": "Ціна за шт."
   },
