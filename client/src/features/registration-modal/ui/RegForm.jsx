@@ -1,5 +1,6 @@
 "use client";
 import { AuthEmailIcon } from "@shared/index";
+import AuthCheckboxMark from "@shared/ui/icons/AuthCheckboxMark";
 import { useI18n } from "@shared/i18n/use-i18n";
 import React, { useState } from "react";
 
@@ -149,12 +150,7 @@ const RegForm = ({ onClose }) => {
                     <div
                         className={`custom-checkbox-box ${formik.values.newsletter ? 'checked' : ''}`}
                     >
-                        {formik.values.newsletter && (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                                <rect width="22" height="22" fill="#FF99D6" />
-                                <path d="M6 11.3333L9.33333 16L16 6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        )}
+                        {formik.values.newsletter ? <AuthCheckboxMark /> : null}
                     </div>
                     <span className="custom-checkbox-text">{t("authorization.newsletter")}</span>
                 </label>
@@ -173,12 +169,7 @@ const RegForm = ({ onClose }) => {
                     <div
                         className={`custom-checkbox-box ${formik.values.terms ? 'checked' : ''}`}
                     >
-                        {formik.values.terms && (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
-                                <rect width="22" height="22" fill="#FF99D6" />
-                                <path d="M6 11.3333L9.33333 16L16 6" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        )}
+                        {formik.values.terms ? <AuthCheckboxMark /> : null}
                     </div>
                     <span className="custom-checkbox-text">
                         {t("authorization.termsPrefix")}{" "}
