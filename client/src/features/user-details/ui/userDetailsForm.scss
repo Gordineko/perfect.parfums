@@ -17,7 +17,6 @@
         margin-bottom: 0;
     }
 
-    // Typography for entered/selected values in form controls
     input,
     select,
     textarea {
@@ -189,7 +188,17 @@
             font-style: normal;
             font-weight: 400;
             line-height: normal;
-            text-transform: capitalize;
+            text-transform: none;
+        }
+
+        .error-text {
+            margin-top: 4px;
+            color: var(--burgundy, #68181f);
+            font-family: var(--font-body), "Lato", sans-serif;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
         }
 
         input,
@@ -202,14 +211,30 @@
             padding: 0 16px;
             border: 1px solid var(--black, #11110f);
             background: var(--white, #fefefa);
+            color: #161330;
             font-family: var(--font-body), "Lato", sans-serif;
-            font-size: 18px;
-            font-weight: 400;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 300;
             line-height: normal;
+            text-transform: none;
 
             @include below-tablet {
                 font-size: 16px;
             }
+        }
+
+        input::placeholder,
+        textarea::placeholder,
+        :global(.react-tel-input .form-control::placeholder) {
+            color: #161330;
+            font-family: var(--font-body), "Lato", sans-serif;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: normal;
+            text-transform: none;
+            opacity: 1;
         }
 
         .user-details__profile-submit {
@@ -765,6 +790,85 @@
         }
     }
 
+    &--order {
+        .user-details__head span {
+            color: #11110f;
+            font-family: var(--font-heading), "Cormorant", serif;
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 130%;
+            text-transform: uppercase;
+        }
+
+        label,
+        .custom-select-label,
+        .user-details__field-label {
+            color: #161330;
+            font-family: var(--font-body), "Lato", sans-serif;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            text-transform: none;
+        }
+
+        input,
+        select,
+        textarea,
+        :global(.react-tel-input .form-control),
+        .custom-select-wrapper :global(.react-select__single-value),
+        .custom-select-wrapper :global(.react-select__placeholder) {
+            color: #161330 !important;
+            font-family: var(--font-body), "Lato", sans-serif !important;
+            font-size: 20px !important;
+            font-style: normal !important;
+            font-weight: 300 !important;
+            line-height: normal !important;
+            text-transform: lowercase;
+        }
+
+        input::placeholder,
+        textarea::placeholder,
+        :global(.react-tel-input .form-control::placeholder) {
+            color: #161330;
+            font-family: var(--font-body), "Lato", sans-serif;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 300;
+            line-height: normal;
+            text-transform: lowercase;
+            opacity: 1;
+        }
+
+        input,
+        select,
+        textarea {
+            border: 1px solid var(--black, #11110f);
+            background: var(--white, #fefefa);
+        }
+
+        :global(.react-tel-input .form-control) {
+            border: 1px solid var(--black, #11110f) !important;
+            background: var(--white, #fefefa) !important;
+        }
+
+        .custom-select-wrapper :global(.react-select__control) {
+            border: 1px solid var(--black, #11110f) !important;
+            background: var(--white, #fefefa) !important;
+        }
+
+        .error-text {
+            margin-top: 4px;
+            color: var(--burgundy, #68181f);
+            font-family: var(--font-body), "Lato", sans-serif;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+    }
+
     &--profile {
         gap: 0;
     }
@@ -775,20 +879,20 @@
         form {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 40px;
             min-width: 0;
             width: 100%;
         }
 
         @include down($bp-desktop-narrow) {
             form {
-                gap: 16px;
+                gap: 40px;
             }
         }
 
         @include down($bp-tablet) {
             form {
-                gap: 12px;
+                gap: 40px;
             }
         }
 
@@ -906,7 +1010,6 @@
         }
     }
 }
-// Кабінет: перекриває legacy-стилі .user-details--profile
 .user-details.user-details--profile.user-details--profile-cabinet {
     .user-details__field-label,
     label,
@@ -917,7 +1020,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: normal;
-        text-transform: capitalize;
+        text-transform: none;
     }
 
     form {
@@ -1003,7 +1106,7 @@
     line-height: 20px !important;
 
     @include down($bp-tablet) {
-        font-size: 14px !important;
+        font-size: 16px !important;
         line-height: 20px !important;
     }
 }
@@ -1017,123 +1120,473 @@
         .react-tel-input .form-control,
         .custom-select-wrapper .react-select__single-value,
         .custom-select-wrapper .react-select__placeholder {
-            font-size: 14px !important;
-            line-height: 20px !important;
+            font-size: 16px !important;
+            line-height: normal !important;
+        }
+    }
+}
+
+@include down($bp-tablet) {
+    .order-page .user-details.user-details--order {
+        .custom-select-wrapper .react-select__single-value,
+        .custom-select-wrapper .react-select__placeholder {
+            font-size: 16px !important;
+            line-height: normal !important;
         }
     }
 }
 .flag-dropdown {
     display: none !important;
 }
-.marg {
-    margin-left: 40px;
-}
 
-@include tablet-only {
-    .user-details {
-        .submit-button {
-            padding: 16px 64px;
-            margin-top: 24px;
+.user-details.user-details--order {
+    .user-details__group {
+        border: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        padding: 0 !important;
+    }
+
+    .user-details__head {
+        margin-bottom: 8px !important;
+    }
+    .user-details__head .num {
+        display: none !important;
+    }
+    .user-details__form-group {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 16px !important;
+        width: 100%;
+
+        @include down($bp-tablet) {
+            grid-template-columns: 1fr !important;
         }
     }
-    .marg {
-        margin-left: 0;
+
+    .user-details__form-group--full {
+        grid-template-columns: 1fr !important;
     }
+
+    .form-group--span-2 {
+        grid-column: 1 / -1;
+    }
+
+    .form-group--ghost {
+        @include down($bp-tablet) {
+            display: none;
+        }
+    }
+
+    .user-details__head span {
+        color: #11110f !important;
+        font-family: var(--font-heading), "Cormorant", serif !important;
+        font-size: 24px !important;
+        font-style: normal !important;
+        font-weight: 600 !important;
+        line-height: 130% !important;
+        text-transform: uppercase !important;
+    }
+
+    label,
+    .custom-select-label,
+    .user-details__field-label {
+        color: #161330 !important;
+        font-family: var(--font-body), "Lato", sans-serif !important;
+        font-size: 12px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: normal !important;
+        text-transform: none !important;
+    }
+
+    input,
+    select,
+    textarea,
+    :global(.react-tel-input .form-control),
+    .custom-select-wrapper :global(.react-select__single-value),
+    .custom-select-wrapper :global(.react-select__placeholder),
+    .custom-select-wrapper :global(.react-select__input-container input) {
+        color: #161330 !important;
+        -webkit-text-fill-color: #161330 !important;
+        font-family: var(--font-body), "Lato", sans-serif !important;
+        font-size: 20px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: normal !important;
+        text-transform: none !important;
+    }
+
+    input::placeholder,
+    textarea::placeholder,
+    :global(.react-tel-input .form-control::placeholder) {
+        color: #161330 !important;
+        -webkit-text-fill-color: #161330 !important;
+        font-family: var(--font-body), "Lato", sans-serif !important;
+        font-size: 20px !important;
+        font-style: normal !important;
+        font-weight: 300 !important;
+        line-height: normal !important;
+        text-transform: none !important;
+        opacity: 1 !important;
+    }
+
+    input:-webkit-autofill,
+    textarea:-webkit-autofill,
+    :global(.react-tel-input .form-control):-webkit-autofill {
+        -webkit-text-fill-color: #161330 !important;
+        box-shadow: 0 0 0px 1000px var(--white, #fefefa) inset !important;
+        font-family: var(--font-body), "Lato", sans-serif !important;
+        font-size: 20px !important;
+        font-weight: 400 !important;
+        text-transform: none !important;
+    }
+
+    input,
+    select,
+    textarea {
+        border: 1px solid #bdb8ae !important;
+        background: var(--white, #fefefa) !important;
+        border-radius: 0 !important;
+        box-sizing: border-box !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    :global(.react-tel-input .form-control) {
+        border: 1px solid #bdb8ae !important;
+        background: var(--white, #fefefa) !important;
+        border-radius: 0 !important;
+        box-sizing: border-box !important;
+        outline: none !important;
+        box-shadow: none !important;
+    }
+
+    .custom-select-wrapper :global(.react-select__control) {
+        border: 1px solid #bdb8ae !important;
+        background: var(--white, #fefefa) !important;
+        height: 53px !important;
+        min-height: 53px !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+    }
+
+    input,
+    select,
+    :global(.react-tel-input .form-control),
+    .custom-select-wrapper :global(.react-select__control) {
+        height: 53px !important;
+        min-height: 53px !important;
+        padding: 0 16px !important;
+    }
+
+    textarea {
+        min-height: 120px !important;
+        padding: 16px !important;
+        resize: vertical;
+    }
+
+    input:hover,
+    select:hover,
+    textarea:hover,
+    :global(.react-tel-input .form-control:hover),
+    .custom-select-wrapper :global(.react-select__control:hover),
+    input:focus,
+    select:focus,
+    textarea:focus,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    :global(.react-tel-input .form-control:focus),
+    :global(.react-tel-input .form-control:focus-visible),
+    .custom-select-wrapper :global(.react-select__control--is-focused),
+    .custom-select-wrapper :global(.react-select__control:focus-within) {
+        border: 1px solid var(--burgundy, #68181f) !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+
+    .custom-select-wrapper :global(.react-select__value-container) {
+        padding: 0 16px !important;
+    }
+
+    .custom-select-wrapper :global(.react-select__indicators) {
+        padding-right: 16px !important;
+    }
+
+    .custom-select-wrapper :global(.react-select__indicator) {
+        padding: 0 !important;
+    }
+
+    .custom-select-wrapper :global(.react-select__input),
+    .custom-select-wrapper :global(.react-select__input-container input) {
+        border: 0 !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+
+    .error-text {
+        color: var(--burgundy, #68181f) !important;
+        font-family: var(--font-body), "Lato", sans-serif !important;
+        font-size: 12px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: normal !important;
+    }
+
+    @include down($bp-tablet) {
+        .user-details__head span {
+            font-size: 20px !important;
+        }
+
+        input,
+        select,
+        textarea,
+        :global(.react-tel-input .form-control),
+        .custom-select-wrapper :global(.react-select__single-value),
+        .custom-select-wrapper :global(.react-select__placeholder),
+        .custom-select-wrapper :global(.react-select__input-container input) {
+            font-size: 16px !important;
+        }
+
+        input::placeholder,
+        textarea::placeholder,
+        :global(.react-tel-input .form-control::placeholder) {
+            font-size: 16px !important;
+        }
+    }
+}
+
+.user-details.user-details--profile-cabinet {
+    input,
+    select,
+    textarea,
+    :global(.react-tel-input .form-control),
+    .custom-select-wrapper :global(.react-select__control) {
+        border: 1px solid #bdb8ae !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+
+    input:hover,
+    select:hover,
+    textarea:hover,
+    :global(.react-tel-input .form-control:hover),
+    .custom-select-wrapper :global(.react-select__control:hover),
+    input:focus,
+    select:focus,
+    textarea:focus,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible,
+    :global(.react-tel-input .form-control:focus),
+    :global(.react-tel-input .form-control:focus-visible),
+    .custom-select-wrapper :global(.react-select__control--is-focused),
+    .custom-select-wrapper :global(.react-select__control:focus-within) {
+        border-color: var(--burgundy, #68181f) !important;
+        box-shadow: none !important;
+        outline: none !important;
+    }
+
+    input,
+    select,
+    textarea,
+    :global(.react-tel-input .form-control),
+    .custom-select-wrapper :global(.react-select__control),
+    .custom-select-wrapper :global(.react-select__single-value),
+    .custom-select-wrapper :global(.react-select__placeholder),
+    .custom-select-wrapper :global(.react-select__input-container input) {
+        color: #161330 !important;
+        -webkit-text-fill-color: #161330 !important;
+        font-family: var(--font-body), "Lato", sans-serif !important;
+        font-size: 20px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: normal !important;
+        text-transform: none !important;
+    }
+
+    :global(.phone-input-field),
+    :global(.phone-input-container input) {
+        color: #161330 !important;
+        -webkit-text-fill-color: #161330 !important;
+        font-family: var(--font-body), "Lato", sans-serif !important;
+        font-size: 20px !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        line-height: normal !important;
+        text-transform: none !important;
+    }
+
+    input::placeholder,
+    textarea::placeholder,
+    :global(.react-tel-input .form-control::placeholder) {
+        color: #161330 !important;
+        font-family: var(--font-body), "Lato", sans-serif !important;
+        font-size: 20px !important;
+        font-style: normal !important;
+        font-weight: 300 !important;
+        line-height: normal !important;
+        text-transform: none !important;
+        opacity: 1 !important;
+    }
+
+    input:-webkit-autofill,
+    textarea:-webkit-autofill,
+    :global(.react-tel-input .form-control):-webkit-autofill {
+        -webkit-text-fill-color: #161330 !important;
+        box-shadow: 0 0 0px 1000px var(--white, #fefefa) inset !important;
+        font-family: var(--font-body), "Lato", sans-serif !important;
+        font-size: 20px !important;
+        font-weight: 400 !important;
+        text-transform: none !important;
+    }
+
+    @include down($bp-tablet) {
+        input,
+        select,
+        textarea,
+        :global(.react-tel-input .form-control),
+        .custom-select-wrapper :global(.react-select__single-value),
+        .custom-select-wrapper :global(.react-select__placeholder),
+        .custom-select-wrapper :global(.react-select__input-container input),
+        :global(.phone-input-field),
+        :global(.phone-input-container input) {
+            font-size: 16px !important;
+        }
+
+        input::placeholder,
+        textarea::placeholder,
+        :global(.react-tel-input .form-control::placeholder) {
+            font-size: 16px !important;
+        }
+    }
+}
+
+.order-page .user-details.user-details--order input,
+.order-page .user-details.user-details--order select,
+.order-page .user-details.user-details--order textarea,
+.order-page .react-tel-input .form-control,
+.order-page .react-select__control,
+.order-page .phone-input-field,
+.order-page .phone-input-container input {
+    border: 1px solid #bdb8ae !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    color: #161330 !important;
+    -webkit-text-fill-color: #161330 !important;
+    font-family: var(--font-body), "Lato", sans-serif !important;
+    font-size: 20px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: normal !important;
+    text-transform: none !important;
+}
+
+.order-page .react-select__single-value,
+.order-page .react-select__placeholder,
+.order-page .react-select__input-container input,
+.order-page .react-select__input {
+    border: 0 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    color: #161330 !important;
+    -webkit-text-fill-color: #161330 !important;
+    font-family: var(--font-body), "Lato", sans-serif !important;
+    font-size: 20px !important;
+    font-style: normal !important;
+    line-height: normal !important;
+    text-transform: none !important;
+}
+
+.order-page .react-select__placeholder {
+    font-weight: 300 !important;
+}
+
+.order-page .react-select__single-value {
+    font-weight: 400 !important;
+}
+
+.order-page .user-details.user-details--order .react-tel-input .form-control {
+    color: #161330 !important;
+    -webkit-text-fill-color: #161330 !important;
+    font-family: var(--font-body), "Lato", sans-serif !important;
+    font-size: 20px !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    line-height: normal !important;
+    text-transform: none !important;
+}
+
+.order-page .user-details.user-details--order .user-details__head span {
+    font-size: 24px !important;
 }
 
 @include down($bp-tablet) {
-    .user-details {
-        .submit-button {
-            padding: 16px 64px;
-            margin-top: 16px;
-            width: 100%;
-            font-size: 14px;
-        }
+    .order-page .user-details.user-details--order .user-details__head span {
+        font-size: 20px !important;
     }
-    .marg {
-        margin-left: 0;
+
+    .order-page .user-details.user-details--order input,
+    .order-page .user-details.user-details--order select,
+    .order-page .user-details.user-details--order textarea,
+    .order-page .react-tel-input .form-control,
+    .order-page .react-select__control,
+    .order-page .react-select__single-value,
+    .order-page .react-select__placeholder,
+    .order-page .react-select__input-container input,
+    .order-page .react-select__input,
+    .order-page .phone-input-field,
+    .order-page .phone-input-container input {
+        font-size: 16px !important;
+        line-height: normal !important;
+    }
+
+    .order-page .user-details.user-details--order input::placeholder,
+    .order-page .user-details.user-details--order textarea::placeholder,
+    .order-page .react-tel-input .form-control::placeholder {
+        font-size: 16px !important;
+        line-height: normal !important;
     }
 }
-.pay {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    min-width: 0;
-    max-width: 100%;
-    &__option {
-        cursor: pointer;
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-        box-sizing: border-box;
-        overflow-wrap: anywhere;
-        word-break: break-word;
-        border-radius: 0;
-        border: 1px solid var(--Main, #FF99D6);
-        background: rgba(255, 153, 214, 0.10);
-        padding: 24px 32px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        transition: 0.3s;
-        &:hover {
-            transition: 0.3s;
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
-        }
-        &.active {
-            background: rgba(255, 153, 214, 0.10);
-        }
-        @include down($bp-tablet) {
-            padding: 16px;
-            gap: 8px;
-        }
-    }
-    .delivery__header {
-        min-width: 0;
-        max-width: 100%;
-    }
-    &__title {
-        display: block;
-        max-width: 100%;
-        overflow-wrap: anywhere;
-        word-break: break-word;
-        color: var(--Text-color-1, #0F172A);
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        @include down($bp-tablet) {
-            color: var(--Dark, #0D0D0D);
-            font-family: var(--font-body);
-            font-size: 18px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: normal;
-        }
-    }
-    &__desc {
-        max-width: 100%;
-        margin: 0;
-        overflow-wrap: anywhere;
-        word-break: break-word;
-        color: var(--Gray, #9CA3AF);
-        font-family: var(--font-body);
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-    }
-    .error-text {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        font-family: $font-secondary;
-        color: red;
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-    }
+
+.order-page .user-details.user-details--order input::placeholder,
+.order-page .user-details.user-details--order textarea::placeholder,
+.order-page .react-tel-input .form-control::placeholder {
+    color: #161330 !important;
+    -webkit-text-fill-color: #161330 !important;
+    font-family: var(--font-body), "Lato", sans-serif !important;
+    font-size: 20px !important;
+    font-style: normal !important;
+    font-weight: 300 !important;
+    line-height: normal !important;
+    text-transform: none !important;
+    opacity: 1 !important;
+}
+
+.order-page .user-details.user-details--order input:hover,
+.order-page .user-details.user-details--order select:hover,
+.order-page .user-details.user-details--order textarea:hover,
+.order-page .user-details.user-details--order input:focus,
+.order-page .user-details.user-details--order select:focus,
+.order-page .user-details.user-details--order textarea:focus,
+.order-page .user-details.user-details--order input:focus-visible,
+.order-page .user-details.user-details--order select:focus-visible,
+.order-page .user-details.user-details--order textarea:focus-visible,
+.order-page .react-tel-input:hover .form-control,
+.order-page .react-tel-input .form-control:hover,
+.order-page .react-tel-input .form-control:focus,
+.order-page .react-tel-input .form-control:focus-visible,
+.order-page .react-select__control:hover,
+.order-page .react-select__control--is-focused,
+.order-page .react-select__control:focus-within {
+    border: 1px solid var(--burgundy, #68181f) !important;
+    box-shadow: none !important;
+    outline: none !important;
 }

@@ -70,6 +70,8 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
             <div className={formGroupClass}>
                 <AutoCompleteSelect
                     variant={variant}
+                    isSearchable={false}
+                    uiVariant={variant === "checkout" ? "order" : "default"}
                     id="delivery-type-select"
                     label={t('checkout.deliveryMethod')}
                     name="deliveryType"
@@ -96,6 +98,8 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
                         <div className={formGroupClass}>
                             <AutoCompleteSelect
                                 variant={variant}
+                                isSearchable={false}
+                                uiVariant={variant === "checkout" ? "order" : "default"}
                                 id="country-select"
                                 label={t('checkout.country')}
                                 name="country"
@@ -115,6 +119,8 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
                     <div className={formGroupClass}>
                         <AutoCompleteSelect
                             variant={variant}
+                            isSearchable={false}
+                            uiVariant={variant === "checkout" ? "order" : "default"}
                             id="area-select" 
                             label={t('checkout.region')} 
                             name="area"
@@ -145,6 +151,8 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
                     <div className={formGroupClass}>
                         <AutoCompleteSelect
                             variant={variant}
+                            isSearchable={false}
+                            uiVariant={variant === "checkout" ? "order" : "default"}
                             id="city-select" 
                             label={t('checkout.city')} 
                             name="city"
@@ -163,6 +171,8 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
                     <div className={`${formGroupClass}${spanTabletClass}`}>
                         <AutoCompleteSelect
                             variant={variant}
+                            isSearchable={false}
+                            uiVariant={variant === "checkout" ? "order" : "default"}
                             id="warehouse-select" 
                             label={t('checkout.branch')} 
                             name="warehouse"

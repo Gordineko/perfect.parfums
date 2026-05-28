@@ -8,6 +8,7 @@ import {
 import { getCurrentUser } from "@shared/api/authServices";
 import PageHeader from "@shared/ui/PageHeader";
 import Footer from "@widgets/Footer";
+import InstagramFeed from "@widgets/instagram-feed";
 import { cookies } from "next/headers";
 
 export default async function OrderPage({ params }) {
@@ -38,7 +39,8 @@ export default async function OrderPage({ params }) {
                         page: t("breadcrumbs.page"),
                     }}
                     breadcrumbsItems={[{ label: orderTitle }]}
-                    title={orderTitle}
+                    showTitle={false}
+                    plainBreadcrumbs
                 />
                 <div className="container">
                     <div className="order__wrapper">
@@ -46,6 +48,8 @@ export default async function OrderPage({ params }) {
                     </div>
                 </div>
             </div>
+
+            <InstagramFeed variant="afterCatalog" />
 
             <section className="products-layout-wrapper products-layout-wrapper--footer">
                 <div className="container products-layout-wrapper__inner" />

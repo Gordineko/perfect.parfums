@@ -3,6 +3,49 @@
 .order-page {
   padding: 0 0 clamp(48px, 8vw, 80px);
 
+  .container {
+    margin-top: 40px;
+  }
+
+  .user-details input,
+  .user-details select,
+  .user-details textarea,
+  :global(.react-tel-input .form-control),
+  :global(.react-select__control) {
+    border: 1px solid #bdb8ae !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+    transition: border-color 0.2s ease;
+  }
+
+  .user-details input:hover,
+  .user-details select:hover,
+  .user-details textarea:hover,
+  .user-details input:focus,
+  .user-details select:focus,
+  .user-details textarea:focus,
+  .user-details input:focus-visible,
+  .user-details select:focus-visible,
+  .user-details textarea:focus-visible,
+  :global(.react-tel-input .form-control:hover),
+  :global(.react-tel-input .form-control:focus),
+  :global(.react-tel-input .form-control:focus-visible),
+  :global(.react-select__control:hover),
+  :global(.react-select__control--is-focused),
+  :global(.react-select__control:focus-within) {
+    border: 1px solid var(--burgundy, #68181f) !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  :global(.react-tel-input .form-control:focus),
+  .user-details input:focus,
+  .user-details select:focus,
+  .user-details textarea:focus {
+    outline: none !important;
+  }
+
   @include down($bp-tablet) {
     padding-bottom: 48px;
   }
