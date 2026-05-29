@@ -156,16 +156,22 @@ export default function AutoCompleteSelect({
     }
 
     if (isOrder) {
+      const borderColor = state.isFocused
+        ? "var(--burgundy, #68181F)"
+        : "#bdb8ae";
+
       return {
         ...base,
         borderRadius: "0px",
         background: "var(--white, #FEFEFA)",
         backdropFilter: "none",
         height: "53px",
-        borderColor: "var(--black, #11110F)",
+        borderWidth: "1px",
+        borderStyle: "solid",
+        borderColor,
         boxShadow: "none",
         "&:hover": {
-          borderColor: "var(--black, #11110F)",
+          borderColor,
           background: "var(--white, #FEFEFA)",
         },
       };

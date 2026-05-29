@@ -1,9 +1,18 @@
 "use client";
 
 import clsx from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import styles from "./Header.module.scss";
+
+function detectNotFoundPage() {
+  if (typeof document === "undefined") return false;
+
+  return (
+    document.documentElement.classList.contains("is-not-found-page") ||
+    Boolean(document.querySelector(".not-found-standalone"))
+  );
+}
 
 export default function HeaderSticky({ lightHeader, navBar }) {
   const lightRef = useRef(null);
@@ -12,6 +21,10 @@ export default function HeaderSticky({ lightHeader, navBar }) {
   const [isPinned, setIsPinned] = useState(false);
   const [navHeight, setNavHeight] = useState(0);
   const [isNotFoundPage, setIsNotFoundPage] = useState(false);
+
+  useLayoutEffect(() => {
+    setIsNotFoundPage(detectNotFoundPage());
+  }, []);
 
   useEffect(() => {
     const sentinel = sentinelRef.current;
@@ -28,9 +41,7 @@ export default function HeaderSticky({ lightHeader, navBar }) {
 
   useEffect(() => {
     const syncNotFound = () => {
-      setIsNotFoundPage(
-        document.documentElement.classList.contains("is-not-found-page"),
-      );
+      setIsNotFoundPage(detectNotFoundPage());
     };
 
     syncNotFound();
@@ -44,6 +55,8 @@ export default function HeaderSticky({ lightHeader, navBar }) {
   }, []);
 
   useEffect(() => {
+    if (isNotFoundPage) return;
+
     const lightEl = lightRef.current;
     const navEl = navRef.current;
     if (!lightEl) return;
@@ -76,32 +89,30 @@ export default function HeaderSticky({ lightHeader, navBar }) {
     return () => observer.disconnect();
   }, [isNotFoundPage, isPinned]);
 
+  if (isNotFoundPage) {
+    return null;
+  }
+
   return (
-    <div
-      className={clsx(styles.siteHeader, isNotFoundPage && styles.siteHeaderNotFound)}
-    >
+    <div className={styles.siteHeader}>
       <div ref={lightRef} className={styles.lightHeader}>
         {lightHeader}
       </div>
 
-      {!isNotFoundPage ? (
-        <>
-          <div ref={sentinelRef} className={styles.sentinel} aria-hidden="true" />
-          {isPinned && navHeight > 0 ? (
-            <div
-              className={styles.navPlaceholder}
-              style={{ height: navHeight }}
-              aria-hidden="true"
-            />
-          ) : null}
-          <div
-            ref={navRef}
-            className={clsx(styles.burgundyBar, isPinned && styles.burgundyPinned)}
-          >
-            {navBar}
-          </div>
-        </>
+      <div ref={sentinelRef} className={styles.sentinel} aria-hidden="true" />
+      {isPinned && navHeight > 0 ? (
+        <div
+          className={styles.navPlaceholder}
+          style={{ height: navHeight }}
+          aria-hidden="true"
+        />
       ) : null}
+      <div
+        ref={navRef}
+        className={clsx(styles.burgundyBar, isPinned && styles.burgundyPinned)}
+      >
+        {navBar}
+      </div>
     </div>
   );
 }

@@ -1,0 +1,136 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+@keyframes order-status-skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@mixin block {
+  border-radius: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(189, 184, 174, 0.28) 0%,
+    rgba(189, 184, 174, 0.48) 50%,
+    rgba(189, 184, 174, 0.28) 100%
+  );
+  background-size: 200% 100%;
+  animation: order-status-skeleton-pulse 1.2s ease-in-out infinite;
+}
+
+.root {
+  pointer-events: none;
+}
+
+.emptyMessage {
+  @include block;
+  width: min(280px, 90%);
+  height: 20px;
+  margin: 0 auto;
+}
+
+.title {
+  @include block;
+  width: min(220px, 75%);
+  height: 31px;
+  margin: 0 auto;
+
+  @include down($bp-tablet) {
+    height: 26px;
+  }
+}
+
+.item {
+  display: flex;
+  gap: 16px;
+
+  @include down($bp-tablet) {
+    gap: 12px;
+  }
+}
+
+.itemImage {
+  @include block;
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+
+  @include down($bp-tablet) {
+    width: 88px;
+    height: 88px;
+  }
+}
+
+.itemBody {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  min-height: 120px;
+
+  @include down($bp-tablet) {
+    min-height: 88px;
+  }
+}
+
+.itemLine {
+  @include block;
+  width: 100%;
+  height: 18px;
+}
+
+.itemLineShort {
+  @include block;
+  width: 55%;
+  height: 12px;
+}
+
+.itemLineMuted {
+  @include block;
+  width: 45%;
+  height: 14px;
+}
+
+.itemCost {
+  @include block;
+  width: 80px;
+  height: 20px;
+  margin-top: auto;
+}
+
+.data {
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+  border-top: 1px solid #bdb8ae;
+
+  @include down($bp-tablet) {
+    padding-top: 24px;
+  }
+}
+
+.totalRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.totalLabel {
+  @include block;
+  width: 140px;
+  height: 28px;
+}
+
+.totalValue {
+  @include block;
+  width: 100px;
+  height: 28px;
+}

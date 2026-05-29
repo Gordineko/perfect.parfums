@@ -32,8 +32,38 @@ body {
   color: var(--color-black);
 }
 
-html.is-not-found-page main {
-  padding-top: var(--header-light-height, 4.25rem);
+html.is-not-found-page main,
+html:has(.not-found-standalone) main {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0 !important;
+  min-height: 100vh;
+  min-height: 100dvh;
+  background: #fffaf0 !important;
+}
+
+html.is-not-found-page .not-found-standalone,
+html:has(.not-found-standalone) .not-found-standalone {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100%;
+}
+
+html.is-not-found-page,
+html:has(.not-found-standalone) {
+  body {
+    background: #fffaf0;
+  }
+
+  .siteHeader {
+    display: none !important;
+  }
+
+  .support-widget {
+    display: none !important;
+  }
 }
 
 main {

@@ -1288,11 +1288,6 @@
         resize: vertical;
     }
 
-    input:hover,
-    select:hover,
-    textarea:hover,
-    :global(.react-tel-input .form-control:hover),
-    .custom-select-wrapper :global(.react-select__control:hover),
     input:focus,
     select:focus,
     textarea:focus,
@@ -1372,11 +1367,6 @@
         outline: none !important;
     }
 
-    input:hover,
-    select:hover,
-    textarea:hover,
-    :global(.react-tel-input .form-control:hover),
-    .custom-select-wrapper :global(.react-select__control:hover),
     input:focus,
     select:focus,
     textarea:focus,
@@ -1570,20 +1560,14 @@
     opacity: 1 !important;
 }
 
-.order-page .user-details.user-details--order input:hover,
-.order-page .user-details.user-details--order select:hover,
-.order-page .user-details.user-details--order textarea:hover,
 .order-page .user-details.user-details--order input:focus,
 .order-page .user-details.user-details--order select:focus,
 .order-page .user-details.user-details--order textarea:focus,
 .order-page .user-details.user-details--order input:focus-visible,
 .order-page .user-details.user-details--order select:focus-visible,
 .order-page .user-details.user-details--order textarea:focus-visible,
-.order-page .react-tel-input:hover .form-control,
-.order-page .react-tel-input .form-control:hover,
 .order-page .react-tel-input .form-control:focus,
 .order-page .react-tel-input .form-control:focus-visible,
-.order-page .react-select__control:hover,
 .order-page .react-select__control--is-focused,
 .order-page .react-select__control:focus-within {
     border: 1px solid var(--burgundy, #68181f) !important;
