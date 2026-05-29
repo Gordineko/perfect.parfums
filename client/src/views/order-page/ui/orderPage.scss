@@ -19,19 +19,14 @@
     transition: border-color 0.2s ease;
   }
 
-  .user-details input:hover,
-  .user-details select:hover,
-  .user-details textarea:hover,
   .user-details input:focus,
   .user-details select:focus,
   .user-details textarea:focus,
   .user-details input:focus-visible,
   .user-details select:focus-visible,
   .user-details textarea:focus-visible,
-  :global(.react-tel-input .form-control:hover),
   :global(.react-tel-input .form-control:focus),
   :global(.react-tel-input .form-control:focus-visible),
-  :global(.react-select__control:hover),
   :global(.react-select__control--is-focused),
   :global(.react-select__control:focus-within) {
     border: 1px solid var(--burgundy, #68181f) !important;

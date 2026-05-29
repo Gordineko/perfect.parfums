@@ -11,6 +11,8 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 
+import OrderStatusSkeleton from './OrderStatusSkeleton';
+
 const OrderStatus = ({ formik }) => {
     const params = useParams();
     const locale = params?.locale ?? "ua";
@@ -26,6 +28,13 @@ const OrderStatus = ({ formik }) => {
     const { t } = useI18n()
     const formatPriceNbsp = (value) =>
       String(formatPrice(value)).replace(/\s/g, "\u00A0");
+
+    const isCartLoading = cart.status === "loading" || cart.status === "idle";
+    const skeletonItemCount = cart.items?.length ?? 0;
+
+    if (isCartLoading) {
+        return <OrderStatusSkeleton itemCount={skeletonItemCount} />;
+    }
 
     return (
         <div className='order__status'>

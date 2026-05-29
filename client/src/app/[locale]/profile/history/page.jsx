@@ -8,6 +8,8 @@ import pageStyles from "@widgets/profile/ui/ProfilePage.module.scss";
 import { cookies } from "next/headers";
 import Link from "next/link";
 
+import ProfileOrdersCountHint from "@widgets/profile/ui/ProfileOrdersCountHint";
+
 import historyStyles from "./ProfileHistory.module.scss";
 
 export default async function HistoryPage({ params }) {
@@ -23,6 +25,7 @@ export default async function HistoryPage({ params }) {
 
   return (
     <div className={pageStyles.page}>
+      <ProfileOrdersCountHint count={normalizedOrders.length} />
       <h2 className={pageStyles.sectionTitle}>{t("profile.title-history")}</h2>
 
       {normalizedOrders.length === 0 ? (

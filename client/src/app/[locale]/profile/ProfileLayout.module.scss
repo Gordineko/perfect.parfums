@@ -14,19 +14,14 @@
     outline: none !important;
   }
 
-  input:hover,
-  select:hover,
-  textarea:hover,
   input:focus,
   select:focus,
   textarea:focus,
   input:focus-visible,
   select:focus-visible,
   textarea:focus-visible,
-  :global(.react-tel-input .form-control:hover),
   :global(.react-tel-input .form-control:focus),
   :global(.react-tel-input .form-control:focus-visible),
-  :global(.react-select__control:hover),
   :global(.react-select__control--is-focused),
   :global(.react-select__control:focus-within) {
     border-color: var(--burgundy, #68181f) !important;
