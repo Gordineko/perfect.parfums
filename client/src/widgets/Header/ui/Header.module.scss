@@ -473,54 +473,6 @@
   }
 }
 
-.siteHeaderNotFound {
-  .lightHeader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 101;
-    box-shadow: 0 0.25rem 1rem color-mix(in srgb, var(--color-black) 8%, transparent);
-  }
-
-  .burgundyBar,
-  .sentinel,
-  .navPlaceholder {
-    display: none;
-  }
-
-  .backLink {
-    display: inline-flex;
-    align-items: center;
-  }
-
-  .rowTop,
-  .topNav,
-  .mainRowTablet,
-  .mainRowDesktop {
-    display: none;
-  }
-
-  .mainInner {
-    padding-block: 12px;
-  }
-
-  .mainRowMobile {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .mainRowMobile > .mobileMenuButton,
-  .mainRowMobile .toolbarMobileRight {
-    display: none;
-  }
-
-  .mainRowMobile .logoTagline {
-    display: none;
-  }
-}
-
 @include down($bp-desktop) {
   .burgundyBar,
   .sentinel,
@@ -792,5 +744,12 @@
       min-width: 8.5rem;
       max-width: min(100%, 22rem);
     }
+  }
+}
+
+:global(html:has(.not-found-standalone)),
+:global(html.is-not-found-page) {
+  .siteHeader {
+    display: none !important;
   }
 }

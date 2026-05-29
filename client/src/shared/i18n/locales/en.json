@@ -797,10 +797,8 @@
   },
   "notFound": {
     "back": "Go back",
-    "eyebrow": "Paths diverged",
-    "title": "It seems the thread has broken...",
-    "description": "This path leads into the unknown. Even the finest artisans need a new spool of thread. Let us return to where order and comfort reign in our atelier.",
-    "ctaHome": "Home",
-    "ctaCatalog": "View catalog"
+    "title": "Page not found",
+    "description": "Sorry, the page you are looking for no longer exists or has been moved. Let us take you back to the world of exquisite fragrances.",
+    "ctaHome": "Back to home"
   }
 }
