@@ -1,32 +1,28 @@
-import { useId } from "react";
-
-const Facebook = () => {
-  const clipId = useId();
-
-  return (
-    <svg
-      width="40"
-      height="40"
-      viewBox="0 0 40 40"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden
-      focusable="false"
-    >
-      <g clipPath={`url(#${clipId})`}>
-        <circle cx="30" cy="30" r="30" fill="currentColor" />
-        <path
-          d="M20 0C8.95312 0 0 8.95312 0 20C0 31.0469 8.95312 40 20 40C31.0469 40 40 31.0469 40 20C40 8.95312 31.0469 0 20 0ZM24.4141 16.6094L24.1875 19.6016H21.1172V29.9922H17.2422V19.6016H15.1719V16.6094H17.2422V14.6016C17.2422 13.7187 17.2656 12.3516 17.9062 11.5C18.5859 10.6016 19.5156 9.99219 21.1172 9.99219C23.7266 9.99219 24.8203 10.3672 24.8203 10.3672L24.3047 13.4297C24.3047 13.4297 23.4453 13.1797 22.6406 13.1797C21.8359 13.1797 21.1172 13.4688 21.1172 14.2734V16.6094H24.4141Z"
-          fill="var(--color-nude)"
-        />
-      </g>
-      <defs>
-        <clipPath id={clipId}>
-          <rect width="40" height="40" fill="white" />
-        </clipPath>
-      </defs>
-    </svg>
-  );
-};
+const Facebook = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="40"
+    height="40"
+    viewBox="0 0 40 40"
+    fill="none"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <rect width="40" height="40" rx="20" fill="#FEFEFA" />
+    <rect
+      x="0.5"
+      y="0.5"
+      width="39"
+      height="39"
+      rx="19.5"
+      stroke="#1A1A1A"
+      strokeOpacity="0.08"
+    />
+    <path
+      d="M20 12C15.5813 12 12 15.5813 12 20C12 24.4187 15.5813 28 20 28C24.4187 28 28 24.4187 28 20C28 15.5813 24.4187 12 20 12ZM21.7656 18.6438L21.675 19.8406H20.4469V23.9969H18.8969V19.8406H18.0687V18.6438H18.8969V17.8406C18.8969 17.4875 18.9062 16.9406 19.1625 16.6C19.4344 16.2406 19.8062 15.9969 20.4469 15.9969C21.4906 15.9969 21.9281 16.1469 21.9281 16.1469L21.7219 17.3719C21.7219 17.3719 21.3781 17.2719 21.0562 17.2719C20.7344 17.2719 20.4469 17.3875 20.4469 17.7094V18.6438H21.7656Z"
+      fill="currentColor"
+    />
+  </svg>
+);
 
 export default Facebook;

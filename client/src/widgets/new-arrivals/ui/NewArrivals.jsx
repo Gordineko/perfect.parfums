@@ -2,11 +2,11 @@
 
 import "swiper/css";
 
-import ProductItem from "@entities/product";
 import { MOCK_PRODUCT_CARDS } from "@entities/product/model/mockProductCards";
-import { BREAKPOINTS, CarouselNavArrow, useI18n } from "@shared";
-import { useId, useMemo, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { useI18n } from "@shared";
+import HomeProductCarousel from "@widgets/bestsellers/ui/HomeProductCarousel";
+import ProductCarouselSkeleton from "@widgets/bestsellers/ui/ProductCarouselSkeleton";
+import { useId, useMemo } from "react";
 
 import styles from "../../bestsellers/ui/Bestsellers.module.scss";
 
@@ -21,15 +21,6 @@ export default function NewArrivals({
 }) {
   const sectionId = useId();
   const { t } = useI18n();
-
-  const [swiper, setSwiper] = useState(null);
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
-
-  const syncNavState = (instance) => {
-    setAtStart(instance.isBeginning);
-    setAtEnd(instance.isEnd);
-  };
 
   const sliderItems = useMemo(() => {
     if (useMockProducts) {
@@ -63,10 +54,8 @@ export default function NewArrivals({
       >
         <div className={`ds-container ${styles.inner}`}>
           <div className={`${styles.skeleton} ${styles.skeletonTitle}`} />
-          <div className={styles.skeletonCarousel}>
-            <div className={`${styles.skeleton} ${styles.skeletonCard}`} />
-            <div className={`${styles.skeleton} ${styles.skeletonCard}`} />
-            <div className={`${styles.skeleton} ${styles.skeletonCard}`} />
+          <div className={styles.carouselShell}>
+            <ProductCarouselSkeleton />
           </div>
         </div>
       </section>
@@ -108,70 +97,7 @@ export default function NewArrivals({
           {t("catalog.newArrivalsTitle")}
         </h2>
 
-        <div className={styles.carouselShell}>
-          <button
-            type="button"
-            className={`${styles.navButton} ${styles.navButtonPrev}`}
-            onClick={() => swiper?.slidePrev()}
-            disabled={atStart}
-            aria-label={t("common.back")}
-          >
-            <CarouselNavArrow direction="prev" />
-          </button>
-
-          <Swiper
-            className={styles.carousel}
-            allowTouchMove
-            simulateTouch
-            touchRatio={1}
-            grabCursor
-            speed={650}
-            slidesPerView={2}
-            spaceBetween={8}
-            onSwiper={(instance) => {
-              setSwiper(instance);
-              syncNavState(instance);
-            }}
-            onSlideChange={syncNavState}
-            onReachBeginning={() => setAtStart(true)}
-            onReachEnd={() => setAtEnd(true)}
-            onFromEdge={(instance) => {
-              setAtStart(instance.isBeginning);
-              setAtEnd(instance.isEnd);
-            }}
-            breakpoints={{
-              [BREAKPOINTS.tablet]: {
-                slidesPerView: 3,
-                spaceBetween: 16,
-              },
-              [BREAKPOINTS.desktop]: {
-                slidesPerView: 4,
-                spaceBetween: 24,
-              },
-            }}
-          >
-            {sliderItems.map((item, index) => (
-              <SwiperSlide key={`${item._id}-${index}`}>
-                <div className={styles.slide}>
-                  <ProductItem
-                    product={item}
-                    showDiscount={false}
-                  />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-
-          <button
-            type="button"
-            className={`${styles.navButton} ${styles.navButtonNext}`}
-            onClick={() => swiper?.slideNext()}
-            disabled={atEnd}
-            aria-label={t("common.next")}
-          >
-            <CarouselNavArrow direction="next" />
-          </button>
-        </div>
+        <HomeProductCarousel items={sliderItems} />
       </div>
     </section>
   );

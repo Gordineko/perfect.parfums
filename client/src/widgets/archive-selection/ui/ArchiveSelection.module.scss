@@ -123,6 +123,10 @@
     padding-bottom: 16px;
     padding-inline: 36px;
 
+    @include below-tablet {
+      padding-inline: 0;
+    }
+
     @include tablet-only {
       padding-inline: 44px;
     }
@@ -145,6 +149,10 @@
     cursor: pointer;
     line-height: 0;
     transform: translateY(-50%);
+
+    @include below-tablet {
+      display: none;
+    }
 
     svg {
       display: block;
