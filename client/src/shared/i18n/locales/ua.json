@@ -218,7 +218,15 @@
     "prof": "Особистий кабінет",
     "order": "Оформлення замовлення",
     "cooperation": "Співпраця",
+    "blog": "Блог",
     "product": "Товар"
+  },
+  "blogPage": {
+    "empty": "Статей поки немає.",
+    "showMore": "Показати ще {count} статей"
+  },
+  "blogArticle": {
+    "readAlso": "Читайте також"
   },
   "delivery": {
     "novaPoshtaAreasErrorMessage": "Не вдалося завантажити області Нової Пошти. Спробуйте ще раз пізніше.",
