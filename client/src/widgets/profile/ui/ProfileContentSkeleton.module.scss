@@ -1,0 +1,277 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+@keyframes profile-skeleton-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@mixin block {
+  border-radius: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(189, 184, 174, 0.28) 0%,
+    rgba(189, 184, 174, 0.48) 50%,
+    rgba(189, 184, 174, 0.28) 100%
+  );
+  background-size: 200% 100%;
+  animation: profile-skeleton-pulse 1.2s ease-in-out infinite;
+}
+
+.root {
+  pointer-events: none;
+}
+
+.title {
+  @include block;
+  width: min(280px, 70%);
+  height: 36px;
+  margin: 0;
+
+  @include below-tablet {
+    width: min(220px, 80%);
+    height: 28px;
+    margin-inline: auto;
+  }
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  width: 100%;
+
+  @include down($bp-tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.fieldLabel {
+  @include block;
+  width: 72px;
+  height: 12px;
+}
+
+.fieldInput {
+  @include block;
+  width: 100%;
+  height: 53px;
+  border: 1px solid rgba(189, 184, 174, 0.45);
+  box-sizing: border-box;
+  background-color: var(--white, #fefefa);
+}
+
+.submit {
+  @include block;
+  width: min(320px, 100%);
+  height: 54px;
+  margin-top: 55px;
+
+  @include below-tablet {
+    margin-top: 24px;
+    width: 100%;
+  }
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  width: 100%;
+  min-width: 0;
+}
+
+.emptyMessage {
+  @include block;
+  width: min(360px, 100%);
+  height: 23px;
+}
+
+.emptyAction {
+  @include block;
+  width: min(280px, 100%);
+  height: 54px;
+
+  @include below-tablet {
+    width: 100%;
+  }
+}
+
+.orders {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.orderCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  border: 1px solid #bdb8ae;
+  background: var(--white, #fefefa);
+  box-sizing: border-box;
+
+  @include down($bp-tablet) {
+    padding: 16px;
+  }
+}
+
+.orderHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #bdb8ae;
+}
+
+.orderTitle {
+  @include block;
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 280px;
+  height: 28px;
+}
+
+.orderStatus {
+  @include block;
+  flex-shrink: 0;
+  width: 100px;
+  height: 32px;
+}
+
+.orderLine {
+  @include block;
+  width: 100%;
+  height: 16px;
+}
+
+.orderLineShort {
+  @include block;
+  width: 55%;
+  height: 16px;
+}
+
+.orderAction {
+  @include block;
+  width: 160px;
+  height: 20px;
+}
+
+.wishlistGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 16px;
+  width: 100%;
+
+  @include up($bp-tablet) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  @include up($bp-desktop) {
+    gap: 32px 24px;
+  }
+}
+
+.productCard {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.productMedia {
+  @include block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.productLine {
+  @include block;
+  width: 100%;
+  height: 14px;
+}
+
+.productLineShort {
+  @include block;
+  width: 65%;
+  height: 14px;
+}
+
+.productLinePrice {
+  @include block;
+  width: 40%;
+  height: 18px;
+}
+
+.orderDetailCards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.detailCard {
+  padding: 24px;
+  border: 1px solid #bdb8ae;
+  background: var(--white, #fefefa);
+  box-sizing: border-box;
+
+  @include down($bp-tablet) {
+    padding: 16px;
+  }
+}
+
+.detailCardTitle {
+  @include block;
+  width: min(240px, 80%);
+  height: 28px;
+  margin-bottom: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(189, 184, 174, 0.45);
+  box-sizing: content-box;
+}
+
+.detailRows {
+  display: grid;
+  grid-template-columns: minmax(100px, 180px) minmax(0, 1fr);
+  gap: 12px 24px;
+
+  @include down($bp-tablet) {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
+
+.detailRow {
+  display: contents;
+}
+
+.detailRowLabel {
+  @include block;
+  width: 100%;
+  max-width: 140px;
+  height: 12px;
+}
+
+.detailRowValue {
+  @include block;
+  width: 100%;
+  height: 16px;
+}

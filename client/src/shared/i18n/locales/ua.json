@@ -792,8 +792,11 @@
     "sourceSelf": "Знайшли самостійно",
     "emailHint": "Відповідаємо протягом 1 години",
     "phoneHint": "Пн-Пт, з 9:00 до 19:00",
-    "chipEmail": "Email",
-    "chipPhone": "Телефон"
+    "email": "perfect.parfums_support@gmail.com",
+    "phone": "+38 (067) 967 01 63",
+    "chipEmail": "EMAIL",
+    "chipPhone": "PHONE",
+    "socialHandle": "@perfect.parfums"
   },
   "notFound": {
     "back": "Повернутися",
