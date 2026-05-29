@@ -1,6 +1,8 @@
 @use "../../../shared/ui/styles/variables.scss" as *;
 
 .root {
+  position: relative;
+  isolation: isolate;
   padding-block-start: var(--space-section-y);
   padding-block-end: 0;
 
@@ -57,13 +59,27 @@ $card-shadow-spread: 16px;
   padding-inline: $nav-carousel-inset-mobile;
   padding-bottom: $card-shadow-spread;
 
+  @include below-tablet {
+    padding-inline: 0;
+  }
+
   @include tablet-only {
     padding-inline: $nav-carousel-inset-tablet;
   }
 
-  @media (min-width: var(--bp-desktop)) {
+  @include desktop-only {
     padding-inline: $nav-carousel-inset;
   }
+}
+
+.carouselInitHidden {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: -1;
 }
 
 .navButton {
@@ -79,6 +95,10 @@ $card-shadow-spread: 16px;
   cursor: pointer;
   line-height: 0;
   transform: translateY(-50%);
+
+  @include below-tablet {
+    display: none;
+  }
 
   svg {
     display: block;
@@ -154,31 +174,166 @@ $card-shadow-spread: 16px;
 }
 
 .loading {
-  .skeleton {
-    border-radius: 4px;
-    background: rgba(153, 153, 153, 0.5);
-    animation: bestsellers-skeleton 1.1s ease-in-out infinite;
-  }
-
   .skeletonTitle {
     width: min(280px, 70%);
     height: 28px;
     margin: 0 auto 2.5rem;
+
+    @include below-tablet {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.skeleton {
+  border-radius: 4px;
+  background: rgba(153, 153, 153, 0.5);
+  animation: bestsellers-skeleton 1.1s ease-in-out infinite;
+}
+
+.skeletonCarousel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+  padding-bottom: $card-shadow-spread;
+  box-sizing: border-box;
+
+  @include tablet-only {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
   }
 
-  .skeletonCarousel {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  @include desktop-only {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 24px;
+  }
 
-    @media (max-width: var(--bp-below-tablet-max)) {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+  .skeletonCard:nth-child(3),
+  .skeletonCard:nth-child(4) {
+    display: none;
+  }
+
+  @include tablet-only {
+    .skeletonCard:nth-child(3) {
+      display: flex;
     }
   }
 
-  .skeletonCard {
-    min-height: 320px;
-    border-radius: 8px;
+  @include desktop-only {
+    .skeletonCard:nth-child(3),
+    .skeletonCard:nth-child(4) {
+      display: flex;
+    }
+  }
+}
+
+.skeletonCard {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--color-white, #fefefa);
+}
+
+.skeletonCardMedia {
+  width: 100%;
+  max-height: 366px;
+  aspect-ratio: 484 / 635;
+  border-radius: 0;
+}
+
+.skeletonCardStars {
+  width: 88px;
+  height: 20px;
+  margin: 16px auto 0;
+  border-radius: 2px;
+}
+
+.skeletonCardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 8px 16px;
+}
+
+.skeletonLine {
+  height: 18px;
+  width: 100%;
+  border-radius: 2px;
+}
+
+.skeletonLinePrice {
+  width: 45%;
+  height: 22px;
+}
+
+.skeletonVolume {
+  height: 44px;
+  width: 100%;
+  border-radius: 0;
+}
+
+.skeletonButton {
+  height: 48px;
+  width: 100%;
+  border-radius: 0;
+}
+
+@include tablet-only {
+  .skeletonCardStars {
+    width: 76px;
+    height: 17px;
+    margin-top: 14px;
+  }
+
+  .skeletonCardBody {
+    gap: 10px;
+    padding: 12px 4px;
+  }
+
+  .skeletonLine {
+    height: 16px;
+  }
+
+  .skeletonLinePrice {
+    height: 18px;
+  }
+
+  .skeletonVolume {
+    height: 40px;
+  }
+
+  .skeletonButton {
+    height: 44px;
+  }
+}
+
+@include below-tablet {
+  .skeletonCardStars {
+    width: 70px;
+    height: 14px;
+    margin-top: 12px;
+  }
+
+  .skeletonCardBody {
+    gap: 10px;
+    padding: 12px 4px;
+  }
+
+  .skeletonLine {
+    height: 14px;
+  }
+
+  .skeletonLinePrice {
+    height: 16px;
+  }
+
+  .skeletonVolume {
+    height: 38px;
+  }
+
+  .skeletonButton {
+    height: 40px;
   }
 }
 

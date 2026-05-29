@@ -1,13 +1,10 @@
 "use client";
 
-import { useLanguageSwitcher } from "@features/language-switcher/model/useLanguageSwitcher";
 import MainNav, {
   AccountIcon,
   ArrowMoreIcon,
   BurgerMenuCatalog,
-  CloseBtn,
   FavoriteProductIcon,
-  LanguageSwitcher,
 } from "@shared";
 import { localePath } from "@shared/lib/localePath";
 import { MODALS } from "@shared/config/modals";
@@ -15,9 +12,13 @@ import { useI18n } from "@shared/i18n/use-i18n";
 import SocialLinks from "@shared/ui/SocialLinks";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import BurgerMenuCatalogTree from "./BurgerMenuCatalogTree";
+import BurgerMenuCloseIcon from "./BurgerMenuCloseIcon";
+
+const BURGER_CLOSE_MS = 1000;
 
 const BurgerMenu = ({
   categories,
@@ -25,47 +26,69 @@ const BurgerMenu = ({
   setIsModalOpen,
   navItems,
   burgerNavItems,
-  locale
+  locale,
 }) => {
-  const LANGS = [
-    {
-      locales: "ua",
-      labelKey: "language.ukrainian",
-      code: "UA",
-      index: 1
-
-    },
-    {
-      locales: "en",
-      labelKey: "language.english",
-      code: "EN",
-      index: 2
-    },
-  ];
   const { t } = useI18n();
-  const { currentLocale, isOpen, onSelect } =
-    useLanguageSwitcher();
+  const pathname = usePathname();
   const isOpenModal = isModalOpen === MODALS.BURGER;
-  const [isCatalogOpen, setIsCatalogOpen] =
-    useState(false);
+  const [isCatalogOpen, setIsCatalogOpen] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+  const closeTimerRef = useRef(null);
+  const pathnameRef = useRef(pathname);
+
+  const closeMenu = useCallback(() => {
+    setIsCatalogOpen(false);
+    setIsModalOpen(null);
+
+    if (isOpenModal) {
+      setIsClosing(true);
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = setTimeout(() => {
+        setIsClosing(false);
+      }, BURGER_CLOSE_MS);
+    }
+  }, [isOpenModal, setIsModalOpen]);
+
+  useEffect(() => {
+    return () => clearTimeout(closeTimerRef.current);
+  }, []);
+
+  useEffect(() => {
+    if (pathnameRef.current !== pathname && isOpenModal) {
+      closeMenu();
+    }
+    pathnameRef.current = pathname;
+  }, [pathname, isOpenModal, closeMenu]);
+
+  useEffect(() => {
+    if (isOpenModal) {
+      setIsClosing(false);
+      clearTimeout(closeTimerRef.current);
+    }
+  }, [isOpenModal]);
+
+  const isMenuVisible = isOpenModal || isClosing;
+
   return (
     <>
-      {isOpenModal && (
+      {isMenuVisible ? (
         <div
-          className="burger-menu__overlay"
-          onClick={() => setIsModalOpen(null)}
+          className={`burger-menu__overlay ${isOpenModal ? "" : "is-fading"}`}
+          onClick={closeMenu}
+          aria-hidden={!isOpenModal}
         />
-      )}
+      ) : null}
 
       <div
         className={`burger-menu ${isOpenModal ? "open" : ""}`}
+        aria-hidden={!isMenuVisible}
       >
         <div className="burger-menu__header">
           <Link
             href={localePath(locale)}
             className="burger-menu__logo-link"
             aria-label={t("aria.homeLogo")}
-            onClick={() => setIsModalOpen(null)}
+            onClick={closeMenu}
           >
             <Image
               src="/img/perfect-parfums-logo.svg"
@@ -80,10 +103,10 @@ const BurgerMenu = ({
           <button
             type="button"
             className="burger-menu__close"
-            onClick={() => setIsModalOpen(null)}
+            onClick={closeMenu}
             aria-label={t("aria.closeMenu")}
           >
-            <CloseBtn size={12} color="#1A1A1A" />
+            <BurgerMenuCloseIcon />
           </button>
         </div>
 
@@ -91,9 +114,7 @@ const BurgerMenu = ({
           <button
             type="button"
             className={`burger-menu-catalog ${isCatalogOpen ? "is-open" : ""}`}
-            onClick={() =>
-              setIsCatalogOpen((v) => !v)
-            }
+            onClick={() => setIsCatalogOpen((v) => !v)}
             aria-expanded={isCatalogOpen}
           >
             <div>
@@ -108,46 +129,21 @@ const BurgerMenu = ({
             </span>
           </button>
 
-          {isCatalogOpen && (
+          {isCatalogOpen ? (
             <div className="burger-menu-catalog__dropdown">
               <BurgerMenuCatalogTree
                 locale={locale}
                 roots={categories?.items ?? []}
-                onNavigate={() => {
-                  setIsCatalogOpen(false);
-                  setIsModalOpen(null);
-                }}
+                onNavigate={closeMenu}
               />
             </div>
-          )}
+          ) : null}
 
           <div className="burger-menu-catalog__dropdown">
-            <MainNav navItems={burgerNavItems ?? navItems} />
-          </div>
-
-
-          <div className="lang-dropdown">
-            <LanguageSwitcher />
-
-            <div className="lang-dropdown__content">
-              <h3 className="lang-dropdown__title">
-                {t("navigation.burger.chooseLanguage")}
-              </h3>
-
-              <ul className="lang-dropdown__list">
-                {LANGS.map(
-                  ({ locales, labelKey, code, Icon, index }) => (
-
-                    <li key={index} onClick={() => onSelect(locales)} className={locales !== locale ? "lang-dropdown__item" : "lang-dropdown__item active"}>
-                      <p>{code}</p>
-                    </li>
-
-
-                  ),
-                )}
-              </ul>
-
-            </div>
+            <MainNav
+              navItems={burgerNavItems ?? navItems}
+              onNavigate={closeMenu}
+            />
           </div>
 
           <div className="account-user">
@@ -199,9 +195,9 @@ const BurgerMenu = ({
 
               <a
                 className="burger-menu-contact__link"
-                href="mailto:maloehelp@gmail.com"
+                href="mailto:perfect.parfums@gmail.com"
               >
-                maloehelp@gmail.com
+                perfect.parfums@gmail.com
               </a>
             </div>
 

@@ -16,7 +16,12 @@ const MainNav = ({
   categories,
   catalogTreeRoots,
   catalogDropdown,
+  onNavigate,
 }) => {
+  const handleNavigate = useCallback(() => {
+    onNavigate?.();
+  }, [onNavigate]);
+
   if (categories) {
     const limited = (categories.items ?? []).slice(0, 3);
     return (
@@ -29,6 +34,7 @@ const MainNav = ({
             <Link
               href={categoryTreeItemHref(locale, item)}
               className="main-nav__button"
+              onClick={handleNavigate}
             >
               <p className="main-nav__text">
                 {item?.title?.[locale] ??
@@ -79,9 +85,10 @@ const MainNav = ({
       if (!target || typeof target.closest !== "function") return;
       if (target.closest("a")) {
         closeCatalog();
+        onNavigate?.();
       }
     },
-    [closeCatalog],
+    [closeCatalog, onNavigate],
   );
 
   return (
@@ -125,6 +132,7 @@ const MainNav = ({
                           <Link
                             href={categoryTreeItemHref(locale, cat)}
                             className="main-nav__dropdown-link"
+                            onClick={handleNavigate}
                           >
                             {cat?.title?.[locale] ??
                               cat?.title?.ua ??
@@ -143,7 +151,11 @@ const MainNav = ({
 
         return (
           <li key={item.id} className="main-nav__item">
-            <Link href={item.href} className="main-nav__button">
+            <Link
+              href={item.href}
+              className="main-nav__button"
+              onClick={handleNavigate}
+            >
               <p className="main-nav__text">{item.label}</p>
             </Link>
           </li>

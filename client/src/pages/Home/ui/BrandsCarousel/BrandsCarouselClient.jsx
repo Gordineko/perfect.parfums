@@ -2,6 +2,8 @@
 
 import "swiper/css";
 
+import { BREAKPOINTS, MQ } from "@shared";
+import { useEffect, useState } from "react";
 import { FreeMode } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -22,9 +24,41 @@ function BrandLogo({ brand }) {
   );
 }
 
-export default function BrandsCarouselClient({ brands }) {
+function BrandsRow({ brands, className, ...rest }) {
   return (
-    <section className={styles.brandsCarousel} aria-labelledby="brands-carousel-title">
+    <div className={className} {...rest}>
+      {brands.map((brand) => (
+        <div key={brand.id} className={styles.brandsCarousel__item}>
+          <BrandLogo brand={brand} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default function BrandsCarouselClient({ brands }) {
+  const [isMounted, setIsMounted] = useState(false);
+  const [isBelowDesktop, setIsBelowDesktop] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+
+    const mediaQuery = window.matchMedia(MQ.belowDesktop);
+    const syncViewport = () => setIsBelowDesktop(mediaQuery.matches);
+
+    syncViewport();
+    mediaQuery.addEventListener("change", syncViewport);
+
+    return () => mediaQuery.removeEventListener("change", syncViewport);
+  }, []);
+
+  const showCarousel = isMounted && isBelowDesktop;
+
+  return (
+    <section
+      className={styles.brandsCarousel}
+      aria-labelledby="brands-carousel-title"
+    >
       <div className="container">
         <h2
           className={`${styles.brandsCarousel__title} t-h2`}
@@ -42,35 +76,46 @@ export default function BrandsCarouselClient({ brands }) {
         </ul>
 
         <div className={styles.brandsCarousel__carousel}>
-          <Swiper
-            className={styles.brandsCarousel__swiper}
-            modules={[FreeMode]}
-            slidesPerView="auto"
-            spaceBetween={24}
-            freeMode={{
-              enabled: true,
-              momentum: true,
-              momentumRatio: 0.35,
-            }}
-            grabCursor
-            touchEventsTarget="container"
-            breakpoints={{
-              768: {
-                spaceBetween: 48,
-              },
-            }}
-          >
-            {brands.map((brand) => (
-              <SwiperSlide
-                key={brand.id}
-                className={styles.brandsCarousel__slide}
-              >
-                <div className={styles.brandsCarousel__item}>
-                  <BrandLogo brand={brand} />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          {showCarousel ? (
+            <Swiper
+              className={styles.brandsCarousel__swiper}
+              modules={[FreeMode]}
+              slidesPerView="auto"
+              spaceBetween={24}
+              freeMode={{
+                enabled: true,
+                momentum: true,
+                momentumRatio: 0.35,
+              }}
+              grabCursor
+              allowTouchMove
+              touchEventsTarget="container"
+              observer
+              observeParents
+              breakpoints={{
+                [BREAKPOINTS.tablet]: {
+                  spaceBetween: 48,
+                },
+              }}
+            >
+              {brands.map((brand) => (
+                <SwiperSlide
+                  key={brand.id}
+                  className={styles.brandsCarousel__slide}
+                >
+                  <div className={styles.brandsCarousel__item}>
+                    <BrandLogo brand={brand} />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ) : (
+            <BrandsRow
+              brands={brands}
+              className={styles.brandsCarousel__placeholder}
+              aria-hidden="true"
+            />
+          )}
         </div>
       </div>
     </section>

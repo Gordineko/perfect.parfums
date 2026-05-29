@@ -37,6 +37,7 @@
 
 .brandsCarousel__carousel {
   display: none;
+  position: relative;
   overflow: hidden;
 
   @include down($bp-desktop) {
@@ -44,8 +45,39 @@
   }
 }
 
+.brandsCarousel__placeholder {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 24px;
+  overflow: hidden;
+  width: 100%;
+  pointer-events: none;
+
+  @media (min-width: $bp-tablet) {
+    gap: 48px;
+  }
+}
+
 .brandsCarousel__swiper {
   overflow: visible;
+
+  &:not(:global(.swiper-initialized)) :global(.swiper-wrapper) {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  @media (min-width: $bp-tablet) {
+    &:not(:global(.swiper-initialized)) :global(.swiper-wrapper) {
+      gap: 48px;
+    }
+  }
+
+  &:not(:global(.swiper-initialized)) :global(.swiper-slide) {
+    flex: 0 0 auto;
+    width: auto !important;
+  }
 }
 
 .brandsCarousel__slide {
@@ -80,9 +112,10 @@
 
 .brandsCarousel__list .brandsCarousel__item {
   flex: 1 1 0;
-  min-width: 7rem;
+  min-width: 0;
   max-width: none;
   height: auto;
+  overflow: hidden;
 }
 
 .brandsCarousel__logo {
@@ -106,6 +139,8 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  max-width: 100%;
+  overflow: hidden;
 
   svg {
     display: block;
