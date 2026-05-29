@@ -6,72 +6,56 @@
   }
 }
 
-.shell {
-  padding: 0 0 80px;
+.page {
+  padding: 0 0 clamp(48px, 8vw, 80px);
 
-  @include tablet-only {
-    padding-bottom: 0;
+  :global(.container) {
+    margin-top: 40px;
   }
 
-  @include below-tablet {
+  @include down($bp-tablet) {
     padding-bottom: 48px;
   }
 }
 
-.card {
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  background: #fff;
-  padding: 40px;
-
-  @include tablet-only {
-    padding: 24px;
-  }
-
-  @include below-tablet {
-    padding: 16px;
-  }
-}
-
-.strong {
-  margin: 0;
-  color: var(--Dark, #{$dark});
-  font-family: var(--font-body);
-  font-size: 24px;
-  font-weight: 500;
-  line-height: normal;
-
-  @include tablet-only {
-    font-size: 20px;
-  }
-
-  @include below-tablet {
-    font-size: 16px;
-  }
+.shell {
+  min-width: 0;
+  width: 100%;
 }
 
 .content {
-  margin-top: 16px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  color: var(--Dark, #{$dark});
-  font-family: var(--font-body);
+  min-width: 0;
+  width: 100%;
+  color: var(--Dark, #0d0d0d);
+  font-family: var(--font-body), "Lato", sans-serif;
   font-size: 20px;
+  font-style: normal;
   font-weight: 400;
   line-height: normal;
 
-  @include tablet-only {
-    font-size: 18px;
-  }
-
   @include below-tablet {
-    margin-top: 12px;
     gap: 12px;
-    font-size: 14px;
+    font-size: 16px;
   }
 
   p {
     margin: 0;
+  }
+}
+
+.lead {
+  color: var(--Dark, #0d0d0d);
+  font-family: var(--font-body), "Lato", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  @include below-tablet {
+    font-size: 20px;
   }
 }
 
@@ -81,6 +65,7 @@
 
   &:hover,
   &:focus-visible {
+    color: var(--burgundy, #68181f);
     text-decoration: underline;
   }
 }
