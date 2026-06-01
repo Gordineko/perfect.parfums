@@ -4,6 +4,7 @@ import {
   getMessages,
 } from "@shared";
 import PaymentFailedIcon from "@shared/ui/icons/PaymentFailedIcon";
+import { localePath } from "@shared/lib/localePath";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -139,7 +140,7 @@ export default async function FailedOrderPage({ params, searchParams }) {
           </article>
 
           <div className={styles.retry}>
-            <Link className={styles.retryButton} href={`/${locale}/order`}>
+            <Link className={styles.retryButton} href={localePath(locale, "/order")}>
               {t("failedOrderPage.retryButton")}
             </Link>
           </div>
@@ -158,12 +159,12 @@ export default async function FailedOrderPage({ params, searchParams }) {
             </div>
 
             <nav className={styles.actions} aria-label={t("failedOrderPage.actionsAria")}>
-              <Link className={styles.actionLink} href={`/${locale}/`}>
+              <Link className={styles.actionLink} href={localePath(locale)}>
                 {t("failedOrderPage.homeLink")}
               </Link>
               <Link
                 className={styles.actionLink}
-                href={`/${locale}/categories/all`}
+                href={localePath(locale, "/categories/all")}
               >
                 {t("failedOrderPage.catalogLink")}
               </Link>

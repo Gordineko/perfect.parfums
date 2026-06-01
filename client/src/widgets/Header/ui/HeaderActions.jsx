@@ -1,5 +1,6 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import SearchModal from "@features/search-modal";
 import {
   headerActionsList,
@@ -65,16 +66,19 @@ const HeaderActions = ({
 
     if (id === "basket") return toggleModal(MODALS.BASKET);
 
-    if (id === "favorite") return router.push(`/${locale}/wishlist`);
-
-    if (id === "profile")
-      return id_token
-        ? router.push(`/${locale}/profile/info`)
-        : toggleModal(MODALS.LOGIN);
-
     if (id === "favorite") {
-      router.push(`/${locale}/wishlist`);
-      return;
+      return router.push(
+        localePath(
+          locale,
+          id_token ? "/profile/wishlist" : "/wishlist",
+        ),
+      );
+    }
+
+    if (id === "profile") {
+      return id_token
+        ? router.push(localePath(locale, "/profile/info"))
+        : toggleModal(MODALS.LOGIN);
     }
   };
 

@@ -9,7 +9,7 @@
 }
 
 .pageContainer {
-  @include mobile-only {
+  @include below-tablet {
     padding-inline: 24px;
   }
 }
@@ -17,7 +17,7 @@
 .empty {
   padding: 24px 0;
   color: #6b7280;
-  font-family: var(--font-inter), Inter, sans-serif;
+  font-family: var(--font-body), var(--font-body);
   font-size: 16px;
   font-weight: 300;
 
@@ -30,6 +30,8 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: $space-md;
+  padding-bottom: 16px;
+  overflow: visible;
 
   @include up($bp-tablet) {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -41,7 +43,7 @@
   }
 
   &:global(.product-cards-context) :global(.product-item) {
-    @include mobile-only {
+    @include below-tablet {
       max-width: none;
       justify-self: stretch;
       margin-inline: 0;

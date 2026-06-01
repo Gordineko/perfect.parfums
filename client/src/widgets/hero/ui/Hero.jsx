@@ -1,114 +1,60 @@
-import styles from "./Hero.module.scss";
+import { localePath } from "@shared/lib/localePath";
 import Link from "next/link";
 
-function normalizeLines(lines) {
-  if (Array.isArray(lines)) {
-    return lines
-      .map((line) => String(line ?? "").trim())
-      .filter(Boolean);
-  }
-  if (typeof lines === "string") {
-    return lines
-      .split("\n")
-      .map((line) => line.trim())
-      .filter(Boolean);
-  }
-  return [];
-}
+import styles from "./Hero.module.scss";
+
+const DEFAULT_MAIN = "/img/hero-perfume-main.png";
+const DEFAULT_SECONDARY = "/img/hero-perfume-secondary.png";
+const DEFAULT_MOBILE = "/img/hero-perfume-main-mob.png";
 
 export default function Hero({
-  slides = [],
-  heroCta = "Дивитися колекцію",
-  heroFallbackTitle = "Естетика ательє\nв кожній деталі",
+  locale = "ua",
+  mainImage = DEFAULT_MAIN,
+  secondaryImage = DEFAULT_SECONDARY,
+  mobileImage = DEFAULT_MOBILE,
+  eyebrow = "ОРИГІНАЛЬНА ПАРФУМЕРІЯ",
+  line1 = "Для тих, хто",
+  line2 = "звик залишати слід",
+  ctaLabel = "Перейти в каталог",
+  catalogHref = "",
 }) {
-  const firstSlide = Array.isArray(slides) && slides.length > 0 ? slides[0] : null;
-  const title =
-    typeof firstSlide?.title === "string" && firstSlide.title.trim()
-      ? firstSlide.title.trim()
-      : heroFallbackTitle;
-  const titleLines = normalizeLines(firstSlide?.lines);
-  const ctaLink =
-    typeof firstSlide?.link === "string" && firstSlide.link.trim()
-      ? firstSlide.link.trim()
-      : "";
-  const desktopImage =
-    typeof firstSlide?.imageURL === "string" && firstSlide.imageURL.trim()
-      ? firstSlide.imageURL.trim()
-      : "";
-  const mobileImage =
-    typeof firstSlide?.mobileImageURL === "string" && firstSlide.mobileImageURL.trim()
-      ? firstSlide.mobileImageURL.trim()
-      : desktopImage;
-  const desktopVideo =
-    typeof firstSlide?.videoURL === "string" && firstSlide.videoURL.trim()
-      ? firstSlide.videoURL.trim()
-      : "";
-  const mobileVideo =
-    typeof firstSlide?.mobileVideoURL === "string" && firstSlide.mobileVideoURL.trim()
-      ? firstSlide.mobileVideoURL.trim()
-      : desktopVideo;
-  const hasVideo = Boolean(desktopVideo);
-  const hasImage = Boolean(desktopImage);
-  const label = "New Season '26";
+  const href =
+    catalogHref.trim() || localePath(locale, "/categories/all");
 
   return (
-    <section className={styles.root}>
-      {hasVideo ? (
-        <>
-          <video
-            className={`${styles.video} ${styles.videoDesktop}`}
-            src={desktopVideo}
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
-          <video
-            className={`${styles.video} ${styles.videoMobile}`}
-            src={mobileVideo || desktopVideo}
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
-        </>
-      ) : hasImage ? (
-        <picture className={styles.media}>
-          <source media="(max-width: 767.98px)" srcSet={mobileImage} />
-          <img className={styles.mediaAsset} src={desktopImage} alt={title} loading="eager" />
-        </picture>
-      ) : (
-        <video
-          className={styles.video}
-          src="/media/home/hero/hero-video.mp4"
-          autoPlay
-          muted
-          loop
-          playsInline
+    <section className={styles.root} aria-label={eyebrow}>
+      <div className={styles.banner}>
+        <img
+          className={styles.bannerMain}
+          src={mainImage}
+          alt=""
+          fetchPriority="high"
         />
-      )}
+        <img
+          className={styles.bannerSecondary}
+          src={secondaryImage}
+          alt=""
+          fetchPriority="high"
+        />
+        <img
+          className={styles.bannerMob}
+          src={mobileImage}
+          alt=""
+          fetchPriority="high"
+        />
+      </div>
+
       <div className={styles.overlay}>
-        <div className={`ds-container ${styles.content}`}>
-          <p className={styles.label}>{label}</p>
+        <div className={styles.content}>
           <h1 className={styles.title}>
-            {(titleLines.length > 0 ? titleLines : title.split("\n")).map((line, idx) => (
-              <span
-                key={idx}
-                className={idx === 1 ? styles.titleLineItalic : styles.titleLine}
-              >
-                {line}
-              </span>
-            ))}
+            <span className={styles.titleEyebrow}>{eyebrow}</span>
+            <span className={styles.titleLine}>{line1}</span>
+            <span className={styles.titleLine}>{line2}</span>
           </h1>
-          {ctaLink ? (
-            <Link href={ctaLink} className={styles.cta}>
-              <span className={styles.ctaText}>{heroCta}</span>
-            </Link>
-          ) : (
-            <button type="button" className={styles.cta}>
-              <span className={styles.ctaText}>{heroCta}</span>
-            </button>
-          )}
+
+          <Link href={href} className={styles.cta}>
+            {ctaLabel}
+          </Link>
         </div>
       </div>
     </section>

@@ -1,3 +1,4 @@
+import { localePath } from "@shared/lib/localePath";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo } from "react";
 
@@ -43,11 +44,14 @@ export function useProductItemViewModel({
 
   const canNavigate = Boolean(slug) && (isCatalogCard || isSearchPreview);
   const pdpHref = canNavigate
-    ? `/${locale}/product/${slug
-        .split("/")
-        .filter(Boolean)
-        .map((s) => encodeURIComponent(s))
-        .join("/")}`
+    ? localePath(
+        locale,
+        `product/${slug
+          .split("/")
+          .filter(Boolean)
+          .map((s) => encodeURIComponent(s))
+          .join("/")}`,
+      )
     : null;
 
   const handleNavigate = (e) => {

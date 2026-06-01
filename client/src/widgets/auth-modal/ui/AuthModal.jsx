@@ -1,5 +1,6 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import LoginForm from "@features/login-modal";
 import RegForm from "@features/registration-modal";
 import ResetForm from "@features/reset-modal";
@@ -53,9 +54,9 @@ const AuthModal = () => {
     const token = Cookies.get("auth_token");
     const locale = getLocaleFromPathname();
     if (token) {
-      router.push(`/${locale}/profile/info`);
+      router.push(localePath(locale, "/profile/info"));
     } else {
-      router.push(`/${locale}`);
+      router.push(localePath(locale));
     }
   };
 

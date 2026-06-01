@@ -1,5 +1,7 @@
 "use client";
 
+import { MQ } from "@shared";
+import { localePath } from "@shared/lib/localePath";
 import clsx from "clsx";
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -11,7 +13,7 @@ import headerStyles from "./Header.module.scss";
 import styles from "./HeaderDesktopNav.module.scss";
 
 const CLOSE_DELAY_MS = 180;
-const DESKTOP_NAV_MEDIA = "(min-width: 768px)";
+const DESKTOP_NAV_MEDIA = MQ.tabletUp;
 
 const MEGA_NAV_ITEMS = [
   { id: MEGA_MENU_IDS.GIRLS, labelKey: "girls" },
@@ -144,7 +146,7 @@ export default function HeaderDesktopNav({ locale, labels, categories }) {
       onMouseLeave={handleWrapMouseLeave}
     >
       <nav className={headerStyles.nav} aria-label="Navigation">
-        <Link className={headerStyles.link} href={`/${locale}/categories/all?isNew=true`}>
+        <Link className={headerStyles.link} href={localePath(locale, "/categories/all?isNew=true")}>
           {labels.new}
         </Link>
 
@@ -158,7 +160,7 @@ export default function HeaderDesktopNav({ locale, labels, categories }) {
               <Link
                 key={id}
                 className={clsx(headerStyles.link, styles.trigger)}
-                href={`/${locale}/categories/${id}`}
+                href={localePath(locale, `/categories/${id}`)}
                 onMouseEnter={closeMenu}
                 onFocus={closeMenu}
               >
@@ -176,7 +178,7 @@ export default function HeaderDesktopNav({ locale, labels, categories }) {
                   styles.trigger,
                   isOpen && styles.triggerActive,
                 )}
-                href={`/${locale}/categories/${id}`}
+                href={localePath(locale, `/categories/${id}`)}
                 aria-expanded={isOpen}
                 aria-haspopup="true"
                 onMouseEnter={() => openMenu(id)}

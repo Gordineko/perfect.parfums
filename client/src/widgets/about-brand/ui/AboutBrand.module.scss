@@ -1,0 +1,183 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+.root {
+  background: var(--color-white, #fefefa);
+  padding-block: var(--space-section-y);
+  overflow-x: clip;
+}
+
+.layout {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  @include below-tablet {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-pad-x);
+  }
+
+  @include tablet-only {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: center;
+  }
+
+  @include desktop-only {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 48px;
+    align-items: center;
+  }
+}
+
+.contentColumn {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  box-sizing: border-box;
+
+  @include tablet-only {
+    padding-inline-start: max(
+      var(--container-pad-x),
+      calc((100vw - var(--container-max)) / 2 + var(--container-pad-x))
+    );
+    padding-inline-end: 0;
+  }
+
+  @include desktop-only {
+    padding-inline-start: max(
+      var(--container-pad-x),
+      calc((100vw - var(--container-max)) / 2 + var(--container-pad-x))
+    );
+    padding-inline-end: 0;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+  text-align: left;
+}
+
+.title {
+  margin: 0 0 32px;
+  width: 100%;
+  color: var(--color-black, #11110f);
+  text-align: left;
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+  text-transform: uppercase;
+
+  @include tablet-only {
+    margin-bottom: 24px;
+    font-size: $section-h2-tablet;
+  }
+
+  @include below-tablet {
+    margin-bottom: 20px;
+    font-size: 20px;
+    text-align: center;
+  }
+}
+
+.textBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 36em;
+
+  @include tablet-only {
+    max-width: 100%;
+    gap: 16px;
+  }
+
+  @include below-tablet {
+    gap: 14px;
+  }
+}
+
+.lead,
+.paragraph {
+  margin: 0;
+  width: 100%;
+  color: #000;
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  letter-spacing: 0.4px;
+  text-align: left;
+
+  @include tablet-only {
+    font-size: 16px;
+  }
+
+  @include below-tablet {
+    font-size: 14px;
+    letter-spacing: 0.28px;
+  }
+}
+
+.brandLink {
+  color: inherit;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  @include tablet-only {
+    font-size: 16px;
+  }
+
+  @include below-tablet {
+    font-size: 14px;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-burgundy, #68181f);
+  }
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  background: var(--color-white, #fefefa);
+
+  @include below-tablet {
+    order: -1;
+    aspect-ratio: 1 / 1;
+    width: calc(100% + 2 * var(--container-pad-x));
+    margin-inline: calc(-1 * var(--container-pad-x));
+  }
+
+  @include tablet-only {
+    height: 750px;
+    max-height: 750px;
+    aspect-ratio: auto;
+  }
+
+  @include desktop-only {
+    height: 750px;
+    max-height: 750px;
+    aspect-ratio: auto;
+  }
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

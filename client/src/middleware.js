@@ -1,50 +1,48 @@
-// middleware.js (в корне проекта, рядом с app/)
-import { i18n } from '@shared/i18n/config';
-import { NextResponse } from 'next/server';
+import { i18n } from "@shared/i18n/config";
+import { NextResponse } from "next/server";
 
+const defaultLocale = i18n.defaultLocale;
 
 export function middleware(request) {
   const { pathname } = request.nextUrl;
-  
-  // Пропускаем статические файлы, API, файлы с расширениями
+
   if (
-    pathname.startsWith('/_next') ||
-    pathname.startsWith('/api') ||
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
     /\.(.*)$/.test(pathname)
   ) {
     return NextResponse.next();
   }
 
-  // Проверяем, содержит ли путь какую-либо локаль из списка
-  const pathnameHasLocale = i18n.locales.some(
-    (locale) => 
-      pathname.startsWith(`/${locale}/`) || 
-      pathname === `/${locale}`
-  );
-
-  // Если локаль не найдена в пути - добавляем локаль по умолчанию
-  if (!pathnameHasLocale) {
-    const defaultLocale = i18n.defaultLocale; // "ua"
-    
-    // Если это корневой путь '/', делаем /ua
-    if (pathname === '/') {
-      request.nextUrl.pathname = `/${defaultLocale}`;
-    } 
-    // Если это любой другой путь, добавляем локаль в начало
-    else {
-      request.nextUrl.pathname = `/${defaultLocale}${pathname}`;
-    }
-    
-    // Перенаправляем пользователя
-    return NextResponse.redirect(request.nextUrl);
+  if (
+    pathname === `/${defaultLocale}` ||
+    pathname.startsWith(`/${defaultLocale}/`)
+  ) {
+    const url = request.nextUrl.clone();
+    url.pathname =
+      pathname === `/${defaultLocale}`
+        ? "/"
+        : pathname.slice(`/${defaultLocale}`.length) || "/";
+    return NextResponse.redirect(url);
   }
 
-  return NextResponse.next();
+  const hasNonDefaultLocale = i18n.locales.some(
+    (locale) =>
+      locale !== defaultLocale &&
+      (pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`),
+  );
+
+  if (hasNonDefaultLocale) {
+    return NextResponse.next();
+  }
+
+  const url = request.nextUrl.clone();
+  url.pathname =
+    pathname === "/" ? `/${defaultLocale}` : `/${defaultLocale}${pathname}`;
+
+  return NextResponse.rewrite(url);
 }
 
 export const config = {
-  matcher: [
-    // Пропускаем все статические файлы и API
-    '/((?!_next|api|favicon.ico|sitemap.xml|robots.txt).*)',
-  ],
+  matcher: ["/((?!_next|api|favicon.ico|sitemap.xml|robots.txt).*)"],
 };

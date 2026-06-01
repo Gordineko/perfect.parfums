@@ -1,32 +1,42 @@
-import Facebook from "@shared/ui/icons/Facebook";
-import Instagram from "@shared/ui/icons/Instagram";
-import Telegram from "@shared/ui/icons/Telegram";
-import TikTok from "@shared/ui/icons/TikTok";
+import {
+  ContactFacebookIcon,
+  ContactInstagramIcon,
+  ContactTelegramIcon,
+  ContactTikTokIcon,
+} from "@pages/contacts-page/ui/ContactSocialIcons";
 
 export const socialLinks = [
   {
     id: "instagram",
-    href: "https://www.instagram.com/world.of_heels/",
+    href: "https://www.instagram.com/perfect.parfums/",
     label: "Instagram",
-    handle: "@maloe_atelier_",
-    Icon: Instagram,
-  },
-  {
-    id: "facebook",
-    href: "https://facebook.com/world.of.heels",
-    label: "Facebook",
-    handle: "@maloe_atelier",
-    Icon: Facebook,
+    handle: "@perfect.parfums",
+    Icon: ContactInstagramIcon,
   },
   {
     id: "telegram",
-    href: "https://t.me/woh_support",
+    href: "https://t.me/perfectparfums",
     label: "Telegram",
+
     handle: "@maloe.support",
     Icon: Telegram,
+
   },
   {
-
+    id: "facebook",
+    href: "https://www.facebook.com/perfect.parfums",
+    label: "Facebook",
+    handle: "@perfect.parfums",
+    Icon: ContactFacebookIcon,
+  },
+  {
+    id: "tiktok",
+    href: "https://www.tiktok.com/@perfect.parfums",
+    label: "TikTok",
+    handle: "@perfect.parfums",
+    Icon: ContactTikTokIcon,
+  },
+  {
     id: "tiktok",
     href: "https://www.tiktok.com/@world.of_heels?_r=1&_t=ZS-95mPRroZ0Dw",
     label: "TikTok",

@@ -24,6 +24,51 @@ function reviewsPublicProductUrl(productId, limit) {
   return `${reviewsApiBaseUrl}/reviews/public/product/${encodeURIComponent(productId)}?limit=${limit}`;
 }
 
+function reviewsPublicMainUrl(limit) {
+  return `${reviewsApiBaseUrl}/reviews/public/main?limit=${limit}`;
+}
+
+export async function fetchMainReviews(options = {}) {
+  if (!reviewsApiBaseUrl) {
+    return [];
+  }
+
+  const rawLimit = options.limit != null ? Number(options.limit) : 3;
+  const limit = Math.min(
+    50,
+    Math.max(1, Number.isFinite(rawLimit) ? Math.floor(rawLimit) : 3),
+  );
+
+  const fetchOptions =
+    options.revalidate != null
+      ? { next: { revalidate: options.revalidate } }
+      : { cache: "no-store" };
+
+  const response = await fetch(reviewsPublicMainUrl(limit), {
+    method: "GET",
+    credentials: "include",
+    headers: { "Content-Type": "application/json" },
+    ...fetchOptions,
+  });
+
+  const data = await parseJsonSafe(response);
+
+  if (!response.ok) {
+    const message =
+      (typeof data?.message === "string" && data.message) ||
+      `Failed to fetch main reviews (${response.status})`;
+    throw new Error(message);
+  }
+
+  if (Array.isArray(data?.data)) {
+    return data.data;
+  }
+  if (Array.isArray(data)) {
+    return data;
+  }
+  return [];
+}
+
 export async function fetchProductReviews(productId, options = {}) {
   const id = productId != null ? String(productId).trim() : "";
   if (!id) {

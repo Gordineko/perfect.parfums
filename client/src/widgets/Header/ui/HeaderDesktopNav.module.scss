@@ -39,7 +39,7 @@ $mega-menu-z: 110;
     visibility 0.2s ease,
     transform 0.2s ease;
 
-  @include mobile-only {
+  @include below-tablet {
     display: none !important;
   }
 

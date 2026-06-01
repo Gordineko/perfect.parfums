@@ -1,32 +1,39 @@
 @use "../../../shared/ui/styles/variables.scss" as *;
 
 %crumb-text {
-  font-family: Inter, sans-serif;
-  font-size: 16px;
+  color: #000;
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-style: normal;
   font-weight: 400;
-  letter-spacing: 2px;
-  text-transform: uppercase;
+  line-height: normal;
+  letter-spacing: 0;
+  text-transform: none;
 
-  @include tablet-only {
-    font-size: 10px;
-    letter-spacing: 1.5px;
+  @include down($bp-desktop) {
+    font-size: 16px;
   }
 
-  @include down($bp-tablet) {
-    font-size: 10px;
-    letter-spacing: 1.5px;
+  @include below-tablet {
+    font-size: 12px;
   }
 }
 
 .root {
-  margin: 24px 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+  width: 100%;
+  margin: 0;
+  padding: 40px 0;
+
+  @include below-tablet {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+  border-top: 1px solid var(--color-burgundy, #68181f);
+  border-bottom: 1px solid #bdb8ae;
+  background: #fefefa;
+  box-sizing: border-box;
   scrollbar-width: none;
   -ms-overflow-style: none;
-
-  @include down($bp-tablet) {
-    margin: 16px 0;
-  }
 
   &::-webkit-scrollbar {
     display: none;
@@ -35,7 +42,18 @@
 
 .rootEmbedded {
   margin: 0;
-  border-bottom: none;
+}
+
+.rootPlain {
+  border-top: 0;
+  border-bottom: 1px solid #bdb8ae;
+  padding-top: 40px;
+  padding-bottom: 40px;
+
+  @include below-tablet {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
 }
 
 .inner {
@@ -45,22 +63,16 @@
   overflow-x: auto;
   overflow-y: hidden;
   white-space: nowrap;
-
-  @include down($bp-tablet) {
-    .link,
-    .split,
-    .linkCurrent {
-      font-size: 10px;
-      letter-spacing: 1.5px;
-    }
-  }
 }
 
 .split {
   @extend %crumb-text;
   flex-shrink: 0;
-  margin-inline: 8px;
-  color: var(--Gray, #9ca3af);
+  margin-inline: 10px;
+
+  @include below-tablet {
+    margin-inline: 4px;
+  }
 }
 
 .link {
@@ -72,11 +84,16 @@
   background: none;
   text-align: inherit;
   cursor: pointer;
-  color: var(--Gray, #9ca3af);
+  transition: opacity 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 0.7;
+  }
 }
 
 .linkCurrent {
-  color: var(--Dark, #0d0d0d);
+  @extend %crumb-text;
   cursor: default;
   pointer-events: none;
 }

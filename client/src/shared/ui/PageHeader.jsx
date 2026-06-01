@@ -9,15 +9,25 @@ export default function PageHeader({
   breadcrumbsLabels,
   title,
   showBreadcrumbs = true,
+  showTitle = true,
+  plainBreadcrumbs = false,
 }) {
   const breadcrumbProps = {
     embedInPage: true,
+    plain: plainBreadcrumbs,
     locale,
     labels: breadcrumbsLabels,
   };
 
   return (
-    <header className="page-header">
+    <header
+      className={[
+        "page-header",
+        !showTitle ? "page-header--breadcrumbs-only" : "",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+    >
       {showBreadcrumbs ? (
         <div className="page-header__breadcrumbs">
           {breadcrumbsItemsCompact ? (
@@ -38,13 +48,13 @@ export default function PageHeader({
         </div>
       ) : null}
 
-      <div className="container">
-        <div className="page-header__header">
-          <h1 className="page-header__title t-page-title">
-            {title}
-          </h1>
+      {showTitle && title ? (
+        <div className="container">
+          <div className="page-header__header">
+            <h1 className="page-header__title t-h1">{title}</h1>
+          </div>
         </div>
-      </div>
+      ) : null}
     </header>
   );
 }

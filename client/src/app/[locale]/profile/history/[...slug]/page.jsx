@@ -1,4 +1,5 @@
 import { getOrderItemCategoryLabel } from "@entities/order-item/lib/getOrderItemCategoryLabel";
+import { localePath } from "@shared/lib/localePath";
 import { getCities, getWarehouses } from "@shared/api/Nova-poshta";
 import { getMessages } from "@shared/i18n/getMessages";
 import { createI18nServer } from "@shared/i18n/server";
@@ -75,17 +76,17 @@ export default async function OrderPage({ params }) {
   if (!foundOrder) {
     return (
       <div className={pageStyles.page}>
-        <div className={pageStyles.introRelative}>
-          <p className={pageStyles.subtitle}>{t("profile.order-detail-subtitle")}</p>
-          <h2 className={pageStyles.title}>
-            {t("profile.order-title")} #{orderSlug}
-          </h2>
-        </div>
+        <h2 className={pageStyles.sectionTitle}>
+          {t("profile.order-title")} #{orderSlug}
+        </h2>
 
-        <div className={`${ordStyles.card} ${ordStyles.empty}`}>
+        <div className={ordStyles.empty}>
           <p>{t("profile.orderNotFound")}</p>
-          <Link href={`/${locale}/profile/history`} className="basket__action">
-            <p>{t("profile.backToOrders")}</p>
+          <Link
+            href={localePath(locale, "/profile/history")}
+            className={ordStyles.backLink}
+          >
+            {t("profile.backToOrders")}
           </Link>
         </div>
       </div>
@@ -132,12 +133,9 @@ export default async function OrderPage({ params }) {
 
   return (
     <div className={pageStyles.page}>
-      <div className={pageStyles.introRelative}>
-        <p className={pageStyles.subtitle}>{t("profile.order-detail-subtitle")}</p>
-        <h2 className={pageStyles.title}>
-          {t("profile.order-title")} #{orderSlug}
-        </h2>
-      </div>
+      <h2 className={pageStyles.sectionTitle}>
+        {t("profile.order-title")} #{orderSlug}
+      </h2>
 
       <div className={ordStyles.card}>
         <p className={ordStyles.cardHeader}>{t("profile.order-data")}</p>

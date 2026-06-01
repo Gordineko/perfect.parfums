@@ -1,1 +1,1 @@
-export { default } from "./ui/SearchModal";
+export { default } from "./ui/SearchDropdown";

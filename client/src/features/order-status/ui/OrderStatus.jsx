@@ -1,6 +1,6 @@
 
 "use client"
-import { fetchCartFromDB, formatPrice } from '@shared'
+import { fetchCartFromDB, formatPrice, removeFromCartAsync } from '@shared'
 import { useI18n } from '@shared/i18n/use-i18n'
 import { cartLineVariantSummary } from '@shared/lib/cartLineVariantSummary'
 import { getOfferUnitPrice } from '@shared/lib/offerPrice'
@@ -10,6 +10,8 @@ import { useParams } from 'next/navigation';
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
+
+import OrderStatusSkeleton from './OrderStatusSkeleton';
 
 const OrderStatus = ({ formik }) => {
     const params = useParams();
@@ -24,6 +26,15 @@ const OrderStatus = ({ formik }) => {
     }, [cart.status, dispatch]);
 
     const { t } = useI18n()
+    const formatPriceNbsp = (value) =>
+      String(formatPrice(value)).replace(/\s/g, "\u00A0");
+
+    const isCartLoading = cart.status === "loading" || cart.status === "idle";
+    const skeletonItemCount = cart.items?.length ?? 0;
+
+    if (isCartLoading) {
+        return <OrderStatusSkeleton itemCount={skeletonItemCount} />;
+    }
 
     return (
         <div className='order__status'>
@@ -35,10 +46,17 @@ const OrderStatus = ({ formik }) => {
                     const qty = prod?.quantityInCart ?? 1
                     const lineTotal = Number.isFinite(unit) ? unit * qty : 0
                     const variantLine = cartLineVariantSummary(prod, locale)
+                    const id =
+                      prod?._id ?? prod?.id ?? prod?.offers?.[0]?._id
 
                     return (
                     <div className='order__status__item' key={prod?._id ?? prod?.id ?? index}>
-                        <Image src={prod.imageURL} alt='' width={88} height={88} />
+                        <Image
+                          src={prod.imageURL}
+                          alt={pickLocalizedString(prod?.title, locale) ?? ""}
+                          width={120}
+                          height={120}
+                        />
                         <div className="order__status__wrapper">
                             <div className="order__status__meta">
                                 <p className="order__status__item-title">
@@ -48,43 +66,41 @@ const OrderStatus = ({ formik }) => {
                                     <p className="order__status__item-variant">{variantLine}</p>
                                 ) : null}
                                 <p className="order__status__item-total">
-                                    {qty} × {formatPrice(Number.isFinite(unit) ? unit : 0)} ₴
+                                  {qty} × {formatPriceNbsp(Number.isFinite(unit) ? unit : 0)} ₴
+                                </p>
+
+                                <p className="order__status__item-cost">
+                                  {formatPriceNbsp(lineTotal)} ₴
                                 </p>
                             </div>
-                            <p className="order__status__item-cost">{formatPrice(lineTotal)} ₴</p>
+                            <div className="order__status__aside">
+                              <button
+                                type="button"
+                                className="order__status__remove"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  if (!id) return;
+                                  dispatch(removeFromCartAsync({ _id: id }));
+                                }}
+                                aria-label={t("basket.removeItem")}
+                              >
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="14" viewBox="0 0 13 14" fill="none">
+                                  <path d="M1 0.510742L12.4892 12.5106" stroke="#11110F" strokeLinecap="round"/>
+                                  <path d="M0.488281 12.5107L11.9774 0.510848" stroke="#11110F" strokeLinecap="round"/>
+                                </svg>
+                              </button>
+                            </div>
                         </div>
                     </div>
                     )
                 })}
             </div>
             <div className="order__status__data">
-                <div className='order__status__data-wrapper'>
-                    <p>{t("order-status.sum")}</p>
-                    <p>{formatPrice(cart.total)} ₴</p>
-                </div>
-                <div className='order__status__data-wrapper'>
-                    <p>{t("order-status.delivery")}</p>
-                    <p className='stat-delivery'>{t("order-status.delivery-ststus")}</p>
-                </div>
-                <div className='order__status__data-wrapper'>
-                    <p className='final'>{t("order-status.all-cost")}</p>
-                    <p className='final-cost'>{formatPrice(cart.total)} ₴</p>
-                </div>
+              <div className='order__status__data-wrapper'>
+                  <p className='final'>{t("order-status.all-cost")}</p>
+                  <p className='final-cost'>{formatPriceNbsp(cart.total)} грн</p>
+              </div>
             </div>
-            {formik?.status?.submitError ? (
-                <div className="error-text" role="alert" aria-live="polite">
-                    {formik.status.submitError}
-                </div>
-            ) : null}
-            <button
-                form='prof-checkout-form'
-                type='submit'
-                className="order__status__btn"
-                disabled={Boolean(formik?.isSubmitting)}
-                aria-busy={Boolean(formik?.isSubmitting)}
-            >
-                {formik?.isSubmitting ? `${t("order-status.btn")}...` : t("order-status.btn")}
-            </button>
         </div>
     )
 }

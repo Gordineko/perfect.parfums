@@ -1,5 +1,6 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import "swiper/css";
 
 import { BREAKPOINTS, useI18n } from "@shared";
@@ -44,7 +45,7 @@ function CollectionCard({ collection, locale, viewLookbookLabel }) {
 
   return (
     <Link
-      href={`/${locale}/categories/${collection.href}`}
+      href={localePath(locale, "/categories/${collection.href}")}
       className={styles.card}
     >
       <div className={styles.cardMedia}>
@@ -102,7 +103,7 @@ export default function SeasonCollections({ locale = "ua", categories }) {
             <p className={styles.eyebrow}>{t("home.seasonEyebrow")}</p>
             <h2
               id="season-collections-title"
-              className={`${styles.title} t-section-title`}
+              className={`${styles.title} t-h2`}
             >
               {t("home.seasonTitle")}
             </h2>

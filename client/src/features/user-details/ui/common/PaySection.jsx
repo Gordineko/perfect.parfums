@@ -1,48 +1,35 @@
 import { useI18n } from '@shared/i18n/use-i18n';
-import React from 'react';
+import React, { useMemo } from 'react';
 
-const PaySection = ({ formik }) => {
+import AutoCompleteSelect from './AutoCompleteSelect';
+
+const PaySection = ({ formik, variant = "checkout" }) => {
   const { t } = useI18n();
   
-  const PAYMENT_METHODS = {
-    ONLINE: 'online',
-    POSTPAID: 'postpaid'
-  };
-
-  const handlePaymentSelect = (method) => {
-    formik.setFieldValue('paymentMethod', method);
-  };
+  const options = useMemo(
+    () => [
+      { value: "online", label: t("checkout.paymentOnlineTitle") },
+      { value: "cod", label: t("checkout.paymentPostpaidTitle") },
+    ],
+    [t],
+  );
 
   return (
-    <div className="pay">
-        <div 
-          className={`pay__option ${formik.values.paymentMethod === PAYMENT_METHODS.ONLINE ? "active" : ""}`}
-          onClick={() => handlePaymentSelect(PAYMENT_METHODS.ONLINE)}
-        >
-          <div className="delivery__header">
-            <span className="pay__title">{t('checkout.paymentOnlineTitle')}</span>
-          </div>
-          <p className="pay__desc">
-            {t('checkout.paymentOnlineDesc')}
-          </p>
-        </div>
-
-        <div 
-          className={`pay__option ${formik.values.paymentMethod === PAYMENT_METHODS.POSTPAID ? "active" : ""}`}
-          onClick={() => handlePaymentSelect(PAYMENT_METHODS.POSTPAID)}
-        >
-            <span className="pay__title">{t('checkout.paymentPostpaidTitle')}</span>
-          <p className="pay__desc">
-            {t('checkout.paymentPostpaidDesc')}
-          </p>
-        </div>
-
-      {formik.touched.paymentMethod && formik.errors.paymentMethod && (
-        <div className="error-text">
-          {formik.errors.paymentMethod}
-        </div>
-      )}
-    </div>
+    <AutoCompleteSelect
+      variant={variant}
+      isSearchable={false}
+      uiVariant={variant === "checkout" ? "order" : "default"}
+      id="payment-method-select"
+      label={t("checkout.paymentMethodLabel")}
+      name="paymentMethod"
+      value={formik.values.paymentMethod}
+      onChange={formik.handleChange}
+      onBlur={formik.handleBlur}
+      options={options}
+      error={formik.errors.paymentMethod}
+      touched={formik.touched.paymentMethod}
+      placeholder={t("checkout.choosePaymentMethod")}
+    />
   );
 }
 

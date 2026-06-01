@@ -11,6 +11,7 @@ import {
   QUERY_PRICE_MAX,
   QUERY_PRICE_MIN,
 } from "@shared";
+import { localePath } from "@shared/lib/localePath";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   useCallback as useReactCallback,
@@ -26,7 +27,7 @@ import {
 import { pickLocalizedField, prepareFilterableMetaItems } from "../lib/characteristicsMetaHelpers";
 import ActiveFilterTags from "./ActiveFilterTags";
 import CategoryTree from "./CategoryTree";
-import { FilterAccordionChevron } from "./FilterAccordionChevron";
+import FilterSectionShell from "./FilterSectionShell";
 import MetaFilterSections from "./MetaFilterSections";
 
 function setJsonSearchParam(params, queryKey, obj) {
@@ -38,7 +39,7 @@ function setJsonSearchParam(params, queryKey, obj) {
 }
 
 function parseCategoriesPathFromPathname(pathname, locale) {
-  const prefix = `/${locale}/categories/`;
+  const prefix = `${localePath(locale, "/categories")}/`;
   if (!pathname.startsWith(prefix)) return "";
   const rest = pathname.slice(prefix.length).replace(/\/$/, "");
   return rest || "all";
@@ -53,7 +54,10 @@ export default function Filters({
   totalCount,
   labels,
   showInlineActiveTags = false,
+  variant = "sidebar",
 }) {
+  const isPanel = variant === "panel";
+  const layoutMode = isPanel ? "column" : "accordion";
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -197,8 +201,51 @@ export default function Filters({
     ? showResultsCount
     : 0;
 
+  const categoriesColumn =
+    categorySidebarRoots.length > 0 ? (
+      <FilterSectionShell
+        layoutMode={layoutMode}
+        title={categoriesSectionTitle}
+        sectionId="categories"
+        isSectionOpen={isSectionOpen}
+        toggleSection={toggleSection}
+      >
+        <div className="filters__category-tree-wrap">
+          <CategoryTree
+            locale={locale}
+            roots={categorySidebarRoots}
+            filters={filters}
+            routeCategoryPath={routeCategoryPath}
+            sectionTitle={categoriesSectionTitle}
+            onNavigate={handleCloseFilters}
+          />
+        </div>
+      </FilterSectionShell>
+    ) : null;
+
+  const priceSection = filters?.facets?.pricing ? (
+    <FilterSectionShell
+      layoutMode={layoutMode}
+      title={labels.price}
+      sectionId="price"
+      isSectionOpen={isSectionOpen}
+      toggleSection={toggleSection}
+    >
+      <PriceRange
+        price={filters.facets.pricing}
+        currency={labels.currency}
+        priceMinAria={labels.priceMinAria}
+        priceMaxAria={labels.priceMaxAria}
+        onApply={handleCloseFilters}
+      />
+    </FilterSectionShell>
+  ) : null;
+
   return (
-    <div className="filters" onClick={handleCloseFilters}>
+    <div
+      className={`filters${isPanel ? " filters--panel" : ""}`}
+      onClick={!isPanel ? handleCloseFilters : undefined}
+    >
       <div
         className="filters__card"
         onClick={(e) => e.stopPropagation()}
@@ -246,94 +293,43 @@ export default function Filters({
           </div>
         ) : null}
 
-        <div className="filters__groups">
-        {categorySidebarRoots.length > 0 && (
-          <div
-            className={`filters__accordion ${
-              isSectionOpen("categories")
-                ? "filters__accordion--open"
-                : "filters__accordion--closed"
-            }`}
-          >
-            <button
-              type="button"
-              className="filters__accordion-header"
-              onClick={() => toggleSection("categories")}
-              aria-expanded={isSectionOpen("categories")}
-            >
-              <span className="filters__title">
-                {categoriesSectionTitle}
-              </span>
-              <FilterAccordionChevron className="filters__accordion-chevron" />
-            </button>
-
-            <div className="filters__accordion-panel">
-              <div className="filters__accordion-panel-inner filters__accordion-panel-inner--category-tree">
-                <CategoryTree
-                  locale={locale}
-                  roots={categorySidebarRoots}
-                  filters={filters}
-                  routeCategoryPath={routeCategoryPath}
-                  sectionTitle={categoriesSectionTitle}
-                  onNavigate={handleCloseFilters}
-                />
-              </div>
-            </div>
-          </div>
-        )}
-
-        <MetaFilterSections
-          items={metaItemsPrepared}
-          locale={locale}
-          filters={filters}
-          charObj={charSnapshot}
-          offerObj={offerSnapshot}
-          isSectionOpen={isSectionOpen}
-          toggleSection={toggleSection}
-          onCommitCharOffer={(nextChar, nextOffer) =>
-            commitFilterUrl(
-              nextChar,
-              nextOffer,
-              getOptObject(),
-            )
+        <div
+          className={
+            isPanel ? "filters__panel-grid" : "filters__groups-wrap"
           }
-        />
+        >
+          <div className="filters__groups">
+            {categoriesColumn}
 
-        </div>
-
-        {filters?.facets?.pricing && (
-          <div className="filters__price">
-            <div
-              className={`filters__accordion ${
-                isSectionOpen("price")
-                  ? "filters__accordion--open"
-                  : "filters__accordion--closed"
-              }`}
-            >
-              <button
-                type="button"
-                className="filters__accordion-header"
-                onClick={() => toggleSection("price")}
-                aria-expanded={isSectionOpen("price")}
-              >
-                <span className="filters__title">{labels.price}</span>
-                <FilterAccordionChevron className="filters__accordion-chevron" />
-              </button>
-
-              <div className="filters__accordion-panel">
-                <div className="filters__accordion-panel-inner">
-                  <PriceRange
-                    price={filters.facets.pricing}
-                    currency={labels.currency}
-                    priceMinAria={labels.priceMinAria}
-                    priceMaxAria={labels.priceMaxAria}
-                    onApply={handleCloseFilters}
-                  />
-                </div>
-              </div>
-            </div>
+            <MetaFilterSections
+              items={metaItemsPrepared}
+              locale={locale}
+              filters={filters}
+              charObj={charSnapshot}
+              offerObj={offerSnapshot}
+              isSectionOpen={isSectionOpen}
+              toggleSection={toggleSection}
+              layoutMode={layoutMode}
+              onCommitCharOffer={(nextChar, nextOffer) =>
+                commitFilterUrl(
+                  nextChar,
+                  nextOffer,
+                  getOptObject(),
+                )
+              }
+            />
           </div>
-        )}
+
+          {priceSection ? (
+            <div
+              className={
+                isPanel ? "filters__price filters__price--panel" : "filters__price"
+              }
+            >
+              {priceSection}
+            </div>
+          ) : null}
+        </div>
 
         {handleCloseFilters && (
           <div className="filters__footer">

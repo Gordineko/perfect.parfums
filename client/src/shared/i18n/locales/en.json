@@ -1,5 +1,29 @@
 {
   "title": "Hello",
+  "header": {
+    "top": {
+      "about": "About us",
+      "paymentDelivery": "Payment and Delivery",
+      "promotions": "Promotions",
+      "contacts": "Contacts",
+      "blog": "Blog",
+      "account": "Personal account"
+    },
+    "tagline": "DECANT PERFUME STORE",
+    "searchPlaceholder": "Search",
+    "menu": "Menu",
+    "topNavAria": "Information menu",
+    "categoryNavAria": "Perfume catalog",
+    "nav": {
+      "men": "Men's",
+      "women": "Women's",
+      "unisex": "Unisex",
+      "elite": "Elite",
+      "oriental": "Oriental",
+      "niche": "Niche",
+      "gourmand": "Gourmand"
+    }
+  },
   "navigation": {
     "header": {
       "catalog": "Catalog",
@@ -19,7 +43,7 @@
       "aboutUs": "About us",
       "laboratory": "Laboratory",
       "library": "Library",
-      "paymentDelivery": "Payment and delivery",
+      "paymentDelivery": "Payment and Delivery",
       "warrantyReturns": "Warranty and returns",
       "cooperation": "Cooperation"
     },
@@ -50,6 +74,11 @@
     "logoutError": "Failed to log out. Please try again."
   },
   "hero": {
+    "banner": {
+      "eyebrow": "ORIGINAL PERFUMERY",
+      "line1": "For those who",
+      "line2": "are used to leaving a mark"
+    },
     "slides": {
       "main": {
         "title": "Structure.Lab",
@@ -74,22 +103,29 @@
     "allCatalog": "All products"
   },
   "aboutPage": {
-    "bannerEyebrow": "Est. 2024",
-    "bannerTitle": "A legacy of the future",
-    "bannerSubtitle": "Clothing that breathes nature and love",
-    "storyEyebrow": "Our story",
-    "storyTitle": "From the first touch to a flawless seam",
-    "storyText": "Maloé was born from a wish to give children freedom. We believe premium is not shine, but the quality of natural linen, the softness of muslin, and the ease of a cut that never limits discovering the world.",
-    "storyImageAlt": "Maloé Atelier",
-    "manifestoQuote": "“We create more than clothing — we create a feeling of safety and lightness”",
-    "valuesNaturalnessTitle": "Naturalness",
-    "valuesNaturalnessText": "Only 100% organic fabrics. Linen, cotton and muslin certified to global standards.",
-    "valuesCraftTitle": "Craftsmanship",
-    "valuesCraftText": "Every detail is handmade by our artisans. We oversee every stitch in our own atelier.",
-    "valuesAestheticTitle": "Aesthetics",
-    "valuesAestheticText": "Timeless design. We create clothing that stays relevant and is passed to the next generation.",
-    "ctaTitle": "Authenticity in every detail",
-    "ctaButton": "Go to catalog"
+    "lead": "Perfect Parfums — A space for niche and elite perfumery in decant format for true aesthetes",
+    "intro": "Welcome to Perfect Parfums — an online store that opens the world of high perfumery art for you! We believe a fragrance is much more than a finishing touch to your look. It is an invisible calling card, an emotion in the moment, and a refined way to express your individuality. That is why we carefully select every composition so you can collect new olfactory impressions and refresh your fragrance wardrobe for any mood.",
+    "offerTitle": "What do we offer?",
+    "offerIntro": "Perfect Parfums is a rich, refined collection of original fragrances in a convenient decant format that will satisfy the most discerning connoisseurs:",
+    "offerItem1Title": "Niche perfumery",
+    "offerItem1Text": "unique, complex and conceptual fragrances from leading global brands for those seeking exclusivity and a distinctive trail.",
+    "offerItem2Title": "Luxury classics",
+    "offerItem2Text": "refined, elegant masterpieces recognized worldwide from legendary fashion houses that remain timeless.",
+    "offerItem3Title": "Decant format",
+    "offerItem3Text": "original perfumes in volumes from 2 to 10 ml (and more). An ideal way to wear an expensive fragrance on skin before buying a full bottle or to build an entire collection of rare perfumes at an accessible price.",
+    "offerItem4Title": "Seasonal and themed sets",
+    "offerItem4Text": "ready-made fragrance sets for special occasions, cozy evenings, business meetings or hot summer days, curated by our experts.",
+    "whyTitle": "Why choose Perfect Parfums?",
+    "whyItem1Title": "100% authentic only",
+    "whyItem1Text": "We value our reputation and your trust. All perfumes are purchased exclusively from verified, official sources. Decanting is done with professional tools and strict adherence to technology that preserves every note and the longevity of the fragrance.",
+    "whyItem2Title": "Premium aesthetics",
+    "whyItem2Text": "We pay special attention to detail and the concept of understated luxury. Each decant is presented in stylish, minimalist glass atomizers with quality fine mist spray. Our bottles are pleasant to hold, aesthetically fit into your space and easy to take with you.",
+    "whyItem3Title": "Personal selection and consultations",
+    "whyItem3Text": "The world of perfumery can seem complex, but we are here to be your guides. Our consultants will help you understand fragrance pyramids, explain the difference between notes and select the perfume that will unfold perfectly on your skin.",
+    "cultureTitle": "Perfume culture and olfactory experience",
+    "cultureText": "We strive not only to sell fragrances, but to develop perfume culture. On our platform we share secrets of proper application and storage, tell the stories behind iconic scents, teach you to distinguish accords and help you develop your personal perfumery taste.",
+    "closingTitle": "Find your perfect trail with Perfect Parfums!",
+    "closingText": "Choose perfect.parfums — a place where every millilitre of perfumery excellence brings inspiration and confidence. Experiment with your look, discover new facets of brands and enjoy the highest quality of original perfumery. We are creating not just a store, but a true olfactory journey into a world of luxury and style."
   },
   "contentHub": {
     "sectionTitle": "Content-hub",
@@ -156,35 +192,25 @@
     "secondary": "Request a call"
   },
   "footer": {
-    "description": "Maloé is the harmony of organic fabrics and handcraft. We turn the complexity of atelier techniques into tenderness that gives freedom to what you cherish most.",
-    "catalogColumn": "Catalog",
-    "companyColumn": "Company",
-    "contactColumn": "Contact",
-    "navNew": "New arrivals",
-    "navSale": "Sale",
-    "navGirls": "Girls",
-    "navBoys": "Boys",
-    "company": "COMPANY",
-    "structure": "CATALOG",
-    "contact": "CONTACT",
-    "structures": {
-      "skin": "Skin Structure",
-      "hair": "Hair Structure",
-      "balance": "Balance Structure",
-      "stress": "Stress Structure",
-      "gut": "Gut Structure",
-      "womenMen": "Women / Men / 40+"
-    },
     "contacts": {
-      "email": "maloehelp@gmail.com",
-      "phone": "+38 (067) 967 01 63",
-      "callback": "Request a call →"
+      "title": "CONTACTS",
+      "showroomLabel": "Showroom address:",
+      "showroomAddress": "Dnipro, 92 Yevropeiska St.",
+      "phoneLabel": "Phone:",
+      "phone": "099-000-00-00",
+      "scheduleLabel": "Opening hours:",
+      "scheduleValue": "Mon–Sun 9:00 – 20:00"
     },
-    "bottom": {
-      "copyright": "© 2026 Maloe Atelier. ALL RIGHTS RESERVED",
-      "offer": "Public offer",
+    "information": {
+      "title": "INFORMATION",
+      "paymentDelivery": "Payment and Delivery",
+      "publicOffer": "Public offer",
       "privacy": "Privacy policy",
-      "madeBy": "Developed & supported by: KEYKEY"
+      "deliveryReturns": "Warranty and returns"
+    },
+    "brand": {
+      "perfect": "Perfect",
+      "parfums": "Parfums"
     }
   },
   "breadcrumbs": {
@@ -270,7 +296,7 @@
     "responseCode": "Response code: {code}"
   },
   "home": {
-    "heroCta": "View collection",
+    "heroCta": "Go to catalog",
     "heroFallbackTitle": "Atelier aesthetics\nin every detail",
     "seasonEyebrow": "Lookbook Stories",
     "seasonTitle": "Season collections",
@@ -281,6 +307,21 @@
     "allCatalogCta": "Full catalog"
   },
   "pdp": {
+    "articleLabel": "SKU:",
+    "inStock": "In stock",
+    "outOfStock": "Out of stock",
+    "perMl": "per 1 ml",
+    "chooseVolume": "Choose volume",
+    "totalLabel": "Total:",
+    "addToCart": "ADD TO CART",
+    "addToWishlist": "Add to wishlist",
+    "meta": {
+      "gender": "Gender",
+      "brand": "Brand",
+      "fragranceGroup": "Fragrance group"
+    },
+    "descriptionTitle": "DESCRIPTION",
+    "specsTableTitle": "SPECIFICATIONS",
     "pickVariantHint": "Select options",
     "sizeChartTitle": "Size chart",
     "accessoriesAria": "Accessories",
@@ -305,6 +346,12 @@
     "block": {
       "galleryAria": "Product gallery",
       "infoAria": "Product information and options"
+    },
+    "reviews": {
+      "sectionTitle": "REVIEWS",
+      "addReview": "Add review",
+      "empty": "No reviews yet",
+      "sectionAria": "Reviews"
     },
     "skeletonAria": "Loading product"
   },
@@ -339,7 +386,55 @@
     "onlyInStockSection": "Availability",
     "onlyInStock": "In stock only"
   },
+  "instagramFeed": {
+    "title": "Follow us on Instagram",
+    "username": "@perfect.parfums.raspiv",
+    "profileAria": "Open Instagram @perfect.parfums.raspiv",
+    "postAria": "Open Instagram post {n}",
+    "imageAlt": "Instagram post {n}"
+  },
+  "homeFaq": {
+    "titleLine1": "Have questions?",
+    "titleLine2": "We are happy to answer",
+    "items": {
+      "original": {
+        "question": "Is this original perfumery?",
+        "answer": "Yes. We work with original fragrances in large bottles and decant them into convenient smaller volumes. You get the same composition without overpaying for brand packaging."
+      },
+      "decant": {
+        "question": "How is decanting different from a store with full bottles?",
+        "answer": "You buy the volume you need, not an entire bottle. It is convenient for trying a scent, travel, or when you want several favorites at once."
+      },
+      "longevity": {
+        "question": "How long-lasting are the scents?",
+        "answer": "Longevity depends on the composition, concentration, and your skin. We will help you choose a fragrance that matches your expectations and advise how to apply it for a longer wear."
+      },
+      "volumes": {
+        "question": "What volumes can I order?",
+        "answer": "Convenient sizes are available from miniatures to larger bottles, depending on the fragrance and stock. Current options are always listed on the product page."
+      },
+      "personalPick": {
+        "question": "Do you offer personal fragrance selection?",
+        "answer": "Yes. We started with curated picks on Instagram and still help you choose a scent for your style, mood, and season."
+      },
+      "delivery": {
+        "question": "Do you deliver across Ukraine?",
+        "answer": "Yes, we deliver orders across Ukraine. Details on methods, timing, and delivery cost are in the Payment & Delivery section."
+      }
+    }
+  },
+  "aboutBrand": {
+    "title": "About Perfect Parfums",
+    "brandName": "Perfect parfums",
+    "brandLinkAria": "Go to About us page",
+    "leadSuffix": " is a space where fragrance becomes part of your style.",
+    "paragraph2": "We started on Instagram with a curated selection tailored to your style, and we have kept that philosophy in everything we do. Here you will find premium perfumery: from light everyday classics to niche, oriental, and gourmand scents.",
+    "paragraph3": "We carefully select compositions so that every fragrance sounds pure and deep, and unfolds on your skin the way you deserve.",
+    "imageAlt": "Perfect Parfums perfumery"
+  },
   "reviews": {
+    "homeSectionTitle": "CUSTOMER REVIEWS",
+    "productFallback": "Product",
     "sectionTitle": "Reviews",
     "leaveReview": "Leave a review",
     "sectionAria": "Reviews",
@@ -351,15 +446,19 @@
     "datePlaceholder": "—",
     "nameFallback": "Customer",
     "textFallback": "No review text",
-    "sentTitle": "Review sent",
-    "sentText": "Your review will appear on the site soon",
+    "sentTitle": "Review sent!",
+    "sentText": "Thank you, your rating will appear on the site soon",
+    "modalTitle": "Add review",
     "modalSubtitle": "Share your experience with the product",
     "nameLabel": "Your name",
     "namePlaceholder": "Enter your name",
     "textLabel": "Your review",
     "textPlaceholder": "Write your review",
+    "commentLabel": "Your comment",
+    "commentPlaceholder": "Write your comment",
     "ratingTitle": "Your rating",
     "submitBtn": "Submit review",
+    "publishBtn": "Publish review",
     "submitError": "Could not submit your review. Please try again.",
     "submitErrorMissingProduct": "Could not determine the product for this review.",
     "validation": {
@@ -373,13 +472,17 @@
     "products": "products",
     "filters": "Filters",
     "sort": "Sort",
-    "sortDefault": "Default",
-    "sortPriceDesc": "Price descending",
-    "sortPriceAsc": "Price ascending",
+    "sortBy": "Sort by",
+    "sortDefault": "default",
+    "sortPopular": "popularity",
+    "sortPriceDesc": "highest price",
+    "sortPriceAsc": "lowest price",
     "sortTitleAsc": "By name (A–Z)",
     "activeFiltersHeading": "Filters:",
-    "clearActiveFilters": "Clear",
-    "catalogTitleAll": "Footwear catalog",
+    "clearActiveFilters": "Clear filters",
+    "noProductsForFilters": "No products found for the selected filters",
+    "noProductsEmpty": "Unfortunately, no products were found for your criteria",
+    "catalogTitleAll": "Perfume catalog",
     "paginationPrev": "Previous",
     "paginationNext": "Next",
     "recommendedEyebrow": "Shop the look",
@@ -389,21 +492,16 @@
     "loadErrorRetry": "Try again",
     "searchResults": "Search results: \"{query}\"",
     "bestsellersEyebrow": "Bestsellers",
-    "bestsellersTitle": "Popular models",
+    "bestsellersTitle": "Best sellers",
     "bestsellersAddToCart": "+ Add to cart",
     "bestsellersGoToProduct": "Go to product",
+    "newArrivalsTitle": "New arrivals",
+    "newArrivalsAddToCart": "+ Add to cart",
+    "newArrivalsGoToProduct": "Go to product",
     "archiveSelectionEyebrow": "SEASONAL OFFER",
     "archiveSelectionTitle": "Archive Selection",
     "archiveSelectionSummary": "The last pieces from past collections are now available at special prices. A conscious approach to fashion.",
     "archiveSelectionCta": "View sale items",
-    "brandValuesQuote": "«Clothing created for moments that stay in memory forever»",
-    "brandValuesStatement": "We use only certified organic fabrics and the handwork of our craftspeople in Ukraine.",
-    "brandValuesCareTitle": "Care",
-    "brandValuesCareLabel": "Thoughtful tailoring",
-    "brandValuesLinenTitle": "Linen",
-    "brandValuesLinenLabel": "Natural linen",
-    "brandValuesEcoTitle": "Eco",
-    "brandValuesEcoLabel": "Eco-friendly packaging",
     "carouselCta": "View category →",
     "carouselDemoClothing": "Clothing",
     "carouselDemoHeels": "High heels",
@@ -411,7 +509,8 @@
     "showMoreWithCount": "Show {count} more products"
   },
   "basket": {
-    "basketCount": "Items in basket",
+    "basketCount": "Items in cart:",
+    "basketCountAria": "Items in cart: {count}",
     "clearConfirm": "Are you sure you want to empty the cart?",
     "closeAria": "Close cart",
     "clearAria": "Clear cart",
@@ -419,10 +518,11 @@
     "clearButton": "Clear",
     "emptyText": "Your cart is empty",
     "startShopping": "Start shopping",
-    "total": "Total:",
-    "checkout": "Checkout",
+    "total": "Total due:",
+    "checkout": "Proceed to checkout",
     "continueShopping": "Continue shopping",
-    "pricePerUnit": "Price per unit"
+    "pricePerUnit": "Price per unit",
+    "removeItem": "Remove item"
   },
   "currency": {
     "uah": "UAH"
@@ -432,7 +532,12 @@
     "close": "Close search",
     "popular": "Popular:",
     "popularItem1": "Linen set \"Sable\"",
-    "popularItem2": "Dress \"Fleur d'été\""
+    "popularItem2": "Dress \"Fleur d'été\"",
+    "clear": "Clear search",
+    "showAll": "Show all results",
+    "loading": "Loading…",
+    "empty": "No results found",
+    "error": "Failed to load results"
   },
   "authorization": {
     "loginTitle": "Log in to your account",
@@ -453,8 +558,8 @@
     "termsLink": "user agreement",
     "terms": "By registering, I accept the terms of the user agreement*",
     "forgotPassword": "Forgot password?",
-    "loginBtn": "Log in",
-    "regBtn": "Register",
+    "loginBtn": "Log in to account",
+    "regBtn": "Register account",
     "phoneLabel": "Phone",
     "phonePlaceholder": "+380 (__) ___ __ __",
     "smsCodeLabel": "SMS code",
@@ -517,7 +622,11 @@
     "paymentOnlineDesc": "Card via payment gateway",
     "paymentPostpaidTitle": "Pay on delivery",
     "paymentPostpaidDesc": "Cash or card when picking up",
-    "orderCreateError": "Could not place your order. Please try again."
+    "orderCreateError": "Could not place your order. Please try again.",
+    "paymentMethodLabel": "Payment method*",
+    "choosePaymentMethod": "Choose payment method",
+    "comment": "Comment",
+    "commentPlaceholder": "Order comment..."
   },
   "choose": "Select",
   "txt-modal": {
@@ -588,7 +697,7 @@
     "sum": "Subtotal",
     "delivery": "Delivery",
     "delivery-ststus": "per carrier rates",
-    "all-cost": "Total",
+    "all-cost": "Total due:",
     "btn": "Place order",
     "promoPlaceholder": "Enter promo code",
     "promoApply": "Apply"
@@ -605,7 +714,7 @@
   "profile": {
     "title-prof": "Your profile",
     "title-header": "Personal account",
-    "title-history": "Protocol Archive",
+    "title-history": "Order history",
     "subtitle-prof": "WELCOME, {name}",
     "subtitle-history": "your order history",
     "guestName": "Guest",
@@ -615,13 +724,19 @@
     "viewAllItems": "View all items",
     "collapseItems": "Collapse",
     "updateProfile": "Update profile",
+    "saveChanges": "Save changes",
+    "titlePersonal": "Personal details",
+    "titleDelivery": "Delivery",
+    "titleWishlist": "Wishlist",
     "updateSuccess": "Profile updated successfully",
     "updateError": "Error updating profile",
     "orderNotFound": "Order not found",
     "backToOrders": "Back to order history",
-    "link1": "personal information",
-    "link2": "order history",
-    "link3": "log out",
+    "link1": "Personal information",
+    "link2": "Order history",
+    "link3": "Log out",
+    "link4": "Delivery address",
+    "link5": "Wishlist",
     "order-title": "Order",
     "order-br": "Archive / Order",
     "order-detail-subtitle": "archive",
@@ -639,7 +754,7 @@
   },
 
   "warrantyReturnsPage": {
-    "lead": "Warranty from Maloe Atelier",
+    "lead": "Warranty from Perfect Parfums",
     "intro": "We strive to provide our customers with high-quality, reliable products, so we guarantee:",
     "originality": "Product authenticity — we work only with official suppliers and verified manufacturers.",
     "warranty": "Warranty service — all products are covered by the manufacturer's official warranty.",
@@ -658,7 +773,7 @@
     "phoneLabel": "Phone:",
     "phone": "+38 (067) 967 01 63",
     "emailLabel": "Email:",
-    "email": "maloe.help@gmail.com"
+    "email": "perfectparfums.help@gmail.com"
 
   },
   "contactsPage": {
@@ -677,15 +792,16 @@
     "sourceSelf": "Found on my own",
     "emailHint": "We reply within 1 hour",
     "phoneHint": "Mon–Fri, 9:00 AM–7:00 PM",
-    "chipEmail": "Email",
-    "chipPhone": "Phone"
+    "email": "perfect.parfums_support@gmail.com",
+    "phone": "+38 (067) 967 01 63",
+    "chipEmail": "EMAIL",
+    "chipPhone": "PHONE",
+    "socialHandle": "@perfect.parfums"
   },
   "notFound": {
     "back": "Go back",
-    "eyebrow": "Paths diverged",
-    "title": "It seems the thread has broken...",
-    "description": "This path leads into the unknown. Even the finest artisans need a new spool of thread. Let us return to where order and comfort reign in our atelier.",
-    "ctaHome": "Home",
-    "ctaCatalog": "View catalog"
+    "title": "Page not found",
+    "description": "Sorry, the page you are looking for no longer exists or has been moved. Let us take you back to the world of exquisite fragrances.",
+    "ctaHome": "Back to home"
   }
 }

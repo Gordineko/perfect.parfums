@@ -1,9 +1,7 @@
-/* layout — align with design tokens (--container-max) */
 $container-max: 1500px;
-$container-padding: 24px;
-$container-padding-mobile: 8px;
+$container-padding: clamp(1rem, 3vw, 2.5rem);
 /* colors */
-$white: #fefefe;
+$white: #fefefa;
 $black: #000;
 $dark: #0d0d0d;
 $dark-70: rgba($dark, 0.7);
@@ -44,11 +42,9 @@ $accent-20: rgba($accent, 0.2);
 $accent-30: rgba($accent, 0.3);
 $accent-50: rgba($accent, 0.5);
 /* fonts */
-$font-primary:
-  var(--font-sofia-sans-condensed), sans-serif;
-$font-secondary: "Golos Text";
-$font-tertiary: var(--font-urbanist), $font-primary;
-$font-montserrat: "Montserrat", $font-primary;
+$font-primary: var(--font-heading);
+$font-secondary: var(--font-body);
+$font-montserrat: var(--font-heading);
 /* font weights */
 $fw-regular: 400;
 $fw-medium: 500;
@@ -57,7 +53,11 @@ $fw-bold: 700;
 $fw-extrabold: 800;
 
 /* typography tokens */
-$section-heading-title-tablet: 24px;
+$section-h2-desktop: 1.75rem;
+$section-h2-tablet: 1.5rem;
+$section-h2-mobile: 1.25rem;
+$section-heading-title-tablet: $section-h2-tablet;
+$section-heading-title-mobile: $section-h2-mobile;
 // mixins
 @mixin nav-text {
   color: $dark;
@@ -155,26 +155,27 @@ $section-heading-title-tablet: 24px;
   text-transform: uppercase;
 }
 
-@mixin section-heading-title {
-  margin: 0;
-  color: $dark;
-  font-family: $font-montserrat;
-  font-size: 60px;
-  font-weight: $fw-bold;
-  line-height: 1.1;
+/* Заголовки секцій (не банер): desktop 28px, tablet 24px, mobile 20px */
+@mixin section-h2-title {
+  font-family: var(--font-heading);
+  font-size: $section-h2-desktop;
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-base);
   text-transform: uppercase;
-
-  @include down($bp-desktop) {
-    font-size: 48px;
-  }
+  color: var(--color-black);
 
   @include tablet-only {
-    font-size: $section-heading-title-tablet;
+    font-size: $section-h2-tablet;
   }
 
-  @include down($bp-tablet) {
-    font-size: $section-heading-title-tablet;
+  @include below-tablet {
+    font-size: $section-h2-mobile;
   }
+}
+
+@mixin section-heading-title {
+  margin: 0;
+  @include section-h2-title;
 }
 
 @mixin second-title {
@@ -213,11 +214,23 @@ $section-heading-title-tablet: 24px;
     font-size: 12px;
   }
 }
-/* breakpoints — mobile 320–768, tablet 768–1250, desktop 1250+ */
+/*
+ * Адаптив (єдині значення для SCSS і CSS-змінних у tokens/_layout.scss):
+ *
+ * | Діапазон viewport      | Міксін / змінна              |
+ * |------------------------|------------------------------|
+ * | ≤399.98px (макет 400)  | mobile-only                  |
+ * | ≤767.98px (до планшета)| below-tablet, down($bp-tablet)|
+ * | 768px … 1249.98px      | tablet-only                  |
+ * | ≥1250px                | desktop-only                 |
+ * | ≤1249.98px             | down($bp-desktop)            |
+ */
 $bp-desktop: 1250px;
 $bp-tablet: 768px;
-$bp-mobile-max: 767.98px;
 $bp-tablet-max: 1249.98px;
+$bp-mobile: 400px;
+$bp-mobile-max: 399.98px;
+$bp-below-tablet-max: 767.98px;
 $bp-desktop-narrow: 1200px;
 $bp-tablet-landscape-max: 1023.98px;
 
@@ -230,7 +243,7 @@ $desktop: $bp-desktop;
       @content;
     }
   } @else if $bp == $bp-tablet {
-    @media (max-width: $bp-mobile-max) {
+    @media (max-width: $bp-below-tablet-max) {
       @content;
     }
   } @else {
@@ -248,6 +261,12 @@ $desktop: $bp-desktop;
 
 @mixin mobile-only {
   @media (max-width: $bp-mobile-max) {
+    @content;
+  }
+}
+
+@mixin below-tablet {
+  @media (max-width: $bp-below-tablet-max) {
     @content;
   }
 }
@@ -323,8 +342,39 @@ $filter-sidebar-width: 357px;
 $filter-card-shadow: 0 4px 24px rgba(13, 13, 13, 0.08);
 $filter-checkbox-size: 20px;
 $filter-checkbox-radius: 5px;
-$filter-checkbox-gap: $space-sm;
+$filter-checkbox-gap: $space-xs;
+$filter-row-gap: $space-xs;
 $filter-section-gap: $space-md;
+$filter-value-color: var(--black, #11110f);
+$filter-value-font-size: 20px;
+$filter-value-line-height: 1.3;
+$filter-divider-color: #bdb8ae;
+
+/* Лінія на всю ширину секції (батько на всю ширину сторінки). */
+@mixin section-bleed-line($edge: bottom, $color: $filter-divider-color) {
+  content: "";
+  position: absolute;
+  #{$edge}: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: $color;
+  pointer-events: none;
+}
+
+/* Лінія на всю ширину вікна (для елементів усередині .container). */
+@mixin viewport-bleed-line($edge: bottom, $color: $filter-divider-color) {
+  content: "";
+  position: absolute;
+  #{$edge}: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  max-width: 100vw;
+  height: 1px;
+  background: $color;
+  pointer-events: none;
+}
 $filter-card-radius: 32px;
 $filter-border-subtle: $black-08;
 /* above .header (100) and burger overlay (101) */

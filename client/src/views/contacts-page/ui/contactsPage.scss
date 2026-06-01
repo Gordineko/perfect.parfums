@@ -1,8 +1,25 @@
-.contacts-page {
-  padding-bottom: 80px;
+.contacts-page-shell {
+  background: #fefefe;
 
-  @include down($bp-desktop) {
-    padding-bottom: 48px;
+  :global(.products-layout-wrapper::before) {
+    display: none;
+  }
+}
+
+.contacts-page {
+  background: #fefefe;
+
+  &__shell {
+    padding: 40px 0 80px;
+    background: #fefefe;
+
+    @include tablet-only {
+      padding: 32px 0 64px;
+    }
+
+    @include below-tablet {
+      padding: 24px 0 48px;
+    }
   }
 
   &__grid {
@@ -10,79 +27,100 @@
     grid-template-columns: 1fr 1.35fr;
     gap: 24px;
     align-items: start;
-    margin-top: 24px;
+    margin-top: 0;
 
     @include down($bp-desktop) {
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 20px;
     }
 
-    @include mobile-only {
-      margin-top: 16px;
+    @include below-tablet {
+      gap: 12px;
     }
   }
 
   &__right {
     display: flex;
     flex-direction: column;
+    gap: 24px;
+
+    @include tablet-only {
+      gap: 20px;
+    }
+
+    @include below-tablet {
+      gap: 16px;
+    }
+  }
+
+  &__contact-stack {
+    display: flex;
+    flex-direction: column;
     gap: 16px;
 
-    @include mobile-only {
+    @include tablet-only {
+      gap: 12px;
+    }
+
+    @include below-tablet {
       gap: 12px;
     }
   }
 
   &__social-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+
+    @include tablet-only {
+      gap: 12px;
+    }
+
+    @include below-tablet {
+      gap: 10px;
+    }
   }
 
   &__card {
-    border: 1px solid rgba(15, 23, 42, 0.08);
-    background: #fbfbf9;
+    box-sizing: border-box;
+    border: 1px solid rgba(26, 26, 26, 0.08);
+    background: #fefefe;
     padding: 24px;
+
+    &:hover,
+    &:active,
+    &:focus-visible {
+      border-color: rgba(26, 26, 26, 0.08);
+      background: #fefefe;
+    }
   }
 
   &__card--wide {
     padding: 40px;
 
-    &:hover,
-    &:active {
-      border-color: rgba(15, 23, 42, 0.08);
-      background: #fbfbf9;
-    }
-
     @include tablet-only {
-      padding: 24px;
+      padding: 20px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       padding: 16px;
     }
   }
 
   &__card--social {
-    border: 1px solid var(--Dark, #1a1a1a);
-    background: #fafafa;
+    padding: 40px 24px;
 
-    &:hover {
-      border-color: var(--Dark, #1a1a1a);
-      background: #fafafa;
+    @include tablet-only {
+      padding: 24px 16px;
     }
 
-    @include down($bp-desktop) {
-      border: 1px solid rgba(15, 23, 42, 0.08);
-      background: rgba(254, 254, 254, 0.8);
-
-      &:hover {
-        border-color: var(--Dark, #1a1a1a);
-        background: rgba(254, 254, 254, 0.8);
-      }
+    @include below-tablet {
+      padding: 20px 12px;
     }
 
-    @include mobile-only {
-      padding: 16px;
+    &:hover,
+    &:focus-visible {
+      border: 1px solid var(--burgundy, #68181f);
     }
   }
 
@@ -93,36 +131,41 @@
     cursor: pointer;
 
     &:focus-visible {
-      outline: 2px solid rgba(255, 153, 214, 0.7);
+      outline: 2px solid var(--burgundy, #68181f);
       outline-offset: 2px;
     }
-
   }
 
   &__card--form {
     padding: 40px;
 
     @include tablet-only {
-      padding: 24px;
+      padding: 20px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       padding: 16px;
     }
   }
 
   &__card-title {
     margin: 0 0 24px;
-    color: var(--Dark, #1a1a1a);
+    color: var(--black, #11110f);
     font-family: var(--font-body);
     font-size: 24px;
+    font-style: normal;
     font-weight: 500;
     line-height: normal;
     text-align: left;
 
-    @include mobile-only {
+    @include tablet-only {
       margin-bottom: 16px;
-      font-size: 24px;
+      font-size: 20px;
+    }
+
+    @include below-tablet {
+      margin-bottom: 12px;
+      font-size: 18px;
       text-align: center;
     }
   }
@@ -133,21 +176,31 @@
   flex-direction: column;
   gap: 24px;
 
+  @include tablet-only {
+    gap: 20px;
+  }
+
+  @include below-tablet {
+    gap: 16px;
+  }
+
   @mixin control {
     box-sizing: border-box;
     width: 100%;
     border: 1px solid #ccc;
     background: #fff;
-    color: var(--Dark, #1a1a1a);
+    color: var(--black, #11110f);
     font-family: var(--font-body);
     font-size: 16px;
+    font-style: normal;
     font-weight: 400;
     line-height: normal;
     outline: none;
 
     &:focus,
-    &:focus-visible {
-      border-color: var(--Dark, #1a1a1a);
+    &:focus-visible,
+    &--filled {
+      border: 1px solid var(--burgundy, #68181f);
     }
   }
 
@@ -156,9 +209,13 @@
     grid-template-columns: 1fr 1fr;
     gap: 24px;
 
-    @include mobile-only {
+    @include tablet-only {
+      gap: 16px;
+    }
+
+    @include below-tablet {
       grid-template-columns: 1fr;
-      gap: 24px;
+      gap: 12px;
     }
   }
 
@@ -166,23 +223,32 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+
+    @include below-tablet {
+      gap: 6px;
+    }
   }
 
   &__field--source {
-    @include mobile-only {
+    @include below-tablet {
       display: none;
     }
   }
 
   &__label {
-    color: var(--Dark, #1a1a1a);
+    color: var(--black, #11110f);
     font-family: var(--font-body);
     font-size: 18px;
-    font-weight: 400;
+    font-style: normal;
+    font-weight: 500;
     line-height: normal;
 
-    &--message {
-      font-weight: 500;
+    @include tablet-only {
+      font-size: 16px;
+    }
+
+    @include below-tablet {
+      font-size: 14px;
     }
   }
 
@@ -190,17 +256,27 @@
   &__textarea {
     @include control;
     padding: 12px 16px;
+
+    @include below-tablet {
+      padding: 10px 12px;
+      font-size: 14px;
+    }
   }
 
   &__input::placeholder,
   &__textarea::placeholder {
-    color: var(--Dark, #1a1a1a);
+    color: var(--Gray, #9ca3af);
+    font-weight: 400;
     opacity: 1;
   }
 
   &__textarea {
     resize: vertical;
     min-height: 120px;
+
+    @include below-tablet {
+      min-height: 96px;
+    }
   }
 
   &__select--sr {
@@ -225,8 +301,13 @@
     text-align: left;
     cursor: pointer;
 
+    @include below-tablet {
+      padding: 10px 12px;
+      font-size: 14px;
+    }
+
     &[aria-expanded="true"] {
-      border-color: var(--Dark, #1a1a1a);
+      border-color: var(--burgundy, #68181f);
     }
   }
 
@@ -234,8 +315,8 @@
     width: 10px;
     height: 10px;
     flex: 0 0 10px;
-    border-right: 2px solid var(--Dark, #1a1a1a);
-    border-bottom: 2px solid var(--Dark, #1a1a1a);
+    border-right: 2px solid var(--black, #11110f);
+    border-bottom: 2px solid var(--black, #11110f);
     transform: rotate(45deg);
     margin-top: -2px;
   }
@@ -260,7 +341,7 @@
     background: transparent;
     text-align: left;
     cursor: pointer;
-    color: var(--Dark, #1a1a1a);
+    color: var(--black, #11110f);
     font-family: var(--font-body);
     font-size: 16px;
     font-weight: 400;
@@ -282,29 +363,41 @@
     box-sizing: border-box;
     padding: 16px 80px;
     border: 0;
-    background: rgba(26, 26, 26, 0.5);
+    background: var(--burgundy, #68181f);
     color: var(--white, #fafafa);
     font-family: var(--font-body);
     font-size: 16px;
+    font-style: normal;
     font-weight: 500;
     line-height: normal;
     cursor: pointer;
 
-    @include mobile-only {
+    @include tablet-only {
+      padding: 14px 48px;
+      font-size: 15px;
+    }
+
+    @include below-tablet {
       display: flex;
       align-self: stretch;
       width: 100%;
-      padding-inline: 16px;
+      padding: 14px 16px;
+      font-size: 14px;
+    }
+
+    &:hover:not(:disabled) {
+      background: var(--color-burgundy-active, #521217);
     }
 
     &:focus-visible {
-      outline: 2px solid var(--Dark, #1a1a1a);
+      outline: 2px solid var(--burgundy, #68181f);
       outline-offset: 2px;
     }
 
     &:disabled {
+      background: rgba(104, 24, 31, 0.7);
+      opacity: 1;
       cursor: not-allowed;
-      opacity: 0.5;
     }
   }
 }
@@ -314,54 +407,74 @@
   flex-direction: column;
   gap: 16px;
 
+  @include tablet-only {
+    gap: 12px;
+  }
+
+  @include below-tablet {
+    gap: 10px;
+  }
+
   &__chip {
     display: inline-flex;
     width: fit-content;
     align-self: flex-start;
     padding: 8px 16px;
-    border: 1px solid var(--Dark, #1a1a1a);
-    color: var(--Dark, #1a1a1a);
-    font-family: var(--font-body);
+    border: 1px solid var(--black, #11110f);
+    color: var(--black, #11110f);
+    font-family: var(--font-body), "Lato", sans-serif;
     font-size: 16px;
+    font-style: normal;
     font-weight: 400;
     line-height: normal;
-    text-transform: uppercase;
 
-    @include mobile-only {
-      font-size: 12px;
+    @include tablet-only {
       padding: 6px 12px;
+      font-size: 14px;
+    }
+
+    @include below-tablet {
+      padding: 6px 10px;
+      font-size: 12px;
     }
   }
 
   &__value {
     margin: 0;
-    color: var(--Dark, #1a1a1a);
-    font-family: var(--font-body);
+    color: var(--black, #11110f);
+    font-family: var(--font-body), "Lato", sans-serif;
     font-size: 32px;
+    font-style: normal;
     font-weight: 500;
     line-height: normal;
     letter-spacing: 0.32px;
     word-break: break-word;
 
     @include tablet-only {
-      font-size: 28px;
+      font-size: 24px;
+      letter-spacing: 0.24px;
     }
 
-    @include mobile-only {
-      font-size: 20px;
-      letter-spacing: 0.2px;
+    @include below-tablet {
+      font-size: 18px;
+      letter-spacing: 0.18px;
     }
   }
 
   &__hint {
     margin: 0;
-    color: var(--Gray, #9ca3af);
-    font-family: var(--font-body);
+    color: var(--grey, #bdb8ae);
+    font-family: var(--font-body), "Lato", sans-serif;
     font-size: 20px;
+    font-style: normal;
     font-weight: 400;
     line-height: normal;
 
-    @include mobile-only {
+    @include tablet-only {
+      font-size: 16px;
+    }
+
+    @include below-tablet {
       font-size: 14px;
     }
   }
@@ -371,70 +484,56 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 24px;
+  width: 100%;
+  min-width: 0;
 
-  @include mobile-only {
-    gap: 12px;
+  @include tablet-only {
+    gap: 16px;
   }
 
-  &__platform {
-    display: none;
-    text-transform: uppercase;
-
-    @include down($bp-desktop) {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 16px;
-      border: 1px solid var(--Dark, #1a1a1a);
-      color: var(--Dark, #1a1a1a);
-      font-family: var(--font-body);
-      font-size: 14px;
-      font-weight: 500;
-      line-height: normal;
-    }
-
-    @include mobile-only {
-      font-size: 10px;
-    }
+  @include below-tablet {
+    gap: 12px;
   }
 
   &__icon {
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    padding: 12px;
-    border-radius: 999px;
-    background: var(--color-white);
-    border: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
-    color: var(--color-text);
-
-    @include down($bp-desktop) {
-      display: none;
-    }
+    flex-shrink: 0;
+    line-height: 0;
 
     svg {
-      width: 26px;
-      height: 26px;
+      width: 50px;
+      height: 50px;
+
+      @include tablet-only {
+        width: 44px;
+        height: 44px;
+      }
+
+      @include below-tablet {
+        width: 40px;
+        height: 40px;
+      }
     }
   }
 
   &__handle {
     margin: 0;
-    color: var(--Dark, #1a1a1a);
-    font-family: var(--font-body);
+    color: var(--black, #11110f);
+    font-family: Inter, var(--font-body), "Lato", sans-serif;
     font-size: 32px;
+    font-style: normal;
     font-weight: 500;
     line-height: normal;
     text-align: center;
+    word-break: break-word;
 
-    @include down($bp-desktop) {
-      font-size: 28px;
+    @include tablet-only {
+      font-size: 22px;
     }
 
-    @include mobile-only {
+    @include below-tablet {
       font-size: 16px;
     }
   }

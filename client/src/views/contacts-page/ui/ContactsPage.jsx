@@ -2,10 +2,16 @@
 
 import {
   formatUaPhone,
+  MQ,
   normalizeUaPhoneDigits,
   PageHeader,
   useI18n,
 } from "@shared";
+import {
+  contactsSocialLinkIds,
+  socialLinks,
+} from "@shared/config/socialLinks";
+import clsx from "clsx";
 import { useParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -68,7 +74,7 @@ export default function ContactsPage() {
   const sourceRef = useRef(null);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767.98px)");
+    const mq = window.matchMedia(MQ.belowTablet);
     const sync = () => setIsSourceFieldHidden(mq.matches);
     sync();
     mq.addEventListener("change", sync);
@@ -103,6 +109,11 @@ export default function ContactsPage() {
     setIsSourceOpen(false);
   };
 
+  const isPhoneFilled = useMemo(() => {
+    const phoneDigits = normalizeUaPhoneDigits(form.phone);
+    return phoneDigits.length > 3;
+  }, [form.phone]);
+
   const isFormValid = useMemo(() => {
     const nameOk = form.name.trim().length > 0;
     const phoneDigits = normalizeUaPhoneDigits(form.phone);
@@ -123,11 +134,13 @@ export default function ContactsPage() {
         locale={locale}
         breadcrumbsLabels={breadcrumbsLabels}
         breadcrumbsItems={breadcrumbsItems}
-        title={title}
+        showTitle={false}
+        plainBreadcrumbs
       />
 
-      <div className="container">
-        <div className="contacts-page__grid">
+      <div className="contacts-page__shell">
+        <div className="container">
+          <div className="contacts-page__grid">
           <section className="contacts-page__card contacts-page__card--form">
             <h2 className="contacts-page__card-title">
               {t("contactsPage.formTitle")}
@@ -141,7 +154,10 @@ export default function ContactsPage() {
                   </label>
                   <input
                     id="contacts-name"
-                    className="contacts-form__input"
+                    className={clsx(
+                      "contacts-form__input",
+                      form.name.trim() && "contacts-form__input--filled",
+                    )}
                     type="text"
                     value={form.name}
                     onChange={onChange("name")}
@@ -154,7 +170,10 @@ export default function ContactsPage() {
                   </label>
                   <input
                     id="contacts-phone"
-                    className="contacts-form__input"
+                    className={clsx(
+                      "contacts-form__input",
+                      isPhoneFilled && "contacts-form__input--filled",
+                    )}
                     type="tel"
                     inputMode="tel"
                     autoComplete="tel"
@@ -189,7 +208,10 @@ export default function ContactsPage() {
 
                   <button
                     type="button"
-                    className="contacts-form__select contacts-form__select--custom"
+                    className={clsx(
+                      "contacts-form__select contacts-form__select--custom",
+                      form.source && "contacts-form__select--custom--filled",
+                    )}
                     aria-haspopup="listbox"
                     aria-expanded={isSourceOpen}
                     onClick={() => setIsSourceOpen((v) => !v)}
@@ -233,7 +255,10 @@ export default function ContactsPage() {
                 </label>
                 <textarea
                   id="contacts-message"
-                  className="contacts-form__textarea"
+                  className={clsx(
+                    "contacts-form__textarea",
+                    form.message.trim() && "contacts-form__textarea--filled",
+                  )}
                   rows={4}
                   value={form.message}
                   onChange={onChange("message")}
@@ -252,15 +277,18 @@ export default function ContactsPage() {
           </section>
 
           <section className="contacts-page__right">
+            <div className="contacts-page__contact-stack">
             <a
               className="contacts-page__card contacts-page__card--wide contacts-page__card--link"
-              href="mailto:maloe_support@gmail.com"
+              href={`mailto:${t("contactsPage.email")}`}
             >
               <div className="contacts-info">
                 <span className="contacts-info__chip">
                   {t("contactsPage.chipEmail")}
                 </span>
-                <p className="contacts-info__value">maloe_support@gmail.com</p>
+                <p className="contacts-info__value">
+                  {t("contactsPage.email")}
+                </p>
                 <p className="contacts-info__hint">
                   {t("contactsPage.emailHint")}
                 </p>
@@ -275,49 +303,44 @@ export default function ContactsPage() {
                 <span className="contacts-info__chip">
                   {t("contactsPage.chipPhone")}
                 </span>
-                <p className="contacts-info__value">+38 (067) 967 01 63</p>
+                <p className="contacts-info__value">{t("contactsPage.phone")}</p>
                 <p className="contacts-info__hint">
                   {t("contactsPage.phoneHint")}
                 </p>
               </div>
             </a>
+            </div>
 
             <div className="contacts-page__social-grid">
-              <a
-                className="contacts-page__card contacts-page__card--social contacts-page__card--link"
-                href="https://www.instagram.com/world.of_heels/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="contacts-info">
-                  <span className="contacts-info__chip">Instagram</span>
-                  <p className="contacts-info__value">@world.of_heels</p>
-                </div>
-              </a>
-              <a
-                className="contacts-page__card contacts-page__card--social contacts-page__card--link"
-                href="https://t.me/woh_support"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="contacts-info">
-                  <span className="contacts-info__chip">Telegram</span>
-                  <p className="contacts-info__value">@woh.support</p>
-                </div>
-              </a>
-              <a
-                className="contacts-page__card contacts-page__card--social contacts-page__card--link"
-                href="https://www.tiktok.com/@world.of_heels?_r=1&_t=ZS-95mPRroZ0Dw"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <div className="contacts-info">
-                  <span className="contacts-info__chip">TikTok</span>
-                  <p className="contacts-info__value">world.of.heels</p>
-                </div>
-              </a>
+              {contactsSocialLinkIds.map((id) => {
+                const link = socialLinks.find((item) => item.id === id);
+                if (!link) return null;
+
+                const Icon = link.Icon;
+
+                return (
+                  <a
+                    key={link.id}
+                    className="contacts-page__card contacts-page__card--social contacts-page__card--link"
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${link.label} ${t("contactsPage.socialHandle")}`}
+                  >
+                    <div className="contacts-social">
+                      <span className="contacts-social__icon">
+                        <Icon label={link.label} />
+                      </span>
+                      <p className="contacts-social__handle">
+                        {t("contactsPage.socialHandle")}
+                      </p>
+                    </div>
+                  </a>
+                );
+              })}
             </div>
           </section>
+          </div>
         </div>
       </div>
     </div>

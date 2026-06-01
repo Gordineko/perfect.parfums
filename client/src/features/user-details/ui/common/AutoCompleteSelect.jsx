@@ -9,17 +9,16 @@ const DropdownChevron = (props) => (
   <components.DropdownIndicator {...props}>
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="10"
-      height="6"
-      viewBox="0 0 10 6"
+      width="16"
+      height="8"
+      viewBox="0 0 16 8"
       fill="none"
       aria-hidden="true"
       focusable="false"
     >
       <path
-        d="M8.59961 0.799805L4.59961 3.7998L0.599609 0.799805"
-        stroke="#0D0D0D"
-        strokeWidth="2"
+        d="M15.7403 0.253838C16.0866 0.592376 16.0866 1.14109 15.7403 1.47963L9.84968 7.23843C8.81129 8.25358 7.12791 8.25389 6.08914 7.23915L0.259716 1.54455C-0.0865707 1.2061 -0.0865707 0.657293 0.259716 0.318842C0.605914 -0.0196095 1.16728 -0.0196095 1.51347 0.318842L7.33988 6.01491C7.68617 6.35338 8.24744 6.35338 8.59364 6.01491L14.4866 0.253838C14.8328 -0.0846138 15.3941 -0.0846138 15.7403 0.253838Z"
+        fill="#BDB8AE"
       />
     </svg>
   </components.DropdownIndicator>
@@ -29,7 +28,7 @@ const PROFILE_BORDER_DEFAULT = "rgba(153, 153, 153, 0.5)";
 const PROFILE_BORDER_FOCUSED = "var(--Dark, #1A1A1A)";
 const PROFILE_VALUE_TEXT = {
   color: "var(--Dark, #0D0D0D)",
-  fontFamily: "Inter, sans-serif",
+  fontFamily: "var(--font-body)",
   fontSize: "16px",
   fontStyle: "normal",
   fontWeight: 400,
@@ -39,6 +38,8 @@ const PROFILE_VALUE_TEXT = {
 export default function AutoCompleteSelect({
   isProduct = false,
   variant = "checkout",
+  isSearchable: isSearchableProp,
+  uiVariant = "default",
   id,
   label,
   name,
@@ -103,6 +104,10 @@ export default function AutoCompleteSelect({
   const finalPlaceholder = placeholder || (isProduct ? label : t("choose"));
   const controlFontSize = isMobile ? "14px" : "16px";
   const isProfile = variant === "profile";
+  const isOrder = variant === "checkout" && uiVariant === "order";
+  const isSearchable =
+    typeof isSearchableProp === "boolean" ? isSearchableProp : !isProfile;
+  const orderFontSize = isMobile ? "16px" : "20px";
 
   const profileControlHeight = isMobile && isProfile ? "48px" : "53px";
 
@@ -150,6 +155,28 @@ export default function AutoCompleteSelect({
       };
     }
 
+    if (isOrder) {
+      const borderColor = state.isFocused
+        ? "var(--burgundy, #68181F)"
+        : "#bdb8ae";
+
+      return {
+        ...base,
+        borderRadius: "0px",
+        background: "var(--white, #FEFEFA)",
+        backdropFilter: "none",
+        height: "53px",
+        borderWidth: "1px",
+        borderStyle: "solid",
+        borderColor,
+        boxShadow: "none",
+        "&:hover": {
+          borderColor,
+          background: "var(--white, #FEFEFA)",
+        },
+      };
+    }
+
     return {
       ...base,
       borderRadius: "0px",
@@ -169,9 +196,19 @@ export default function AutoCompleteSelect({
     ...base,
     ...(isProfile
       ? PROFILE_VALUE_TEXT
+      : isOrder
+        ? {
+            color: "#161330",
+            fontFamily: "var(--font-body), Lato, sans-serif",
+            fontSize: orderFontSize,
+            fontStyle: "normal",
+            fontWeight: 400,
+            lineHeight: "normal",
+            margin: 0,
+          }
       : {
           color: "var(--Dark, #0D0D0D)",
-          fontFamily: "\"Golos Text\"",
+          fontFamily: "var(--font-body)",
           fontSize: controlFontSize,
           fontStyle: "normal",
           fontWeight: 600,
@@ -204,6 +241,32 @@ export default function AutoCompleteSelect({
       };
     }
 
+    if (isOrder) {
+      const hoverBg = "rgba(189, 184, 174, 0.20)";
+      const selectedBg = "rgba(189, 184, 174, 0.35)";
+      return {
+        ...base,
+        borderRadius: "0px",
+        padding: "0 16px",
+        margin: "2px 0",
+        color: "#161330",
+        fontFamily: "var(--font-body), Lato, sans-serif",
+        fontSize: orderFontSize,
+        fontStyle: "normal",
+        fontWeight: 400,
+        lineHeight: "normal",
+        backgroundColor: state.isSelected
+          ? selectedBg
+          : state.isFocused
+            ? hoverBg
+            : "transparent",
+        cursor: "pointer",
+        "&:active": {
+          backgroundColor: hoverBg,
+        },
+      };
+    }
+
     return {
       ...base,
       borderRadius: "0px",
@@ -225,14 +288,21 @@ export default function AutoCompleteSelect({
   };
 
   return (
-    <div className="custom-select-wrapper">
-      <label htmlFor={id} className="custom-select-label">
-        {label}
-      </label>
+    <div
+      className={`custom-select-wrapper${
+        isProfile ? " custom-select-wrapper--no-label" : ""
+      }`}
+    >
+      {!isProfile ? (
+        <label htmlFor={id} className="custom-select-label">
+          {label}
+        </label>
+      ) : null}
       <Select
         instanceId={id} 
         inputId={id}
         name={name}
+        aria-label={isProfile ? label : undefined}
         className="select-new-post"
         classNamePrefix="react-select"
         options={options}
@@ -240,7 +310,7 @@ export default function AutoCompleteSelect({
         onChange={handleChange}
         onBlur={!isProduct ? onBlur : undefined}
         isDisabled={disabled}
-        isSearchable={!isProfile}
+        isSearchable={isSearchable}
         placeholder={finalPlaceholder}
         menuPortalTarget={menuTarget}
         components={{
@@ -297,13 +367,19 @@ export default function AutoCompleteSelect({
           placeholder: (base) =>
             isProfile
               ? getProfileValueDisplayStyles("#9CA3AF")
+              : isOrder
+                ? { ...getValueTextStyles(base), fontWeight: 300 }
               : {
                   ...base,
                   color: "#999",
                   fontSize: controlFontSize,
                 },
           singleValue: (base) =>
-            isProfile ? getProfileValueDisplayStyles() : getValueTextStyles(base),
+            isProfile
+              ? getProfileValueDisplayStyles()
+              : isOrder
+                ? { ...getValueTextStyles(base), fontWeight: 400 }
+                : getValueTextStyles(base),
           indicatorSeparator: () => ({ display: "none" }),
           input: (base) =>
             isProfile

@@ -61,14 +61,17 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
         }
     };
 
-    const spanTabletClass =
-        variant === "profile" ? " form-group--span-tablet" : "";
+    const isProfile = variant === "profile";
+    const formGroupClass = isProfile ? "form-group form-group--no-label" : "form-group";
+    const spanTabletClass = isProfile ? " form-group--span-tablet" : "";
 
     return (
         <>
-            <div className="form-group">
+            <div className={formGroupClass}>
                 <AutoCompleteSelect
                     variant={variant}
+                    isSearchable={false}
+                    uiVariant={variant === "checkout" ? "order" : "default"}
                     id="delivery-type-select"
                     label={t('checkout.deliveryMethod')}
                     name="deliveryType"
@@ -92,9 +95,11 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
                     ) : null}
 
                     {values.deliveryType === DELIVERY_TYPES.MEEST_BRANCH && (
-                        <div className="form-group">
+                        <div className={formGroupClass}>
                             <AutoCompleteSelect
                                 variant={variant}
+                                isSearchable={false}
+                                uiVariant={variant === "checkout" ? "order" : "default"}
                                 id="country-select"
                                 label={t('checkout.country')}
                                 name="country"
@@ -111,9 +116,11 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
                         </div>
                     )}
 
-                    <div className="form-group">
+                    <div className={formGroupClass}>
                         <AutoCompleteSelect
                             variant={variant}
+                            isSearchable={false}
+                            uiVariant={variant === "checkout" ? "order" : "default"}
                             id="area-select" 
                             label={t('checkout.region')} 
                             name="area"
@@ -141,9 +148,11 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
                         />
                     </div>
 
-                    <div className="form-group">
+                    <div className={formGroupClass}>
                         <AutoCompleteSelect
                             variant={variant}
+                            isSearchable={false}
+                            uiVariant={variant === "checkout" ? "order" : "default"}
                             id="city-select" 
                             label={t('checkout.city')} 
                             name="city"
@@ -159,9 +168,11 @@ const DeliverySection = ({ formik, variant = "checkout" }) => {
                         />
                     </div>
 
-                    <div className={`form-group${spanTabletClass}`}>
+                    <div className={`${formGroupClass}${spanTabletClass}`}>
                         <AutoCompleteSelect
                             variant={variant}
+                            isSearchable={false}
+                            uiVariant={variant === "checkout" ? "order" : "default"}
                             id="warehouse-select" 
                             label={t('checkout.branch')} 
                             name="warehouse"

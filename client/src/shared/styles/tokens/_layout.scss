@@ -1,12 +1,14 @@
 :root {
   --container-max: 1500px;
-  --container-pad-desktop: 40px;
-  --container-pad-tablet: 24px;
-  --container-pad-mobile: 16px;
+  --container-pad-x: clamp(1rem, 3vw, 2.5rem);
+  --container-pad-desktop: var(--container-pad-x);
+  --container-pad-tablet: var(--container-pad-x);
+  --container-pad-mobile: var(--container-pad-x);
 
   --bp-desktop: 1250px;
   --bp-tablet: 768px;
-  --bp-mobile-max: 767.98px;
   --bp-tablet-max: 1249.98px;
+  --bp-mobile: 400px;
+  --bp-mobile-max: 399.98px;
+  --bp-below-tablet-max: 767.98px;
 }
-

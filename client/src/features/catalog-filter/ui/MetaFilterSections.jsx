@@ -14,7 +14,7 @@ import {
   isFacetMultiSelectType,
   toggleSelectionInRecord,
 } from "../lib/filterFacetHelpers";
-import { FilterAccordionChevron } from "./FilterAccordionChevron";
+import FilterSectionShell from "./FilterSectionShell";
 
 function isMetaColorCharacteristic(item) {
   const k = String(item?.key ?? "").toLowerCase();
@@ -58,6 +58,7 @@ export default function MetaFilterSections({
   isSectionOpen,
   toggleSection,
   onCommitCharOffer,
+  layoutMode = "accordion",
 }) {
   return (
     <>
@@ -69,9 +70,9 @@ export default function MetaFilterSections({
           item.key,
         );
 
-        // Проверяем: есть ли валидные данные либо в meta, либо в facet от бекенда
         const hasMetaPresets = normalizePresetRows(item, locale).length > 0;
-        const hasFacetBuckets = Array.isArray(facet?.buckets) && facet.buckets.length > 0;
+        const hasFacetBuckets =
+          Array.isArray(facet?.buckets) && facet.buckets.length > 0;
         const isBooleanType = item.type === "boolean";
 
         if (
@@ -105,58 +106,45 @@ export default function MetaFilterSections({
             return null;
           }
           return (
-            <div
+            <FilterSectionShell
               key={item._id ?? sectionId}
-              className={`filters__accordion ${
-                isSectionOpen(sectionId)
-                  ? "filters__accordion--open"
-                  : "filters__accordion--closed"
-              }`}
+              layoutMode={layoutMode}
+              title={title}
+              sectionId={sectionId}
+              isSectionOpen={isSectionOpen}
+              toggleSection={toggleSection}
             >
-              <button
-                type="button"
-                className="filters__accordion-header"
-                onClick={() => toggleSection(sectionId)}
-                aria-expanded={isSectionOpen(sectionId)}
-              >
-                <span className="filters__title">{title}</span>
-                <FilterAccordionChevron className="filters__accordion-chevron" />
-              </button>
-              <div className="filters__accordion-panel">
-                <div className="filters__accordion-panel-inner">
-                  <ul className="filters__list">
-                    <li className="filters__item">
-                      <label className="filters-check">
-                        <input
-                          type="checkbox"
-                          checked={checked}
-                          onChange={(e) => {
-                            const nextChar = { ...charObj };
-                            const nextOffer = { ...offerObj };
-                            const target =
-                              item.scope === "group"
-                                ? nextChar
-                                : nextOffer;
-                            if (e.target.checked) {
-                              target[item.key] = true;
-                            } else {
-                              delete target[item.key];
-                            }
-                            onCommitCharOffer(nextChar, nextOffer);
-                          }}
-                        />
-                        <span className="filters-check__box" />
-                        <span className="filters-check__text">
-                          {facet
-                            ? `${title} (${trueCount})`
-                            : title}
-                        </span>
-                      </label>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
+              <ul className="filters__list">
+                <li className="filters__item">
+                  <label className="filters-check">
+                    <input
+                      type="checkbox"
+                      checked={checked}
+                      onChange={(e) => {
+                        const nextChar = { ...charObj };
+                        const nextOffer = { ...offerObj };
+                        const target =
+                          item.scope === "group"
+                            ? nextChar
+                            : nextOffer;
+                        if (e.target.checked) {
+                          target[item.key] = true;
+                        } else {
+                          delete target[item.key];
+                        }
+                        onCommitCharOffer(nextChar, nextOffer);
+                      }}
+                    />
+                    <span className="filters-check__box" />
+                    <span className="filters-check__text">
+                      {facet
+                        ? `${title} (${trueCount})`
+                        : title}
+                    </span>
+                  </label>
+                </li>
+              </ul>
+            </FilterSectionShell>
           );
         }
 
@@ -177,149 +165,124 @@ export default function MetaFilterSections({
           !useColorSwatches &&
           item.type !== "boolean" &&
           !isFacetMultiSelectType(item.type);
-console.log(presets)
+
         return (
-          <div
+          <FilterSectionShell
             key={item._id ?? sectionId}
-            className={`filters__accordion ${
-              isSectionOpen(sectionId)
-                ? "filters__accordion--open"
-                : "filters__accordion--closed"
-            }`}
+            layoutMode={layoutMode}
+            title={title}
+            sectionId={sectionId}
+            isSectionOpen={isSectionOpen}
+            toggleSection={toggleSection}
           >
-            <button
-              type="button"
-              className="filters__accordion-header"
-              onClick={() => toggleSection(sectionId)}
-              aria-expanded={isSectionOpen(sectionId)}
+            <ul
+              className={
+                useColorSwatches ? "filters__color-grid" : listClass
+              }
             >
-              <span className="filters__title">{title}</span>
-              <FilterAccordionChevron className="filters__accordion-chevron" />
-            </button>
+              {presets.map((row, idx) => {
+                const checked = isMetaValueActive(
+                  item,
+                  charObj,
+                  offerObj,
+                  row.value,
+                );
+                if (
+                  facet &&
+                  !shouldShowFacetOption(row.count, checked)
+                ) {
+                  return null;
+                }
 
-            <div className="filters__accordion-panel">
-              <div className="filters__accordion-panel-inner">
-                <ul
-                  className={
-                    useColorSwatches
-                      ? "filters__color-grid"
-                      : listClass
-                  }
-                >
-                  {presets.map((row, idx) => {
-                    const checked = isMetaValueActive(
-                      item,
-                      charObj,
-                      offerObj,
+                const labelText = facet
+                  ? `${row.label} (${row.count})`
+                  : row.label;
+
+                const onToggle = (e) => {
+                  const nextChar = { ...charObj };
+                  const nextOffer = { ...offerObj };
+                  const target =
+                    item.scope === "group" ? nextChar : nextOffer;
+                  const key = item.key;
+
+                  if (
+                    item.type === "select" ||
+                    item.type === "multiselect" ||
+                    item.type === "number" ||
+                    item.type === "string"
+                  ) {
+                    toggleSelectionInRecord(
+                      target,
+                      key,
                       row.value,
+                      e.target.checked,
                     );
-                    if (
-                      facet &&
-                      !shouldShowFacetOption(
-                        row.count,
-                        checked,
-                      )
-                    ) {
-                      return null;
-                    }
+                  }
 
-                    const labelText = facet
-                      ? `${row.label} (${row.count})`
-                      : row.label;
+                  onCommitCharOffer(nextChar, nextOffer);
+                };
 
-                    const onToggle = (e) => {
-                      const nextChar = { ...charObj };
-                      const nextOffer = { ...offerObj };
-                      const target =
-                        item.scope === "group"
-                          ? nextChar
-                          : nextOffer;
-                      const key = item.key;
+                const rowKey = `${row.value}-${idx}`;
 
-                      if (
-                        item.type === "select" ||
-                        item.type === "multiselect" ||
-                        item.type === "number" ||
-                        item.type === "string"
-                      ) {
-                        toggleSelectionInRecord(
-                          target,
-                          key,
-                          row.value,
-                          e.target.checked,
-                        );
-                      }
+                if (useColorSwatches) {
+                  const hex = colorPresetValueToHex(row.value);
+                  const isWhite =
+                    String(row.value).toLowerCase().trim() ===
+                    "white";
 
-                      onCommitCharOffer(nextChar, nextOffer);
-                    };
-
-                    const rowKey = `${row.value}-${idx}`;
-
-                    if (useColorSwatches) {
-                      const hex =
-                        colorPresetValueToHex(row.value);
-                      const isWhite =
-                        String(row.value)
-                          .toLowerCase()
-                          .trim() === "white";
-
-                      return (
-                        <li
-                          key={rowKey}
-                          className="filters__color-grid-item"
-                        >
-                          <label className="filters__color-row">
-                            <input
-                              type="checkbox"
-                              checked={checked}
-                              onChange={onToggle}
-                              aria-label={labelText}
-                            />
-                            <span
-                              className={`filters__color-swatch${isWhite ? " filters__color-swatch--white" : ""}`}
-                              style={
-                                hex
-                                  ? { backgroundColor: hex }
-                                  : {
-                                      backgroundColor: "#bdbdbd",
-                                    }
-                              }
-                              aria-hidden
-                            />
-                            <span className="filters__color-label">
-                              {labelText}
-                            </span>
-                          </label>
-                        </li>
-                      );
-                    }
-
-                    return (
-                      <li key={rowKey} className="filters__item">
-                        <label
-                          className={
-                            useRadioAppearance
-                              ? "filters-check filters-check--radio-look"
-                              : "filters-check"
+                  return (
+                    <li
+                      key={rowKey}
+                      className="filters__color-grid-item"
+                    >
+                      <label className="filters__color-row">
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={onToggle}
+                          aria-label={labelText}
+                        />
+                        <span
+                          className={`filters__color-swatch${isWhite ? " filters__color-swatch--white" : ""}`}
+                          style={
+                            hex
+                              ? { backgroundColor: hex }
+                              : { backgroundColor: "#bdbdbd" }
                           }
-                        >
-                          <input
-                            type="checkbox"
-                            checked={checked}
-                            onChange={onToggle}
-                          />
-                          <span className="filters-check__box" />
-                          <span className="filters-check__text">
-                            {labelText}
-                          </span>
-                        </label>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
-          </div>
+                          aria-hidden
+                        />
+                        <span className="filters__color-label">
+                          {labelText}
+                        </span>
+                      </label>
+                    </li>
+                  );
+                }
+
+                return (
+                  <li key={rowKey} className="filters__item">
+                    <label
+                      className={
+                        useRadioAppearance
+                          ? "filters-check filters-check--radio-look"
+                          : "filters-check"
+                      }
+                    >
+                      <input
+                        type="checkbox"
+                        checked={checked}
+                        onChange={onToggle}
+                      />
+                      <span className="filters-check__box" />
+                      <span className="filters-check__text">
+                        {labelText}
+                      </span>
+                    </label>
+                  </li>
+                );
+              })}
+            </ul>
+          </FilterSectionShell>
         );
       })}
     </>

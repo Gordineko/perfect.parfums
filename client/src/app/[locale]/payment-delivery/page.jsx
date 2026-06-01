@@ -19,43 +19,43 @@ export default async function PaymentDeliveryPage({ params }) {
 
   return (
     <div className={styles.pageShell}>
-      <PageHeader
-        locale={locale}
-        breadcrumbsLabels={{
-          home: t("breadcrumbs.home"),
-          page: t("breadcrumbs.page"),
-        }}
-        breadcrumbsItems={[{ label: pageTitle }]}
-        title={pageTitle}
-      />
+      <div className={styles.page}>
+        <PageHeader
+          locale={locale}
+          breadcrumbsLabels={{
+            home: t("breadcrumbs.home"),
+            page: t("breadcrumbs.page"),
+          }}
+          breadcrumbsItems={[{ label: pageTitle }]}
+          showTitle={false}
+          plainBreadcrumbs
+        />
 
-      <div className="container">
-        <section className={styles.shell}>
-          <div className={styles.card}>
-            <p className={styles.strong}>{t("paymentDelivery.lead")}</p>
-
+        <div className="container">
+          <section className={styles.shell}>
             <div className={styles.content}>
+              <p className={styles.lead}>{t("paymentDelivery.lead")}</p>
               <p>{t("paymentDelivery.delivery")}</p>
               <p>{t("paymentDelivery.freeDelivery")}</p>
               <p>{t("paymentDelivery.minDelivery")}</p>
               <p>{t("paymentDelivery.payment")}</p>
               <p>{t("paymentDelivery.returns")}</p>
-              <p className={styles.strong}>{t("paymentDelivery.defectContact")}</p>
+              <p>{t("paymentDelivery.defectContact")}</p>
               <p>
-                <span className={styles.strong}>{t("paymentDelivery.phoneLabel")}</span>{" "}
+                {t("paymentDelivery.phoneLabel")}{" "}
                 <a className={styles.link} href="tel:+380679670163">
                   {t("paymentDelivery.phone")}
                 </a>
               </p>
               <p>
-                <span className={styles.strong}>{t("paymentDelivery.emailLabel")}</span>{" "}
+                {t("paymentDelivery.emailLabel")}{" "}
                 <a className={styles.link} href={`mailto:${t("paymentDelivery.email")}`}>
                   {t("paymentDelivery.email")}
                 </a>
               </p>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
 
       <section className="products-layout-wrapper products-layout-wrapper--footer">

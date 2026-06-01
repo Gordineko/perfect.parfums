@@ -374,14 +374,7 @@ export default function ActiveFilterTags({
   const tagList = tags.map((tag) => (
     <li className="active-filter-tags__item" key={tag.id}>
       <span className="active-filter-tags__body">
-        <>
-          <span className="active-filter-tags__title">
-            {tag.title}
-          </span>{" "}
-          <span className="active-filter-tags__value">
-            {tag.value}
-          </span>
-        </>
+        <span className="active-filter-tags__value">{tag.value}</span>
       </span>
       <button
         type="button"
@@ -407,18 +400,24 @@ export default function ActiveFilterTags({
       >
         <svg
           className="active-filter-tags__remove-icon"
-          width="7"
-          height="7"
-          viewBox="0 0 7 7"
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           aria-hidden="true"
         >
           <path
-            fillRule="evenodd"
-            clipRule="evenodd"
-            d="M0.859644 0.140356C0.765343 0.0492769 0.639042 -0.00112031 0.507944 1.89013e-05C0.376845 0.00115811 0.251439 0.0537426 0.158735 0.146447C0.0660308 0.239151 0.0134463 0.364557 0.0123071 0.495655C0.0111679 0.626754 0.0615651 0.753055 0.152644 0.847356L2.79914 3.49386L0.152644 6.14036C0.104889 6.18648 0.0667979 6.24165 0.0405934 6.30265C0.0143889 6.36366 0.000595787 6.42927 1.88784e-05 6.49566C-0.00055803 6.56204 0.0120928 6.62788 0.0372333 6.68933C0.0623737 6.75078 0.0995003 6.80661 0.146447 6.85355C0.193393 6.9005 0.249219 6.93763 0.310667 6.96277C0.372115 6.98791 0.437955 7.00056 0.504345 6.99998C0.570734 6.9994 0.636344 6.98561 0.697346 6.95941C0.758348 6.9332 0.813521 6.89511 0.859644 6.84736L3.50614 4.20086L6.15264 6.84736C6.24695 6.93843 6.37325 6.98883 6.50434 6.98769C6.63544 6.98655 6.76085 6.93397 6.85355 6.84126C6.94626 6.74856 6.99884 6.62315 6.99998 6.49206C7.00112 6.36096 6.95072 6.23466 6.85964 6.14036L4.21314 3.49386L6.85964 0.847356C6.95072 0.753055 7.00112 0.626754 6.99998 0.495655C6.99884 0.364557 6.94626 0.239151 6.85355 0.146447C6.76085 0.0537426 6.63544 0.00115811 6.50434 1.89013e-05C6.37325 -0.00112031 6.24695 0.0492769 6.15264 0.140356L3.50614 2.78686L0.859644 0.140356Z"
-            fill="var(--color-text)"
+            d="M1.24316 0.766113L12.7325 12.7659"
+            stroke="#11110F"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+          <path
+            d="M0.733398 12.7659L12.2227 0.766121"
+            stroke="#11110F"
+            strokeWidth="1.5"
+            strokeLinecap="round"
           />
         </svg>
       </button>
@@ -447,9 +446,6 @@ export default function ActiveFilterTags({
 
   return (
     <div className="active-filter-tags">
-      <span className="active-filter-tags__panel-label">
-        {panelLabel}
-      </span>
       <ul className="active-filter-tags__list">{tagList}</ul>
       <button
         type="button"

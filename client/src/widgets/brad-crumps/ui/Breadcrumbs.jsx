@@ -1,5 +1,6 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import { useRouter } from "next/navigation";
 import React from "react";
 
@@ -18,6 +19,7 @@ const Breadcrumbs = ({
   pageName,
   className,
   embedInPage = false,
+  plain = false,
   hideHome = false,
 }) => {
   const router = useRouter();
@@ -29,6 +31,7 @@ const Breadcrumbs = ({
   const rootClass = [
     styles.root,
     embedInPage ? styles.rootEmbedded : "",
+    plain ? styles.rootPlain : "",
     className,
   ]
     .filter(Boolean)
@@ -42,7 +45,7 @@ const Breadcrumbs = ({
             <button
               type="button"
               className={styles.link}
-              onClick={() => go(`/${locale}`)}
+              onClick={() => go(localePath(locale))}
             >
               {labels.home}
             </button>
@@ -83,7 +86,7 @@ const Breadcrumbs = ({
                 type="button"
                 className={styles.link}
                 onClick={() =>
-                  go(`/${locale}/categories/${categoryLink}`)
+                  go(localePath(locale, "/categories/${categoryLink}"))
                 }
               >
                 {categoryName}
@@ -103,7 +106,7 @@ const Breadcrumbs = ({
                     className={styles.link}
                     onClick={() =>
                       go(
-                        `/${locale}/categories/${categoryLink}/${subcategoryLink}`,
+                        localePath(locale, `/categories/${categoryLink}/${subcategoryLink}`),
                       )
                     }
                   >

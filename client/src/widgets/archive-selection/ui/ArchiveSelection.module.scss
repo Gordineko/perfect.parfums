@@ -1,8 +1,11 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
 .archive-selection {
   background: rgba(243, 240, 236, 0.5);
-  padding-block: var(--space-section-y);
+  padding-block-start: var(--space-section-y);
+  padding-block-end: 0;
 
-  @media (max-width: 1249.98px) {
+  @media (max-width: var(--bp-tablet-max)) {
     overflow-x: clip;
   }
 
@@ -12,7 +15,7 @@
     gap: var(--space-8);
     align-items: center;
 
-    @media (max-width: 1249.98px) {
+    @media (max-width: var(--bp-tablet-max)) {
       grid-template-columns: 1fr;
     }
   }
@@ -23,7 +26,7 @@
     align-items: flex-start;
     min-width: 0;
 
-    @media (max-width: 1249.98px) {
+    @media (max-width: var(--bp-tablet-max)) {
       align-items: center;
       text-align: center;
     }
@@ -33,52 +36,44 @@
     margin: 0;
     color: #9ca3af;
     font-family: var(--font-body);
-    font-size: var(--fs-label);
+    font-size: 0.625rem;
     font-weight: var(--fw-medium);
     letter-spacing: 3px;
     text-transform: uppercase;
 
-    @media (max-width: 767.98px) {
+    @media (max-width: var(--bp-below-tablet-max)) {
       font-size: 8px;
     }
   }
 
   &__title {
     margin: 32px 0 0;
-    font-size: 54px;
+    @include section-h2-title;
 
-    @media (max-width: 1249.98px) {
+    @include tablet-only {
       margin-top: var(--space-3);
-    }
-
-    @media (max-width: 1249.98px) and (min-width: 768px) {
-      font-size: var(--fs-section-title);
-    }
-
-    @media (max-width: 767.98px) {
-      font-size: 32px;
     }
   }
 
   &__summary {
     margin: 40px 0 0;
     max-width: 34ch;
-    color: var(--color-text-muted);
+    color: var(--color-grey);
     font-family: var(--font-body);
     font-size: 14px;
     font-weight: 300;
 
-    @media (max-width: 1249.98px) {
+    @media (max-width: var(--bp-tablet-max)) {
       max-width: min(34ch, 100%);
       margin-inline: auto;
     }
 
-    @media (max-width: 1249.98px) and (min-width: 768px) {
+    @media (max-width: var(--bp-tablet-max)) and (min-width: var(--bp-tablet)) {
       margin-top: var(--space-4);
       font-size: 12px;
     }
 
-    @media (max-width: 767.98px) {
+    @media (max-width: var(--bp-below-tablet-max)) {
       margin-top: var(--space-2);
       font-size: 10px;
     }
@@ -90,9 +85,9 @@
     justify-content: center;
     margin-top: 40px;
     padding: 16px 48px;
-    border: 1px solid var(--color-text);
+    border: 1px solid var(--color-black);
     background: transparent;
-    color: var(--color-text);
+    color: var(--color-black);
     font-family: var(--font-body);
     font-size: 10px;
     line-height: normal;
@@ -103,27 +98,41 @@
       color 0.15s ease,
       background-color 0.15s ease;
 
-    @media (max-width: 1249.98px) {
+    @media (max-width: var(--bp-tablet-max)) {
       margin-top: var(--space-4);
     }
 
-    @media (max-width: 767.98px) {
+    @media (max-width: var(--bp-below-tablet-max)) {
       font-size: 8px;
     }
 
     &:hover,
     &:focus-visible {
-      background: var(--color-text);
+      background: var(--color-black);
       color: var(--color-white);
     }
   }
 
   &__slider {
     position: relative;
+    width: 100%;
+    max-width: 100%;
     min-width: 0;
+    box-sizing: border-box;
+    overflow: visible;
+    padding-bottom: 16px;
+    padding-inline: 36px;
 
-    @media (max-width: 1249.98px) {
-      overflow: visible;
+    @include below-tablet {
+      padding-inline: 0;
+    }
+
+    @include tablet-only {
+      padding-inline: 44px;
+    }
+
+    @media (min-width: var(--bp-desktop)) {
+      padding-inline: 0;
     }
   }
 
@@ -131,6 +140,9 @@
     position: absolute;
     top: 40%;
     z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0;
     border: 0;
     background: transparent;
@@ -138,25 +150,60 @@
     line-height: 0;
     transform: translateY(-50%);
 
+    @include below-tablet {
+      display: none;
+    }
+
+    svg {
+      display: block;
+      width: 40px;
+      height: 40px;
+    }
+
+    @include tablet-only {
+      svg {
+        width: 32px;
+        height: 32px;
+      }
+    }
+
+    @include below-tablet {
+      svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
     &:disabled {
       cursor: not-allowed;
       opacity: 1;
     }
 
     &--prev {
-      left: -18.5px;
+      left: 0;
+
+      @media (min-width: var(--bp-desktop)) {
+        left: -20px;
+      }
     }
 
     &--next {
-      right: -18.5px;
+      right: 0;
+
+      @media (min-width: var(--bp-desktop)) {
+        right: -20px;
+      }
     }
   }
 
   &__carousel {
     overflow: hidden;
+    padding-bottom: 16px;
+    box-sizing: content-box;
 
     :global(.swiper-slide) {
       height: auto;
+      overflow: visible;
     }
 
     :global(.swiper-pagination) {
@@ -188,163 +235,34 @@
     :global(.swiper-pagination-bullet-active) {
       width: 80px !important;
       min-width: 80px;
-      background: var(--color-text) !important;
+      background: var(--color-black) !important;
     }
 
-    @media (max-width: 1249.98px) {
-      width: 100vw;
-      margin-inline: calc(50% - 50vw);
-      padding-right: 0;
-    }
-
-    @media (max-width: 1249.98px) and (min-width: 768px) {
-      padding-left: var(--container-pad-tablet);
-    }
-
-    @media (max-width: 767.98px) {
-      padding-left: var(--container-pad-mobile);
-    }
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    margin-inline: 0;
+    box-sizing: border-box;
   }
 
   &__slide {
-  height: 100%;
-
-  :global(.product-item) {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "media"
-      "meta";
-    width: 100%;
     height: 100%;
-    margin: 0;
-    min-height: 0;
-    background: transparent;
-    box-shadow: none;
     overflow: visible;
-  }
+    box-sizing: border-box;
 
-  :global(.product-item__image-wrap) {
-    grid-area: media;
-    margin-bottom: 0;
-    border-radius: 0;
-  }
-
-  :global(.product-item__meta-container--catalog) {
-    grid-area: meta;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 0 0;
-  }
-
-  :global(.product-item__button) {
-    display: none;
-  }
-
-  :global(.product-item__discount) {
-    top: 24px;
-    left: 24px;
-    display: inline-flex;
-    padding: 4px 12px;
-    justify-content: center;
-    align-items: center;
-    background: var(--color-text);
-
-    @media (max-width: 767.98px) {
-      top: 10px;
-      left: 10px;
+    :global(.product-item) {
+      width: 100%;
+      max-width: 100%;
     }
 
-    :global(.product-item__discount-text) {
-      margin: 0;
-      color: var(--color-white);
-      font-family: var(--font-body);
-      font-size: 10px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-  }
+    :global(.card) {
+      position: relative;
+      z-index: 0;
 
-  :global(.product-item__meta-text) {
-    gap: 8px;
-
-    @media (max-width: 767.98px) {
-      gap: 4px;
-    }
-
-    :global(.product-item__title) {
-      margin: 0;
-      color: var(--color-text);
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: block;
-      -webkit-line-clamp: unset;
-      -webkit-box-orient: unset;
-
-      @media (max-width: 767.98px) {
-        font-size: 8px;
+      &:hover {
+        z-index: 1;
       }
     }
-  }
-
-  :global(.product-item__text) {
-    margin: 0;
-    color: #9ca3af;
-    font-family: var(--font-body);
-    font-size: 10px;
-
-    @media (max-width: 767.98px) {
-      font-size: 7px;
-    }
-  }
-
-  :global(.product-item__meta-price) {
-    align-self: center;
-
-    :global(.product-item__wrapper--discount) {
-      flex-direction: row;
-      align-items: baseline;
-      justify-content: flex-end;
-      flex-wrap: nowrap;
-      gap: 16px;
-      margin-bottom: 0;
-
-      @media (max-width: 767.98px) {
-        gap: var(--space-3);
-      }
-    }
-
-    :global(.product-item__price-old),
-    :global(.product-item__price-line--sale) {
-      font-family: var(--font-title);
-      font-style: italic;
-    }
-
-    :global(.product-item__price-old) {
-      color: #991b1b;
-      font-size: 15px;
-      text-decoration-line: line-through;
-
-      @media (max-width: 767.98px) {
-        font-size: 8px;
-      }
-    }
-
-    :global(.product-item__price-line--sale) {
-      color: #1a1a1a;
-      font-size: 17px;
-
-      @media (max-width: 767.98px) {
-        font-size: 12px;
-      }
-    }
-  }
   }
 
   &--loading {

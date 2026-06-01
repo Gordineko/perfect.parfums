@@ -1,14 +1,17 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import { useI18n } from "@shared";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 
 import styles from "./NotFoundPage.module.scss";
+import NotFoundCtaOrnament from "./NotFoundCtaOrnament";
+import NotFoundOrnament from "./NotFoundOrnament";
+import NotFoundTitleOrnament from "./NotFoundTitleOrnament";
 
 const NOT_FOUND_PAGE_CLASS = "is-not-found-page";
-const NOT_FOUND_BG = "#f0efed";
 
 export default function NotFoundPage({ locale: localeFromServer }) {
   const params = useParams();
@@ -17,54 +20,38 @@ export default function NotFoundPage({ locale: localeFromServer }) {
 
   useEffect(() => {
     document.documentElement.classList.add(NOT_FOUND_PAGE_CLASS);
-    const main = document.querySelector("main");
-    const previousMainBackground = main?.style.background ?? "";
-
-    if (main) {
-      main.style.background = NOT_FOUND_BG;
-    }
 
     return () => {
       document.documentElement.classList.remove(NOT_FOUND_PAGE_CLASS);
-
-      if (main) {
-        main.style.background = previousMainBackground;
-      }
     };
   }, []);
 
   return (
     <section className={styles.page}>
-      <div className={styles.container}>
-        <div className={styles.inner}>
-          <p className={styles.code} aria-hidden="true">
-            404
-          </p>
+      <div className={styles.ornament}>
+        <NotFoundOrnament />
+      </div>
 
-          <p className={styles.eyebrow}>
-            {t("notFound.eyebrow")}
-          </p>
+      <div className={styles.content}>
+        <p className={styles.code} aria-hidden="true">
+          404
+        </p>
 
-          <h1 className={styles.title}>
-            {t("notFound.title")}
-          </h1>
+        <h1 className={styles.title}>{t("notFound.title")}</h1>
 
-          <p className={styles.desc}>
-            {t("notFound.description")}
-          </p>
-
-          <div className={styles.actions}>
-            <Link href={`/${locale}`} className={styles.ctaPrimary}>
-              {t("notFound.ctaHome")}
-            </Link>
-            <Link
-              href={`/${locale}/categories/new`}
-              className={styles.ctaSecondary}
-            >
-              {t("notFound.ctaCatalog")}
-            </Link>
-          </div>
+        <div className={styles.titleOrnament}>
+          <NotFoundTitleOrnament />
         </div>
+
+        <p className={styles.desc}>{t("notFound.description")}</p>
+
+        <Link href={localePath(locale)} className={styles.cta}>
+          {t("notFound.ctaHome")}
+        </Link>
+      </div>
+
+      <div className={styles.ctaOrnament}>
+        <NotFoundCtaOrnament />
       </div>
     </section>
   );

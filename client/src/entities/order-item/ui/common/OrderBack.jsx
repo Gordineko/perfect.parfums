@@ -1,5 +1,6 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import { useI18n } from "@shared/i18n/use-i18n";
 import { useParams, useRouter } from "next/navigation";
 
@@ -10,10 +11,11 @@ const OrderBack = () => {
   const { t } = useI18n();
 
   return (
-    <span
-      className="ob"
+    <button
+      type="button"
+      className="order-back"
       onClick={() => {
-        router.push(`/${locale}/profile/history`);
+        router.push(localePath(locale, "/profile/history"));
       }}
     >
       <svg
@@ -22,15 +24,16 @@ const OrderBack = () => {
         height="11"
         viewBox="0 0 7 11"
         fill="none"
+        aria-hidden="true"
       >
         <path
           d="M5.33789 9.66431L1.33789 5.16431L5.33789 0.664307"
-          stroke="#0F172A"
+          stroke="currentColor"
           strokeWidth="2"
         />
-      </svg>{" "}
-      {t("profile.viewAllItems")}
-    </span>
+      </svg>
+      {t("profile.backToOrders")}
+    </button>
   );
 };
 

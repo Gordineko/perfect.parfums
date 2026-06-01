@@ -1,5 +1,6 @@
 "use client";
 
+import { localePath } from "@shared/lib/localePath";
 import PageHeader from "@shared/ui/PageHeader";
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
@@ -37,8 +38,8 @@ export default function ProfilePageHeader({
 
   const breadcrumbsItems = useMemo(() => {
     const { section, orderNumber } = getProfileRouteState(pathname);
-    const profPath = `/${locale}/profile/info`;
-    const historyPath = `/${locale}/profile/history`;
+    const profPath = localePath(locale, "/profile/info");
+    const historyPath = localePath(locale, "/profile/history");
 
     if (section === "history" && orderNumber) {
       return [
@@ -64,7 +65,8 @@ export default function ProfilePageHeader({
       breadcrumbsLabels={breadcrumbsLabels}
       breadcrumbsItems={breadcrumbsItems}
       breadcrumbsItemsCompact={breadcrumbsItemsCompact}
-      title={copy.titleProf}
+      showTitle={false}
+      plainBreadcrumbs
     />
   );
 }

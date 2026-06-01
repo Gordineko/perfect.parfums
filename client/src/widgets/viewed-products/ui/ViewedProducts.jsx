@@ -36,11 +36,11 @@ const ViewedProducts = ({ title }) => {
         loop={false}
         breakpoints={{
           [BREAKPOINTS.tablet]: {
-            slidesPerView: 3.9,
+            slidesPerView: 3,
             spaceBetween: 16,
           },
           [BREAKPOINTS.desktop]: {
-            slidesPerView: 6,
+            slidesPerView: 5,
             spaceBetween: 24,
           },
         }}

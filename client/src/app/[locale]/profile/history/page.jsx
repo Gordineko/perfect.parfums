@@ -1,4 +1,5 @@
 import OrderItem from "@entities/order-item/ui/OrderItem";
+import { localePath } from "@shared/lib/localePath";
 import { getCurrentUser } from "@shared/api/authServices";
 import { getUserOrders } from "@shared/api/orderServices";
 import { getMessages } from "@shared/i18n/getMessages";
@@ -6,6 +7,8 @@ import { createI18nServer } from "@shared/i18n/server";
 import pageStyles from "@widgets/profile/ui/ProfilePage.module.scss";
 import { cookies } from "next/headers";
 import Link from "next/link";
+
+import ProfileOrdersCountHint from "@widgets/profile/ui/ProfileOrdersCountHint";
 
 import historyStyles from "./ProfileHistory.module.scss";
 
@@ -22,15 +25,14 @@ export default async function HistoryPage({ params }) {
 
   return (
     <div className={pageStyles.page}>
-      <div className={pageStyles.intro}>
-        <p className={pageStyles.subtitle}>{t("profile.subtitle-history")}</p>
-        <h2 className={pageStyles.title}>{t("profile.title-history")}</h2>
-      </div>
+      <ProfileOrdersCountHint count={normalizedOrders.length} />
+      <h2 className={pageStyles.sectionTitle}>{t("profile.title-history")}</h2>
+
       {normalizedOrders.length === 0 ? (
         <div className={historyStyles.empty}>
           <p>{t("profile.noOrders")}</p>
           <Link
-            href={`/${locale}/categories/all`}
+            href={localePath(locale, "/categories/all")}
             className={historyStyles.emptyAction}
           >
             {t("basket.startShopping")}
@@ -39,7 +41,12 @@ export default async function HistoryPage({ params }) {
       ) : (
         <div className={historyStyles.root}>
           {normalizedOrders.map((order, index) => (
-            <OrderItem order={order} key={index} locale={locale} />
+            <OrderItem
+              order={order}
+              key={order?.orderNumber ?? order?.order_number ?? index}
+              locale={locale}
+              variant="profile"
+            />
           ))}
         </div>
       )}

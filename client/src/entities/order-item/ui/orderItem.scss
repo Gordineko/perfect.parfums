@@ -1,7 +1,7 @@
 @import "../../../shared/ui/styles/variables.scss";
 
 @mixin inter($size, $weight: 400) {
-  font-family: Inter, sans-serif;
+  font-family: var(--font-body);
   font-size: $size;
   font-weight: $weight;
   line-height: normal;
@@ -290,6 +290,29 @@
   }
 }
 
+.order-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--black, #11110f);
+  font-family: var(--font-heading), "Cormorant", serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--burgundy, #68181f);
+  }
+}
+
 .ob {
   position: absolute;
   top: 0;
@@ -318,4 +341,166 @@
 
 .or {
   position: relative !important;
+}
+
+.order--profile {
+  border: 1px solid #bdb8ae;
+  background: var(--white, #fefefa);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  margin-bottom: 16px;
+  padding: 24px;
+  font-family: var(--font-body), "Lato", sans-serif;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  @include down($bp-tablet) {
+    padding: 16px;
+  }
+
+  .order__header {
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #bdb8ae;
+
+    &-txt {
+      p:first-child {
+        color: var(--black, #11110f);
+        font-family: var(--font-heading), "Cormorant", serif;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 130%;
+        text-transform: uppercase;
+      }
+
+      p:last-child {
+        color: #9ca3af;
+        font-family: var(--font-body), "Lato", sans-serif;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 130%;
+        text-transform: none;
+      }
+    }
+
+    &-status {
+      padding: 8px 20px;
+      font-family: var(--font-body), "Lato", sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      line-height: 130%;
+      text-transform: capitalize;
+      background: transparent;
+
+      &--processing {
+        color: var(--burgundy, #68181f);
+        border: 1px solid var(--burgundy, #68181f);
+      }
+
+      &--done {
+        color: #0d7a4e;
+        border: 1px solid #0d7a4e;
+      }
+
+      &--cancelled {
+        color: #b42318;
+        border: 1px solid #b42318;
+      }
+    }
+  }
+
+  .order__list {
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #bdb8ae;
+  }
+
+  .order__items-toggle {
+    color: var(--burgundy, #68181f);
+    font-family: var(--font-body), "Lato", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 130%;
+
+    svg path {
+      stroke: var(--burgundy, #68181f);
+    }
+  }
+
+  .order-item {
+    &__wrapper img {
+      border: 1px solid var(--black, #11110f);
+    }
+
+    &__title {
+      font-family: var(--font-body), "Lato", sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 130%;
+    }
+
+    &__category {
+      color: #9ca3af;
+      font-size: 12px;
+      font-weight: 400;
+    }
+
+    &__quantity,
+    &__cost {
+      font-family: var(--font-body), "Lato", sans-serif;
+      font-size: 16px;
+      line-height: 130%;
+    }
+
+    &__cost {
+      font-weight: 600;
+      color: var(--black, #11110f);
+    }
+  }
+
+  .order__func {
+    gap: 16px;
+
+    p {
+      font-family: var(--font-heading), "Cormorant", serif;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 130%;
+      color: var(--black, #11110f);
+
+      @include down($bp-tablet) {
+        font-size: 22px;
+      }
+    }
+
+    button {
+      padding: 15px 40px;
+      border: 0;
+      border-radius: 0;
+      background: var(--burgundy, #68181f);
+      box-shadow: none;
+      color: var(--white, #fefefa);
+      font-family: var(--font-body), "Lato", sans-serif;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 130%;
+      text-transform: uppercase;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background: var(--color-burgundy-active, #521217);
+      }
+
+      @include down($bp-tablet) {
+        padding: 12px 24px;
+        font-size: 14px;
+      }
+    }
+  }
 }

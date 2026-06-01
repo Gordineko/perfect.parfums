@@ -2,37 +2,57 @@
 
 .shell {
   width: 100%;
+
+  input,
+  select,
+  textarea,
+  :global(.react-tel-input .form-control),
+  :global(.react-select__control) {
+    border: 1px solid #bdb8ae !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  :global(.react-tel-input .form-control:focus),
+  :global(.react-tel-input .form-control:focus-visible),
+  :global(.react-select__control--is-focused),
+  :global(.react-select__control:focus-within) {
+    border-color: var(--burgundy, #68181f) !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
 }
 
 .container {
   display: flex;
-  gap: 24px;
+  align-items: flex-start;
+  gap: 40px;
   width: 100%;
   max-width: var(--container-max);
-  margin: 0 auto clamp(80px, 12vw, 300px);
-  padding-inline: var(--container-pad-desktop);
+  margin: 40px auto clamp(80px, 12vw, 120px);
+  padding-inline: var(--container-pad-x);
 
   @include down($bp-desktop-narrow) {
     flex-direction: column;
-  }
-
-  @include tablet-only {
+    align-items: stretch;
     gap: 32px;
-    padding-inline: var(--container-pad-tablet);
   }
 
   @include down($bp-tablet) {
     gap: 24px;
+    margin-top: 40px;
     margin-bottom: 48px;
-    padding-inline: var(--container-pad-mobile);
   }
 }
 
 .content {
-  width: 75%;
+  flex: 1;
   min-width: 0;
-
-  @include down($bp-desktop-narrow) {
-    width: 100%;
-  }
 }

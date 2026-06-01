@@ -1,42 +1,51 @@
-import {
-  Geologica,
-  Golos_Text,
-  Inter,
-  Montserrat,
-  Urbanist,
-} from "next/font/google";
+import { Cormorant, Italiana } from "next/font/google";
+import localFont from "next/font/local";
 
-export const sofiaSansCondensed = Montserrat({
+export const cormorant = Cormorant({
   subsets: ["latin", "cyrillic"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
-  variable: "--font-sofia-sans-condensed",
+  variable: "--font-cormorant",
 });
 
-export const manrope = Golos_Text({
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
+export const lato = localFont({
+  src: [
+    {
+      path: "../../../../public/fonts/lato/Lato-Light.ttf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../../../../public/fonts/lato/Lato-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../../../public/fonts/lato/Lato-Medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+
+      path: "../../../../public/fonts/lato/Lato-SemiBold.ttf",
+      weight: "600",
+      style: "normal",
+    },
+    {
+
+      path: "../../../../public/fonts/lato/Lato-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-lato",
   display: "swap",
-  variable: "--font-main",
+  fallback: ["system-ui", "Segoe UI", "sans-serif"],
 });
 
-export const urbanist = Urbanist({
+export const italiana = Italiana({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
+  weight: ["400"],
   display: "swap",
-  variable: "--font-urbanist",
-});
-
-export const inter = Inter({
-  subsets: ["latin", "cyrillic"],
-  weight: ["300", "400", "500"],
-  display: "swap",
-  variable: "--font-inter",
-});
-
-export const geologica = Geologica({
-  subsets: ["latin", "cyrillic"],
-  display: "swap",
-  variable: "--font-geologica",
-  axes: ["slnt", "CRSV"],
+  variable: "--font-italiana",
 });

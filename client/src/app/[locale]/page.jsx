@@ -4,18 +4,22 @@ import {
   getLocalizedFooter,
   getMessages,
 } from "@shared";
-import ArchiveSelection from "@widgets/archive-selection";
 import Bestsellers from "@widgets/bestsellers";
-import { getPopularCatalogCards, getSaleCatalogCards } from "@shared/api/productsServices";
-import { getHomeBanners } from "@shared/api/bannerServices";
-import BrandValues from "@widgets/brand-values";
-import CategoryBanners from "@widgets/category-banners";
+import NewArrivals from "@widgets/new-arrivals";
+import {
+  getNewCatalogCards,
+  getPopularCatalogCards,
+} from "@shared/api/productsServices";
+import AboutBrand from "@widgets/about-brand";
+import HomeFaq from "@widgets/home-faq";
+import InstagramFeed from "@widgets/instagram-feed";
+import CustomerReviews from "@widgets/customer-reviews";
 import Footer from "@widgets/Footer";
+import { fetchMainReviews } from "@shared/api/reviewsServices";
 import { HeroSkeleton } from "@widgets/hero";
-import SeasonCollections from "@widgets/season-collections";
 import { Suspense } from "react";
 
-import ArchiveSelectionServerBlock from "./ArchiveSelectionServerBlock";
+import BrandsCarousel from "pages/Home/ui/BrandsCarousel";
 import HeroServerBlock from "./HeroServerBlock";
 
 
@@ -25,43 +29,39 @@ export default async function HomePage({ params }) {
   const { t } = createI18nServer(messages);
   const footerData = getLocalizedFooter(t);
 
-  const archiveSection = {
-    title: t("catalog.archiveSelectionTitle"),
-    eyebrow: t("catalog.archiveSelectionEyebrow"),
-    summary: t("catalog.archiveSelectionSummary"),
-    ctaLabel: t("catalog.archiveSelectionCta"),
-  };
   const categories = await getAllCategory();
   const popularProducts = await getPopularCatalogCards();
-  const saleProducts = await getSaleCatalogCards();
-  const bannersResponse = await getHomeBanners();
-  const banners = bannersResponse?.items ?? [];
+  const newProducts = await getNewCatalogCards();
+  let mainReviews = [];
+
+  try {
+    mainReviews = await fetchMainReviews({ limit: 6, revalidate: 120 });
+  } catch {
+    mainReviews = [];
+  }
 
   return (
     <>
       <Suspense fallback={<HeroSkeleton />}>
-        <HeroServerBlock locale={locale} banners={banners} />
+        <HeroServerBlock locale={locale} />
       </Suspense>
 
-      <SeasonCollections locale={locale} categories={categories} />
+      <BrandsCarousel />
 
-      <CategoryBanners locale={locale}  />
+      <Bestsellers fetchState="success" products={popularProducts} />
 
-      <Bestsellers fetchState="success" products={popularProducts}  />
+      <NewArrivals fetchState="success" products={newProducts} />
 
-      <Suspense
-        fallback={
-          <ArchiveSelection
-            data={archiveSection}
-            fetchState="loading"
-            products={saleProducts}
-          />
-        }
-      >
-        <ArchiveSelectionServerBlock data={archiveSection} />
-      </Suspense>
+      <CustomerReviews
+        reviews={mainReviews}
+        useMockReviews={mainReviews.length === 0}
+      />
 
-      <BrandValues />
+      <AboutBrand />
+
+      <HomeFaq />
+
+      <InstagramFeed />
 
       <section className="products-layout-wrapper products-layout-wrapper--footer">
         <Footer

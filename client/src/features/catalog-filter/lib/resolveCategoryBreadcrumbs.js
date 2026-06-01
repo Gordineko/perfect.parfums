@@ -3,6 +3,7 @@ import {
   categoryTreeItemHref,
   pickLocalizedString,
 } from "@shared";
+import { localePath } from "@shared/lib/localePath";
 import {
   getCategoryBreadcrumbs,
 } from "@shared/api/categoryServices";
@@ -191,7 +192,7 @@ export async function resolvePdpBreadcrumbItems({
         return [
           {
             label: catalogFallbackLabel,
-            path: `/${locale}/categories/all`,
+            path: localePath(locale, "/categories/all"),
           },
           {
             label,
@@ -244,11 +245,11 @@ export async function resolvePdpBreadcrumbItems({
     return [
       {
         label: catalogFallbackLabel,
-        path: `/${locale}/categories/all`,
+        path: localePath(locale, "/categories/all"),
       },
       {
         label: title,
-        path: `/${locale}/categories/${pathSlug}`,
+        path: localePath(locale, `/categories/${pathSlug}`),
       },
       { label: safeProductLabel },
     ];
@@ -257,7 +258,7 @@ export async function resolvePdpBreadcrumbItems({
   return [
     {
       label: catalogFallbackLabel,
-      path: `/${locale}/categories/all`,
+      path: localePath(locale, "/categories/all"),
     },
     { label: safeProductLabel },
   ];
