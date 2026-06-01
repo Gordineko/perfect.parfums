@@ -3,13 +3,13 @@ global:
   evaluation_interval: 10s
 
 scrape_configs:
-  - job_name: maloe-api
+  - job_name: perfect-parfums-api
     metrics_path: /metrics
     static_configs:
       - targets:
           - 127.0.0.1:5007
         labels:
-          service: maloe-api
+          service: perfect-parfums-api
           component: api
           runtime: pm2
 

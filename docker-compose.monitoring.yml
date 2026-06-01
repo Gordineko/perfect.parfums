@@ -27,7 +27,7 @@ services:
     command: -config.file=/etc/promtail/config.yml
     volumes:
       - ./monitoring/promtail/promtail-config.yml:/etc/promtail/config.yml:ro
-      - ./server/logs:/var/log/maloe:ro
+      - ./server/logs:/var/log/perfect-parfums:ro
     depends_on:
       loki:
         condition: service_started

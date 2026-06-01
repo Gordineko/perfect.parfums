@@ -378,6 +378,25 @@ export function createCatalogCardsService({
       const items = groups.map((g) => {
         const a = aggByGroupId.get(String(g._id));
         const groupAxes = Array.isArray(g.variationAxes) ? g.variationAxes : [];
+        const previewAxes = Array.isArray(a?.variantPreviewAxes)
+          ? a.variantPreviewAxes.map((previewAxis) => {
+              const axisIndex = Number(previewAxis?.axisIndex);
+              const axisMeta = Number.isInteger(axisIndex) && axisIndex >= 0
+                ? groupAxes[axisIndex]
+                : null;
+
+              return {
+                axisIndex,
+                axisId: axisMeta?.axisId ?? null,
+                title: axisMeta?.title ?? null,
+                type: axisMeta?.type ?? null,
+                unit: axisMeta?.unit ?? null,
+                values: Array.isArray(previewAxis?.values)
+                  ? previewAxis.values
+                  : [],
+              };
+            })
+          : [];
 
         const categories = (g.categoryIds || [])
           .map((id) => categoryMap.get(String(id)))
@@ -405,9 +424,14 @@ export function createCatalogCardsService({
             totalStock: a?.totalStock ?? 0,
           },
 
+          ratingSummary: {
+            average: Number(g?.ratingSummary?.average || 0),
+            count: Number(g?.ratingSummary?.count || 0),
+          },
+
           variantPreview: {
             depth,
-            axes: a?.variantPreviewAxes ?? [],
+            axes: previewAxes,
           },
 
           offers: includeOffers === "none" ? [] : a?.offers ?? [],

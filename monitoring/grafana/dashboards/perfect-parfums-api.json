@@ -71,7 +71,7 @@
       },
       "targets": [
         {
-          "expr": "max(up{job=\"maloe-api\"})",
+          "expr": "max(up{job=\"perfect-parfums-api\"})",
           "legendFormat": "PM2 API /metrics",
           "refId": "A"
         }
@@ -110,7 +110,7 @@
       },
       "targets": [
         {
-          "expr": "(sum(rate(maloe_http_requests_total[5m]))) or vector(0)",
+          "expr": "(sum(rate(perfect_parfums_http_requests_total[5m]))) or vector(0)",
           "legendFormat": "RPS",
           "refId": "A"
         }
@@ -149,7 +149,7 @@
       },
       "targets": [
         {
-          "expr": "(max(maloe_http_unique_clients{job=\"maloe-api\", window=\"5m\"})) or vector(0)",
+          "expr": "(max(perfect_parfums_http_unique_clients{job=\"perfect-parfums-api\", window=\"5m\"})) or vector(0)",
           "legendFormat": "unique clients",
           "refId": "A"
         }
@@ -188,7 +188,7 @@
       },
       "targets": [
         {
-          "expr": "(histogram_quantile(0.95, sum(rate(maloe_http_request_duration_seconds_bucket[5m])) by (le))) or vector(0)",
+          "expr": "(histogram_quantile(0.95, sum(rate(perfect_parfums_http_request_duration_seconds_bucket[5m])) by (le))) or vector(0)",
           "legendFormat": "p95",
           "refId": "A"
         }
@@ -227,7 +227,7 @@
       },
       "targets": [
         {
-          "expr": "(sum(rate(maloe_http_requests_total{status_class=\"5xx\"}[5m])) / clamp_min(sum(rate(maloe_http_requests_total[5m])), 0.001)) or vector(0)",
+          "expr": "(sum(rate(perfect_parfums_http_requests_total{status_class=\"5xx\"}[5m])) / clamp_min(sum(rate(perfect_parfums_http_requests_total[5m])), 0.001)) or vector(0)",
           "legendFormat": "5xx",
           "refId": "A"
         }
@@ -257,7 +257,7 @@
       "id": 6,
       "targets": [
         {
-          "expr": "(sum(rate(maloe_http_requests_total[5m])) by (module, area)) or vector(0)",
+          "expr": "(sum(rate(perfect_parfums_http_requests_total[5m])) by (module, area)) or vector(0)",
           "legendFormat": "{{module}} / {{area}}",
           "refId": "A"
         }
@@ -287,7 +287,7 @@
       "id": 7,
       "targets": [
         {
-          "expr": "(histogram_quantile(0.95, sum(rate(maloe_http_request_duration_seconds_bucket[5m])) by (le, route))) or vector(0)",
+          "expr": "(histogram_quantile(0.95, sum(rate(perfect_parfums_http_request_duration_seconds_bucket[5m])) by (le, route))) or vector(0)",
           "legendFormat": "{{route}}",
           "refId": "A"
         }
@@ -319,13 +319,13 @@
       },
       "targets": [
         {
-          "expr": "{service=\"maloe-api\"}",
+          "expr": "{service=\"perfect-parfums-api\"}",
           "refId": "A"
         }
       ],
       "title": "Логи приложения",
       "type": "logs",
-      "description": "Живой поток JSON-логов PM2 API, которые Promtail читает из server/logs/app.log и отправляет в Loki.",
+      "description": "Живой поток JSON-логов PM2 API, которые Promtail читает из server/logs/api.log и отправляет в Loki.",
       "fieldConfig": {
         "defaults": {
           "noValue": "Нет данных"
@@ -336,7 +336,7 @@
   "refresh": "10s",
   "schemaVersion": 39,
   "tags": [
-    "maloe",
+    "perfect-parfums",
     "api",
     "monitoring",
     "русский",
@@ -352,8 +352,8 @@
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Maloe API: обзор",
-  "uid": "maloe-api-overview",
+  "title": "Perfect Parfums API: обзор",
+  "uid": "perfect-parfums-api-overview",
   "version": 7,
   "weekStart": "",
   "style": "dark"

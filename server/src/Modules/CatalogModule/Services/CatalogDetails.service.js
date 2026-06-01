@@ -21,6 +21,10 @@ export function createCatalogDetailsService({ productGroupRepo, offerRepo }) {
         offers,
         pricing: { min, max, currency: "UAH" },
         availability: { hasAvailable, variantsCount: offers.length },
+        ratingSummary: {
+          average: Number(group?.ratingSummary?.average || 0),
+          count: Number(group?.ratingSummary?.count || 0),
+        },
       };
     },
   };

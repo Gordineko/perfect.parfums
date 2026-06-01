@@ -71,7 +71,7 @@
       },
       "targets": [
         {
-          "expr": "max(up{job=\"maloe-api\"})",
+          "expr": "max(up{job=\"perfect-parfums-api\"})",
           "legendFormat": "PM2 API /metrics",
           "refId": "A"
         }
@@ -111,7 +111,7 @@
       },
       "targets": [
         {
-          "expr": "(max(maloe_process_uptime_seconds{job=\"maloe-api\"})) or vector(0)",
+          "expr": "(max(perfect_parfums_process_uptime_seconds{job=\"perfect-parfums-api\"})) or vector(0)",
           "legendFormat": "uptime",
           "refId": "A"
         }
@@ -151,7 +151,7 @@
       },
       "targets": [
         {
-          "expr": "(sum(rate(maloe_http_requests_total{module=~\"$module\", area=~\"$area\"}[5m]))) or vector(0)",
+          "expr": "(sum(rate(perfect_parfums_http_requests_total{module=~\"$module\", area=~\"$area\"}[5m]))) or vector(0)",
           "legendFormat": "RPS",
           "refId": "A"
         }
@@ -191,7 +191,7 @@
       },
       "targets": [
         {
-          "expr": "(sum(maloe_http_requests_in_progress{module=~\"$module\", area=~\"$area\"})) or vector(0)",
+          "expr": "(sum(perfect_parfums_http_requests_in_progress{module=~\"$module\", area=~\"$area\"})) or vector(0)",
           "legendFormat": "active",
           "refId": "A"
         }
@@ -231,7 +231,7 @@
       },
       "targets": [
         {
-          "expr": "(max(maloe_http_unique_clients{job=\"maloe-api\", window=\"5m\"})) or vector(0)",
+          "expr": "(max(perfect_parfums_http_unique_clients{job=\"perfect-parfums-api\", window=\"5m\"})) or vector(0)",
           "legendFormat": "5m",
           "refId": "A"
         }
@@ -271,7 +271,7 @@
       },
       "targets": [
         {
-          "expr": "(max(maloe_http_unique_clients{job=\"maloe-api\", window=\"1h\"})) or vector(0)",
+          "expr": "(max(perfect_parfums_http_unique_clients{job=\"perfect-parfums-api\", window=\"1h\"})) or vector(0)",
           "legendFormat": "1h",
           "refId": "A"
         }
@@ -311,7 +311,7 @@
       },
       "targets": [
         {
-          "expr": "(histogram_quantile(0.95, sum(rate(maloe_http_request_duration_seconds_bucket{module=~\"$module\", area=~\"$area\"}[5m])) by (le))) or vector(0)",
+          "expr": "(histogram_quantile(0.95, sum(rate(perfect_parfums_http_request_duration_seconds_bucket{module=~\"$module\", area=~\"$area\"}[5m])) by (le))) or vector(0)",
           "legendFormat": "p95",
           "refId": "A"
         }
@@ -351,7 +351,7 @@
       },
       "targets": [
         {
-          "expr": "(sum(rate(maloe_http_requests_total{status_class=\"5xx\", module=~\"$module\", area=~\"$area\"}[5m])) / clamp_min(sum(rate(maloe_http_requests_total{module=~\"$module\", area=~\"$area\"}[5m])), 0.001)) or vector(0)",
+          "expr": "(sum(rate(perfect_parfums_http_requests_total{status_class=\"5xx\", module=~\"$module\", area=~\"$area\"}[5m])) / clamp_min(sum(rate(perfect_parfums_http_requests_total{module=~\"$module\", area=~\"$area\"}[5m])), 0.001)) or vector(0)",
           "legendFormat": "5xx",
           "refId": "A"
         }
@@ -381,7 +381,7 @@
       "id": 9,
       "targets": [
         {
-          "expr": "(sum(rate(maloe_http_requests_total{module=~\"$module\", area=~\"$area\"}[5m])) by (module, area)) or vector(0)",
+          "expr": "(sum(rate(perfect_parfums_http_requests_total{module=~\"$module\", area=~\"$area\"}[5m])) by (module, area)) or vector(0)",
           "legendFormat": "{{module}} / {{area}}",
           "refId": "A"
         }
@@ -411,7 +411,7 @@
       "id": 10,
       "targets": [
         {
-          "expr": "(sum(rate(maloe_http_requests_total{module=~\"$module\", area=~\"$area\"}[5m])) by (client_source)) or vector(0)",
+          "expr": "(sum(rate(perfect_parfums_http_requests_total{module=~\"$module\", area=~\"$area\"}[5m])) by (client_source)) or vector(0)",
           "legendFormat": "{{client_source}}",
           "refId": "A"
         }
@@ -441,7 +441,7 @@
       "id": 11,
       "targets": [
         {
-          "expr": "(sum(rate(maloe_http_requests_total{module=~\"$module\", area=~\"$area\"}[5m])) by (status_class)) or vector(0)",
+          "expr": "(sum(rate(perfect_parfums_http_requests_total{module=~\"$module\", area=~\"$area\"}[5m])) by (status_class)) or vector(0)",
           "legendFormat": "{{status_class}}",
           "refId": "A"
         }
@@ -471,17 +471,17 @@
       "id": 12,
       "targets": [
         {
-          "expr": "(histogram_quantile(0.50, sum(rate(maloe_http_request_duration_seconds_bucket{module=~\"$module\", area=~\"$area\"}[5m])) by (le))) or vector(0)",
+          "expr": "(histogram_quantile(0.50, sum(rate(perfect_parfums_http_request_duration_seconds_bucket{module=~\"$module\", area=~\"$area\"}[5m])) by (le))) or vector(0)",
           "legendFormat": "p50",
           "refId": "A"
         },
         {
-          "expr": "(histogram_quantile(0.95, sum(rate(maloe_http_request_duration_seconds_bucket{module=~\"$module\", area=~\"$area\"}[5m])) by (le))) or vector(0)",
+          "expr": "(histogram_quantile(0.95, sum(rate(perfect_parfums_http_request_duration_seconds_bucket{module=~\"$module\", area=~\"$area\"}[5m])) by (le))) or vector(0)",
           "legendFormat": "p95",
           "refId": "B"
         },
         {
-          "expr": "(histogram_quantile(0.99, sum(rate(maloe_http_request_duration_seconds_bucket{module=~\"$module\", area=~\"$area\"}[5m])) by (le))) or vector(0)",
+          "expr": "(histogram_quantile(0.99, sum(rate(perfect_parfums_http_request_duration_seconds_bucket{module=~\"$module\", area=~\"$area\"}[5m])) by (le))) or vector(0)",
           "legendFormat": "p99",
           "refId": "C"
         }
@@ -511,7 +511,7 @@
       "id": 13,
       "targets": [
         {
-          "expr": "topk(15, sum(rate(maloe_http_requests_total{route=~\"$route\", module=~\"$module\", area=~\"$area\"}[5m])) by (method, route))",
+          "expr": "topk(15, sum(rate(perfect_parfums_http_requests_total{route=~\"$route\", module=~\"$module\", area=~\"$area\"}[5m])) by (method, route))",
           "legendFormat": "{{method}} {{route}}",
           "refId": "A"
         }
@@ -541,7 +541,7 @@
       "id": 14,
       "targets": [
         {
-          "expr": "topk(15, histogram_quantile(0.95, sum(rate(maloe_http_request_duration_seconds_bucket{route=~\"$route\", module=~\"$module\", area=~\"$area\"}[5m])) by (le, method, route)))",
+          "expr": "topk(15, histogram_quantile(0.95, sum(rate(perfect_parfums_http_request_duration_seconds_bucket{route=~\"$route\", module=~\"$module\", area=~\"$area\"}[5m])) by (le, method, route)))",
           "legendFormat": "{{method}} {{route}}",
           "refId": "A"
         }
@@ -571,7 +571,7 @@
       "id": 15,
       "targets": [
         {
-          "expr": "topk(15, sum(rate(maloe_http_requests_total{status_class=~\"4xx|5xx\", route=~\"$route\", module=~\"$module\", area=~\"$area\"}[5m])) by (method, route, status_code))",
+          "expr": "topk(15, sum(rate(perfect_parfums_http_requests_total{status_class=~\"4xx|5xx\", route=~\"$route\", module=~\"$module\", area=~\"$area\"}[5m])) by (method, route, status_code))",
           "legendFormat": "{{status_code}} {{method}} {{route}}",
           "refId": "A"
         }
@@ -601,7 +601,7 @@
       "id": 16,
       "targets": [
         {
-          "expr": "(sum(rate(maloe_business_events_total{area=~\"$area\"}[5m])) by (action, status_class)) or vector(0)",
+          "expr": "(sum(rate(perfect_parfums_business_events_total{area=~\"$area\"}[5m])) by (action, status_class)) or vector(0)",
           "legendFormat": "{{action}} / {{status_class}}",
           "refId": "A"
         }
@@ -631,7 +631,7 @@
       "id": 17,
       "targets": [
         {
-          "expr": "(sum(increase(maloe_business_events_total{status_class=~\"2xx|3xx\"}[$__range])) by (action)) or vector(0)",
+          "expr": "(sum(increase(perfect_parfums_business_events_total{status_class=~\"2xx|3xx\"}[$__range])) by (action)) or vector(0)",
           "legendFormat": "{{action}}",
           "refId": "A"
         }
@@ -661,12 +661,12 @@
       "id": 18,
       "targets": [
         {
-          "expr": "(sum(rate(maloe_http_request_bytes_total{module=~\"$module\", area=~\"$area\"}[5m]))) or vector(0)",
+          "expr": "(sum(rate(perfect_parfums_http_request_bytes_total{module=~\"$module\", area=~\"$area\"}[5m]))) or vector(0)",
           "legendFormat": "request bytes",
           "refId": "A"
         },
         {
-          "expr": "(sum(rate(maloe_http_response_bytes_total{module=~\"$module\", area=~\"$area\"}[5m]))) or vector(0)",
+          "expr": "(sum(rate(perfect_parfums_http_response_bytes_total{module=~\"$module\", area=~\"$area\"}[5m]))) or vector(0)",
           "legendFormat": "response bytes",
           "refId": "B"
         }
@@ -696,7 +696,7 @@
       "id": 19,
       "targets": [
         {
-          "expr": "topk(15, sum(rate(maloe_http_response_bytes_total{module=~\"$module\", area=~\"$area\"}[5m])) by (route) / clamp_min(sum(rate(maloe_http_requests_total{module=~\"$module\", area=~\"$area\"}[5m])) by (route), 0.001))",
+          "expr": "topk(15, sum(rate(perfect_parfums_http_response_bytes_total{module=~\"$module\", area=~\"$area\"}[5m])) by (route) / clamp_min(sum(rate(perfect_parfums_http_requests_total{module=~\"$module\", area=~\"$area\"}[5m])) by (route), 0.001))",
           "legendFormat": "{{route}}",
           "refId": "A"
         }
@@ -726,7 +726,7 @@
       "id": 20,
       "targets": [
         {
-          "expr": "max by(type) (maloe_process_memory_bytes{job=\"maloe-api\"})",
+          "expr": "max by(type) (perfect_parfums_process_memory_bytes{job=\"perfect-parfums-api\"})",
           "legendFormat": "{{type}}",
           "refId": "A"
         }
@@ -756,12 +756,12 @@
       "id": 21,
       "targets": [
         {
-          "expr": "rate(maloe_process_cpu_user_seconds_total{job=\"maloe-api\"}[5m])",
+          "expr": "rate(perfect_parfums_process_cpu_user_seconds_total{job=\"perfect-parfums-api\"}[5m])",
           "legendFormat": "user",
           "refId": "A"
         },
         {
-          "expr": "rate(maloe_process_cpu_system_seconds_total{job=\"maloe-api\"}[5m])",
+          "expr": "rate(perfect_parfums_process_cpu_system_seconds_total{job=\"perfect-parfums-api\"}[5m])",
           "legendFormat": "system",
           "refId": "B"
         }
@@ -791,7 +791,7 @@
       "id": 22,
       "targets": [
         {
-          "expr": "max(maloe_process_event_loop_lag_seconds{job=\"maloe-api\"})",
+          "expr": "max(perfect_parfums_process_event_loop_lag_seconds{job=\"perfect-parfums-api\"})",
           "legendFormat": "lag",
           "refId": "A"
         }
@@ -821,12 +821,12 @@
       "id": 23,
       "targets": [
         {
-          "expr": "max(maloe_process_active_handles{job=\"maloe-api\"})",
+          "expr": "max(perfect_parfums_process_active_handles{job=\"perfect-parfums-api\"})",
           "legendFormat": "handles",
           "refId": "A"
         },
         {
-          "expr": "sum(resets(maloe_process_uptime_seconds{job=\"maloe-api\"}[1h]))",
+          "expr": "sum(resets(perfect_parfums_process_uptime_seconds{job=\"perfect-parfums-api\"}[1h]))",
           "legendFormat": "restarts 1h",
           "refId": "B"
         }
@@ -871,12 +871,12 @@
       "id": 24,
       "targets": [
         {
-          "expr": "max(maloe_mongodb_connected{job=\"maloe-api\"})",
+          "expr": "max(perfect_parfums_mongodb_connected{job=\"perfect-parfums-api\"})",
           "legendFormat": "MongoDB",
           "refId": "A"
         },
         {
-          "expr": "max(maloe_redis_connected{job=\"maloe-api\"})",
+          "expr": "max(perfect_parfums_redis_connected{job=\"perfect-parfums-api\"})",
           "legendFormat": "Redis",
           "refId": "B"
         }
@@ -906,7 +906,7 @@
       "id": 25,
       "targets": [
         {
-          "expr": "(sum(increase(maloe_process_errors_total{job=\"maloe-api\"}[$__range])) by (type)) or vector(0)",
+          "expr": "(sum(increase(perfect_parfums_process_errors_total{job=\"perfect-parfums-api\"}[$__range])) by (type)) or vector(0)",
           "legendFormat": "{{type}}",
           "refId": "A"
         }
@@ -936,7 +936,7 @@
       "id": 26,
       "targets": [
         {
-          "expr": "sum by(level) (count_over_time({service=\"maloe-api\", level=~\"$log_level\"}[$__interval]))",
+          "expr": "sum by(level) (count_over_time({service=\"perfect-parfums-api\", level=~\"$log_level\"}[$__interval]))",
           "refId": "A"
         }
       ],
@@ -965,7 +965,7 @@
       "id": 27,
       "targets": [
         {
-          "expr": "topk(10, sum by(route, status_class) (count_over_time({service=\"maloe-api\", status_class=~\"4xx|5xx\"}[$__range])))",
+          "expr": "topk(10, sum by(route, status_class) (count_over_time({service=\"perfect-parfums-api\", status_class=~\"4xx|5xx\"}[$__range])))",
           "refId": "A"
         }
       ],
@@ -996,7 +996,7 @@
       },
       "targets": [
         {
-          "expr": "{service=\"maloe-api\", level=~\"error|warn\"}",
+          "expr": "{service=\"perfect-parfums-api\", level=~\"error|warn\"}",
           "refId": "A"
         }
       ],
@@ -1032,7 +1032,7 @@
       },
       "targets": [
         {
-          "expr": "{service=\"maloe-api\", module=~\"$module\", area=~\"$area\", level=~\"$log_level\"}",
+          "expr": "{service=\"perfect-parfums-api\", module=~\"$module\", area=~\"$area\", level=~\"$log_level\"}",
           "refId": "A"
         }
       ],
@@ -1049,7 +1049,7 @@
   "refresh": "10s",
   "schemaVersion": 39,
   "tags": [
-    "maloe",
+    "perfect-parfums",
     "api",
     "monitoring",
     "русский",
@@ -1069,7 +1069,7 @@
           "type": "prometheus",
           "uid": "prometheus"
         },
-        "definition": "label_values(maloe_http_requests_total, module)",
+        "definition": "label_values(perfect_parfums_http_requests_total, module)",
         "hide": 0,
         "includeAll": true,
         "label": "Модуль",
@@ -1077,7 +1077,7 @@
         "name": "module",
         "options": [],
         "query": {
-          "query": "label_values(maloe_http_requests_total, module)",
+          "query": "label_values(perfect_parfums_http_requests_total, module)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -1097,7 +1097,7 @@
           "type": "prometheus",
           "uid": "prometheus"
         },
-        "definition": "label_values(maloe_http_requests_total, area)",
+        "definition": "label_values(perfect_parfums_http_requests_total, area)",
         "hide": 0,
         "includeAll": true,
         "label": "Зона",
@@ -1105,7 +1105,7 @@
         "name": "area",
         "options": [],
         "query": {
-          "query": "label_values(maloe_http_requests_total, area)",
+          "query": "label_values(perfect_parfums_http_requests_total, area)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -1125,7 +1125,7 @@
           "type": "prometheus",
           "uid": "prometheus"
         },
-        "definition": "label_values(maloe_http_requests_total, route)",
+        "definition": "label_values(perfect_parfums_http_requests_total, route)",
         "hide": 0,
         "includeAll": true,
         "label": "Маршрут",
@@ -1133,7 +1133,7 @@
         "name": "route",
         "options": [],
         "query": {
-          "query": "label_values(maloe_http_requests_total, route)",
+          "query": "label_values(perfect_parfums_http_requests_total, route)",
           "refId": "PrometheusVariableQueryEditor-VariableQuery"
         },
         "refresh": 1,
@@ -1207,8 +1207,8 @@
     ]
   },
   "timezone": "browser",
-  "title": "Maloe API: подробный мониторинг",
-  "uid": "maloe-api-full",
+  "title": "Perfect Parfums API: подробный мониторинг",
+  "uid": "perfect-parfums-api-full",
   "version": 7,
   "weekStart": "",
   "style": "dark"

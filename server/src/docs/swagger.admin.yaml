@@ -88,6 +88,28 @@ info:
     - остальные поля оффера
 
 
+    ### characteristics
+
+    `ProductGroup.characteristics` и `Offer.characteristics` заполняются
+    отдельно от вариаций.
+
+    Что это значит на практике:
+
+    - `ProductGroup.characteristics` — ручные характеристики группы, они не
+      зависят от `variationAxes`
+
+    - `Offer.characteristics` — ручные характеристики конкретного оффера, их
+      можно обновлять отдельно через `PATCH
+      /catalog/admin/catalog/offers/{offerId}`
+
+    - backend всё равно строит производные характеристики оффера из
+      `variationAxes` + `optionMap`
+
+    - если ручная характеристика оффера использует тот же `key`, что и
+      производная характеристика из вариации, итоговое значение будет взято из
+      `optionMap`
+
+
     ---
 
 
@@ -416,6 +438,8 @@ tags:
     description: Управление группами товаров
   - name: Admin Catalog Offers
     description: Управление офферами товаров
+  - name: Characteristics Meta
+    description: Словарь характеристик для форм товара и фильтров в админке
   - name: Auth
     description: Password reset flow for storefront users
 paths:
@@ -2163,6 +2187,9 @@ paths:
         - `PUT /catalog/admin/catalog/groups/{groupId}`
         - или offer endpoints
 
+        Можно отправить только `characteristics`, если нужно отдельно
+        редактировать характеристики группы без изменения variationAxes.
+
         Использовать для обычной формы группы в верхней части страницы.
       parameters:
         - $ref: '#/components/parameters/GroupIdPath'
@@ -2183,6 +2210,28 @@ paths:
                     ua: Оновлений підзаголовок
                     en: Обновленный подзаголовок
                   status: active
+              patchCharacteristicsOnly:
+                summary: Обновить только характеристики группы
+                value:
+                  characteristics:
+                    - key: brand
+                      type: select
+                      unit: null
+                      value:
+                        value: MST
+                        label:
+                          ua: MST
+                          en: MST
+                      values: []
+                    - key: effect
+                      type: multiselect
+                      unit: null
+                      value: null
+                      values:
+                        - value: hydration
+                          label:
+                            ua: Зволоження
+                            en: Hydration
       responses:
         '200':
           description: Группа успешно обновлена частично
@@ -2378,6 +2427,17 @@ paths:
         - наличие всех required axis values в optionMap
         - уникальность SKU
         - уникальность комбинации вариаций внутри группы
+
+        `characteristics` здесь отвечают только за ручные характеристики
+        конкретного оффера.
+
+        Производные характеристики из `optionMap` backend достраивает сам.
+
+        Если ручные характеристики будут заполнены позже, можно:
+        - не передавать `characteristics` вовсе
+        - или передать пустой массив `characteristics: []`
+        - затем вызвать `PATCH /catalog/admin/catalog/offers/{offerId}` только с
+          полем `characteristics`
       parameters:
         - $ref: '#/components/parameters/GroupIdPath'
       requestBody:
@@ -2404,6 +2464,22 @@ paths:
                       onHand: 7
                       reserved: 0
                   characteristics: []
+              deferredCharacteristics:
+                summary: Создать оффер и заполнить ручные характеристики позже
+                value:
+                  sku: VITC-BERRY-60-POUCH-t003
+                  price: 999
+                  opt_price: null
+                  available: true
+                  img: https://i.postimg.cc/8k2LRmzP/fallback.webp
+                  optionMap:
+                    A1: berry
+                    A2: 60
+                    A3: pouch
+                  stocks:
+                    - warehouseId: 69c470e7475b219c3e3255a0
+                      onHand: 4
+                      reserved: 0
       responses:
         '201':
           description: Оффер успешно создан
@@ -2439,6 +2515,14 @@ paths:
         - заново собирает optionKey
         - проверяет уникальность новой комбинации
 
+        Можно отправить только `characteristics`, не меняя `optionMap`.
+
+        В этом случае backend:
+        - оставит текущий `optionMap`
+        - заново соберет производные характеристики из текущих вариаций
+        - добавит ручные характеристики из payload, если их `key` не
+          конфликтует с производными
+
         - редактирование оффера в drawer/modal
         - редактирование строки в таблице
         - сложный form patch
@@ -2455,6 +2539,24 @@ paths:
             schema:
               $ref: '#/components/schemas/PatchOfferRequest'
             examples:
+              characteristicsOnly:
+                summary: Обновить только ручные характеристики оффера
+                value:
+                  characteristics:
+                    - key: tags
+                      type: multiselect
+                      unit: null
+                      value: null
+                      values:
+                        - value: promo
+                          label:
+                            ua: Акція
+                            en: Promo
+                    - key: usage
+                      type: string
+                      unit: null
+                      value: evening-care
+                      values: []
               complexPatch:
                 summary: Частичное обновление оффера
                 value:
@@ -2483,6 +2585,66 @@ paths:
           $ref: '#/components/responses/BadRequest'
         '404':
           $ref: '#/components/responses/NotFound'
+  /catalog/characteristics/meta:
+    get:
+      tags:
+        - Characteristics Meta
+      summary: Получить словарь характеристик для форм и фильтров
+      description: |
+        Возвращает meta-описания характеристик, которые фронт может
+        использовать:
+
+        - для форм редактирования group/offer characteristics
+        - для выбора типа характеристики
+        - для отображения unit и valuesPreset
+        - для понимания области применения поля через `scope`
+
+        Это отдельный словарь характеристик, а не описание вариаций.
+
+        Для вариаций используйте:
+        - `variationAxes` группы
+        - `optionMap` оффера
+      parameters:
+        - name: status
+          in: query
+          required: false
+          description: Фильтр по статусу meta-записи. По умолчанию `active`.
+          schema:
+            type: string
+            enum:
+              - active
+              - hidden
+            default: active
+      responses:
+        '200':
+          description: Список meta-характеристик
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CharacteristicMetaListResponse'
+              examples:
+                success:
+                  value:
+                    items:
+                      - _id: 69aaf53efcc1f31d1fda65ed
+                        key: brand
+                        title:
+                          ua: Бренд
+                          en: Brand
+                        type: select
+                        unit: null
+                        valuesPreset:
+                          - value: MST
+                            label:
+                              ua: MST
+                              en: MST
+                        scope: group
+                        filterable: true
+                        searchable: true
+                        sort: 10
+                        status: active
+        '400':
+          $ref: '#/components/responses/BadRequest'
         '409':
           $ref: '#/components/responses/Conflict'
     delete:
@@ -5888,6 +6050,20 @@ components:
         Универсальная структура характеристики.
         Используется и для группы, и для оффера.
 
+        В админке это поле используется по-разному:
+
+        - для группы — это ручные характеристики товара, независимые от
+          `variationAxes`
+
+        - для оффера — это только ручные характеристики конкретного SKU
+
+        - производные характеристики оффера из `variationAxes` + `optionMap`
+          backend вычисляет сам и добавляет к сохраненному результату
+
+        - если `key` ручной характеристики совпадает с `key` производной
+          характеристики из вариации, итоговое значение будет взято из
+          `optionMap`
+
         Примеры:
 
         ```json
@@ -5923,6 +6099,63 @@ components:
           ]
         }
         ```
+    CharacteristicMeta:
+      type: object
+      description: |
+        Meta-описание характеристики для UI формы и фильтров.
+
+        Используется отдельно от `variationAxes`.
+      properties:
+        _id:
+          $ref: '#/components/schemas/ObjectIdString'
+        key:
+          type: string
+          example: brand
+        title:
+          $ref: '#/components/schemas/LocalizedText'
+        type:
+          $ref: '#/components/schemas/CharacteristicType'
+        unit:
+          oneOf:
+            - type: string
+            - type: 'null'
+          nullable: true
+        valuesPreset:
+          type: array
+          items:
+            nullable: true
+        scope:
+          type: string
+          enum:
+            - group
+            - offer
+            - both
+        filterable:
+          type: boolean
+        searchable:
+          type: boolean
+        sort:
+          type: number
+        status:
+          type: string
+          enum:
+            - active
+            - hidden
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+    CharacteristicMetaListResponse:
+      type: object
+      required:
+        - items
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CharacteristicMeta'
     VariationAxisInput:
       type: object
       additionalProperties: false
@@ -6025,7 +6258,6 @@ components:
         - img
         - optionMap
         - stocks
-        - characteristics
       properties:
         sku:
           type: string
@@ -6063,6 +6295,12 @@ components:
         Очень важно:
         - optionValues не передавать
         - optionKey не передавать
+
+        `characteristics` в этом payload описывают только ручные
+        характеристики оффера.
+
+        Производные характеристики из `variationAxes` + `optionMap` backend
+        добавит сам.
     PatchOfferRequest:
       type: object
       additionalProperties: false
@@ -6098,6 +6336,14 @@ components:
 
         Backend берет текущий оффер, мержит с этими полями, валидирует итог и
         сохраняет.
+
+
+        `characteristics` можно отправить отдельно от `optionMap`.
+
+
+        Итоговый `characteristics` оффера после сохранения = ручные
+        характеристики из payload + производные характеристики из текущего
+        `optionMap`.
     CreateGroupRequest:
       type: object
       additionalProperties: false
@@ -6185,6 +6431,7 @@ components:
             $ref: '#/components/schemas/CharacteristicInput'
       description: |
         Частичный payload только для полей группы.
+        `characteristics` можно передавать отдельно от `variationAxes`.
         Нельзя передавать variationAxes и offers.
     OfferOutput:
       type: object
@@ -6221,6 +6468,13 @@ components:
             $ref: '#/components/schemas/StockRowInput'
         characteristics:
           type: array
+          description: |
+            Финальный набор характеристик оффера после сохранения.
+
+            Содержит:
+            - ручные характеристики оффера
+            - производные характеристики, построенные backend из `variationAxes`
+              + `optionMap`
           items:
             $ref: '#/components/schemas/CharacteristicInput'
         createdAt:
@@ -6284,6 +6538,9 @@ components:
             $ref: '#/components/schemas/VariationAxisInput'
         characteristics:
           type: array
+          description: |
+            Ручные характеристики группы товара.
+            Значения `variationAxes` сюда автоматически не дублируются.
           items:
             $ref: '#/components/schemas/CharacteristicInput'
         status:
