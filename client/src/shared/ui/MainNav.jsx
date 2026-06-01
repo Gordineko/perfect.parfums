@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { categoryTreeItemHref } from "../lib/categoryTreeHref";
+import { isNavLinkActive } from "../lib/isNavLinkActive";
 import { useOnClickOutside } from "../lib/useOnClickOutside";
 
 function isCatalogNavItem(item) {
@@ -18,6 +20,8 @@ const MainNav = ({
   catalogDropdown,
   onNavigate,
 }) => {
+  const pathname = usePathname();
+
   const handleNavigate = useCallback(() => {
     onNavigate?.();
   }, [onNavigate]);
@@ -149,12 +153,20 @@ const MainNav = ({
           );
         }
 
+        const isActive = isNavLinkActive(pathname, item.href);
+
         return (
           <li key={item.id} className="main-nav__item">
             <Link
               href={item.href}
-              className="main-nav__button"
+              className={[
+                "main-nav__button",
+                isActive ? "main-nav__button--active" : "",
+              ]
+                .filter(Boolean)
+                .join(" ")}
               onClick={handleNavigate}
+              aria-current={isActive ? "page" : undefined}
             >
               <p className="main-nav__text">{item.label}</p>
             </Link>

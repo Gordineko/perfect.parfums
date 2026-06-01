@@ -1,4 +1,3 @@
-import Floating from "@features/floating";
 import { i18n } from "@shared";
 import {
   getAllCategory,
@@ -37,7 +36,6 @@ export default async function LocaleLayout({
           />
           <MainContent locale={locale}>
             {children}
-            <Floating />
           </MainContent>
         </div>
       </ReduxProvider>

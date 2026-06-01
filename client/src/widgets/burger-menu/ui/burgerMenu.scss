@@ -178,7 +178,8 @@ $burger-link-active: var(--color-burgundy, #68181f);
 
         &:hover,
         &:focus-visible,
-        &:active {
+        &:active,
+        &--active {
           color: $burger-link-active;
 
           .main-nav__text {

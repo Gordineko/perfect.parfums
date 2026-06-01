@@ -42,7 +42,7 @@
   color: var(--color-nude);
   text-align: left;
   font-family: var(--font-heading);
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 500;
   line-height: normal;
 }
@@ -63,9 +63,9 @@
 %footerBodyText {
   color: var(--color-nude);
   font-family: var(--font-body);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 300;
-  line-height: normal;
+  line-height: 1.35;
   font-synthesis: none;
 }
 
@@ -85,7 +85,6 @@
 
 .link {
   @extend %footerBodyText;
-  position: relative;
   display: inline-block;
   margin: 0;
   padding: 0;
@@ -94,33 +93,9 @@
   text-decoration: none;
   cursor: pointer;
 
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--color-nude);
-    transform: scaleX(0);
-    transform-origin: left center;
-    transition: transform 0.3s ease;
-  }
-
-  &:hover::after,
-  &:focus-visible::after {
-    transform: scaleX(1);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    &::after {
-      transition: none;
-    }
-
-    &:hover::after,
-    &:focus-visible::after {
-      transform: scaleX(1);
-    }
+  &:hover,
+  &:focus-visible {
+    opacity: 0.85;
   }
 }
 
@@ -192,16 +167,16 @@
 
 @include down($bp-desktop) {
   .title {
-    font-size: 20px;
+    font-size: 22px;
   }
 
   .text,
   .link {
-    font-size: 14px;
+    font-size: 18px;
   }
 
   .list {
-    gap: 8px;
+    gap: 10px;
 
     li {
       margin: 0;
@@ -310,13 +285,14 @@
   }
 
   .title {
-    font-size: 16px;
+    font-size: 20px;
     text-align: left;
   }
 
   .text,
   .link {
-    font-size: 12px;
+    font-size: 17px;
+    line-height: 1.4;
   }
 
   .textGroup,
@@ -325,8 +301,12 @@
     align-items: flex-start;
   }
 
+  .list {
+    gap: 12px;
+  }
+
   .list .link {
-    line-height: 1.2;
+    line-height: 1.35;
   }
 
   .brand {

@@ -15,13 +15,14 @@
     "topNavAria": "Information menu",
     "categoryNavAria": "Perfume catalog",
     "nav": {
-      "men": "Men's",
-      "women": "Women's",
-      "unisex": "Unisex",
-      "elite": "Elite",
+      "amber": "Amber",
+      "woody": "Woody",
       "oriental": "Oriental",
-      "niche": "Niche",
-      "gourmand": "Gourmand"
+      "citrus": "Citrus",
+      "floral": "Floral",
+      "fruity": "Fruity",
+      "gourmand": "Gourmand",
+      "green": "Green"
     }
   },
   "navigation": {

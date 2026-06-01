@@ -1,5 +1,6 @@
 "use client";
 
+import { isNavLinkActive } from "@shared/lib/isNavLinkActive";
 import { localePath } from "@shared/lib/localePath";
 import { useI18n } from "@shared/i18n/use-i18n";
 import clsx from "clsx";
@@ -19,9 +20,7 @@ export default function HeaderCategoryNav({ locale }) {
         <ul className={styles.categoryList}>
           {HEADER_CATEGORY_NAV.map(({ id, slug, labelKey }) => {
             const href = localePath(locale, `/categories/${slug}`);
-            const isActive =
-              typeof pathname === "string" &&
-              (pathname === href || pathname.startsWith(`${href}/`));
+            const isActive = isNavLinkActive(pathname, href);
 
             return (
               <li key={id} className={styles.categoryItem}>
@@ -31,6 +30,7 @@ export default function HeaderCategoryNav({ locale }) {
                     styles.categoryLink,
                     isActive && styles.categoryLinkActive,
                   )}
+                  aria-current={isActive ? "page" : undefined}
                 >
                   {t(labelKey)}
                 </Link>

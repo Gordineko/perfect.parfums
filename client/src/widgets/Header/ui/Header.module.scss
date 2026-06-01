@@ -61,6 +61,10 @@
   }
 }
 
+.topLinkActive {
+  color: var(--color-burgundy);
+}
+
 .topAccount {
   @extend %topBarText;
   flex-shrink: 0;
@@ -413,7 +417,7 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 80px;
+  gap: clamp(1.5rem, 3.5vw, 4.5rem);
   margin: 0;
   padding: clamp(0.625rem, 1.5vw, 0.875rem) 0;
   list-style: none;

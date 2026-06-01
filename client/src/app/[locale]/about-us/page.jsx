@@ -46,7 +46,7 @@ export default async function AboutUsPage({ params }) {
       <div className="container">
         <section className={styles.shell}>
           <div className={styles.content}>
-            <p className={styles.lead}>{t("aboutPage.lead")}</p>
+            <p className={styles.leadHero}>{t("aboutPage.lead")}</p>
             <p className={styles.intro}>{t("aboutPage.intro")}</p>
             <p className={styles.lead}>{t("aboutPage.offerTitle")}</p>
             <p className={styles.intro}>{t("aboutPage.offerIntro")}</p>

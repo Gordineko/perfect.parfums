@@ -5,7 +5,6 @@ import { createI18nServer } from "@shared/i18n/server";
 import AuthModal from "@widgets/auth-modal/ui/AuthModal";
 import Link from "next/link";
 
-import { HEADER_TOP_LINKS } from "../config/headerNavConfig";
 import HeaderAccountButton from "./HeaderAccountButton";
 import HeaderCartButton from "./HeaderCartButton";
 import HeaderMobileToggle from "./HeaderMobileToggle";
@@ -13,6 +12,7 @@ import HeaderSearchBar from "./HeaderSearchBar";
 import HeaderWishlistButton from "./HeaderWishlistButton";
 import HeaderBackLink from "./HeaderBackLink";
 import HeaderCategoryNav from "./HeaderCategoryNav";
+import HeaderTopNav from "./HeaderTopNav";
 import HeaderOverlays from "./HeaderOverlays";
 import HeaderSticky from "./HeaderSticky";
 import styles from "./Header.module.scss";
@@ -30,17 +30,7 @@ export default async function Header({ locale, categories }) {
         <div className="container">
           <div className={styles.topInner}>
             <HeaderBackLink label={t("notFound.back")} />
-            <nav className={styles.topNav} aria-label={t("header.topNavAria")}>
-              <ul className={styles.topList}>
-                {HEADER_TOP_LINKS.map(({ id, path, labelKey }) => (
-                  <li key={id}>
-                    <Link href={localePath(locale, path)} className={styles.topLink}>
-                      {t(labelKey)}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            <HeaderTopNav locale={locale} />
             <HeaderAccountButton locale={locale} labelKey="header.top.account" />
           </div>
         </div>

@@ -7,11 +7,12 @@ export const HEADER_TOP_LINKS = [
 ];
 
 export const HEADER_CATEGORY_NAV = [
-  { id: "men", slug: "cholovichi", labelKey: "header.nav.men" },
-  { id: "women", slug: "zhinochi", labelKey: "header.nav.women" },
-  { id: "unisex", slug: "uniseks", labelKey: "header.nav.unisex" },
-  { id: "elite", slug: "elitni", labelKey: "header.nav.elite" },
+  { id: "amber", slug: "ambrovi", labelKey: "header.nav.amber" },
+  { id: "woody", slug: "derevni", labelKey: "header.nav.woody" },
   { id: "oriental", slug: "skhidni", labelKey: "header.nav.oriental" },
-  { id: "niche", slug: "nishevi", labelKey: "header.nav.niche" },
+  { id: "citrus", slug: "tsitrusovi", labelKey: "header.nav.citrus" },
+  { id: "floral", slug: "kvitkovi", labelKey: "header.nav.floral" },
+  { id: "fruity", slug: "fruktovi", labelKey: "header.nav.fruity" },
   { id: "gourmand", slug: "gurmanski", labelKey: "header.nav.gourmand" },
+  { id: "green", slug: "zeleni", labelKey: "header.nav.green" },
 ];
