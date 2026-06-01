@@ -3,7 +3,7 @@ export const HEADER_TOP_LINKS = [
   { id: "payment", path: "payment-delivery", labelKey: "header.top.paymentDelivery" },
   { id: "promotions", path: "categories/all", labelKey: "header.top.promotions" },
   { id: "contacts", path: "contacts", labelKey: "header.top.contacts" },
-  { id: "blog", path: "content", labelKey: "header.top.blog" },
+  { id: "blog", path: "blog", labelKey: "header.top.blog" },
 ];
 
 export const HEADER_CATEGORY_NAV = [

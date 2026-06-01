@@ -179,22 +179,12 @@
     flex-direction: column;
     gap: 24px;
     min-height: 0;
-    max-height: 420px;
     margin-bottom: 24px;
-    overflow-y: auto;
+    overflow: visible;
 
     @include down($bp-tablet) {
       gap: 16px;
       margin-bottom: 16px;
-    }
-
-    &::-webkit-scrollbar {
-      width: 3px;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      border-radius: 10px;
-      background: rgba(15, 23, 42, 0.2);
     }
   }
 
@@ -308,18 +298,30 @@
   .product-item {
     display: grid;
     align-items: center;
-    column-gap: 40px;
-    row-gap: 0;
+    column-gap: 24px;
+    row-gap: 12px;
     padding: 0;
     border: 0;
     border-radius: 0;
     box-shadow: none;
     overflow: visible;
-    grid-template-columns: 120px minmax(0, 197px) auto auto auto auto;
+    grid-template-columns:
+      120px
+      minmax(140px, 1fr)
+      minmax(180px, 1.4fr)
+      auto
+      auto
+      24px;
 
     @include down($bp-desktop) {
-      column-gap: 20px;
-      grid-template-columns: 96px minmax(0, 150px) auto auto auto auto;
+      column-gap: 16px;
+      grid-template-columns:
+        96px
+        minmax(120px, 1fr)
+        minmax(140px, 1.2fr)
+        auto
+        auto
+        24px;
     }
 
     @include below-tablet {
@@ -382,15 +384,13 @@
       color: var(--Dark, #1a1a1a);
       font-size: 18px;
       font-weight: 500;
-      max-width: 197px;
+      max-width: none;
 
       @include down($bp-desktop) {
-        max-width: 150px;
         font-size: 16px;
       }
 
       @include below-tablet {
-        max-width: none;
         font-size: 14px;
       }
     }
@@ -452,7 +452,7 @@
       max-width: 100%;
       margin: 0;
       overflow-wrap: anywhere;
-      white-space: nowrap;
+      white-space: normal;
       word-break: break-word;
       justify-self: start;
       color: var(--black, #11110f);

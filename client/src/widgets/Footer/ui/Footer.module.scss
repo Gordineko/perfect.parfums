@@ -173,13 +173,13 @@
   border: 0;
   border-radius: 0;
   background: transparent;
-  color: var(--color-burgundy);
+  color: var(--color-black, #11110f);
   text-decoration: none;
   transition: color 0.3s ease;
 
   &:hover,
   &:focus-visible {
-    color: var(--color-burgundy-active);
+    color: var(--color-burgundy, #68181f);
   }
 
   svg {
@@ -270,17 +270,17 @@
 
 @include below-tablet {
   .root :global(.social-links) {
-    gap: 8px;
+    gap: 16px;
     justify-content: center;
   }
 
   .root :global(.social-links__link) {
-    width: 28px;
-    height: 28px;
+    width: 40px;
+    height: 40px;
 
     svg {
-      width: 28px;
-      height: 28px;
+      width: 40px;
+      height: 40px;
     }
   }
 

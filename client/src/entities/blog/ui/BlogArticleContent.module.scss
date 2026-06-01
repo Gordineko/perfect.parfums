@@ -1,0 +1,25 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  color: var(--text-color, #3d3f3c);
+  font-family: var(--font-body), "Lato", sans-serif;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  @include below-tablet {
+    gap: 16px;
+    font-size: 16px;
+  }
+}
+
+.paragraph {
+  margin: 0;
+}

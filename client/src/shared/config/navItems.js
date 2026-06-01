@@ -95,5 +95,10 @@ export const getLocalizedNavigation = (
       label: t("navigation.header.contacts"),
       href: localePath(locale, "/contacts"),
     },
+    {
+      id: "blog",
+      label: t("header.top.blog"),
+      href: localePath(locale, "/blog"),
+    },
   ],
 });
