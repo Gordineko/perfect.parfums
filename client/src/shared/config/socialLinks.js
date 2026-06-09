@@ -18,7 +18,7 @@ export const socialLinks = [
     href: "https://t.me/perfectparfums",
     label: "Telegram",
 
-    handle: "@maloe.support",
+    handle: "@perfect.parfums",
     Icon: ContactTelegramIcon,
 
   },
@@ -36,13 +36,7 @@ export const socialLinks = [
     handle: "@perfect.parfums",
     Icon: ContactTikTokIcon,
   },
-  {
-    id: "tiktok",
-    href: "https://www.tiktok.com/@world.of_heels?_r=1&_t=ZS-95mPRroZ0Dw",
-    label: "TikTok",
-    handle: "@maloe_atelier",
-    Icon: ContactTikTokIcon,
-  },
+
 ];
 
 export const contactsSocialLinkIds = [

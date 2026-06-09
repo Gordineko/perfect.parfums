@@ -1,0 +1,125 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+.page {
+  padding: 0 0 clamp(56px, 8vw, 96px);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  max-width: 900px;
+  margin: 0 auto 32px;
+  text-align: center;
+
+  @include below-tablet {
+    margin-bottom: 24px;
+    gap: 8px;
+  }
+}
+
+.date {
+  color: var(--grey, #bdb8ae);
+  font-family: var(--font-body), "Lato", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  @include below-tablet {
+    font-size: 14px;
+  }
+}
+
+.title {
+  margin: 0;
+  color: var(--burgundy, #68181f);
+  font-family: var(--font-body), "Lato", sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  @include below-tablet {
+    font-size: 24px;
+  }
+}
+
+.category {
+  margin: 0;
+  color: var(--black, #11110f);
+  font-family: var(--font-body), "Lato", sans-serif;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
+  @include below-tablet {
+    font-size: 18px;
+  }
+}
+
+.hero {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto 40px;
+  overflow: hidden;
+  background: #f5f0ea;
+
+  @include below-tablet {
+    margin-bottom: 24px;
+  }
+}
+
+.heroImage {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: cover;
+}
+
+.related {
+  margin-top: clamp(48px, 8vw, 80px);
+  padding-top: 0;
+
+  @include below-tablet {
+    margin-top: 40px;
+  }
+}
+
+.relatedTitle {
+  margin: 0 0 32px;
+  color: var(--black, #11110f);
+  text-align: center;
+  font-family: var(--font-heading), "Cormorant", serif;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 130%;
+  text-transform: uppercase;
+
+  @include below-tablet {
+    margin-bottom: 20px;
+    font-size: 24px;
+  }
+}
+
+.relatedGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include down($bp-desktop) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include below-tablet {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}

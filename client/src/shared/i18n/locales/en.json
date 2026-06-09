@@ -220,7 +220,15 @@
     "prof": "Profile",
     "order": "Checkout",
     "cooperation": "Cooperation",
+    "blog": "Blog",
     "product": "Product"
+  },
+  "blogPage": {
+    "empty": "No articles yet.",
+    "showMore": "Show {count} more articles"
+  },
+  "blogArticle": {
+    "readAlso": "Read also"
   },
   "cooperationPage": {
     "heroEyebrow": "World of Heels Ecosystem",

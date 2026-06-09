@@ -1,0 +1,19 @@
+@use "../../../shared/ui/styles/variables.scss" as *;
+
+.pageShell {
+  :global(.products-layout-wrapper::before) {
+    display: none;
+  }
+}
+
+.page {
+  padding: 0 0 clamp(48px, 8vw, 80px);
+
+  :global(.container) {
+    margin-top: 40px;
+  }
+
+  @include down($bp-tablet) {
+    padding-bottom: 48px;
+  }
+}
