@@ -26,7 +26,7 @@ const messageLabel = (message) => {
 export const recordLogEvent = (entry = {}) => {
   const labels = {
     level: entry.level || "info",
-    service: entry.service || process.env.SERVICE_NAME || "maloe-api",
+    service: entry.service || process.env.SERVICE_NAME || "perfect-parfums-api",
     environment: entry.environment || process.env.NODE_ENV || "development",
     module: entry.module || "app",
     area: entry.area || "app",

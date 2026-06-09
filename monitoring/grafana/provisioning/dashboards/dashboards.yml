@@ -1,9 +1,9 @@
 apiVersion: 1
 
 providers:
-  - name: Maloe
+  - name: Perfect Parfums
     orgId: 1
-    folder: Maloe
+    folder: Perfect Parfums
     type: file
     disableDeletion: false
     updateIntervalSeconds: 30

@@ -2,7 +2,7 @@ import {
   ContactFacebookIcon,
   ContactInstagramIcon,
   ContactTelegramIcon,
-  ContactTikTokIcon,
+  ContactTikTokIcon
 } from "@pages/contacts-page/ui/ContactSocialIcons";
 
 export const socialLinks = [
@@ -17,8 +17,10 @@ export const socialLinks = [
     id: "telegram",
     href: "https://t.me/perfectparfums",
     label: "Telegram",
+
     handle: "@perfect.parfums",
     Icon: ContactTelegramIcon,
+
   },
   {
     id: "facebook",
@@ -34,6 +36,7 @@ export const socialLinks = [
     handle: "@perfect.parfums",
     Icon: ContactTikTokIcon,
   },
+
 ];
 
 export const contactsSocialLinkIds = [

@@ -1,6 +1,7 @@
 // Services/Review.service.js
 import mongoose from "mongoose";
 import { reviewRepository } from "../Repositories/Review.repository.js";
+import { ReviewModel } from "../Models/Review.model.js";
 import { ProductGroup } from "../../CatalogModule/Models/ProductGroup.model.js";
 
 const isObjectId = (v) => mongoose.Types.ObjectId.isValid(String(v));
@@ -96,6 +97,59 @@ function buildSelect(qs = {}) {
     .join(" ");
 }
 
+async function syncProductRatingSummary(productIds = []) {
+  const uniqueIds = Array.from(
+    new Set(
+      (productIds || [])
+        .map((value) => String(value || "").trim())
+        .filter((value) => isObjectId(value))
+    )
+  );
+
+  if (!uniqueIds.length) return;
+
+  const objectIds = uniqueIds.map((id) => new mongoose.Types.ObjectId(id));
+
+  const rows = await ReviewModel.aggregate([
+    {
+      $match: {
+        product: { $in: objectIds },
+        status: "published",
+      },
+    },
+    {
+      $group: {
+        _id: "$product",
+        average: { $avg: "$rating" },
+        count: { $sum: 1 },
+      },
+    },
+  ]);
+
+  const summaryByProductId = new Map(
+    rows.map((row) => [
+      String(row._id),
+      {
+        average: Number(Number(row.average || 0).toFixed(2)),
+        count: Number(row.count || 0),
+      },
+    ])
+  );
+
+  await ProductGroup.bulkWrite(
+    uniqueIds.map((id) => ({
+      updateOne: {
+        filter: { _id: new mongoose.Types.ObjectId(id) },
+        update: {
+          $set: {
+            ratingSummary: summaryByProductId.get(id) || { average: 0, count: 0 },
+          },
+        },
+      },
+    }))
+  );
+}
+
 export const reviewService = {
   async getReviewsList(qs = {}) {
     const filter = buildFilter(qs);
@@ -161,6 +215,8 @@ export const reviewService = {
           err
         );
       }
+
+      await syncProductRatingSummary([createdProductId]);
     }
 
     return created;
@@ -218,6 +274,8 @@ export const reviewService = {
       );
     }
 
+    await syncProductRatingSummary([prevProductId, nextProductId]);
+
     return updated;
   },
 
@@ -233,6 +291,8 @@ export const reviewService = {
     // удаляем отзыв
     const deleted = await reviewRepository.deleteById(id);
 
+    const deletedProductId = getEntityId(existing.product);
+
     // убираем id этого отзыва из всех productGroups, где он был
     try {
       await ProductGroup.updateMany(
@@ -247,6 +307,8 @@ export const reviewService = {
       );
     }
 
+    await syncProductRatingSummary([deletedProductId]);
+
     return deleted;
   },
 
@@ -258,11 +320,15 @@ export const reviewService = {
     const existing = await reviewRepository.findById(id);
     if (!existing) return null;
 
-    return reviewRepository.updateById(id, {
+    const cancelled = await reviewRepository.updateById(id, {
       status: "archived",
       isVisibleMainPage: false,
       isVisibleProduct: false,
     });
+
+    await syncProductRatingSummary([getEntityId(existing.product)]);
+
+    return cancelled;
   },
 
   async getPublicMain({ limit } = {}) {

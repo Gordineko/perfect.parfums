@@ -16,7 +16,7 @@ installConsoleLogger();
 installProcessMetrics(logger);
 
 const PORT = Number(process.env.PORT || 5007);
-const MONGO_URI ="mongodb://mongoAdmin:aifnniniqniniqin@127.0.0.1:27017/maloe?authSource=admin";
+const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI || "mongodb://mongoAdmin:aifnniniqniniqin@127.0.0.1:27017/woh?authSource=admin";
 
 async function start() {
   logger.info("server_starting", {
@@ -33,7 +33,7 @@ async function start() {
 
   // Redis is optional: connect only when REDIS_URL is configured.
   // This avoids background reconnect noise on environments without Redis.
-  if (String(process.env.REDIS_URL || "true").trim()) {
+  if (String(process.env.REDIS_URL || "").trim()) {
     await connectRedis();
   } else {
     console.log("[redis] REDIS_URL is not set, cache disabled");

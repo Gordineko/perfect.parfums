@@ -456,15 +456,15 @@ export const metricsHandler = (_req, res) => {
   const cpu = process.cpuUsage();
   const currentMongoState = mongoState();
 
-  pushHelp(lines, "maloe_api_up", "gauge", "Maloe API availability gauge.");
-  pushMetric(lines, "maloe_api_up", {}, 1);
+  pushHelp(lines, "perfect_parfums_api_up", "gauge", "Perfect Parfums API availability gauge.");
+  pushMetric(lines, "perfect_parfums_api_up", {}, 1);
 
-  pushHelp(lines, "maloe_build_info", "gauge", "Static service and runtime metadata.");
+  pushHelp(lines, "perfect_parfums_build_info", "gauge", "Static service and runtime metadata.");
   pushMetric(
     lines,
-    "maloe_build_info",
+    "perfect_parfums_build_info",
     {
-      service: process.env.SERVICE_NAME || "maloe-api",
+      service: process.env.SERVICE_NAME || "perfect-parfums-api",
       environment: process.env.NODE_ENV || "development",
       node_version: process.version,
       platform: process.platform,
@@ -473,94 +473,94 @@ export const metricsHandler = (_req, res) => {
     1
   );
 
-  pushHelp(lines, "maloe_process_uptime_seconds", "gauge", "Process uptime in seconds.");
-  pushMetric(lines, "maloe_process_uptime_seconds", {}, process.uptime());
+  pushHelp(lines, "perfect_parfums_process_uptime_seconds", "gauge", "Process uptime in seconds.");
+  pushMetric(lines, "perfect_parfums_process_uptime_seconds", {}, process.uptime());
 
-  pushHelp(lines, "maloe_process_memory_bytes", "gauge", "Process memory usage by type.");
+  pushHelp(lines, "perfect_parfums_process_memory_bytes", "gauge", "Process memory usage by type.");
   for (const [type, value] of Object.entries(memory)) {
-    pushMetric(lines, "maloe_process_memory_bytes", { type }, value);
+    pushMetric(lines, "perfect_parfums_process_memory_bytes", { type }, value);
   }
 
-  pushHelp(lines, "maloe_process_cpu_user_seconds_total", "counter", "Total user CPU time spent in seconds.");
-  pushMetric(lines, "maloe_process_cpu_user_seconds_total", {}, cpu.user / 1_000_000);
+  pushHelp(lines, "perfect_parfums_process_cpu_user_seconds_total", "counter", "Total user CPU time spent in seconds.");
+  pushMetric(lines, "perfect_parfums_process_cpu_user_seconds_total", {}, cpu.user / 1_000_000);
 
-  pushHelp(lines, "maloe_process_cpu_system_seconds_total", "counter", "Total system CPU time spent in seconds.");
-  pushMetric(lines, "maloe_process_cpu_system_seconds_total", {}, cpu.system / 1_000_000);
+  pushHelp(lines, "perfect_parfums_process_cpu_system_seconds_total", "counter", "Total system CPU time spent in seconds.");
+  pushMetric(lines, "perfect_parfums_process_cpu_system_seconds_total", {}, cpu.system / 1_000_000);
 
-  pushHelp(lines, "maloe_process_event_loop_lag_seconds", "gauge", "Approximate event loop lag in seconds.");
-  pushMetric(lines, "maloe_process_event_loop_lag_seconds", {}, eventLoopLagSeconds);
+  pushHelp(lines, "perfect_parfums_process_event_loop_lag_seconds", "gauge", "Approximate event loop lag in seconds.");
+  pushMetric(lines, "perfect_parfums_process_event_loop_lag_seconds", {}, eventLoopLagSeconds);
 
-  pushHelp(lines, "maloe_process_active_handles", "gauge", "Number of active libuv handles.");
-  pushMetric(lines, "maloe_process_active_handles", {}, process._getActiveHandles?.().length || 0);
+  pushHelp(lines, "perfect_parfums_process_active_handles", "gauge", "Number of active libuv handles.");
+  pushMetric(lines, "perfect_parfums_process_active_handles", {}, process._getActiveHandles?.().length || 0);
 
-  pushHelp(lines, "maloe_mongodb_connected", "gauge", "MongoDB connection state as 1 when connected.");
-  pushMetric(lines, "maloe_mongodb_connected", { state: currentMongoState }, currentMongoState === "connected" ? 1 : 0);
+  pushHelp(lines, "perfect_parfums_mongodb_connected", "gauge", "MongoDB connection state as 1 when connected.");
+  pushMetric(lines, "perfect_parfums_mongodb_connected", { state: currentMongoState }, currentMongoState === "connected" ? 1 : 0);
 
-  pushHelp(lines, "maloe_redis_connected", "gauge", "Redis connection state as 1 when connected.");
-  pushMetric(lines, "maloe_redis_connected", {}, redis?.isOpen ? 1 : 0);
+  pushHelp(lines, "perfect_parfums_redis_connected", "gauge", "Redis connection state as 1 when connected.");
+  pushMetric(lines, "perfect_parfums_redis_connected", {}, redis?.isOpen ? 1 : 0);
 
-  pushHelp(lines, "maloe_http_requests_in_progress", "gauge", "HTTP requests currently being processed.");
-  pushMapMetrics(lines, "maloe_http_requests_in_progress", httpRequestsInProgress);
+  pushHelp(lines, "perfect_parfums_http_requests_in_progress", "gauge", "HTTP requests currently being processed.");
+  pushMapMetrics(lines, "perfect_parfums_http_requests_in_progress", httpRequestsInProgress);
 
-  pushHelp(lines, "maloe_http_unique_clients", "gauge", "Approximate unique clients observed in a rolling window.");
+  pushHelp(lines, "perfect_parfums_http_unique_clients", "gauge", "Approximate unique clients observed in a rolling window.");
   for (const [window, windowMs] of Object.entries(UNIQUE_CLIENT_WINDOWS)) {
-    pushMetric(lines, "maloe_http_unique_clients", { window }, uniqueClientCount(windowMs));
+    pushMetric(lines, "perfect_parfums_http_unique_clients", { window }, uniqueClientCount(windowMs));
   }
 
-  pushHelp(lines, "maloe_http_requests_total", "counter", "Total number of HTTP requests.");
-  pushMapMetrics(lines, "maloe_http_requests_total", httpRequestsTotal);
+  pushHelp(lines, "perfect_parfums_http_requests_total", "counter", "Total number of HTTP requests.");
+  pushMapMetrics(lines, "perfect_parfums_http_requests_total", httpRequestsTotal);
 
-  pushHelp(lines, "maloe_http_request_duration_seconds", "histogram", "HTTP request duration histogram.");
+  pushHelp(lines, "perfect_parfums_http_request_duration_seconds", "histogram", "HTTP request duration histogram.");
   pushHistogram(
     lines,
-    "maloe_http_request_duration_seconds",
+    "perfect_parfums_http_request_duration_seconds",
     httpRequestDurationBuckets,
     httpRequestDurationSum,
     httpRequestDurationCount
   );
 
-  pushHelp(lines, "maloe_http_request_size_bytes", "histogram", "HTTP request content-length histogram.");
+  pushHelp(lines, "perfect_parfums_http_request_size_bytes", "histogram", "HTTP request content-length histogram.");
   pushHistogram(
     lines,
-    "maloe_http_request_size_bytes",
+    "perfect_parfums_http_request_size_bytes",
     httpRequestSizeBuckets,
     httpRequestSizeSum,
     httpRequestSizeCount
   );
 
-  pushHelp(lines, "maloe_http_response_size_bytes", "histogram", "HTTP response content-length histogram.");
+  pushHelp(lines, "perfect_parfums_http_response_size_bytes", "histogram", "HTTP response content-length histogram.");
   pushHistogram(
     lines,
-    "maloe_http_response_size_bytes",
+    "perfect_parfums_http_response_size_bytes",
     httpResponseSizeBuckets,
     httpResponseSizeSum,
     httpResponseSizeCount
   );
 
-  pushHelp(lines, "maloe_http_request_bytes_total", "counter", "Total HTTP request bytes by route.");
-  pushMapMetrics(lines, "maloe_http_request_bytes_total", httpRequestBytesTotal);
+  pushHelp(lines, "perfect_parfums_http_request_bytes_total", "counter", "Total HTTP request bytes by route.");
+  pushMapMetrics(lines, "perfect_parfums_http_request_bytes_total", httpRequestBytesTotal);
 
-  pushHelp(lines, "maloe_http_response_bytes_total", "counter", "Total HTTP response bytes by route.");
-  pushMapMetrics(lines, "maloe_http_response_bytes_total", httpResponseBytesTotal);
+  pushHelp(lines, "perfect_parfums_http_response_bytes_total", "counter", "Total HTTP response bytes by route.");
+  pushMapMetrics(lines, "perfect_parfums_http_response_bytes_total", httpResponseBytesTotal);
 
-  pushHelp(lines, "maloe_http_slow_requests_total", "counter", "HTTP requests slower than configured threshold.");
-  pushMapMetrics(lines, "maloe_http_slow_requests_total", httpSlowRequestsTotal);
+  pushHelp(lines, "perfect_parfums_http_slow_requests_total", "counter", "HTTP requests slower than configured threshold.");
+  pushMapMetrics(lines, "perfect_parfums_http_slow_requests_total", httpSlowRequestsTotal);
 
-  pushHelp(lines, "maloe_business_events_total", "counter", "Important Maloe business workflow events.");
-  pushMapMetrics(lines, "maloe_business_events_total", businessEventsTotal);
+  pushHelp(lines, "perfect_parfums_business_events_total", "counter", "Important Perfect Parfums business workflow events.");
+  pushMapMetrics(lines, "perfect_parfums_business_events_total", businessEventsTotal);
 
-  pushHelp(lines, "maloe_process_errors_total", "counter", "Unhandled process errors observed by the runtime.");
-  pushMapMetrics(lines, "maloe_process_errors_total", processErrorsTotal);
+  pushHelp(lines, "perfect_parfums_process_errors_total", "counter", "Unhandled process errors observed by the runtime.");
+  pushMapMetrics(lines, "perfect_parfums_process_errors_total", processErrorsTotal);
 
   const logMetrics = logMetricsSnapshot();
 
-  pushHelp(lines, "maloe_logs_total", "counter", "Total structured log entries emitted by the API logger.");
+  pushHelp(lines, "perfect_parfums_logs_total", "counter", "Total structured log entries emitted by the API logger.");
   for (const row of logMetrics.logsTotal) {
-    pushMetric(lines, "maloe_logs_total", row.labels, row.value);
+    pushMetric(lines, "perfect_parfums_logs_total", row.labels, row.value);
   }
 
-  pushHelp(lines, "maloe_log_write_failures_total", "counter", "Total failures while writing structured logs to disk.");
-  pushMetric(lines, "maloe_log_write_failures_total", {}, logMetrics.logWriteFailuresTotal);
+  pushHelp(lines, "perfect_parfums_log_write_failures_total", "counter", "Total failures while writing structured logs to disk.");
+  pushMetric(lines, "perfect_parfums_log_write_failures_total", {}, logMetrics.logWriteFailuresTotal);
 
   res.set("Content-Type", "text/plain; version=0.0.4; charset=utf-8");
   res.end(`${lines.join("\n")}\n`);

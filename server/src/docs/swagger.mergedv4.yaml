@@ -271,6 +271,9 @@ components:
 
         axisIndex - индекс оси в variationAxes[].
         values - уникальные значения, ограниченные maxValuesPerAxis.
+        Backend дополнительно дублирует метаданные оси (`axisId`, `title`,
+        `type`, `unit`), чтобы фронт мог рендерить селектор прямо на карточке
+        товара без дополнительного маппинга.
       properties:
         axisIndex:
           type: integer
@@ -341,6 +344,21 @@ components:
         variantsCount:
           type: integer
           example: 12
+      RatingSummary:
+        type: object
+        description: |
+          Агрегированный рейтинг ProductGroup.
+
+          Пересчитывается backend по опубликованным отзывам (`status=published`) и
+          сохраняется прямо в группе товара.
+        properties:
+          average:
+            type: number
+            format: float
+            example: 4.8
+          count:
+            type: integer
+            example: 37
     CharacteristicValue:
       type: object
       description: |
@@ -460,6 +478,9 @@ components:
           - groupId используется как стабильный идентификатор группы (ProductGroup._id)
           - slug для PDP
           - pricing/availability — агрегаты по offers с учетом фильтров onlyAvailable
+            - ratingSummary — сохраненный рейтинг группы по опубликованным отзывам
+            - variantPreview.axes[n] можно сразу использовать для UI выбора одной оси
+              на карточке товара
       properties:
         groupId:
           type: string
@@ -490,6 +511,8 @@ components:
           $ref: "#/components/schemas/Pricing"
         availability:
           $ref: "#/components/schemas/Availability"
+        ratingSummary:
+          $ref: '#/components/schemas/RatingSummary'
         variantPreview:
           type: object
           properties:
@@ -650,11 +673,13 @@ components:
           - characteristics (характеристики)
           - все offers (SKU)
           - агрегированную цену/наличие
+            - ratingSummary по опубликованным отзывам
 
         Важно:
           - offers всегда в одном массиве
           - фронт строит UI из variationAxes
           - затем резолвит offer через /catalog/offers/resolve (или выбирает напрямую по optionKey)
+            - ratingSummary хранится в группе и не требует отдельного запроса к отзывам
       properties:
         _id:
           type: string
@@ -708,6 +733,8 @@ components:
           $ref: "#/components/schemas/Pricing"
         availability:
           $ref: "#/components/schemas/Availability"
+        ratingSummary:
+          $ref: '#/components/schemas/RatingSummary'
         offers:
           type: array
           items:
@@ -2094,22 +2121,29 @@ components:
         - archived
       example: published
     ReviewProductShort:
-      type: object
-      properties:
-        _id:
-          $ref: "#/components/schemas/ObjectIdString"
-        slug:
-          type: string
-        title:
-          type: object
-          additionalProperties: true
-        subtitle:
-          type: object
-          additionalProperties: true
-        imageURL:
-          type: string
-        status:
-          type: string
+        type: object
+        description: |
+          Короткий preview товара внутри отзыва.
+
+          Этого достаточно, чтобы на фронте собрать карточку отзыва для главной:
+            - название товара
+            - изображение товара
+            - slug для ссылки на PDP
+        properties:
+          _id:
+            $ref: "#/components/schemas/ObjectIdString"
+          slug:
+            type: string
+          title:
+            type: object
+            additionalProperties: true
+          subtitle:
+            type: object
+            additionalProperties: true
+          imageURL:
+            type: string
+          status:
+            type: string
     ReviewItem:
       type: object
       required:
@@ -2236,6 +2270,17 @@ components:
           type: integer
     ReviewPublicListResponse:
       type: object
+      description: |
+        Публичный список отзывов.
+
+        Для карточки отзыва на главной странице фронт обычно использует:
+          - review.name
+          - review.createdAt
+          - review.rating
+          - review.text
+          - review.product.title
+          - review.product.imageURL
+          - review.product.slug
       required:
         - ok
         - data
@@ -2765,6 +2810,31 @@ paths:
         maxValuesPerAxis=6 (сколько значений на ось)
 
 
+          ---------------------------------------------------------
+
+          ✅ Как выбрать вариант прямо на карточке товара
+
+          ---------------------------------------------------------
+
+          Для UI вроде dropdown/chips на карточке товара:
+
+          1) Запроси `/catalog/cards?preview=true&depth=1`
+
+          2) Возьми значения из `item.variantPreview.axes[0].values`
+
+          3) Подпись оси бери из `item.variantPreview.axes[0]`
+            (`title/type/unit`) или из `item.ui.variationAxes[axisIndex]`
+
+          4) Если у товара одна ось вариации и SKU немного, удобно запрашивать
+            `includeOffers=all` и матчить оффер по `offer.optionValues[axisIndex]`
+
+          5) Если осей несколько, карточка обычно даёт выбрать только первую ось,
+            а затем:
+            - либо вызывает `/catalog/offers/resolve`, когда собрана полная
+             комбинация
+            - либо переводит пользователя на PDP для добора остальных осей
+
+
         ---------------------------------------------------------
 
         ✅ Товары для свайпера акций/популярного товаров
@@ -3086,6 +3156,9 @@ paths:
                         availability:
                           hasAvailable: true
                           variantsCount: 12
+                          ratingSummary:
+                            average: 4.8
+                            count: 37
                         variantPreview:
                           depth: 2
                           axes:
@@ -3165,6 +3238,9 @@ paths:
                         availability:
                           hasAvailable: true
                           variantsCount: 12
+                          ratingSummary:
+                            average: 4.8
+                            count: 37
                         variantPreview:
                           depth: 1
                           axes:
@@ -3363,12 +3439,14 @@ paths:
           - characteristics (характеристики)
           - offers (все SKU)
           - агрегированную цену/наличие
+            - ratingSummary по опубликованным отзывам
 
         Использование на фронте:
           1) Открыли PDP по slug
           2) Отрисовали UI осей variationAxes
           3) Пользователь выбирает опции
-          4) На add-to-cart делаем /offers/resolve для получения offer
+            4) Используем ratingSummary для звезд и счетчика отзывов
+            5) На add-to-cart делаем /offers/resolve для получения offer
       parameters:
         - name: slug
           in: path
@@ -3486,6 +3564,9 @@ paths:
                       availability:
                         hasAvailable: true
                         variantsCount: 12
+                      ratingSummary:
+                        average: 4.8
+                        count: 37
                       offers:
                         - _id: O1001
                           groupId: G100
@@ -3530,6 +3611,10 @@ paths:
       description: >
         Используется на фронте при выборе вариаций на PDP и при добавлении в
         корзину.
+
+
+        Этот же endpoint можно вызывать из карточки каталога, если пользователь
+        уже выбрал значения всех нужных осей вариации.
 
 
         Передай groupId и ЛИБО:  - optionValues: массив значений по осям
@@ -5486,7 +5571,16 @@ paths:
         - Reviews Public
       summary: Получить отзывы для главной страницы
       description: |
-        Возвращает опубликованные отзывы, отмеченные для главной страницы.
+          Возвращает опубликованные отзывы, отмеченные для главной страницы.
+
+          Текущий DTO уже позволяет вывести блок отзывов в формате витрины:
+            - имя автора из `name`
+            - дату из `createdAt`
+            - рейтинг из `rating`
+            - текст из `text`
+            - название и изображение товара из `product.title` и
+              `product.imageURL`
+            - ссылку на товар из `product.slug`
       parameters:
         - name: limit
           in: query
@@ -5503,6 +5597,33 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ReviewPublicListResponse"
+              examples:
+                homeCards:
+                  value:
+                    ok: true
+                    data:
+                      - _id: 681f0e6f0b0b0b0b0b0b0b01
+                        name: Лариса
+                        product:
+                          _id: 681f0e6f0b0b0b0b0b0b0c10
+                          slug: ex-nihilo-fleur-narcotique
+                          title:
+                            ua: Ex Nihilo Fleur Narcotique
+                            en: Ex Nihilo Fleur Narcotique
+                          subtitle:
+                            ua: Парфумована вода
+                            en: Парфюмированная вода
+                          imageURL: https://cdn.site/perfumes/ex-nihilo-fleur-narcotique.webp
+                          status: active
+                        photoUrl: ""
+                        text: Шикарний аромат, залишає за собою приємний шлейф.
+                        rating: 5
+                        status: published
+                        position: 1
+                        isVisibleProduct: true
+                        isVisibleMainPage: true
+                        createdAt: "2025-10-19T12:00:00.000Z"
+                        updatedAt: "2025-10-19T12:00:00.000Z"
   /reviews/public/product/{productId}:
     get:
       tags:
@@ -5511,6 +5632,12 @@ paths:
       description: >
         Возвращает опубликованные отзывы, отмеченные для отображения на странице
         товара.
+
+
+        Для среднего рейтинга и общего счетчика отзывов используйте
+        `ratingSummary` из `/catalog/groups/{slug}`: backend сохраняет этот
+        агрегат прямо в ProductGroup и пересчитывает его по опубликованным
+        отзывам.
       parameters:
         - name: productId
           in: path

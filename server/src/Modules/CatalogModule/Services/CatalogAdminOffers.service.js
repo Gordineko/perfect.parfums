@@ -230,8 +230,24 @@ export function createCatalogAdminOffersService({
         _id: current._id,
       };
 
+      const hasValue = (v) => v !== undefined && v !== null && v !== "";
+      const currentOptionMap =
+        current?.optionMap && typeof current.optionMap === "object" ? current.optionMap : {};
+      const payloadOptionMap =
+        payload?.optionMap && typeof payload.optionMap === "object" ? payload.optionMap : {};
+      const legacyMissingAxisIds = effectiveVariationAxes
+        .filter(
+          (axis) =>
+            !hasValue(currentOptionMap?.[axis.axisId]) &&
+            !hasValue(payloadOptionMap?.[axis.axisId])
+        )
+        .map((axis) => axis.axisId);
+      const mergedOptionalAxisIds = [
+        ...new Set([...(optionalAxisIds || []), ...legacyMissingAxisIds]),
+      ];
+
       validateOfferPayload(nextRaw, 0, effectiveVariationAxes, {
-        optionalAxisIds,
+        optionalAxisIds: mergedOptionalAxisIds,
       });
 
       const normalized = normalizeOfferForSave(nextRaw, effectiveVariationAxes);

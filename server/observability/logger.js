@@ -26,12 +26,12 @@ const originalConsole = {
 };
 
 const requestStorage = new AsyncLocalStorage();
-const service = process.env.SERVICE_NAME || "maloe-api";
+const service = process.env.SERVICE_NAME || "perfect-parfums-api";
 const environment = process.env.NODE_ENV || "development";
 const logLevel = String(process.env.LOG_LEVEL || "info").toLowerCase();
 const logToStdout = String(process.env.LOG_TO_STDOUT || "false").toLowerCase() === "true";
 const logDir = process.env.LOG_DIR || path.resolve(__dirname, "..", "logs");
-const logFile = process.env.LOG_FILE || path.join(logDir, "app.log");
+const logFile = process.env.LOG_FILE || path.join(logDir, "api.log");
 
 fs.mkdirSync(path.dirname(logFile), { recursive: true });
 

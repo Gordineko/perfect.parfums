@@ -111,6 +111,7 @@ export function validateOfferPayload(
 
   const axisIds = new Set(variationAxes.map((a) => a.axisId));
   const optionalAxisIds = new Set(options.optionalAxisIds || []);
+  const requireAllAxes = options.requireAllAxes !== false;
 
   for (const key of Object.keys(offer.optionMap || {})) {
     if (!axisIds.has(key)) {
@@ -135,6 +136,7 @@ export function validateOfferPayload(
     }
 
     if (value === undefined || value === null || value === "") {
+      if (!requireAllAxes) continue;
       throw badRequest(
         `offers[${index}].optionMap.${axis.axisId} is required because this axis exists in variationAxes`
       );
