@@ -19,6 +19,7 @@ import styles from "./Header.module.scss";
 import TemplateLogo from "./TemplateLogo";
 
 export default async function Header({ locale, categories }) {
+  console.log(categories, "categories in header");
   const messages = await getMessages(locale);
   const { t } = createI18nServer(messages);
 
@@ -104,7 +105,7 @@ export default async function Header({ locale, categories }) {
       <AuthModal />
       <HeaderSticky
         lightHeader={lightHeader}
-        navBar={<HeaderCategoryNav locale={locale} />}
+        navBar={<HeaderCategoryNav locale={locale} categories={categories} />}
       />
       <HeaderOverlays
         locale={locale}

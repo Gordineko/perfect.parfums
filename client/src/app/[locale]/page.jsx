@@ -52,10 +52,7 @@ export default async function HomePage({ params }) {
 
       <NewArrivals fetchState="success" products={newProducts} />
 
-      <CustomerReviews
-        reviews={mainReviews}
-        useMockReviews={mainReviews.length === 0}
-      />
+      <CustomerReviews reviews={mainReviews} />
 
       <AboutBrand />
 

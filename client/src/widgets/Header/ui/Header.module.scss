@@ -185,7 +185,33 @@
 
 .wishlistButton {
   @extend %headerIconButton;
+  position: relative;
   flex-shrink: 0;
+}
+
+.wishlistIcon {
+  display: inline-flex;
+  color: var(--color-black);
+}
+
+.wishlistCount {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--color-burgundy);
+  color: var(--color-white, #fefefa);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  pointer-events: none;
 }
 
 .accountIconButton {
@@ -451,6 +477,62 @@
 
 .categoryLinkActive::after {
   transform: scaleX(1);
+}
+
+.categoryItem {
+  position: relative;
+}
+
+.categoryDropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  z-index: 110;
+  min-width: 240px;
+  padding: 1rem 1.25rem;
+  background: var(--color-white, #fefefa);
+  box-shadow: 0 0.5rem 1.5rem color-mix(in srgb, var(--color-black) 18%, transparent);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translate(-50%, 6px);
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease,
+    transform 0.2s ease;
+}
+
+.categoryDropdownOpen {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translate(-50%, 0);
+}
+
+.categorySubList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.categorySubLink {
+  display: block;
+  padding: 0.25rem 0;
+  color: var(--color-black);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-burgundy);
+  }
 }
 
 .backLink {
