@@ -33,7 +33,7 @@ async function start() {
 
   // Redis is optional: connect only when REDIS_URL is configured.
   // This avoids background reconnect noise on environments without Redis.
-  if (String(process.env.REDIS_URL || "true").trim()) {
+  if (String(process.env.REDIS_URL || "").trim()) {
     await connectRedis();
   } else {
     console.log("[redis] REDIS_URL is not set, cache disabled");

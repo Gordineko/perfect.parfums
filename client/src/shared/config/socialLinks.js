@@ -2,7 +2,7 @@ import {
   ContactFacebookIcon,
   ContactInstagramIcon,
   ContactTelegramIcon,
-  ContactTikTokIcon,
+  ContactTikTokIcon
 } from "@pages/contacts-page/ui/ContactSocialIcons";
 
 export const socialLinks = [
@@ -19,7 +19,7 @@ export const socialLinks = [
     label: "Telegram",
 
     handle: "@maloe.support",
-    Icon: Telegram,
+    Icon: ContactTelegramIcon,
 
   },
   {
@@ -41,7 +41,7 @@ export const socialLinks = [
     href: "https://www.tiktok.com/@world.of_heels?_r=1&_t=ZS-95mPRroZ0Dw",
     label: "TikTok",
     handle: "@maloe_atelier",
-    Icon: TikTok,
+    Icon: ContactTikTokIcon,
   },
 ];
 
