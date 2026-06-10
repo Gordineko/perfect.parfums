@@ -524,7 +524,7 @@ const filteredOffers = useMemo(() => {
                         opacity: isGroupVideoUploading ? 0.7 : 1
                     }}
                 >
-                    <span style={{ color: '#FF99D6', fontWeight: '500' }}>
+                    <span style={{ color: '#68181F', fontWeight: '500' }}>
                         {isGroupVideoUploading
                             ? 'Завантаження відео...'
                             : (formik.values.videoURL ? 'Змінити відео' : 'Завантажити відео')}
@@ -608,16 +608,16 @@ const filteredOffers = useMemo(() => {
                                     marginBottom: '8px' 
                                 }} 
                             />
-                            <span style={{ color: '#FF99D6', fontWeight: '500' }}>
+                            <span style={{ color: '#68181F', fontWeight: '500' }}>
                                 Змінити картинку
                             </span>
                         </>
                     ) : (
                         <>
                             <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none" style={{ marginBottom: '8px' }}>
-                                <path d="M39.1111 4.88889V39.1111H4.88889V4.88889H39.1111ZM39.1111 0H4.88889C2.2 0 0 2.2 0 4.88889V39.1111C0 41.8 2.2 44 4.88889 44H39.1111C41.8 44 44 41.8 44 39.1111V4.88889C44 2.2 41.8 0 39.1111 0ZM27.2311 21.6578L19.8978 31.1178L14.6667 24.7867L7.33333 34.2222H36.6667L27.2311 21.6578Z" fill="#FF99D6"/>
+                                <path d="M39.1111 4.88889V39.1111H4.88889V4.88889H39.1111ZM39.1111 0H4.88889C2.2 0 0 2.2 0 4.88889V39.1111C0 41.8 2.2 44 4.88889 44H39.1111C41.8 44 44 41.8 44 39.1111V4.88889C44 2.2 41.8 0 39.1111 0ZM27.2311 21.6578L19.8978 31.1178L14.6667 24.7867L7.33333 34.2222H36.6667L27.2311 21.6578Z" fill="#68181F"/>
                             </svg>
-                            <span style={{ color: '#FF99D6', fontWeight: '500' }}>
+                            <span style={{ color: '#68181F', fontWeight: '500' }}>
                                 Завантажити розмірну сітку
                             </span>
                         </>
@@ -715,7 +715,7 @@ const filteredOffers = useMemo(() => {
                             opacity: isCardImageUploading ? 0.7 : 1
                         }}
                     >
-                        <span style={{ color: '#FF99D6', fontWeight: '500' }}>
+                        <span style={{ color: '#68181F', fontWeight: '500' }}>
                             {isCardImageUploading
                                 ? 'Завантаження фото...'
                                 : 'Завантажити фото карточки'}
@@ -937,16 +937,16 @@ const filteredOffers = useMemo(() => {
                                                                 marginBottom: '8px'
                                                             }}
                                                         />
-                                                        <span className="variation-image-upload__text" style={{ color: '#FF99D6', fontWeight: '500' }}>
+                                                        <span className="variation-image-upload__text" style={{ color: '#68181F', fontWeight: '500' }}>
                                                             Змінити фото #{imageIndex + 1}
                                                         </span>
                                                     </>
                                                 ) : (
                                                     <>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44" fill="none" style={{ marginBottom: '8px' }}>
-                                                            <path d="M39.1111 4.88889V39.1111H4.88889V4.88889H39.1111ZM39.1111 0H4.88889C2.2 0 0 2.2 0 4.88889V39.1111C0 41.8 2.2 44 4.88889 44H39.1111C41.8 44 44 41.8 44 39.1111V4.88889C44 2.2 41.8 0 39.1111 0ZM27.2311 21.6578L19.8978 31.1178L14.6667 24.7867L7.33333 34.2222H36.6667L27.2311 21.6578Z" fill="#FF99D6" />
+                                                            <path d="M39.1111 4.88889V39.1111H4.88889V4.88889H39.1111ZM39.1111 0H4.88889C2.2 0 0 2.2 0 4.88889V39.1111C0 41.8 2.2 44 4.88889 44H39.1111C41.8 44 44 41.8 44 39.1111V4.88889C44 2.2 41.8 0 39.1111 0ZM27.2311 21.6578L19.8978 31.1178L14.6667 24.7867L7.33333 34.2222H36.6667L27.2311 21.6578Z" fill="#68181F" />
                                                         </svg>
-                                                        <span className="variation-image-upload__text" style={{ color: '#FF99D6', fontWeight: '500' }}>
+                                                        <span className="variation-image-upload__text" style={{ color: '#68181F', fontWeight: '500' }}>
                                                             Додати фото #{imageIndex + 1}
                                                         </span>
                                                     </>
