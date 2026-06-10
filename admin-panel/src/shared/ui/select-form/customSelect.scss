@@ -1,0 +1,128 @@
+.custom-select-wrapper {
+    position: relative;
+    width: 100%;
+
+    &.is-disabled {
+        .custom-select-input {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .custom-select-icon {
+            cursor: not-allowed;
+        }
+    }
+
+    .custom-select-trigger-input-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .custom-select-input {
+        width: 100%;
+        outline: none;
+        border-radius: 5px;
+        background: $color-white;
+        color: $color-txt-main;
+        font-family: $font-family-base;
+        font-size: 14px;
+        padding: 12px;
+        padding-right: 35px; // Місце для іконки
+        
+        // Твій стандартний бордер
+        border: 1px solid $color-border-muted;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+        &:hover {
+            border-color: darken($color-border-muted, 10%);
+        }
+
+        &:focus {
+            border-color: $color-main;
+        }
+
+        &.error {
+            border-color: $color-danger;
+
+            &:focus {
+                border-color: $color-danger;
+                box-shadow: $shadow-danger-focus;
+            }
+        }
+    }
+
+    &.is-open .custom-select-input {
+        border-color: $color-main;
+    }
+
+    &.has-error.is-open .custom-select-input {
+        border-color: $color-danger;
+    }
+
+    .custom-select-icon {
+        position: absolute;
+        right: 12px;
+        pointer-events: auto;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        color: $color-border-hover;
+
+        &.rotated {
+            transform: rotate(180deg);
+        }
+    }
+
+    .custom-select-dropdown {
+        border-radius: 5px;
+        z-index: 1000;
+        background: $color-white;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: calc(100% + 4px);
+        border: 1px solid $color-main;
+        box-shadow: $shadow-dropdown;
+        overflow: hidden;
+    }
+
+    .custom-select-options-list {
+        max-height: 200px;
+        overflow-y: auto;
+        
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: $color-border-muted;
+            border-radius: 10px;
+        }
+    }
+
+    .custom-select-option {
+        padding: 10px 12px;
+        color: $color-txt-main;
+        font-family: $font-family-base;
+        font-size: 14px;
+        cursor: pointer;
+        transition: background 0.2s ease;
+
+        &:hover {
+            background: rgba($color-main, 0.05);
+            color: $color-main;
+        }
+
+        &.selected {
+            background: rgba($color-main, 0.1);
+            color: $color-main;
+            font-weight: 500;
+        }
+    }
+
+    .custom-select-no-results {
+        padding: 12px;
+        text-align: center;
+        color: $color-border-hover;
+        font-size: 13px;
+    }
+}

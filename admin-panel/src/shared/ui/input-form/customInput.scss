@@ -1,0 +1,68 @@
+.form-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 16px;
+
+    .form-control {
+        width: 100%;
+        outline: none;
+        border-radius: 5px;
+        background: $color-white;
+        color: $color-txt-main;
+        font-family: $font-family-base;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        padding: 12px;
+
+        // Початковий стан бордера (як у селекта)
+        border: 1px solid $color-border-muted;
+        transition: border-color 0.3s ease;
+
+        // При наведенні трохи затемнюємо
+        &:hover {
+            border-color: darken($color-border-muted, 10%);
+        }
+
+        // При активації стає основним кольором
+        &:focus {
+            border-color: $color-main;
+        }
+
+        &.error {
+            border-color: $color-danger;
+
+            &:focus {
+                border-color: $color-danger;
+                box-shadow: $shadow-danger-focus;
+            }
+        }
+    }
+
+    textarea.form-control {
+        resize: none;
+    }
+
+    label {
+        color: $color-neutral-550;
+        font-family: $font-family-base;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+}
+
+.error-text {
+    position: absolute;
+    top: 105%;
+    color: $color-danger;
+    font-size: 10px;
+    right: 10px;
+    font-family: $font-family-base;
+    font-weight: 500;
+}

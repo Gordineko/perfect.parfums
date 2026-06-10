@@ -1,0 +1,187 @@
+.order-item {
+    display: grid;
+    align-items: center;
+    padding: 0 12px 16px 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid $color-border-light;
+    // &:last-child{
+    //     border: none;
+    // }
+    &__info {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        text-align: left;
+        &.with-list {
+            display: flex;
+            gap: 4px;
+            flex-direction: column;
+            align-items: flex-start;
+            font-family: $font-family-base;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            color: $color-txt-main;
+        }
+        img {
+            border-radius: 5px;
+            width: 47px;
+            height: 47px;
+            object-fit: contain;
+        }
+        &-txt {
+            display: flex;
+            flex-direction: column;
+            p {
+                color: $color-side-bar;
+                font-family: $font-family-base;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+            }
+            span {
+                color: $color-txt-main;
+                font-family: $font-family-base;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+        }
+    }
+    &__prods {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        &-item {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+           
+            font-family: $font-family-base;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            p{    color: $color-txt-main;}
+            &-q {
+                padding: 2px 6px;
+                border-radius: 10px;
+                border: 0.5px solid $color-border-light;
+                background: $color-white;
+                color: $color-txt-main !important;
+                font-family: $font-family-base;
+                font-size: 11px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+    }
+    &__price {
+        color: $color-txt-main;
+        font-family: $font-family-base;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+    &__bayer {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        span {
+            color: $color-neutral-550;
+            font-family: $font-family-base;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        p {
+            color: $color-txt-main;
+            font-family: $font-family-base;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+    }
+    &__delivery {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        p {
+            color: $color-txt-main;
+            font-family: $font-family-base;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+        span {
+            color: $color-txt-main;
+            font-family: $font-family-base;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+    }
+    &__status {
+        padding: 4px 8px;
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        border: 0.5px solid $color-success-border;
+        background: $color-success-soft;
+        color: $color-success-text;
+        font-family: $font-family-base;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+    &__func {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        button {
+            border-radius: 5px;
+            color: $color-white;
+            font-family: $font-family-base;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            padding: 5px 12px;
+            border: none;
+        }
+        .func-rewrite {
+            background: $color-main;
+        }
+        .func-delete {
+            background: $color-danger;
+        }
+        .func-hide {
+            background: $color-neutral-550;
+        }
+    }
+}
+
+.order-id{
+    color: $color-side-bar;
+    &:hover {
+        cursor: pointer;
+        color: $color-side-bar;
+        text-decoration: underline;
+        text-decoration-color: currentColor;
+    }
+}

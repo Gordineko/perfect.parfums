@@ -1,0 +1,40 @@
+.content-item {
+    border-radius: 10px;
+    border: 1px solid $color-black-30;
+    background: $color-white;
+    padding: 16px;
+    transition: 0.3s;
+    &:hover {
+        transition: 0.3s;
+        border: 1px solid $color-side-bar;
+    }
+    &__title {
+        color: $color-txt-main;
+        font-family: $font-family-base;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        margin-bottom: 8px;
+    }
+    &__subtitle {
+        color: $color-neutral-550;
+        font-family: $font-family-base;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-bottom: 24px;
+    }
+    &__btn {
+        float: right;
+        color: $color-pink;
+        font-family: $font-family-base;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        border: none;
+        background: inherit;
+    }
+}

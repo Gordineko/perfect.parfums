@@ -1,0 +1,10 @@
+node_modules
+.next
+out
+coverage
+
+next-i18next.config.js
+next-sitemap.config.cjs
+eslint.cjs
+*.config.js
+*.config.cjs

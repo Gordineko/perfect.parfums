@@ -1,0 +1,279 @@
+.bulk-offers-modal {
+    &__overlay {
+        position: fixed;
+        inset: 0;
+        background: $overlay-35;
+        z-index: 999;
+    }
+
+    &__container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: min(820px, calc(100vw - 32px));
+        max-height: calc(100vh - 32px);
+        display: flex;
+        flex-direction: column;
+        background: $color-white;
+        border-radius: 32px;
+        padding: 28px 28px 24px;
+        z-index: 1000;
+        box-shadow: 0 24px 80px rgba($color-overlay, 0.16);
+    }
+
+    &__close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        border: none;
+        background: transparent;
+        font-size: 28px;
+        line-height: 1;
+        color: $color-neutral-700;
+        cursor: pointer;
+        padding: 0;
+        transition: color 0.15s ease;
+
+        &:hover {
+            color: $color-main;
+        }
+    }
+
+    &__title {
+        margin: 0 0 10px;
+        font-family: $font-family-headings;
+        font-size: 12px;
+        font-weight: 700;
+        color: $color-main;
+    }
+
+    &__subtitle {
+        margin: 0 0 28px;
+        font-family: $font-family-base;
+        font-size: 12px;
+        color: $color-neutral-550;
+    }
+
+    &__axes {
+        display: flex;
+        flex-direction: column;
+        gap: 28px;
+        overflow-y: auto;
+        flex: 1;
+    }
+
+    &__prices {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        overflow-y: auto;
+        flex: 1;
+        padding-right: 6px;
+    }
+
+    &__bulk-price-panel {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 16px 18px;
+        margin-bottom: 14px;
+        border: 1px solid $color-neutral-250;
+        border-radius: 18px;
+        background: $color-bg;
+    }
+
+    &__bulk-price-header {
+        min-width: 0;
+        flex: 1;
+    }
+
+    &__bulk-price-title {
+        margin: 0 0 6px;
+        font-family: $font-family-base;
+        font-size: 13px;
+        font-weight: 700;
+        color: $color-neutral-800;
+    }
+
+    &__bulk-price-description {
+        margin: 0;
+        font-family: $font-family-base;
+        font-size: 12px;
+        line-height: 1.4;
+        color: $color-neutral-600;
+    }
+
+    &__bulk-price-controls {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-shrink: 0;
+        width: min(100%, 420px);
+    }
+
+    &__price-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 180px;
+        align-items: center;
+        gap: 14px;
+        padding: 12px 14px;
+        border-radius: 14px;
+        border: 1px solid $color-neutral-250;
+        background: $color-bg;
+    }
+
+    &__price-title {
+        margin: 0;
+        font-family: $font-family-base;
+        font-size: 12px;
+        color: $color-neutral-700;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__price-input {
+        width: 100%;
+        height: 40px;
+        border: 1px solid $color-neutral-350;
+        border-radius: 10px;
+        padding: 0 12px;
+        font-family: $font-family-base;
+        font-size: 14px;
+        font-weight: 600;
+        color: $color-main;
+        background: $color-white;
+        box-sizing: border-box;
+
+        &:focus {
+            outline: none;
+            border-color: $color-main;
+        }
+
+        &::placeholder {
+            color: $color-neutral-500;
+            font-weight: 500;
+        }
+    }
+
+    &__price-input--bulk {
+        min-width: 0;
+        flex: 1;
+    }
+
+    &__axis-title {
+        margin: 0 0 16px;
+        font-family: $font-family-base;
+        font-size: 12px;
+        font-weight: 600;
+        color: $color-neutral-600;
+    }
+
+    &__axis-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px 28px;
+    }
+
+    &__empty {
+        font-family: $font-family-base;
+        font-size: 12px;
+        color: $color-neutral-700;
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-top: 32px;
+        flex-wrap: wrap;
+    }
+
+    &__cancel {
+        min-width: 140px;
+        padding: 14px 18px;
+        border-radius: 16px;
+        border: 1px solid $color-neutral-350;
+        background: $color-white;
+        color: $color-neutral-600;
+        font-family: $font-family-base;
+        font-size: 12px;
+        cursor: pointer;
+        transition: border-color 0.15s ease, color 0.15s ease;
+
+        &:hover {
+            border-color: $color-neutral-500;
+            color: $color-neutral-800;
+        }
+    }
+
+    &__count {
+        font-family: $font-family-base;
+        font-size: 12px;
+        color: $color-neutral-600;
+        font-weight: 500;
+
+        span {
+            color: $color-main;
+            font-weight: 700;
+        }
+    }
+
+    &__confirm {
+        min-width: 160px;
+        padding: 14px 18px;
+        border-radius: 16px;
+        border: none;
+        background: $color-sidebar-bg;
+        color: $color-white;
+        font-family: $font-family-base;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.15s ease;
+
+        &:hover:not(:disabled) {
+            opacity: 0.88;
+        }
+
+        &:disabled {
+            background: rgba($color-sidebar-bg, 0.45);
+            cursor: not-allowed;
+        }
+    }
+
+    &__confirm--bulk {
+        min-width: 192px;
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 720px) {
+        &__bulk-price-panel {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        &__bulk-price-controls {
+            width: 100%;
+        }
+
+        &__price-row {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 520px) {
+        &__bulk-price-controls {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        &__confirm--bulk {
+            width: 100%;
+        }
+    }
+}

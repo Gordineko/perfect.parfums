@@ -1,0 +1,68 @@
+@import "../../../app/style/variables";
+.admin-sidebar {
+    width: 226px;
+    padding: 24px;
+    background: $color-sidebar-bg;
+    font-family: $font-family-base;
+    &__header {
+        border-radius: 10px;
+        margin-bottom: 16px;
+        background: $color-bg;
+        padding: 8px;
+       
+        text-align: center;
+        img {
+            width: auto;
+            height: 29px;
+            margin-bottom: 8px;
+        }
+        p {
+            margin: 0;
+            color: $color-neutral-900;
+            font-family: $font-family-base;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+    }
+    h2 {
+        margin-top: 0;
+        margin-bottom: 20px;
+    }
+    nav {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        a {
+            border: 1px solid $color-sidebar-bg;
+            border-radius: 10px;
+            display: block;
+            padding: 10px 14px;
+            border-radius: 8px;
+            text-decoration: none;
+            padding: 16px 13px;
+            //
+            color: $color-white;
+            font-family: $font-family-base;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+            transition: 0.3s;
+            &:hover{
+                transition: 0.3s;
+                border: 1px solid $color-bg;
+            }
+            &.active {
+                transition: 0.3s;
+                background: $color-bg;
+                color: $color-sidebar-bg;
+                 border: 1px solid $color-bg;
+                svg, path {
+                    fill: $color-sidebar-bg;
+                }
+            }
+        }
+    }
+}

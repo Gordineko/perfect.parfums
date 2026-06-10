@@ -1,0 +1,380 @@
+/* Основні сітки (Гріди) */
+.form-wrapper-2-column {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+.form-wrapper-3-column {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+.form-wrapper-2-1-column {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 16px;
+}
+/* Форма та її базові елементи */
+.product-form {
+    h1 {
+        color: $color-txt-main;
+        font-family: $font-family-base;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        margin: 48px 0;
+    }
+    &__section-title {
+        margin-top: 40px;
+    }
+    &__submit-wrapper {
+        margin-top: 40px;
+    }
+    &__submit {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: $color-side-bar;
+        color: $color-white;
+        font-family: $font-family-base;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        border: none;
+    }
+}
+/* Загальні кнопки */
+.btn-remove {
+    color: $color-danger;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: $font-family-base;
+    font-size: 11px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    padding: 0;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+.btn-add-secondary, .btn-add-primary {
+    background: inherit;
+    border: none;
+    color: $color-side-bar;
+    font-family: $font-family-base;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+/* Блок налаштування осей */
+.product__axes {
+    &-item {
+        &:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+    }
+    &-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        strong {
+            color: $color-slate-700;
+        }
+    }
+    &-values {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+    &-values-title {
+        font-size: 13px;
+        font-weight: 500;
+        color: $color-slate-500;
+        margin-bottom: 4px;
+    }
+    &-value-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr auto;
+        gap: 10px;
+        align-items: flex-end;
+        background: $color-slate-50;
+        border: 1px solid $color-slate-200;
+        border-radius: 8px;
+        padding: 10px 12px;
+        .btn-remove {
+            margin-bottom: 4px;
+            padding: 6px 10px;
+            font-size: 18px;
+            line-height: 1;
+        }
+    }
+}
+/* Блок варіацій (Оффери) */
+.product__variations-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    h1 {
+        margin: 0;
+    }
+}
+.product__variation {
+    margin-bottom: 20px;
+    border: 1px solid $color-slate-200;
+    border-radius: 8px;
+    padding: 15px;
+    &__header {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        color: $color-txt-main;
+        font-family: $font-family-base;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+    &__title-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        h3 {
+            margin: 0;
+            color: inherit;
+        }
+    }
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+/* Блок завантаження зображення для варіації */
+.variation-image-upload {
+    width: 100%;
+    &__label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 500;
+    }
+    &__slots {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: flex-start;
+    }
+    &__slot {
+        width: 150px;
+    }
+    &__remove-btn {
+        width: 100%;
+        border: 1px solid $color-slate-300;
+        border-radius: 6px;
+        background-color: $color-white;
+        color: $color-slate-700;
+        font-size: 12px;
+        padding: 6px;
+        cursor: pointer;
+        margin-top: 8px;
+    }
+    &__box {
+        width: 150px;
+        height: 150px;
+        min-height: 150px;
+        border: 2px dashed $color-slate-300;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background-color: $color-slate-50;
+        position: relative;
+        transition: border-color 0.2s;
+        &:hover {
+            border-color: $color-slate-400;
+        }
+    }
+    &__text {
+        font-size: 12px;
+        color: $color-slate-500;
+    }
+    &__input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+}
+.variation-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+/* =========================================
+   НОВІ СТИЛІ ДЛЯ TEXTAREA ТА FORM-GROUP
+   ========================================= */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+    label {
+        color: $color-slate-900;
+        font-family: $font-family-base;
+        font-size: 14px;
+        font-weight: 500;
+    }
+    .error-text {
+        color: $color-danger;
+        font-size: 12px;
+        font-family: $font-family-base;
+        margin-top: -4px;
+    }
+}
+
+.accessory-select-lock {
+    filter: blur(1.2px);
+    opacity: 0.75;
+}
+
+.accessory-select-lock__hint {
+    color: $color-slate-500;
+    font-size: 12px;
+    line-height: 1.4;
+}
+
+.custom-textarea {
+    width: 100%;
+    min-height: 120px;
+    /* Оптимальная высота для описания */
+    padding: 12px 16px;
+    border: 1px solid $color-slate-300;
+    border-radius: 8px;
+    background-color: $color-white;
+    font-family: $font-family-base;
+    font-size: 14px;
+    color: $color-slate-700;
+    resize: none;
+    /* Запрещает пользователю растягивать поле */
+    outline: none;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    &:focus {
+        border-color: $color-main;
+        box-shadow: 0 0 0 2px rgba(120, 100, 245, 0.1);
+    }
+    &::placeholder {
+        color: $color-slate-400;
+    }
+    /* Состояние ошибки от Formik */
+    &.error {
+        border-color: $color-danger;
+        &:focus {
+            box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.1);
+        }
+    }
+}
+.section-form__header-btns {
+    display: flex;
+    gap: 12px;align-items: center;
+}
+.btn-groups {
+    padding: 0 !important;
+    width: 31px;
+    height: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: 0.5px solid var(--gray, #9E9E9E) !important;
+    background: var(--white, #FAFAFA);
+}
+
+.bulk-offers-modal__checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+}
+
+.bulk-offers-modal__checkbox-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.bulk-offers-modal__checkbox-box {
+    width: 20px;
+    height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    border: 1px solid $color-neutral-350;
+    background: $color-white;
+    flex-shrink: 0;
+    transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+
+    &::after {
+        content: "";
+        width: 6px;
+        height: 10px;
+        border-right: 1.5px solid $color-white;
+        border-bottom: 1.5px solid $color-white;
+        transform: rotate(45deg) scale(0);
+        transform-origin: center;
+        transition: transform 0.18s ease;
+        margin-top: -1px;
+    }
+}
+
+.bulk-offers-modal__checkbox-text {
+    color: $color-txt-main;
+    font-family: $font-family-base;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.35;
+}
+
+.bulk-offers-modal__checkbox:hover .bulk-offers-modal__checkbox-box {
+    border-color: $color-sidebar-bg;
+    background: rgba($color-sidebar-bg, 0.12);
+}
+
+.bulk-offers-modal__checkbox-input:focus-visible + .bulk-offers-modal__checkbox-box {
+    box-shadow: 0 0 0 3px rgba($color-sidebar-bg, 0.22);
+}
+
+.bulk-offers-modal__checkbox-input:checked + .bulk-offers-modal__checkbox-box {
+    border-color: $color-sidebar-bg;
+    background: $color-sidebar-bg;
+}
+
+.bulk-offers-modal__checkbox-input:checked + .bulk-offers-modal__checkbox-box::after {
+    transform: rotate(45deg) scale(1);
+}

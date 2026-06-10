@@ -1,0 +1,123 @@
+.banner-create-form {
+  
+
+  .form-main-title {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid $color-border-soft;
+  }
+
+  .form-section {
+    margin-bottom: 2.5rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid $color-neutral-150;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      color: $color-neutral-800;
+    }
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // Групи для зображень
+  .image-upload-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    .image-upload-container {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+
+    .image-dropzone {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1rem;
+      border: 2px dashed $color-border-light;
+      border-radius: 8px;
+      cursor: pointer;
+      background: $color-neutral-100;
+      transition: all 0.2s;
+      min-width: 180px;
+
+      &:hover {
+        border-color: $color-info;
+        background: $color-info-surface;
+      }
+
+      .upload-state {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+
+    .image-preview-box {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid $color-neutral-300;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  // Кольорові пікери
+  .color-group {
+    .color-input-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .form-group {
+        margin: 0;
+      }
+    }
+
+    .color-preview {
+      padding: 0 !important;
+      border: none !important;
+      border-radius: 10px !important;
+      min-width: 40px !important;
+      height: 40px !important;
+      cursor: pointer;
+    }
+  }
+
+  // Спіннер
+  .spinner {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+}

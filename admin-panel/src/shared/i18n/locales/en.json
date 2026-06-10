@@ -1,0 +1,228 @@
+{
+  "title": "Hello",
+  "navigation": {
+    "header": {
+      "catalog": "Catalog",
+      "about": "About us",
+      "content": "Content",
+      "principles": "Principles",
+      "contacts": "Contacts"
+    },
+    "footer": {
+      "catalog": "Product catalog",
+      "aboutUs": "About us",
+      "laboratory": "Laboratory",
+      "library": "Library",
+      "paymentDelivery": "Payment and delivery",
+      "warrantyReturns": "Warranty and returns"
+    }
+  },
+  "language": {
+    "english": "English",
+    "ukrainian": "Ukrainian"
+  },
+  "hero": {
+    "slides": {
+      "main": {
+        "title": "Structure.Lab",
+        "lines": [
+          "Science.",
+          "Energy.",
+          "Balance."
+        ]
+      },
+      "second": {
+        "title": "Second slide",
+        "lines": [
+          "Line 1.",
+          "Line 2.",
+          "Line 3."
+        ]
+      }
+    }
+  },
+  "catalogSection": {
+    "title": "Product catalog",
+    "allCatalog": "All products"
+  },
+  "about": {
+    "sectionTitle": "About us",
+    "title": "The “Structure” Manifesto",
+    "text": "Structure Lab is more than a brand — it’s a philosophy that unites science, nature, and discipline into one system for your health and well-being. We believe true beauty begins with balance. Every product we create is designed to help you maintain that balance in every aspect of your life.",
+    "button": "Learn more about us",
+    "imageAlt": "About us"
+  },
+  "contentHub": {
+    "sectionTitle": "Content-hub",
+    "mainCard": {
+      "mainImage": "/img/content-hub-main.jpg",
+      "title": "Evidence base of your beauty",
+      "text": "Structure.Lab R&D center combines molecular biology and nutrition science. Each protocol is the result of thousands of research hours and clinically validated purity standards.",
+      "button": "Laboratory standards"
+    },
+    "cards": {
+      "molecules": {
+        "id": "molecules",
+        "date": "25.12.2025",
+        "title": "Molecular lifting: the role of peptide bonds",
+        "text": "A study of how specific amino acids restore the dermal framework at the DNA level.",
+        "link": "Read article",
+        "tone": "green"
+      },
+      "neuro": {
+        "id": "neuro",
+        "date": "25.12.2025",
+        "title": "Neurobalance and skin: a direct connection",
+        "text": "How stress and cortisol management becomes a key step in appearance care.",
+        "link": "Read article",
+        "tone": "violet"
+      }
+    }
+  },
+  "principles": {
+    "sectionTitle": "Our principles",
+    "cards": {
+      "quality": {
+        "title": "Quality is not marketing. It’s control.",
+        "items": [
+          "Incoming raw materials control (HPLC / LC-MS)",
+          "Production stage control (GMP)",
+          "Final lab analysis of every batch"
+        ],
+        "button": "How we ensure quality"
+      },
+      "system": {
+        "title": "A system that goes beyond the jar.",
+        "items": [
+          "Personalized intake protocols",
+          "Integration with nutrition and lifestyle",
+          "Support from nutrition experts"
+        ],
+        "button": "View catalog"
+      },
+      "care": {
+        "title": "External care as a system booster",
+        "button": "Hair care"
+      },
+      "balance": {
+        "title": "Balance starts with resilience",
+        "button": "Structure Lab Library"
+      }
+    }
+  },
+  "infoBlock": {
+    "title": "Structure Lab — when form follows balance",
+    "text": "Open the catalog or leave your details for a callback. Combinations are explainable. Quality is verified.",
+    "primary": "Open catalog",
+    "secondary": "Request a call"
+  },
+  "footer": {
+    "description": "Premium nutraceuticals created at the intersection of high technology and biological excellence.",
+    "company": "COMPANY",
+    "structure": "STRUCTURE",
+    "contact": "CONTACT",
+    "structures": {
+      "skin": "Skin Structure",
+      "hair": "Hair Structure",
+      "balance": "Balance Structure",
+      "stress": "Stress Structure",
+      "gut": "Gut Structure",
+      "womenMen": "Women / Men / 40+"
+    },
+    "contacts": {
+      "email": "sl.structure.lab@gmail.com",
+      "phone": "+38 (093) 718 12 70",
+      "callback": "Request a call"
+    },
+    "bottom": {
+      "copyright": "© 2026 World of heels. All rights reserved",
+      "offer": "Public offer",
+      "privacy": "Privacy policy",
+      "madeBy": "Developed & supported by: KEYKEY"
+    }
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "catalog": "Catalog",
+    "page": "Page",
+    "prof": "Profile"
+  },
+  "filters": {
+    "targetSystems": "Target systems",
+    "price": "Price, UAH",
+    "reset": "Clear filters",
+    "currency": "UAH"
+  },
+  "catalog": {
+    "allProducts": "All products",
+    "products": "products",
+    "filters": "Filters",
+    "sort": "Sort",
+    "sortDefault": "Default",
+    "sortPriceDesc": "Price descending",
+    "sortPriceAsc": "Price ascending"
+  },
+  "basket": {
+    "basketCount": "Items in basket"
+  },
+  "search": {
+    "placeholder": "What are you looking for?",
+    "close": "Close search",
+    "popular": "Popular:"
+  },
+  "authorization": {
+    "loginTitle": "Log in to your account",
+    "regTitle": "Account Registration",
+    "resetTitle": "Password Recovery",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@mail.com",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "rememberMe": "Remember me",
+    "newsletter": "I wish to receive news and special offers from the store",
+    "terms": "By registering, I accept the terms of the user agreement*",
+    "forgotPassword": "Forgot password?",
+    "loginBtn": "Log in",
+    "regBtn": "Register",
+    "resetBtn": "Reset password",
+    "alreadyHaveAccount": "Already have an account?",
+    "loginLink": "Log in",
+    "backToLogin": "Back to login",
+    "noAccount": "Don't have an account?",
+    "regLink": "Register",
+    "validation": {
+      "required": "Required field",
+      "invalidEmail": "Invalid email format",
+      "minPassword": "Password must contain at least 6 characters",
+      "acceptTerms": "You must agree to the terms"
+    }
+  },
+  "txt-modal": {
+    "reg": {
+      "title": "Thank you for registering!",
+      "desc": "You can now use your personal account",
+      "btn": "Go to personal account"
+    },
+    "login": {
+      "title": "Thank you for registering!",
+      "desc": "You can now use your personal account",
+      "btn": "Go to personal account"
+    },
+    "reset": {
+      "title": "Thank you for registering!",
+      "desc": "You can now use your personal account",
+      "btn": "Go to personal account"
+    }
+  },
+  "profile": {
+    "title-prof": "Your System",
+    "title-history": "Protocol Archive",
+    "subtitle-prof": "WELCOME, {name}",
+    "subtitle-history": "your order history",
+    "link1": "personal information",
+    "link2": "order history",
+    "link3": "log out"
+  }
+}

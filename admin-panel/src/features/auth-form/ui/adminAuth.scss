@@ -1,0 +1,133 @@
+.auth {
+  overflow: hidden;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  &__logo {background:$color-sidebar-bg;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
+    @media (max-width: 600px) {
+      display: none;
+      width: 0px !important;
+    }
+  }
+  .auth-form__button{
+    background:$color-sidebar-bg;
+    border: none;
+  }
+  &__logo-img{
+    padding: 10px;
+    border-radius: 20%;
+    background: $color-white;
+  }
+  &-form {
+    // background: $color-white;
+    height: 100vh;
+    width: 40%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media (max-width: 600px) {
+      width: 100% !important;
+    }
+    &__container {
+    }
+  }
+}
+.auth-form__form{
+    display: flex;flex-direction: column;gap: 24px;
+}
+.auth-form__status {
+  position: absolute;
+  top: 102%;
+  left: 10px;
+  font-size: 14px;
+  font-family: $font-family-base;
+  color: $color-danger;
+}
+
+//auth-form
+
+.auth-form {
+  &__container {
+    max-width: 472px;
+    width: 100%;
+  }
+  h2 {
+    color: $color-txt-main;
+    font-family: $font-family-base;
+    font-size: 24px;
+    height: 28px;
+    white-space: nowrap; // текст в одну строку
+    overflow: hidden; // скрываем выходящий за пределы текст
+    text-overflow: ellipsis;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px; /* 116.667% */
+    margin-bottom: 16px;
+  }
+  &__field {
+    // margin-bottom: 34px;
+    position: relative;
+    input,
+    input::placeholder {
+      color: $color-txt-main;
+      font-family: $font-family-base;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+    input {
+      min-height: 49px;
+      white-space: nowrap; // текст в одну строку
+      overflow: hidden; // скрываем выходящий за пределы текст
+      text-overflow: ellipsis;
+      border-radius: 8px;
+      border: 1px solid $color-border-light;
+      background: $color-white;
+      padding: 16px 12px;
+      width: 100%;
+      outline: none;
+    }
+    .auth-form__error {
+      position: absolute;
+      top: 105%;
+      left: 16px;
+      color: $color-danger;
+      font-family: $font-family-base;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+  &__button {
+    height: 50px;
+    white-space: nowrap; // текст в одну строку
+    overflow: hidden; // скрываем выходящий за пределы текст
+    text-overflow: ellipsis;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.08);
+    width: 100%;
+    span {
+      color: $color-white;
+      text-align: center;
+      font-family: $font-family-base;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+  }
+}
+.auth__logo{
+    
+    
+}

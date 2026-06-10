@@ -1,0 +1,56 @@
+.user-item {
+    display: grid;
+    align-items: center;
+    padding: 0 12px 16px 12px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid $color-border-light;
+    &__data {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        &-name {
+            color: $color-side-bar;
+            font-family: $font-family-base;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+        &-info {
+            color: $color-neutral-550;
+            font-family: $font-family-base;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+    }
+    &__txt {
+        color: $color-txt-main;
+        font-family: $font-family-base;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+    &__func {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        button {
+            border: none;
+            color: $color-white;
+            font-family: $font-family-base;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            padding: 5px 12px;
+            border-radius: 5px;
+            background: $color-main;
+            &:last-child {
+                background: $color-danger;
+            }
+        }
+    }
+}

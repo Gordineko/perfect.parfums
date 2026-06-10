@@ -1,0 +1,81 @@
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px); // Небольшое смещение вверх в начале
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); // Конечная точка — свое место
+    }
+}
+.header {
+    animation: slideDown 0.5s ease-out forwards;
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    &__input-content {
+        position: relative;
+        width: 100%;
+        button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 14px;
+            border-radius: 5px;
+            background: $color-sidebar-bg;
+            border: none;
+            color: $color-white;
+            font-family: $font-family-base;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            padding: 4px 12px;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            color: $color-black;
+            font-family: $font-family-base;
+            font-size: 18px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            background: $color-white;
+            box-shadow: $shadow-card;
+            &::placeholder {
+                color: $color-neutral-550;
+                font-family: $font-family-base;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+        }
+    }
+    &__filter-button {
+        border: none;
+        color: $color-white;
+        font-family: var(--font-family-base);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        border-radius: 15px;
+        background: $color-main;
+        padding: 12px 24px;
+    }
+    &__func-btn {
+        border: none;
+        min-width: 45px;
+        height: 45px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: $color-white;
+    }
+}

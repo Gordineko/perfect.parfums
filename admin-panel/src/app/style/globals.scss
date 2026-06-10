@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+@import "./variables";
+@import "./components";
+@import "../../shared/ui/pageHeader.scss";
+@import "../../shared/ui/admin-loader/adminPageLoader.scss";
+@import "../../widgets/sidebar/ui/sideBar.scss";
+@import "../../widgets/products-list/ui/productsList.scss";
+@import "../../widgets/categories-list/ui/categoriesList.scss";
+@import "../../widgets/orders-list/ui/ordersList.scss";
+@import "../../features/auth-form/ui/adminAuth.scss";
+@import "../../shared/ui/select-form/customSelect.scss";
+@import "../../shared/ui/input-form/customInput.scss";
+@import "../../shared/ui/filter/filter.scss";
+@import "../../shared/ui/modal-confirm/ui/modalConfirm.scss";
+@import "../../widgets/users-list/ui/UsersList.scss";
+@import "../../widgets/warehouse-list/ui/warehouseList.scss";
+@import "../../widgets/contents-list/ui/contentsList.scss";
+@import "../../widgets/blogs-list/ui/blogsList.scss";
+@import "../../widgets/reviews-list/ui/reviewsList.scss";
+//entities
+@import "../../entities/product/ui/productItem.scss";
+@import "../../entities/review/ui/reviewsItem.scss";
+@import "../../entities/category/ui/categoryItem.scss";
+@import "../../entities/order/ui/orderItem.scss";
+@import "../../entities/user/ui/userItem.scss";
+@import "../../entities/warehouse/ui/warehouseItem.scss";
+@import "../../entities/content/ui/contentItem.scss";
+@import "../../entities/blog/ui/blogItem.scss";
+//feature
+@import "../../features/pagination/ui/pagination.scss";
+@import "../../features/product-form/ui/productForm.scss";
+@import "../../features/bulk-offers-modal/ui/bulkOffersModal.scss";
+@import "../../features/orders-form/ui/OrdersForm.scss";
+@import "../../features/orders-form/ui/productSelectionModal.scss";
+@import "../../features/blog-form/ui/articleForm.scss";
+@import "../../features/banner-form/ui/bannerForm.scss";
+@import "../../features/review-form/ui/reviewForm.scss";
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html,
+body {
+  font-family: var(--font-family-base);
+}
+.layout {
+  min-height: 100dvh;
+}
+main {
+  min-height: 100%;
+  background: $color-bg;
+}
+.container {
+  box-sizing: border-box;
+  width: min(var(--container-max-width), calc(100% - 2 * var(--page-inline)));
+  margin-inline: auto;
+}
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+/* Якорі: секція не ховається під sticky-хедером */
+main section[id] {
+  scroll-margin-top: calc(var(--header-height) + 12px);
+}
+:root {
+  --color-on-accent: var(--color-white);
+  --header-height: 72px;
+  --container-max-width: 1644px;
+  --page-inline: 24px;
+  @media (max-width: 768px) {
+    --page-inline: 16px;
+  }
+}
+h1,
+h2,
+h3 {
+  font-family: var(--font-tenor-sans), serif;
+  font-weight: 400;
+}
+p {
+  color: var(--color-text-muted);
+  font-size: 14px;
+  line-height: 1;
+  margin: 0;
+}
+button {
+  transition: 0.3s;
+  cursor: pointer;
+  &:hover {
+    transition: 0.3s;
+    opacity: 0.8;
+  }
+}
+ul{
+  list-style: none !important;
+}

@@ -1,0 +1,17 @@
+.reviews-grid {
+    grid-template-columns:  2fr 1fr 3fr 1fr 1fr 2fr ;
+    gap: 63px;
+}
+
+.reviews-sort-select {
+    min-width: 200px;
+    height: 32px;
+    border-radius: 5px;
+    border: 1px solid $color-border-light;
+    background: $color-white;
+    color: $color-txt-main;
+    font-family: $font-family-base;
+    font-size: 14px;
+    padding: 4px 10px;
+    outline: none;
+}

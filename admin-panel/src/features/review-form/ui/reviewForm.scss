@@ -1,0 +1,59 @@
+ .review-checkbox {
+     display: inline-flex;
+     align-items: center;
+     gap: 10px;
+     width: fit-content;
+     cursor: pointer;
+     user-select: none;
+     margin: 0;
+     &__input {
+         position: absolute;
+         opacity: 0;
+         width: 0;
+         height: 0;
+     }
+     &__box {
+         width: 18px;
+         height: 18px;
+         display: inline-flex;
+         align-items: center;
+         justify-content: center;
+         border-radius: 5px;
+         border: 1px solid $color-neutral-500;
+         background: $color-white;
+         transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+         flex-shrink: 0;
+         &::after {
+             content: "";
+             width: 5px;
+             height: 9px;
+             border-right: 1px solid #000000;
+             border-bottom: 1px solid #000000;
+             transform: rotate(45deg) scale(0);
+             transform-origin: center;
+             transition: transform 0.18s ease;
+             margin-top: -2px;
+         }
+     }
+     &__text {
+         color: $color-txt-main;
+         font-family: $font-family-base;
+         font-size: 14px;
+         font-weight: 500;
+         line-height: 1.35;
+     }
+     &:hover &__box {
+         border-color: $color-main;
+         background: $color-neutral-150;
+     }
+     &__input:focus-visible+&__box {
+         box-shadow: 0 0 0 3px rgba($color-main, 0.15);
+     }
+     &__input:checked+&__box {
+         border-color: $color-main;
+         background: $color-success-soft;
+     }
+     &__input:checked+&__box::after {
+         transform: rotate(45deg) scale(1);
+     }
+ }

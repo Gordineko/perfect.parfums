@@ -1,0 +1,107 @@
+.warehouse-item {
+    display: grid;
+    align-items: center;
+    padding: 0 0 0 0;
+    border-bottom: 1px solid $color-border-light;
+    &__data {
+        display: flex;
+        gap: 16px;
+        padding-left: 16px;
+        align-items: center;
+        img {
+            border-radius: 5px;
+            border: 1px solid $color-border-light;
+            width: 47px;
+            height: 47px;
+            object-fit: contain;
+        }
+        &-txt {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: flex-start;
+            padding: 10px 0;
+            p {
+                color: $color-side-bar;
+                font-family: $font-family-base;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 500;
+                line-height: normal;
+            }
+            span {
+                color: $color-neutral-550;
+                font-family: $font-family-base;
+                font-size: 12px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: normal;
+            }
+        }
+    }
+    &__variation-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        max-width: 100%;
+    }
+    &__variation-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        max-width: 180px;
+        padding: 3px 7px;
+        border-radius: 4px;
+        background: #F1F5F9;
+        color: #334155;
+        font-family: $font-family-base;
+        font-size: 11px;
+        line-height: 1.2;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        b {
+            color: #0F172A;
+            font-weight: 600;
+            &::after {
+                content: ":";
+            }
+        }
+    }
+    &__store {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        &-item {
+            border-left: 1px solid $color-border-light;
+            
+            // width: 82px;
+            min-height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        &-item:last-child {
+            border-right: 1px solid $color-border-light;
+        }
+        p {
+            color: $color-black;
+            font-family: $font-family-base;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+    }
+}
+.warehouse-rewrite {
+    padding: 5px 12px;
+    color: $color-white !important;
+    font-family: $font-family-base;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border-radius: 5px;
+    background: $color-main;
+    border: none;
+}

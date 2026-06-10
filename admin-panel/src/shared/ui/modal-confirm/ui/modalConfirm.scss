@@ -1,0 +1,44 @@
+.confirm-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: $color-white;
+    border-radius: 8px;
+    z-index: 1000;
+    padding: 32px;
+    h1 {
+        margin: 0 10px;
+        max-width: 300px;
+        text-align: center;
+        color: $color-txt-main;
+        font-family: $font-family-base;
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+    &__buttons {
+        display: flex;
+        gap: 10px;
+        justify-content: space-between;
+    }
+
+    &__btn {
+        padding: 8px 16px;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        font-family: $font-family-base;
+    }
+
+    &__btn-accept {
+        background-color: $color-sidebar-bg;
+        color: $color-white;
+    }
+
+    &__btn-reject {
+        background-color: $color-neutral-150;
+        color: $color-txt-main;
+    }
+}
